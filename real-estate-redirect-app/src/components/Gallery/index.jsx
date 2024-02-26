@@ -7,7 +7,8 @@ export default function Gallery({ listings, refreshQueue, updateDetails, zipCode
         if (!zipCode) {
             refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&page=${listings.length / 20 + 1}&pageSize=20`)
         } else {
-            refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?postalcode=${zipCode}&page=1&pageSize=20`)
+            let zipCodeParam = `postalcode=${zipCode}`
+            refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?${zipCodeParam}&page=${listings.length / 20 + 1}&pageSize=20`)
         }
         setCurrentPage(currentPage + 1)
     }

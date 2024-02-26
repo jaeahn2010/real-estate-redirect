@@ -21,6 +21,7 @@ export default function App() {
     })
     const { property } = await res.json()
     setListings(listings => listings.concat(property))
+    console.log("current list: ", listings)
   }
 
   useEffect(() => {

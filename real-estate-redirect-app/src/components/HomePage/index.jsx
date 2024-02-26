@@ -35,7 +35,7 @@ export default function HomePage({ listings, setListings, refreshQueue, updateDe
                         id="zip-code"
                         defaultValue=''
                         onChange={event => setZipCode(event.target.value)}>
-                        <option disabled selected>Select a zip code</option>
+                        <option key='0' disabled selected>Select a zip code</option>
                         {zipCodeOptions}
                     </select>
                     <button
