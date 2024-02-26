@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import Gallery from '../Gallery'
 import Card from '../Card'
+import Details from '../Details'
 import './styles.css'
 
 export default function App() {
   const [listings, setListings] = useState([])
-
+  const [detailsData, setDetailsData] = useState({})
   async function getData(url) {
     const res = await fetch(url, {
       mode: 'cors',
@@ -26,7 +27,12 @@ export default function App() {
   return (
     <>
       <h1 className="text-6xl text-center">Real Estate Redirect</h1>
-      <Gallery listings={listings} refreshQueue={getData}/>
+      <Gallery
+        listings={listings}
+        refreshQueue={getData}
+        updateDetails={setDetailsData}
+      />
+      {detailsData.identifier.attomId && <Details listing={detailsData}/>}
     </>
   )
 }

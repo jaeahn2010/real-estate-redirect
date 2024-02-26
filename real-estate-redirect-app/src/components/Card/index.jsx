@@ -1,10 +1,11 @@
 import heartIcon from '../../assets/heart.svg'
 import './styles.css'
 
-export default function Card({ listing }) {
+export default function Card({ listing, updateDetails }) {
     return (
         <figure className="relative mb-4 break-inside-avoid-column border-2 border-black rounded-xl bg-sky-100 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
-            <div className="card-overlay absolute cursor-pointer w-full flex items-center justify-center bg-black rounded-t-lg z-10">
+            <div onClick={() => 
+                updateDetails(listing)} className="card-overlay absolute cursor-pointer w-full flex items-center justify-center bg-black rounded-t-lg z-10">
                 <p className="w-40 text-slate-50 text-3xl" id='hover-msg'>See Details</p>
             </div>
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Card from '../Card'
 
-export default function Gallery({ listings, refreshQueue }) {
+export default function Gallery({ listings, refreshQueue, updateDetails }) {
     const [currentPage, setCurrentPage] = useState(1)
     function getNextPage() {
         refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&page=${listings.length / 20 + 1}&pageSize=20`)
@@ -19,7 +19,7 @@ export default function Gallery({ listings, refreshQueue }) {
         const endIndex = startIndex + 20
         galleryContent = listings
             .slice(startIndex, endIndex)
-            .map(listing => <Card key={listing.identifier.attomId} listing={listing} />)
+            .map(listing => <Card key={listing.identifier.attomId} listing={listing} updateDetails={updateDetails}/>)
     }
 
     let prevBtn = <button onClick={getPrevPage} className='mx-10 border-2 border-neutral-900 border-solid rounded-xl p-2'>&#11104; Previous Page</button>
