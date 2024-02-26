@@ -1,0 +1,29 @@
+.card-overlay {
+    display: none !important;
+    opacity: 0;
+    height: calc(100% - 110px);
+}
+
+figure:hover .card-overlay{
+    background-color: black;
+    display: flex !important;
+    animation: fade-in 150ms ease-in-out 50ms forwards;
+}
+
+figure:hover .card-image {
+    filter: blur(50px);
+}
+
+#heart-icon {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+    from {opacity: 0;}
+    to {opacity: 0.7;}
+}
+
+@keyframes pulse {
+    from {transform: scale(1)}
+    to {transform: scale(1.1)}
+}
