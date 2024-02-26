@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
+import { Routes, Route, Link } from "react-router-dom"
+import AboutPage from '../AboutPage'
+import NotFoundPage from '../NotFoundPage'
+import HomePage from '../HomePage'
 import Gallery from '../Gallery'
 import Card from '../Card'
-import Details from '../Details'
+import DetailsPage from '../DetailsPage'
 import './styles.css'
 
 export default function App() {
@@ -26,13 +30,26 @@ export default function App() {
 
   return (
     <>
-      <h1 className="text-6xl text-center">Real Estate Redirect</h1>
-      <Gallery
-        listings={listings}
-        refreshQueue={getData}
-        updateDetails={setDetailsData}
-      />
-      {detailsData.identifier.attomId && <Details listing={detailsData}/>}
+      <nav className="flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
+        <Link to="/">
+          <h1 className="text-white font-bold md:text-3xl sm:text-2xl">Real Estate Redirect</h1>
+        </Link>
+        <Link to="/about">
+          <h2 className="text-white md:text-lg sm:text-md">About</h2>
+        </Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={
+          <HomePage
+            listings={listings}
+            refreshQueue={getData}
+            updateDetails={setDetailsData}
+          />}
+        />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/details/:listingId" element={<DetailsPage listing={detailsData} />} />
+        <Route path="/*" element={<NotFoundPage />} />
+      </Routes>
     </>
   )
 }
