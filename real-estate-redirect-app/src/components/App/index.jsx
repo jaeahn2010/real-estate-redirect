@@ -20,8 +20,7 @@ export default function App() {
       }
     })
     const { property } = await res.json()
-    console.log(property)
-    setListings(listings.concat(property))
+    setListings(listings => listings.concat(property))
   }
 
   useEffect(() => {
@@ -43,6 +42,7 @@ export default function App() {
           <HomePage
             listings={listings}
             refreshQueue={getData}
+            setListings={setListings}
             updateDetails={setDetailsData}
           />}
         />

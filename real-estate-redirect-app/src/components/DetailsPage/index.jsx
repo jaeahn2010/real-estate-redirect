@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom"
 export default function DetailsPage(props) {
     const [listing, setListing] = useState({ ...props.listing})
     const params = useParams()
+    console.log(listing)
 
     useEffect(() => {
-        if (!listing.identifier) {
+        if (!listing.identifier || !listing.summary) {
             async function getListingFromAPI() {
                 const res = await fetch(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?attomid=${params.listingId}`, {
                     mode: 'cors',
@@ -22,7 +23,7 @@ export default function DetailsPage(props) {
         }
     }, [])
 
-    if (listing.identifier) {
+    if (listing.identifier && listing.summary) {
         return (
             <div className="w-4/5 mx-auto min-h-[300px] border-2 border-black rounded-lg">
                 <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover cursor-pointer"/>

@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import Card from '../Card'
 
-export default function Gallery({ listings, refreshQueue, updateDetails }) {
+export default function Gallery({ listings, refreshQueue, updateDetails, zipCode }) {
     const [currentPage, setCurrentPage] = useState(1)
     function getNextPage() {
-        refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&page=${listings.length / 20 + 1}&pageSize=20`)
+        if (!zipCode) {
+            refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&page=${listings.length / 20 + 1}&pageSize=20`)
+        } else {
+            refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?postalcode=${zipCode}&page=1&pageSize=20`)
+        }
         setCurrentPage(currentPage + 1)
     }
     
