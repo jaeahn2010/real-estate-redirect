@@ -7,32 +7,21 @@ export default function Offer({ data, refreshOffers }) {
         id: data._id,
         listingId: data.listingId,
         status: data.status,
-        terms: {
-            offerPrice: data.terms.offerPrice,
-        },
+        // expiration: data.terms.expiration,
+        // listingShown: data.terms.listingShown,
+        EMD: data.terms.EMD,
+        downPayment: data.terms.downPayment,
+        loanType: data.terms.loanType,
+        loanAmount: data.terms.loanAmount,
+        // proofOfFunds: data.terms.proofOfFunds,
     })
 
     // Update the form fields as the user types
     function handleInputChange(event) {
-        let newValue = ''
-        if (event.target.name === 'status') {
-            setEditFormData({
-                ...editFormData,
-                [event.target.name]: event.target.value
-            })
-        } else {
-            if (event.target.name === 'offerPrice') {
-                newValue = Number(event.target.value)
-            } else {
-                newValue = event.target.value
-            }
-            setEditFormData({
-                ...editFormData,
-                terms: {
-                    [event.target.name]: newValue
-                }
-            })
-        }
+        setEditFormData({
+            ...editFormData,
+            [event.target.name]: event.target.value
+        })
     }
 
     // Execute form submission logic
@@ -84,9 +73,73 @@ export default function Offer({ data, refreshOffers }) {
                 <input
                     name="offerPrice"
                     className="mx-2 bg-gray-100"
-                    defaultValue={editFormData.terms.offerPrice}
+                    defaultValue={data.terms.offerPrice}
                     onChange={handleInputChange}
                 />
+                <br />
+                    {/* <label htmlFor="expiration">This offer expires on: </label>
+                    <input
+                        name="expiration"
+                        type="date"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={data.terms.expiration}
+                        onChange={handleInputChange}
+                    />
+                    <br /> */}
+                    {/* <label htmlFor="listingShown">Have you already seen the property in person?</label>
+                    <input
+                        name="listingShown"
+                        type="text" //change to boolean
+                        className="mx-2 bg-gray-100"
+                        placeholder="Y / N"
+                        defaultValue={data.terms.listingShown}
+                        onChange={handleInputChange}
+                    /> */}
+                    <label htmlFor="EMD">Earnest money deposit: $</label>
+                    <input
+                        name="EMD"
+                        type="number"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={data.terms.EMD}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="downPayment">Down payment: $</label>
+                    <input
+                        name="downPayment"
+                        type="number"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={data.terms.downPayment}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="loanType">Loan type: </label>
+                    <input
+                        name="loanType"
+                        type="text"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={data.terms.loanType}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="loanAmount">Loan amount: $</label>
+                    <input
+                        name="loanAmount"
+                        type="number"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={data.terms.loanAmount}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    {/* <label htmlFor="proofOfFunds">Upload your proof of funds or preapproval letter here: $</label>
+                    <input
+                        name="proofOfFunds"
+                        type="file"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={editFormData.terms.proofOfFunds}
+                        onChange={handleInputChange}
+                    /> */}
+                    <br />
                 <div>
                     <button
                         onClick={() => { setShowEditForm(false) }}
@@ -112,6 +165,13 @@ export default function Offer({ data, refreshOffers }) {
                 <p>Status: {data.status}</p>
                 <p>Terms:</p>
                 <p>Offer price: ${data.terms.offerPrice}</p>
+                {/* <p>Offer expires on: ${data.terms.expiration}</p> */}
+                {/* <p>Buyer has seen the property? ${data.terms.listingShown}</p> */}
+                <p>Earnest money deposit: ${data.terms.EMD}</p>
+                <p>Down payment: ${data.terms.downPayment}</p>
+                <p>Loan type: {data.terms.loanType}</p>
+                <p>Loan amount: ${data.terms.loanAmount}</p>
+                {/* <p>Proof of funds: ${data.terms.proofOfFunds}</p> */}
                 <div className="flex justify-end">
                     <button
                         onClick={() => { setShowEditForm(true) }}

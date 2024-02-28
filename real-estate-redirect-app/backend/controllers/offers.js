@@ -22,15 +22,37 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new offer
 router.post('/', (req, res) => {
-    db.Offer.create(req.body)
+    const reformat = {
+        listingId: req.body.listingId,
+        status: req.body.status,
+        terms: {
+            offerPrice: req.body.offerPrice,
+            EMD: req.body.EMD,
+            downPayment: req.body.downPayment,
+            loanType: req.body.loanType, 
+            loanAmount: req.body.loanAmount
+        }
+    }
+    db.Offer.create(reformat)
         .then(offer => res.json(offer))
 })
 
 // update: edit offer
 router.put('/:offerId', (req, res) => {
+    const reformat = {
+        listingId: req.body.listingId,
+        status: req.body.status,
+        terms: {
+            offerPrice: req.body.offerPrice,
+            EMD: req.body.EMD,
+            downPayment: req.body.downPayment,
+            loanType: req.body.loanType, 
+            loanAmount: req.body.loanAmount
+        }
+    }
     db.Offer.findByIdAndUpdate(
         req.params.offerId,
-        req.body,
+        reformat,
         { new: true }
     )
         .then(offer => res.json(offer))

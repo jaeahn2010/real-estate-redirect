@@ -10,9 +10,14 @@ export default function offerSection({ listingId }) {
         // buyerId: buyerId,
         listingId: listingId,
         status: 'pending',
-        terms: {
-            offerPrice: 0,
-        },
+        offerPrice: 0,
+        // expiration: new Date(),
+        // listingShown: false,
+        EMD: 0,
+        downPayment: 0,
+        loanType: '',
+        loanAmount: 0,
+        // proofOfFunds: false,
     })
 
     // Query the database for all comments that pertain to this offer on component mount
@@ -22,24 +27,10 @@ export default function offerSection({ listingId }) {
     }, [])
 
     // Update the form fields as the user types
-    // function handleInputChange(event) {
-    //     setCreateFormData({
-    //         ...createFormData,
-    //         [event.target.name]: event.target.value
-    //     })
-    // }
     function handleInputChange(event) {
-        let newValue = ''
-        if (event.target.name === "offerPrice") {
-            newValue = Number(event.target.value)
-        } else {
-            newValue = event.target.value
-        }
         setCreateFormData({
             ...createFormData,
-            terms: {
-                [event.target.name]: newValue
-            }
+            [event.target.name]: event.target.value
         })
     }
 
@@ -61,9 +52,14 @@ export default function offerSection({ listingId }) {
         setCreateFormData({
             listingId: listingId,
             status: 'pending',
-            terms: {
-                offerPrice: 0,
-            },
+            offerPrice: 0,
+            // expiration: new Date(),
+            // listingShown: false,
+            EMD: 0,
+            downPayment: 0,
+            loanType: '',
+            loanAmount: 0,
+            // proofOfFunds: false,
         })
         // close the form
         setShowCreateForm(false)
@@ -129,9 +125,73 @@ export default function offerSection({ listingId }) {
                         type="number"
                         className="mx-2 bg-gray-100"
                         placeholder="Your offer price"
-                        defaultValue={createFormData.terms.offerPrice}
+                        defaultValue={createFormData.offerPrice}
                         onChange={handleInputChange}
                     />
+                    <br />
+                    {/* <label htmlFor="expiration">This offer expires on: </label>
+                    <input
+                        name="expiration"
+                        type="date"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.expiration}
+                        onChange={handleInputChange}
+                    />
+                    <br /> */}
+                    {/* <label htmlFor="listingShown">Have you already seen the property in person?</label>
+                    <input
+                        name="listingShown"
+                        type="text" //change to boolean
+                        className="mx-2 bg-gray-100"
+                        placeholder="Y / N"
+                        defaultValue={createFormData.listingShown}
+                        onChange={handleInputChange}
+                    /> */}
+                    <label htmlFor="EMD">Earnest money deposit: $</label>
+                    <input
+                        name="EMD"
+                        type="number"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.EMD}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="downPayment">Down payment: $</label>
+                    <input
+                        name="downPayment"
+                        type="number"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.downPayment}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="loanType">Loan type: </label>
+                    <input
+                        name="loanType"
+                        type="text"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.loanType}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="loanAmount">Loan amount: $</label>
+                    <input
+                        name="loanAmount"
+                        type="number"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.loanAmount}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    {/* <label htmlFor="proofOfFunds">Upload your proof of funds or preapproval letter here: $</label>
+                    <input
+                        name="proofOfFunds"
+                        type="file"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.proofOfFunds}
+                        onChange={handleInputChange}
+                    /> */}
+                    <br />
                     <button
                         type="submit"
                         className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
