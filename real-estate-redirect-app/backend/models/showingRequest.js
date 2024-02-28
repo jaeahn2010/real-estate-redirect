@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const showingRequestSchema = new mongoose.Schema(
     {
-        id: {type: Number, required: true },
         buyerId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Buyer' },
         listingId: { type: Number, required: true },
         status: { type: String, maxLength: 20 },

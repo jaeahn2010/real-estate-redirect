@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import OfferSection from "../OfferSection"
 
 //for seed data
 import {seedData} from '../../assets/seedData'
@@ -104,92 +105,99 @@ export default function DetailsPage(props) {
     // }
     if (listing.identifier) {
         return (
-            <div className="w-4/5 mx-auto min-h-[300px] border-2 border-black rounded-lg">
-                <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover cursor-pointer"/>
-                <p>ADDRESS</p>
-                <p>{listing.location.address}</p>
-                <p>{listing.location.city}, {listing.location.state} {listing.location.zip}</p>
-                <p>Subdivision: {listing.location.subdivision}</p>
-                <br/>
-                <p>IDENTIFICATION</p>
-                <p>RER ID: {listing.identifier.rerListingId}</p>
-                <p>Parcel number: {listing.identifier.apn}</p>
-                <br/>
-                <p>CURRENT STATUS</p>
-                <p>Status: {listing.currentActivity.status}</p>
-                <p>Sale price: ${listing.currentActivity.price}</p>
-                <p>Price per sq ft: ${listing.currentActivity.pricePerSF}</p>
-                <p>List date: {listing.currentActivity.listDate.toString()}</p>
-                <p>Days on market: {listing.currentActivity.daysOnMarket}</p>
-                <p>Offers: {listing.currentActivity.offers.length}</p>
-                <p>Showing requests: {listing.currentActivity.showingRequests.length}</p>
-                <br/>
-                <p>HOMEOWNER INFORMATION</p>
-                <p>Name: {listing.homeowner[0].lastName}, {listing.homeowner[0].firstName}</p>
-                <br/>
-                <p>GENERAL PROPERTY INFORMATION</p>
-                <p>Property type: {listing.generalInfo.propertyType}</p>
-                <p>Zoning description: {listing.generalInfo.zoning}</p>
-                <p>Stories: {listing.generalInfo.stories}</p>
-                <p>Level: {listing.generalInfo.level}</p>
-                <p>Year built: {listing.generalInfo.yearBuilt}</p>
-                <p>Detached: {listing.generalInfo.isDetached}</p>
-                <p>House faces: {listing.generalInfo.houseFaces}</p>
-                <br/>
-                <p>EXTERIOR DETAILS</p>
-                <p>Roof: {listing.exterior.construction.roof}</p>
-                <p>Walls: {listing.exterior.construction.walls}</p>
-                <p>Fencing: {listing.exterior.construction.fencing}</p>
-                <p>Lot size: {listing.exterior.lot.size}</p>
-                <p>Lot features: {listing.exterior.lot.features.join(", ")}</p>
-                <p>Vegetation: {listing.exterior.lot.vegetation.join(", ")}</p>
-                <p>Solar panels: {listing.exterior.hasSolar}</p>
-                <p>Balcony: {listing.exterior.hasBalcony}</p>
-                <p>Pool: {listing.exterior.hasPool}</p>
-                <p>Spa: {listing.exterior.hasSpa}</p>
-                <br/>
-                <p>INTERIOR DETAILS</p>
-                <p>Bedrooms: {listing.interior.rooms.bedrooms}</p>
-                <p>Bathrooms: {listing.interior.rooms.bathrooms}</p>
-                <p>Total number of rooms: {listing.interior.rooms.roomsTotal}</p>
-                <p>Flooring: {listing.interior.construction.flooring.join(", ")}</p>
-                <p>Living area: {listing.interior.livingArea}</p>
-                <p>Cooling: {listing.interior.cooling}</p>
-                <p>Heating: {listing.interior.heating}</p>
-                <p>Appliances included: {listing.interior.appliancesIncluded.join(", ")}</p>
-                <p>Fixtures: {listing.interior.features.fixtures.join(", ")}</p>
-                <p>Window: {listing.interior.features.window.join(", ")}</p>
-                <p>Fireplace: {listing.interior.features.fireplace}</p>
-                <p>Other: {listing.interior.features.other}</p>
-                <br/>
-                <p>PARKING INFORMATION</p>
-                <p>Type: {listing.parking.type}</p>
-                <p>Size: {listing.parking.size}</p>
-                <br/>
-                <p>UTILITIES</p>
-                <p>Sewer: {listing.utilities.sewer}</p>
-                <p>Water: {listing.utilities.water}</p>
-                <p>Other: {listing.utilities.otherUtilities}</p>
-                <br/>
-                <p>HOA INFORMATION</p>
-                <p>Name: {listing.HOA[0].name}</p>
-                <p>Monthly fee: {listing.HOA[0].monthlyFee}</p>
-                <p>Phone: {listing.HOA[0].phone}</p>
-                <p>Fee includes: {listing.HOA[0].feeIncludes.join(", ")}</p>
-                <br/>
-                <p>COMMUNITY FEATURES</p>
-                <p>Amenities: {listing.community.amenities.join(", ")}</p>
-                <p>Community is age restricted (55+): {listing.community.isSeniorCommunity}</p>
-                <br/>
-                <p>MOST RECENT SALE HISTORY</p>
-                <p>Sold date: {listing.lastSoldInfo.soldDate.toString()}</p>
-                <p>Sale price: ${listing.lastSoldInfo.price}</p>
-                <p>Sale price per sq ft: ${listing.lastSoldInfo.pricePerSF}</p>
-                <br/>
-                <p>TAX INFORMATION</p>
-                <p>Annual tax for year {listing.tax.year}: ${listing.tax.annualTax}</p>
-                <br/>
-            </div>
+            <>
+                <div className="w-4/5 mx-auto min-h-[300px] border-2 border-black rounded-lg">
+                    <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover cursor-pointer"/>
+                    <p>ADDRESS</p>
+                    <p>{listing.location.address}</p>
+                    <p>{listing.location.city}, {listing.location.state} {listing.location.zip}</p>
+                    <p>Subdivision: {listing.location.subdivision}</p>
+                    <br/>
+                    <p>IDENTIFICATION</p>
+                    <p>RER ID: {listing.identifier.rerListingId}</p>
+                    <p>Parcel number: {listing.identifier.apn}</p>
+                    <br/>
+                    <p>CURRENT STATUS</p>
+                    <p>Status: {listing.currentActivity.status}</p>
+                    <p>Sale price: ${listing.currentActivity.price}</p>
+                    <p>Price per sq ft: ${listing.currentActivity.pricePerSF}</p>
+                    <p>List date: {listing.currentActivity.listDate.toString()}</p>
+                    <p>Days on market: {listing.currentActivity.daysOnMarket}</p>
+                    <p>Offers: {listing.currentActivity.offers.length}</p>
+                    <p>Showing requests: {listing.currentActivity.showingRequests.length}</p>
+                    <br/>
+                    <p>HOMEOWNER INFORMATION</p>
+                    <p>Name: {listing.homeowner[0].lastName}, {listing.homeowner[0].firstName}</p>
+                    <br/>
+                    <p>GENERAL PROPERTY INFORMATION</p>
+                    <p>Property type: {listing.generalInfo.propertyType}</p>
+                    <p>Zoning description: {listing.generalInfo.zoning}</p>
+                    <p>Stories: {listing.generalInfo.stories}</p>
+                    <p>Level: {listing.generalInfo.level}</p>
+                    <p>Year built: {listing.generalInfo.yearBuilt}</p>
+                    <p>Detached: {listing.generalInfo.isDetached}</p>
+                    <p>House faces: {listing.generalInfo.houseFaces}</p>
+                    <br/>
+                    <p>EXTERIOR DETAILS</p>
+                    <p>Roof: {listing.exterior.construction.roof}</p>
+                    <p>Walls: {listing.exterior.construction.walls}</p>
+                    <p>Fencing: {listing.exterior.construction.fencing}</p>
+                    <p>Lot size: {listing.exterior.lot.size}</p>
+                    <p>Lot features: {listing.exterior.lot.features.join(", ")}</p>
+                    <p>Vegetation: {listing.exterior.lot.vegetation.join(", ")}</p>
+                    <p>Solar panels: {listing.exterior.hasSolar}</p>
+                    <p>Balcony: {listing.exterior.hasBalcony}</p>
+                    <p>Pool: {listing.exterior.hasPool}</p>
+                    <p>Spa: {listing.exterior.hasSpa}</p>
+                    <br/>
+                    <p>INTERIOR DETAILS</p>
+                    <p>Bedrooms: {listing.interior.rooms.bedrooms}</p>
+                    <p>Bathrooms: {listing.interior.rooms.bathrooms}</p>
+                    <p>Total number of rooms: {listing.interior.rooms.roomsTotal}</p>
+                    <p>Flooring: {listing.interior.construction.flooring.join(", ")}</p>
+                    <p>Living area: {listing.interior.livingArea}</p>
+                    <p>Cooling: {listing.interior.cooling}</p>
+                    <p>Heating: {listing.interior.heating}</p>
+                    <p>Appliances included: {listing.interior.appliancesIncluded.join(", ")}</p>
+                    <p>Fixtures: {listing.interior.features.fixtures.join(", ")}</p>
+                    <p>Window: {listing.interior.features.window.join(", ")}</p>
+                    <p>Fireplace: {listing.interior.features.fireplace}</p>
+                    <p>Other: {listing.interior.features.other}</p>
+                    <br/>
+                    <p>PARKING INFORMATION</p>
+                    <p>Type: {listing.parking.type}</p>
+                    <p>Size: {listing.parking.size}</p>
+                    <br/>
+                    <p>UTILITIES</p>
+                    <p>Sewer: {listing.utilities.sewer}</p>
+                    <p>Water: {listing.utilities.water}</p>
+                    <p>Other: {listing.utilities.otherUtilities}</p>
+                    <br/>
+                    <p>HOA INFORMATION</p>
+                    <p>Name: {listing.HOA[0].name}</p>
+                    <p>Monthly fee: {listing.HOA[0].monthlyFee}</p>
+                    <p>Phone: {listing.HOA[0].phone}</p>
+                    <p>Fee includes: {listing.HOA[0].feeIncludes.join(", ")}</p>
+                    <br/>
+                    <p>COMMUNITY FEATURES</p>
+                    <p>Amenities: {listing.community.amenities.join(", ")}</p>
+                    <p>Community is age restricted (55+): {listing.community.isSeniorCommunity}</p>
+                    <br/>
+                    <p>MOST RECENT SALE HISTORY</p>
+                    <p>Sold date: {listing.lastSoldInfo.soldDate.toString()}</p>
+                    <p>Sale price: ${listing.lastSoldInfo.price}</p>
+                    <p>Sale price per sq ft: ${listing.lastSoldInfo.pricePerSF}</p>
+                    <br/>
+                    <p>TAX INFORMATION</p>
+                    <p>Annual tax for year {listing.tax.year}: ${listing.tax.annualTax}</p>
+                    <br/>
+                    <br/>
+                </div>
+                <div>
+                    <p>OFFERS</p>
+                    <OfferSection listingId={listing.identifier.rerListingId} />
+                </div>
+            </>
         )
     }
 }
