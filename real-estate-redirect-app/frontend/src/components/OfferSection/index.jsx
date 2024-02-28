@@ -9,8 +9,10 @@ export default function offerSection({ listingId }) {
     const [createFormData, setCreateFormData] = useState({
         // buyerId: buyerId,
         listingId: listingId,
-        status: '',
-        // terms: '',
+        status: 'pending',
+        terms: {
+            offerPrice: 0,
+        },
     })
 
     // Query the database for all comments that pertain to this offer on component mount
@@ -20,10 +22,24 @@ export default function offerSection({ listingId }) {
     }, [])
 
     // Update the form fields as the user types
+    // function handleInputChange(event) {
+    //     setCreateFormData({
+    //         ...createFormData,
+    //         [event.target.name]: event.target.value
+    //     })
+    // }
     function handleInputChange(event) {
+        let newValue = ''
+        if (event.target.name === "offerPrice") {
+            newValue = Number(event.target.value)
+        } else {
+            newValue = event.target.value
+        }
         setCreateFormData({
             ...createFormData,
-            [event.target.name]: event.target.value
+            terms: {
+                [event.target.name]: newValue
+            }
         })
     }
 
@@ -43,10 +59,11 @@ export default function offerSection({ listingId }) {
         event.preventDefault()
         // clear the form
         setCreateFormData({
-            offerId: '',
-            listingId: '',
-            status: '',
-            // terms: '',
+            listingId: listingId,
+            status: 'pending',
+            terms: {
+                offerPrice: 0,
+            },
         })
         // close the form
         setShowCreateForm(false)
@@ -87,32 +104,34 @@ export default function offerSection({ listingId }) {
             {
                 showCreateForm && <form
                     onSubmit={handleSubmit}
-                    className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto text-right">
+                    className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
                     {/* input for buyer id, autopopulate name/email */}
+                    <label htmlFor="listingId">Listing ID:</label>
                     <input
                         name="listingId"
-                        className="px-2 py-1 w-full bg-gray-100"
-                        placeholder={listingId}
+                        className="pl-2 bg-gray-100"
                         disabled={true}
                         value={listingId}
                     />
                     <br />
+                    <label htmlFor="listingId">Status:</label>
                     <input
                         name="status"
-                        className="px-2 py-1 w-full bg-gray-100"
-                        placeholder="pending"
+                        className="pl-2 bg-gray-100"
                         disabled={true}
                         value="pending"
                     />
                     <br />
-                    {/* <p>Terms:</p>
+                    <p>Terms:</p>
+                    <label htmlFor="offerPrice">Your offer price: $</label>
                     <input
                         name="offerPrice"
-                        className="p-2 my-2 h-[100px] w-full bg-gray-100"
+                        type="number"
+                        className="mx-2 bg-gray-100"
                         placeholder="Your offer price"
-                        value={createFormData.terms.offerPrice}
+                        defaultValue={createFormData.terms.offerPrice}
                         onChange={handleInputChange}
-                    /> */}
+                    />
                     <button
                         type="submit"
                         className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">

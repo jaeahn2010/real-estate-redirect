@@ -15,8 +15,7 @@ const db = require('../models')
 /* routes
 ---------------------------------------------------------- */
 // index: display all offers
-router.get('/:listingId', function (req, res) { //not working b/c localhost 5173 instead of 3000, need to fix
-    console.log(req)
+router.get('/:listingId', function (req, res) {
     db.Offer.find({ listingId: req.params.listingId })
         .then(offers => res.json(offers))
 })

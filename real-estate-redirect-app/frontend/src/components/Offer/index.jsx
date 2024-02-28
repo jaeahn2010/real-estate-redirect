@@ -4,18 +4,35 @@ import { updateOffer, deleteOffer } from "../../../utils/backend"
 export default function Offer({ data, refreshOffers }) {
     const [showEditForm, setShowEditForm] = useState(false)
     const [editFormData, setEditFormData] = useState({
-        id: data.id,
+        id: data._id,
         listingId: data.listingId,
         status: data.status,
-        // terms: data.terms
+        terms: {
+            offerPrice: data.terms.offerPrice,
+        },
     })
 
     // Update the form fields as the user types
     function handleInputChange(event) {
-        setEditFormData({
-            ...editFormData,
-            [event.target.name]: event.target.value
-        })
+        let newValue = ''
+        if (event.target.name === 'status') {
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: event.target.value
+            })
+        } else {
+            if (event.target.name === 'offerPrice') {
+                newValue = Number(event.target.value)
+            } else {
+                newValue = event.target.value
+            }
+            setEditFormData({
+                ...editFormData,
+                terms: {
+                    [event.target.name]: newValue
+                }
+            })
+        }
     }
 
     // Execute form submission logic
@@ -39,33 +56,37 @@ export default function Offer({ data, refreshOffers }) {
         return (
             <form
                 onSubmit={handleSubmit}
-                className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto text-right">
+                className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
                 {/* input for buyer id, autopopulate name/email */}
                 <br />
+                <input 
+                    type="hidden"
+                    name="_id"
+                    defaultValue={data._id}
+                />
+                <label htmlFor="listingId">Listing ID:</label>
                 <input
                     name="listingId"
-                    className="px-2 py-1 w-full bg-gray-100"
-                    placeholder={data.listingId}
+                    className="pl-2 bg-gray-100"
                     disabled={true}
-                    value={data.listingId}
+                    defaultValue={data.listingId}
                 />
                 <br />
+                <label htmlFor="listingId">Status:</label>
                 <input
                     name="status"
-                    className="px-2 py-1 w-full bg-gray-100"
-                    placeholder="pending"
-                    disabled={true}
-                    value={data.status}
+                    className="pl-2 bg-gray-100"
+                    defaultValue={data.status}
                 />
                 <br />
-                {/* <p>Terms:</p>
+                <p>Terms of the counteroffer (if any):</p>
+                <label htmlFor="offerPrice">Your offer price: $</label>
                 <input
                     name="offerPrice"
-                    className="p-2 my-2 h-[100px] w-full bg-gray-100"
-                    placeholder="Your offer price"
-                    value={editFormData.terms.offerPrice}
+                    className="mx-2 bg-gray-100"
+                    defaultValue={editFormData.terms.offerPrice}
                     onChange={handleInputChange}
-                /> */}
+                />
                 <div>
                     <button
                         onClick={() => { setShowEditForm(false) }}
@@ -86,11 +107,11 @@ export default function Offer({ data, refreshOffers }) {
         return (
             <div
                 className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
-                <p className="font-bold">Offer #{data.id}</p>
+                <p className="font-bold">Offer #{data._id}</p>
                 <p className="my-2">for listing #{data.listingId}</p>
                 <p>Status: {data.status}</p>
-                {/* <p>Terms:</p>
-                <p>Offer price: {data.terms.offerPrice}</p> */}
+                <p>Terms:</p>
+                <p>Offer price: ${data.terms.offerPrice}</p>
                 <div className="flex justify-end">
                     <button
                         onClick={() => { setShowEditForm(true) }}
