@@ -8,24 +8,35 @@ import Card from '../Card'
 import DetailsPage from '../DetailsPage'
 import './styles.css'
 
+//for seed data
+import {seedData} from '../../assets/seedData'
+
 export default function App() {
   const [listings, setListings] = useState([])
   const [detailsData, setDetailsData] = useState({})
-  async function getData(url) {
-    const res = await fetch(url, {
-      mode: 'cors',
-      headers: {
-        'apikey': '8eaefa810fce7a9efaed84eb8b9559c9',
-        'Accept': 'applicaton/json'
-      }
-    })
-    const { property } = await res.json()
-    setListings(listings => listings.concat(property))
-    console.log("current list: ", listings)
-  }
+  // don't use until api problem resolved
+  // async function getData(url) {
+  //   const res = await fetch(url, {
+  //     mode: 'cors',
+  //     headers: {
+  //       'apikey': '8eaefa810fce7a9efaed84eb8b9559c9',
+  //       'Accept': 'applicaton/json'
+  //     }
+  //   })
+  //   const { property } = await res.json()
+  //   setListings(listings => listings.concat(property))
+  //   console.log("current list: ", listings)
+  // }
 
+  // useEffect(() => {
+  //   getData("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&pageSize=20")
+  // }, [])
+
+  async function getData(filteredData) {
+    setListings(listings => listings.concat(filteredData))
+  }
   useEffect(() => {
-    getData("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&pageSize=20")
+    getData(seedData)
   }, [])
 
   return (

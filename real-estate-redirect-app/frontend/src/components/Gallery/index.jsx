@@ -3,12 +3,21 @@ import Card from '../Card'
 
 export default function Gallery({ listings, refreshQueue, updateDetails, zipCode }) {
     const [currentPage, setCurrentPage] = useState(1)
+    // function getNextPage() {
+    //     if (!zipCode) {
+    //         refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&page=${listings.length / 20 + 1}&pageSize=20`)
+    //     } else {
+    //         let zipCodeParam = `postalcode=${zipCode}`
+    //         refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?${zipCodeParam}&page=${listings.length / 20 + 1}&pageSize=20`)
+    //     }
+    //     setCurrentPage(currentPage + 1)
+    // }
     function getNextPage() {
         if (!zipCode) {
-            refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&page=${listings.length / 20 + 1}&pageSize=20`)
+            refreshQueue(listings.slice(currentPage * 5, (currentPage + 1) * 5))
         } else {
-            let zipCodeParam = `postalcode=${zipCode}`
-            refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?${zipCodeParam}&page=${listings.length / 20 + 1}&pageSize=20`)
+            const filtered = listings.filter(listing => listing.location.zip == zipCode)
+            refreshQueue(filtered.slice(currentPage * 5, (currentPage + 1) * 5))
         }
         setCurrentPage(currentPage + 1)
     }
@@ -17,15 +26,26 @@ export default function Gallery({ listings, refreshQueue, updateDetails, zipCode
         setCurrentPage(currentPage - 1)
     }
 
-    let galleryContent = <p>Property data is loading...</p>
+    let galleryContent = <p>None found</p>
 
+    // if (listings.length > 0) {
+    //     const startIndex = (currentPage - 1) * 20;
+    //     const endIndex = startIndex + 20
+    //     galleryContent = listings
+    //         .slice(startIndex, endIndex)
+    //         .map(listing => <Card key={listing.identifier.attomId} listing={listing} updateDetails={updateDetails}/>)
+    // }
     if (listings.length > 0) {
-        const startIndex = (currentPage - 1) * 20;
-        const endIndex = startIndex + 20
+        const startIndex = (currentPage - 1) * 5;
+        const endIndex = startIndex + 5
         galleryContent = listings
             .slice(startIndex, endIndex)
-            .map(listing => <Card key={listing.identifier.attomId} listing={listing} updateDetails={updateDetails}/>)
-    }
+            .map(listing => <Card
+                key={listing.identifier.rerListingId}
+                listing={listing}
+                updateDetails={updateDetails}
+            />)
+    }   
 
     let prevBtn = <button onClick={getPrevPage} className='mx-10 border-2 border-neutral-900 border-solid rounded-xl p-2'>&#11104; Previous Page</button>
     let nextBtn = <button onClick={getNextPage} className='mx-10 border-2 border-neutral-900 border-solid rounded-xl p-2'>Next Page &#11106;</button>
@@ -42,7 +62,7 @@ export default function Gallery({ listings, refreshQueue, updateDetails, zipCode
             <span> Current page: {currentPage} </span>
             <span>{nextBtn}</span>
         </p>
-    } else if (currentPage === 10) {
+    } else if (currentPage === 4) { //refactor
         btnsDisplay =
         <p className='text-xl'>
             <span>{prevBtn}</span>
