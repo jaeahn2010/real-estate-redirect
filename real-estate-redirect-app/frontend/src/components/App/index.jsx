@@ -3,8 +3,6 @@ import { Routes, Route, Link } from "react-router-dom"
 import AboutPage from '../AboutPage'
 import NotFoundPage from '../NotFoundPage'
 import HomePage from '../HomePage'
-import Gallery from '../Gallery'
-import Card from '../Card'
 import DetailsPage from '../DetailsPage'
 import AuthFormPage from '../AuthFormPage'
 import './styles.css'
@@ -15,6 +13,8 @@ import {seedData} from '../../assets/seedData'
 export default function App() {
   const [listings, setListings] = useState([])
   const [detailsData, setDetailsData] = useState({})
+  const [loginStatus, setLoginStatus] = useState(false)
+
   // don't use until api problem resolved
   // async function getData(url) {
   //   const res = await fetch(url, {
@@ -40,6 +40,28 @@ export default function App() {
     getData(seedData)
   }, [])
 
+  let authLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
+    <Link to="/auth/signup">
+        <h2 className="text-white md:text-lg sm:text-md">Sign Up</h2>
+    </Link>
+    <Link to="/auth/login">
+        <h2 className="text-white md:text-lg sm:text-md">Log In</h2>
+    </Link>
+  </div>
+
+  if (loginStatus) {
+    authLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
+      <button
+          className="text-white md:text-lg sm:text-md"
+          onClick={() => {
+              localStorage.clear()
+              setLoginStatus(false)
+          }}>
+          Log Out
+      </button>
+    </div>
+  }
+
   return (
     <>
       <nav className="flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
@@ -49,14 +71,7 @@ export default function App() {
         <Link to="/about">
           <h2 className="text-white md:text-lg sm:text-md">About</h2>
         </Link>
-        <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
-          <Link to="/auth/signup">
-            <h2 className="text-white md:text-lg sm:text-md">Sign Up</h2>
-          </Link>
-          <Link to="/auth/login">
-            <h2 className="text-white md:text-lg sm:text-md">Log In</h2>
-          </Link>
-        </div>
+        {authLink}
       </nav>
       <Routes>
         <Route path="/" element={
@@ -67,7 +82,7 @@ export default function App() {
             updateDetails={setDetailsData}
           />}
         />
-        <Route path="/auth/:formType" element={<AuthFormPage />} />
+        <Route path="/auth/:formType" element={<AuthFormPage setLoginStatus={setLoginStatus}/>} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/details/:listingId" element={<DetailsPage listing={detailsData} />} />
         <Route path="/*" element={<NotFoundPage />} />

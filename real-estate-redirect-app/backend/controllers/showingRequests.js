@@ -50,7 +50,6 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new showing request
 router.post('/', authMiddleware, (req, res) => {
-    console.log(req.body)
     db.ShowingRequest.create({
         ...req.body,
         userId: req.user.id

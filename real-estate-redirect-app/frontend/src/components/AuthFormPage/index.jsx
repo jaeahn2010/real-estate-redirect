@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { signUp, logIn } from "../../../utils/backend"
 
-export default function AuthFormPage() {
+export default function AuthFormPage({ setLoginStatus }) {
     const { formType } = useParams()
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -21,9 +21,11 @@ export default function AuthFormPage() {
         if (formType === 'login') {
             const { token } = await logIn(formData)
             localStorage.setItem('userToken', token)
+            setLoginStatus(true)
         } else {
             const { token } = await signUp(formData)
             localStorage.setItem('userToken', token)
+            setLoginStatus(true)
         }
         // redirect to the home page after signing/logging in
         navigate('/')
