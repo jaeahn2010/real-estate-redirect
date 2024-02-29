@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route, Link, useNavigate } from "react-router-dom"
 import AboutPage from '../AboutPage'
 import NotFoundPage from '../NotFoundPage'
 import HomePage from '../HomePage'
@@ -14,6 +14,7 @@ export default function App() {
   const [listings, setListings] = useState([])
   const [detailsData, setDetailsData] = useState({})
   const [loginStatus, setLoginStatus] = useState(false)
+  const navigate = useNavigate()
 
   // don't use until api problem resolved
   // async function getData(url) {
@@ -54,8 +55,11 @@ export default function App() {
       <button
           className="text-white md:text-lg sm:text-md"
           onClick={() => {
+            if (confirm("Are you sure you would like to log out?")) {
               localStorage.clear()
               setLoginStatus(false)
+              navigate('/')
+            }
           }}>
           Log Out
       </button>

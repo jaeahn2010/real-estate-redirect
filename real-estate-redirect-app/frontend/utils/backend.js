@@ -2,7 +2,6 @@ import axios from 'axios'
 
 //offers CRUD
 export async function getOffers(listingId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
     const { data } = await axios.get(`/api/offers/${listingId}`)
     return data
 }
@@ -26,7 +25,6 @@ export async function deleteOffer(offerId) {
 
 //showing requests CRUD
 export async function getShowingRequests(listingId) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
     const { data } = await axios.get(`/api/showingRequests/${listingId}`)
     return data
 }

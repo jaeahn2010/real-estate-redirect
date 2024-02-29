@@ -104,7 +104,45 @@ export default function DetailsPage(props) {
     //         <p>The listing data is loading...</p>
     //     )
     // }
+
     if (listing.identifier) {
+        function displayBool(attr) {
+            return attr ? 'Yes' : 'No'
+        }
+        let detached = displayBool(listing.generalInfo.isDetached)
+        let solar = displayBool(listing.exterior.hasSolar)
+        let balcony = displayBool(listing.exterior.hasBalcony)
+        let pool = displayBool(listing.exterior.hasPool)
+        let spa = displayBool(listing.exterior.hasSpa)
+        let senior = displayBool(listing.community.isSeniorCommunity)
+
+        function displayDate(dateObj) {
+            return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
+        }
+        let listed = displayDate(listing.currentActivity.listDate)
+        let sold = displayDate(listing.lastSoldInfo.soldDate)
+
+        let level = ''
+        if (listing.generalInfo.propertyType === 'condominium') {
+            level = <p>Unit located on: level {listing.generalInfo.level}</p>
+        }
+
+        let dom = Math.floor((new Date() - listing.currentActivity.listDate) / 1000 / 60 / 60 / 24) + 1
+
+        let homeowners = ''
+        for (let i = 0; i < listing.homeowner.length; i++) {
+            if (i === 0) {
+                homeowners = `${listing.homeowner[i].firstName} ${listing.homeowner[i].lastName}`
+            } else {
+                homeowners += `, ${listing.homeowner[i].firstName} ${listing.homeowner[i].lastName}`
+            }
+        }
+
+        let hoas = ''
+        for (let j = 0; j < listing.HOA.length; j++) {
+            hoas += `${listing.HOA[j].name}: $${listing.HOA[j].monthlyFee} / mo\n`
+        }
+
         return (
             <>
                 <div className="w-4/5 mx-auto min-h-[300px] border-2 border-black rounded-lg">
@@ -120,23 +158,23 @@ export default function DetailsPage(props) {
                     <br/>
                     <p>CURRENT STATUS</p>
                     <p>Status: {listing.currentActivity.status}</p>
-                    <p>Sale price: ${listing.currentActivity.price}</p>
+                    <p>Sale price: ${listing.currentActivity.price.toLocaleString()}</p>
                     <p>Price per sq ft: ${listing.currentActivity.pricePerSF}</p>
-                    <p>List date: {listing.currentActivity.listDate.toString()}</p>
-                    <p>Days on market: {listing.currentActivity.daysOnMarket}</p>
+                    <p>List date: {listed}</p>
+                    <p>Days on market: {dom}</p>
                     <p>Offers: {listing.currentActivity.offers.length}</p>
                     <p>Showing requests: {listing.currentActivity.showingRequests.length}</p>
                     <br/>
                     <p>HOMEOWNER INFORMATION</p>
-                    <p>Name: {listing.homeowner[0].lastName}, {listing.homeowner[0].firstName}</p>
+                    <p>Name: {homeowners}</p>
                     <br/>
                     <p>GENERAL PROPERTY INFORMATION</p>
                     <p>Property type: {listing.generalInfo.propertyType}</p>
                     <p>Zoning description: {listing.generalInfo.zoning}</p>
                     <p>Stories: {listing.generalInfo.stories}</p>
-                    <p>Level: {listing.generalInfo.level}</p>
+                    {level}
                     <p>Year built: {listing.generalInfo.yearBuilt}</p>
-                    <p>Detached: {listing.generalInfo.isDetached}</p>
+                    <p>Detached: {detached}</p>
                     <p>House faces: {listing.generalInfo.houseFaces}</p>
                     <br/>
                     <p>EXTERIOR DETAILS</p>
@@ -146,17 +184,17 @@ export default function DetailsPage(props) {
                     <p>Lot size: {listing.exterior.lot.size}</p>
                     <p>Lot features: {listing.exterior.lot.features.join(", ")}</p>
                     <p>Vegetation: {listing.exterior.lot.vegetation.join(", ")}</p>
-                    <p>Solar panels: {listing.exterior.hasSolar}</p>
-                    <p>Balcony: {listing.exterior.hasBalcony}</p>
-                    <p>Pool: {listing.exterior.hasPool}</p>
-                    <p>Spa: {listing.exterior.hasSpa}</p>
+                    <p>Solar panels: {solar}</p>
+                    <p>Balcony: {balcony}</p>
+                    <p>Pool: {pool}</p>
+                    <p>Spa: {spa}</p>
                     <br/>
                     <p>INTERIOR DETAILS</p>
                     <p>Bedrooms: {listing.interior.rooms.bedrooms}</p>
                     <p>Bathrooms: {listing.interior.rooms.bathrooms}</p>
                     <p>Total number of rooms: {listing.interior.rooms.roomsTotal}</p>
                     <p>Flooring: {listing.interior.construction.flooring.join(", ")}</p>
-                    <p>Living area: {listing.interior.livingArea}</p>
+                    <p>Living area: {listing.interior.livingArea.toLocaleString()} sq ft</p>
                     <p>Cooling: {listing.interior.cooling}</p>
                     <p>Heating: {listing.interior.heating}</p>
                     <p>Appliances included: {listing.interior.appliancesIncluded.join(", ")}</p>
@@ -175,31 +213,29 @@ export default function DetailsPage(props) {
                     <p>Other: {listing.utilities.otherUtilities}</p>
                     <br/>
                     <p>HOA INFORMATION</p>
-                    <p>Name: {listing.HOA[0].name}</p>
-                    <p>Monthly fee: {listing.HOA[0].monthlyFee}</p>
-                    <p>Phone: {listing.HOA[0].phone}</p>
-                    <p>Fee includes: {listing.HOA[0].feeIncludes.join(", ")}</p>
+                    {hoas}
+                    <br/>
                     <br/>
                     <p>COMMUNITY FEATURES</p>
                     <p>Amenities: {listing.community.amenities.join(", ")}</p>
-                    <p>Community is age restricted (55+): {listing.community.isSeniorCommunity}</p>
+                    <p>Community is age restricted (55+): {senior}</p>
                     <br/>
                     <p>MOST RECENT SALE HISTORY</p>
-                    <p>Sold date: {listing.lastSoldInfo.soldDate.toString()}</p>
-                    <p>Sale price: ${listing.lastSoldInfo.price}</p>
+                    <p>Sold date: {sold}</p>
+                    <p>Sale price: ${listing.lastSoldInfo.price.toLocaleString()}</p>
                     <p>Sale price per sq ft: ${listing.lastSoldInfo.pricePerSF}</p>
                     <br/>
                     <p>TAX INFORMATION</p>
-                    <p>Annual tax for year {listing.tax.year}: ${listing.tax.annualTax}</p>
+                    <p>Annual tax for year {listing.tax.year}: ${listing.tax.annualTax.toLocaleString()}</p>
                     <br/>
                     <br/>
                 </div>
                 <div>
-                    <p>OFFERS</p>
+                    <p className="text-center">OFFERS</p>
                     <OfferSection listingId={listing.identifier.rerListingId} />
                 </div>
                 <div>
-                    <p>SHOWING REQUESTS</p>
+                    <p className="text-center">SHOWING REQUESTS</p>
                     <ShowingRequestSection listingId={listing.identifier.rerListingId} />
                 </div>
             </>

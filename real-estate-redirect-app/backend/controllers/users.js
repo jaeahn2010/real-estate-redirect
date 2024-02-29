@@ -37,9 +37,7 @@ router.post('/signup', (req, res) => {
 
 // login route
 router.post('/login', async (req, res) => {
-    // attempt to find user w/ email in db
     const foundUser = await db.User.findOne({ email: req.body.email })
-    // ensure user exists and pw is correct
     if (foundUser && foundUser.password === req.body.password) {
         // if true, send the JWT to the browser
         const payload = { id: foundUser.id }

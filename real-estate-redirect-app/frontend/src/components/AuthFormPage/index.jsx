@@ -15,20 +15,28 @@ export default function AuthFormPage({ setLoginStatus }) {
 
     // Execute auth logic on form submit
     async function handleSubmit(event) {
-        // prevent the page from refreshing when the form is submitted
         event.preventDefault()
-        // check what the URL parameter is to determine what request to make
         if (formType === 'login') {
-            const { token } = await logIn(formData)
-            localStorage.setItem('userToken', token)
-            setLoginStatus(true)
+            try {
+                const { token } = await logIn(formData)
+                localStorage.setItem('userToken', token)
+                setLoginStatus(true)
+                navigate('/')
+            } catch(error) {
+                alert(error)
+                navigate('/auth/login')
+            }
         } else {
-            const { token } = await signUp(formData)
-            localStorage.setItem('userToken', token)
-            setLoginStatus(true)
+            try {
+                const { token } = await signUp(formData)
+                localStorage.setItem('userToken', token)
+                setLoginStatus(true)
+                navigate('/')
+            } catch(error) {
+                alert(error) 
+                navigate('/auth/login')
+            }
         }
-        // redirect to the home page after signing/logging in
-        navigate('/')
     }
 
     const handleInputChange = (event) => {

@@ -95,7 +95,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2020-3-18"),
+            soldDate: new Date("2020-03-18"),
             price: 203000,
             pricePerSF: 157,
         },
@@ -199,7 +199,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2021-9-16"),
+            soldDate: new Date("2021-09-16"),
             price: 235000,
             pricePerSF: 214,
         },
@@ -298,7 +298,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2022-4-15"),
+            soldDate: new Date("2022-04-15"),
             price: 355000,
             pricePerSF: 346,
         },
@@ -409,7 +409,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2001-11-9"),
+            soldDate: new Date("2001-11-09"),
             price: 354908,
             pricePerSF: 89,
         },
@@ -520,7 +520,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2010-4-2"),
+            soldDate: new Date("2010-04-02"),
             price: 277000,
             pricePerSF: 78,
         },
@@ -737,7 +737,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2017-6-24"),
+            soldDate: new Date("2017-06-24"),
             price: 274000,
             pricePerSF: 172,
         },
@@ -852,6 +852,7 @@ export const seedData = [
             year: 2023,
         }
     },
+
     {
         identifier: {
             apn: "176-36-713-008",
@@ -1277,7 +1278,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("1996-5-15"),
+            soldDate: new Date("1996-05-15"),
             price: 403500,
             pricePerSF: 103,
         },
@@ -1394,7 +1395,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2021-4-22"),
+            soldDate: new Date("2021-04-22"),
             price: 245000,
             pricePerSF: 215,
         },
@@ -1500,7 +1501,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2020-8-14"),
+            soldDate: new Date("2020-08-14"),
             price: 267000,
             pricePerSF: 155,
         },
@@ -1611,7 +1612,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2020-3-23"),
+            soldDate: new Date("2020-03-23"),
             price: 311423,
             pricePerSF: 166,
         },
@@ -1927,7 +1928,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2003-9-15"),
+            soldDate: new Date("2003-09-15"),
             price: 1350000,
             pricePerSF: 123,
         },
@@ -1936,6 +1937,7 @@ export const seedData = [
             year: 2023,
         }
     },
+
     {
         identifier: {
             apn: "137-12-615-158",
@@ -2032,7 +2034,7 @@ export const seedData = [
             isSeniorCommunity: false
         },
         lastSoldInfo: {
-            soldDate: new Date("2023-8-31"),
+            soldDate: new Date("2023-08-31"),
             price: 335000,
             pricePerSF: 294,
         },
