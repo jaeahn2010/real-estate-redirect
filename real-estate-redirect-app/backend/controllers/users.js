@@ -22,7 +22,6 @@ const config = require('../../jwt.config.js')
 --------------------------------------------------------------- */
 // create user (signup route)
 router.post('/signup', (req, res) => {
-    console.log(req.body)
     db.User.create(req.body)
         .then(user => {
             // if the database creates a user successfully, assign a JWT to the user and send the JWT as the response

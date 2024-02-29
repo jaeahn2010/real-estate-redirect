@@ -91,7 +91,7 @@ export default function ShowingRequest({ data, refreshShowingRequests }) {
         return (
             <div
                 className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
-                <p className="font-bold">Offer #{data._id}</p>
+                <p className="font-bold">Showing Request #{data._id}</p>
                 <p className="my-2">for listing #{data.listingId}</p>
                 <p>Status: {data.status}</p>
                 <p>Requested date & time: {data.requestedDateTime}</p>

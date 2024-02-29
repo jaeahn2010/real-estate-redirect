@@ -49,6 +49,7 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new offer
 router.post('/', authMiddleware, (req, res) => {
+    console.log(req.body)
     const reformat = {
         listingId: req.body.listingId,
         status: req.body.status,
@@ -62,7 +63,7 @@ router.post('/', authMiddleware, (req, res) => {
     }
     db.Offer.create({
         ...reformat,
-        buyerId: req.user.id
+        userId: req.user.id
     })
         .then(offer => res.json(offer))
 })
@@ -82,7 +83,7 @@ router.put('/:offerId', authMiddleware, async (req, res) => {
     }
     // Check if the user who sent the update request is the same user who created the comment
     const userOffer = await db.Offer.findById(req.params.offerId)
-    if (userOffer.buyerId == req.user.id) {
+    if (userOffer.userId == req.user.id) {
         // If it is the original author, update the offer
         const newOffer = await db.Offer.findByIdAndUpdate(
             req.params.offerId,
@@ -99,7 +100,7 @@ router.put('/:offerId', authMiddleware, async (req, res) => {
 router.delete('/:offerId', authMiddleware, async (req, res) => {
     // Check if the user who sent the delete request is the same user who created the comment
     const userOffer = await db.Offer.findById(req.params.offerId)
-    if (userOffer.buyerId == req.user.id) {
+    if (userOffer.userId == req.user.id) {
         const deletedOffer = await db.Offer.findByIdAndDelete(req.params.offerId)
         res.send('You deleted comment ' + deletedOffer._id)
     } else {

@@ -18,7 +18,7 @@ const mongoose = require('mongoose');
 
 const offerSchema = new mongoose.Schema(
     {
-        buyerId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+        userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
         listingId: { type: Number, required: true },
         status: { type: String, maxLength: 20, default: "pending" },
         terms: {

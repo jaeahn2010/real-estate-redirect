@@ -8,6 +8,9 @@ export default function AuthFormPage() {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
+        firstName: "",
+        lastName: "",
+        category: "",
     });
 
     // Execute auth logic on form submit
@@ -32,6 +35,63 @@ export default function AuthFormPage() {
 
     let actionText;
     formType === 'login' ? actionText = 'Log In' : actionText = 'Sign Up'
+    let signupFields;
+    if (formType !== 'login') {
+        signupFields = 
+            <>
+                <div>
+                    <label className="block text-gray-100 font-bold mb-2" htmlFor="email">
+                        First name
+                    </label>
+                    <input
+                        className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600"
+                        id="firstName"
+                        name="firstName"
+                        type="text"
+                        required
+                        placeholder="Your first name"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div>
+                    <label className="block text-gray-100 font-bold mb-2" htmlFor="email">
+                        Last name
+                    </label>
+                    <input
+                        className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600"
+                        id="lastName"
+                        name="lastName"
+                        type="text"
+                        required
+                        placeholder="Your last name"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div className="text-center text-gray-100">
+                    <p>Are you planning to buy or sell a home?</p>
+                    <input
+                        id="categoryBuyer"
+                        name="category"
+                        type="radio"
+                        required
+                        value="buyer"
+                        onChange={handleInputChange}
+                    />
+                    <label htmlFor="categoryBuyer" className="ml-2 mr-4">Buy</label>
+                    <input
+                        id="categorySeller"
+                        name="category"
+                        type="radio"
+                        required
+                        value="seller"
+                        onChange={handleInputChange}
+                    />
+                    <label htmlFor="categoryBuyer" className="ml-2 mr-4">Sell</label>
+                </div>
+            </>
+    }
     return (
         <div className="flex items-center justify-center h-[90vh]">
             <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
@@ -68,6 +128,7 @@ export default function AuthFormPage() {
                             onChange={handleInputChange}
                         />
                     </div>
+                    {signupFields}
                     <div>
                         <button
                             type="submit"

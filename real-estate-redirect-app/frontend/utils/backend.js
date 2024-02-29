@@ -9,18 +9,18 @@ export async function getOffers(listingId) {
 
 export async function postOffer(offer) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.post('/api/offers', offer)
+    const { data } = await axios.post('/api/offers', offer, authHeader)
     return data
 }
 export async function updateOffer(offer, offerId) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.put(`/api/offers/${offerId}`, offer)
+    const { data } = await axios.put(`/api/offers/${offerId}`, offer, authHeader)
     return data
 }
 
 export async function deleteOffer(offerId) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.delete(`/api/offers/${offerId}`)
+    const { data } = await axios.delete(`/api/offers/${offerId}`, authHeader)
     return data
 }
 
@@ -33,24 +33,23 @@ export async function getShowingRequests(listingId) {
 
 export async function postShowingRequest(showingRequest) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.post('/api/showingRequests', showingRequest)
+    const { data } = await axios.post('/api/showingRequests', showingRequest, authHeader)
     return data
 }
 export async function updateShowingRequest(showingRequest, showingRequestId) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.put(`/api/showingRequests/${showingRequestId}`, showingRequest)
+    const { data } = await axios.put(`/api/showingRequests/${showingRequestId}`, showingRequest, authHeader)
     return data
 }
 
 export async function deleteShowingRequest(showingRequestId) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.delete(`/api/showingRequests/${showingRequestId}`)
+    const { data } = await axios.delete(`/api/showingRequests/${showingRequestId}`, authHeader)
     return data
 }
 
 //signup & login
 export async function signUp(user) {
-    //code works until line below: need to add other required fields (first, last, category)
     const { data } = await axios.post('/api/users/signup', user)
     return data
 }

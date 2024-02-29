@@ -13,8 +13,7 @@ const db = require('./models');
 --------------------------------------------------------------- */
 const offersCtrl = require('./controllers/offers')
 const showingRequestsCtrl = require('./controllers/showingRequests')
-// const buyersCtrl = require('./controllers/buyers')
-// const sellersCtrl = require('./controllers/sellers')
+const usersCtrl = require('./controllers/users')
 // const favoritesCtrl = require('./controllers/favorites')
 
 /* create express app
@@ -34,8 +33,7 @@ app.use(express.json())
 // look at controllers folders for certain urls
 app.use('/api/offers', offersCtrl)
 app.use('/api/showingRequests', showingRequestsCtrl)
-// app.use('/api/buyers', buyersCtrl)
-// app.use('/api/sellers', sellersCtrl)
+app.use('/api/users', usersCtrl)
 // app.use('/api/favorites', favoritesCtrl)
 
 /* listen to port

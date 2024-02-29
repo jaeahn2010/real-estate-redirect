@@ -23,6 +23,7 @@ const config = require('../../jwt.config.js')
 const authMiddleware = (req, res, next) => {
     // Check if the 'Authorization' header is present and has the token
     const token = req.headers.authorization;
+    console.log(token)
     if (token) {
         try {
             // Decode the token using the secret key and add the decoded payload to the request object
@@ -48,26 +49,43 @@ router.get('/:listingId', function (req, res) {
 })
 
 // create: create new showing request
-router.post('/', (req, res) => {
-    db.ShowingRequest.create(req.body)
+router.post('/', authMiddleware, (req, res) => {
+    console.log(req.body)
+    db.ShowingRequest.create({
+        ...req.body,
+        userId: req.user.id
+    })
         .then(showingRequest => res.json(showingRequest))
 })
 
 // update: edit showing request
-router.put('/:showingRequestId', (req, res) => {
-    db.ShowingRequest.findByIdAndUpdate(
-        req.params.showingRequestId,
-        req.body,
-        { new: true }
-    )
-        .then(showingRequest => res.json(showingRequest))
+router.put('/:showingRequestId', authMiddleware, async (req, res) => {
+    const userShowingRequest = await db.ShowingRequest.findById(req.params.showingRequestId)
+    if (userShowingRequest.userId == req.user.id) {
+        // If it is the original author, update the showing request
+        const newShowingRequest = await db.ShowingRequest.findByIdAndUpdate(
+            req.params.showingRequestId,
+            req.body,
+            { new: true }
+        )
+        res.json(newShowingRequest)
+    } else {
+        res.status(401).json({ message: 'Invalid user or token' });
+    }
 })
 
 // destroy: delete showing request
-router.delete('/:showingRequestId', (req, res) => {
-    db.ShowingRequest.findByIdAndDelete(req.params.showingRequestId)
-        .then(() => res.json({ deletedShowingRequestId: req.params.showingRequestId }))
+router.delete('/:showingRequestId', authMiddleware, async (req, res) => {
+    // Check if the user who sent the delete request is the same user who created the showing request
+    const userShowingRequest = await db.ShowingRequest.findById(req.params.showingRequestId)
+    if (userShowingRequest.userId == req.user.id) {
+        const deletedShowingRequest = await db.ShowingRequest.findByIdAndDelete(req.params.showingRequestId)
+        res.send('You deleted comment ' + deletedShowingRequest._id)
+    } else {
+        res.status(401).json({ message: 'Invalid user or token' });
+    }
 })
+
 
 /* export to server.js
 ---------------------------------------------------------- */
