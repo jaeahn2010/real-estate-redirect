@@ -20,14 +20,15 @@ const config = require('../../jwt.config.js')
 
 /* routes
 --------------------------------------------------------------- */
-//get user (trying out secure method) 
-// router.get('/:userId', (req, res) => {
-//     db.User.findById(req.params.userId)
-//         .then(user => {
-//             const token = jwt.encode({ id: user.id }, config.jwtSecret)
-//             res.json({ token: token })
-//         })
-// })
+// get user (trying out secure method) 
+router.get('/:userId', (req, res) => {
+    // const decodedToken = jwt.decode(req.params.userToken, config.jwtSecret);
+    db.User.findById(req.params.userId)
+        .then(user => {
+            const token = jwt.encode({ id: user.id }, config.jwtSecret)
+            res.json({ token: token })
+        })
+})
 
 // create user (signup route)
 router.post('/signup', (req, res) => {

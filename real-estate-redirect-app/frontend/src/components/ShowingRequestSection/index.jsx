@@ -3,7 +3,6 @@ import { postShowingRequest, getShowingRequests } from "../../../utils/backend"
 import ShowingRequest from "../ShowingRequest"
 
 export default function showingRequestSection({ listingId, loginStatus }) {
-    // Save showing requests queried from the database in state
     const [showingRequests, setShowingRequests] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false)
     const [createFormData, setCreateFormData] = useState({

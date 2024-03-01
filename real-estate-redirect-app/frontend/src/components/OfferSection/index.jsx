@@ -3,7 +3,6 @@ import { postOffer, getOffers } from "../../../utils/backend"
 import Offer from "../Offer"
 
 export default function offerSection({ listingId, loginStatus }) {
-    // Save offers queried from the database in state
     const [offers, setOffers] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false)
     const [createFormData, setCreateFormData] = useState({
@@ -11,13 +10,20 @@ export default function offerSection({ listingId, loginStatus }) {
         listingId: listingId,
         status: 'pending',
         offerPrice: 0,
-        // expiration: new Date(),
+        expiration: new Date(),
         // listingShown: false,
         EMD: 0,
         downPayment: 0,
         loanType: '',
         loanAmount: 0,
         // proofOfFunds: false,
+        appraisalContingencyDate: new Date(),
+        loanContingencyDate: new Date(),
+        personalPropertyIncluded: '',
+        escrowCompany: '',
+        walkthrough: new Date(),
+        closeOfEscrow: new Date(),
+        additionalTerms: '',
     })
 
     useEffect(() => {
@@ -43,18 +49,26 @@ export default function offerSection({ listingId, loginStatus }) {
 
     function handleSubmit(event) {
         event.preventDefault()
+        //reset form
         setCreateFormData({
             userId: localStorage.getItem("userToken"),
             listingId: listingId,
             status: 'pending',
             offerPrice: 0,
-            // expiration: new Date(),
+            expiration: new Date(),
             // listingShown: false,
             EMD: 0,
             downPayment: 0,
             loanType: '',
             loanAmount: 0,
             // proofOfFunds: false,
+            appraisalContingencyDate: new Date(),
+            loanContingencyDate: new Date(),
+            personalPropertyIncluded: '',
+            escrowCompany: '',
+            walkthrough: new Date(),
+            closeOfEscrow: new Date(),
+            additionalTerms: '',
         })
         setShowCreateForm(false)
         postOffer({ ...createFormData, listingId: listingId })
@@ -68,6 +82,7 @@ export default function offerSection({ listingId, loginStatus }) {
                 key={offer._id}
                 data={offer}
                 refreshOffers={refreshOffers}
+                loginStatus={loginStatus}
             />
         })
     }
@@ -121,7 +136,7 @@ export default function offerSection({ listingId, loginStatus }) {
                         onChange={handleInputChange}
                     />
                     <br />
-                    {/* <label htmlFor="expiration">This offer expires on: </label>
+                    <label htmlFor="expiration">This offer expires on: </label>
                     <input
                         name="expiration"
                         type="date"
@@ -129,7 +144,7 @@ export default function offerSection({ listingId, loginStatus }) {
                         defaultValue={createFormData.expiration}
                         onChange={handleInputChange}
                     />
-                    <br /> */}
+                    <br />
                     {/* <label htmlFor="listingShown">Have you already seen the property in person?</label>
                     <input
                         name="listingShown"
@@ -183,6 +198,69 @@ export default function offerSection({ listingId, loginStatus }) {
                         defaultValue={createFormData.proofOfFunds}
                         onChange={handleInputChange}
                     /> */}
+                    <br />
+                    <label htmlFor="appraisalContingencyDate">Appraisal Contingency Date: </label>
+                    <input
+                        name="appraisalContingencyDate"
+                        type="date"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.appraisalContingencyDate}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="loanContingencyDate">Loan Contingency Date: </label>
+                    <input
+                        name="loanContingencyDate"
+                        type="date"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.loanContingencyDate}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="personalPropertyIncluded">Personal properties to be included in sale: </label>
+                    <input
+                        name="personalPropertyIncluded"
+                        type="text"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.personalPropertyIncluded}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="escrowCompany">Escrow company: </label>
+                    <input
+                        name="escrowCompany"
+                        type="text"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.escrowCompany}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="walkthrough">Walkthrough Date: </label>
+                    <input
+                        name="walkthrough"
+                        type="date"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.walkthrough}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="closeOfEscrow">Closing Date: </label>
+                    <input
+                        name="closeOfEscrow"
+                        type="date"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.closeOfEscrow}
+                        onChange={handleInputChange}
+                    />
+                    <br />
+                    <label htmlFor="additionalTerms">Additional Terms: </label>
+                    <input
+                        name="additionalTerms"
+                        type="text"
+                        className="mx-2 bg-gray-100"
+                        defaultValue={createFormData.additionalTerms}
+                        onChange={handleInputChange}
+                    />
                     <br />
                     <button
                         type="submit"

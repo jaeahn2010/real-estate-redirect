@@ -57,8 +57,8 @@ export async function logIn(user) {
     return data
 }
 
-//trying this out: securely find user by id
-// export async function getUser(userId) {
-//     const { data } = await axios.get(`/api/users/${userId}`)
-//     return data
-// }
+//find user by id
+export async function getUser(userId) {
+    const { data } = await axios.get(`/api/users/${userId}`)
+    return data
+}

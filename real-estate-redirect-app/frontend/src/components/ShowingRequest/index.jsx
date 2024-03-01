@@ -1,16 +1,26 @@
-import { useState } from "react"
-import { updateShowingRequest, deleteShowingRequest } from "../../../utils/backend"
+import { useState, useEffect } from "react"
+import { updateShowingRequest, deleteShowingRequest, getUser } from "../../../utils/backend"
 
-export default function ShowingRequest({ data, refreshShowingRequests }) {
+export default function ShowingRequest({ data, refreshShowingRequests, loginStatus }) {
+    const [currentUserToken, setCurrentUserToken] = useState('')
+    const [offerUserToken, setOfferUserToken] = useState('')
     const [showEditForm, setShowEditForm] = useState(false)
     const [editFormData, setEditFormData] = useState({
         showingRequestId: data._id,
+        userId: data.userId,
         listingId: data.listingId,
         status: data.status,
         requestedDateTime: data.requestedDateTime,
     })
 
-    // Update the form fields as the user types
+    useEffect(() => {
+        if (loginStatus) {
+            getUser(data.userId)
+                .then(user => setOfferUserToken(user.token))
+        setCurrentUserToken(localStorage.getItem("userToken"))
+        }
+    }, [])
+
     function handleInputChange(event) {
         setEditFormData({
             ...editFormData,
@@ -18,23 +28,35 @@ export default function ShowingRequest({ data, refreshShowingRequests }) {
         })
     }
 
-    // Execute form submission logic
     function handleSubmit(event) {
         event.preventDefault()
-        // close the form
         setShowEditForm(false)
-        // update the showing request in the backend
         updateShowingRequest(editFormData, data._id)
             .then(() => refreshShowingRequests())
     }
 
-    // Delete a showing request
     function handleDelete() {
         deleteShowingRequest(data._id)
             .then(() => refreshShowingRequests())
     }
 
-    // Change the showing request to a form if the showEditForm state variable is true
+    let btns = ''
+    if (currentUserToken === offerUserToken) {
+        btns = 
+            <div className="flex justify-end">
+                <button
+                    onClick={() => { setShowEditForm(true) }}
+                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    Edit
+                </button>
+                <button
+                    onClick={handleDelete}
+                    className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded">
+                    Delete
+                </button>
+            </div>
+    }
+
     if (showEditForm) {
         return (
             <form
@@ -85,28 +107,15 @@ export default function ShowingRequest({ data, refreshShowingRequests }) {
                 </div>
             </form>
         )
-
-        //  Default JSX of each comment
     } else {
         return (
             <div
                 className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
-                <p className="font-bold">Showing Request #{data._id}</p>
+                <p className="font-bold">Showing Request from {data.userId}</p>
                 <p className="my-2">for listing #{data.listingId}</p>
                 <p>Status: {data.status}</p>
                 <p>Requested date & time: {data.requestedDateTime}</p>
-                <div className="flex justify-end">
-                    <button
-                        onClick={() => { setShowEditForm(true) }}
-                        className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                        Edit
-                    </button>
-                    <button
-                        onClick={handleDelete}
-                        className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded">
-                        Delete
-                    </button>
-                </div>
+                {btns}
             </div>
         )
     }

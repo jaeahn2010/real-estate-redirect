@@ -28,7 +28,7 @@ const authMiddleware = (req, res, next) => {
             // Decode the token using the secret key and add the decoded payload to the request object
             const decodedToken = jwt.decode(token, config.jwtSecret);
             req.user = decodedToken;
-            next();
+            next(); //pass control to next matching route
         } catch (err) {
             // Return an error if the token is invalid
             res.status(401).json({ message: 'Invalid token' });
@@ -54,10 +54,18 @@ router.post('/', authMiddleware, (req, res) => {
         status: req.body.status,
         terms: {
             offerPrice: req.body.offerPrice,
+            expiration: req.body.expiration,
             EMD: req.body.EMD,
             downPayment: req.body.downPayment,
             loanType: req.body.loanType, 
-            loanAmount: req.body.loanAmount
+            loanAmount: req.body.loanAmount,
+            appraisalContingencyDate: req.body.appraisalContingencyDate,
+            loanContingencyDate: req.body.loanContingencyDate,
+            personalPropertyIncluded: req.body.personalPropertyIncluded,
+            escrowCompany: req.body.escrowCompany,
+            walkthrough: req.body.walkthrough,
+            closeOfEscrow: req.body.closeOfEscrow,
+            additionalTerms: req.body.additionalTerms,
         }
     }
     db.Offer.create({
@@ -74,10 +82,18 @@ router.put('/:offerId', authMiddleware, async (req, res) => {
         status: req.body.status,
         terms: {
             offerPrice: req.body.offerPrice,
+            expiration: req.body.expiration,
             EMD: req.body.EMD,
             downPayment: req.body.downPayment,
             loanType: req.body.loanType, 
-            loanAmount: req.body.loanAmount
+            loanAmount: req.body.loanAmount,
+            appraisalContingencyDate: req.body.appraisalContingencyDate,
+            loanContingencyDate: req.body.loanContingencyDate,
+            personalPropertyIncluded: req.body.personalPropertyIncluded,
+            escrowCompany: req.body.escrowCompany,
+            walkthrough: req.body.walkthrough,
+            closeOfEscrow: req.body.closeOfEscrow,
+            additionalTerms: req.body.additionalTerms,
         }
     }
     const userOffer = await db.Offer.findById(req.params.offerId)
