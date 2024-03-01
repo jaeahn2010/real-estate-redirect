@@ -102,7 +102,7 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
                     <button
                         type="submit"
                         className="text-white hover:bg-green-800 font-bold py-2 px-4 bg-green-900 rounded cursor-pointer mr-2">
-                        Post
+                        Submit Changes
                     </button>
                 </div>
             </form>

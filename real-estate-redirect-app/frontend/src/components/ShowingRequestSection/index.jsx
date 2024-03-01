@@ -59,19 +59,19 @@ export default function showingRequestSection({ listingId, loginStatus }) {
 
     let createBtn
     if (loginStatus) {
-        let btnText = 'Create'
+        let btnText = 'Request a Showing'
         if (showCreateForm) btnText = 'Close'
         createBtn = 
             <button
             onClick={toggleCreateForm}
-            className="top-0 right-5 absolute text-white hover:bg-green-800 font-bold py-2 px-4 bg-green-900 rounded cursor-pointer mr-2"
+            className="top-0 right-5 absolute text-stone-300hover:bg-green-800 font-bold py-2 px-4 bg-green-700 rounded cursor-pointer mr-2"
             >
                 {btnText}
             </button>
     }
 
     return (
-        <div className='comment-section bg-gray-300 rounded-lg p-4 pb-10 my-5 mx-10 space-y-4 relative'>
+        <div className='showingRequest-section bg-stone-600 rounded-lg p-4 pb-10 my-5 mx-10 space-y-4 relative text-stone-300'>
             <h1 className='text-xl font-bold'>Showing Requests</h1>
             {createBtn}
             {
@@ -107,7 +107,7 @@ export default function showingRequestSection({ listingId, loginStatus }) {
                     <button
                         type="submit"
                         className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                        Post
+                        Submit
                     </button>
                 </form>
             }
