@@ -49,7 +49,6 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new offer
 router.post('/', authMiddleware, (req, res) => {
-    console.log(req.body)
     const reformat = {
         listingId: req.body.listingId,
         status: req.body.status,
@@ -81,10 +80,8 @@ router.put('/:offerId', authMiddleware, async (req, res) => {
             loanAmount: req.body.loanAmount
         }
     }
-    // Check if the user who sent the update request is the same user who created the comment
     const userOffer = await db.Offer.findById(req.params.offerId)
     if (userOffer.userId == req.user.id) {
-        // If it is the original author, update the offer
         const newOffer = await db.Offer.findByIdAndUpdate(
             req.params.offerId,
             reformat,
@@ -98,7 +95,6 @@ router.put('/:offerId', authMiddleware, async (req, res) => {
 
 // destroy: delete offer
 router.delete('/:offerId', authMiddleware, async (req, res) => {
-    // Check if the user who sent the delete request is the same user who created the comment
     const userOffer = await db.Offer.findById(req.params.offerId)
     if (userOffer.userId == req.user.id) {
         const deletedOffer = await db.Offer.findByIdAndDelete(req.params.offerId)

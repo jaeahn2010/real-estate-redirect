@@ -18,8 +18,8 @@ export default function AuthFormPage({ setLoginStatus }) {
         event.preventDefault()
         if (formType === 'login') {
             try {
-                const { token } = await logIn(formData)
-                localStorage.setItem('userToken', token)
+                const userCredentials = await logIn(formData)
+                localStorage.setItem('userToken', userCredentials.token)
                 setLoginStatus(true)
                 navigate('/')
             } catch(error) {
@@ -28,8 +28,8 @@ export default function AuthFormPage({ setLoginStatus }) {
             }
         } else {
             try {
-                const { token } = await signUp(formData)
-                localStorage.setItem('userToken', token)
+                const userCredentials = await signUp(formData)
+                localStorage.setItem('userToken', userCredentials.token)
                 setLoginStatus(true)
                 navigate('/')
             } catch(error) {

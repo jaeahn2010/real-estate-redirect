@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import Card from '../Card'
 
-export default function Gallery({ listings, refreshQueue, updateDetails, zipCode }) {
+export default function Gallery({ listings, refreshQueue, updateDetails, zipCode, loginStatus }) {
     const [currentPage, setCurrentPage] = useState(1)
+
+    // don't user until api problem solved
     // function getNextPage() {
     //     if (!zipCode) {
     //         refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&page=${listings.length / 20 + 1}&pageSize=20`)
@@ -12,6 +14,7 @@ export default function Gallery({ listings, refreshQueue, updateDetails, zipCode
     //     }
     //     setCurrentPage(currentPage + 1)
     // }
+
     function getNextPage() {
         if (!zipCode) {
             refreshQueue(listings.slice(currentPage * 5, (currentPage + 1) * 5))
@@ -28,6 +31,7 @@ export default function Gallery({ listings, refreshQueue, updateDetails, zipCode
 
     let galleryContent = <p>None found</p>
 
+    // don't use until api problem resolved
     // if (listings.length > 0) {
     //     const startIndex = (currentPage - 1) * 20;
     //     const endIndex = startIndex + 20
@@ -35,6 +39,7 @@ export default function Gallery({ listings, refreshQueue, updateDetails, zipCode
     //         .slice(startIndex, endIndex)
     //         .map(listing => <Card key={listing.identifier.attomId} listing={listing} updateDetails={updateDetails}/>)
     // }
+
     if (listings.length > 0) {
         const startIndex = (currentPage - 1) * 5;
         const endIndex = startIndex + 5
@@ -44,6 +49,7 @@ export default function Gallery({ listings, refreshQueue, updateDetails, zipCode
                 key={listing.identifier.rerListingId}
                 listing={listing}
                 updateDetails={updateDetails}
+                loginStatus={loginStatus}
             />)
     }   
 
@@ -75,7 +81,6 @@ export default function Gallery({ listings, refreshQueue, updateDetails, zipCode
             <div className='page-controls text-center'>
                 {btnsDisplay}
             </div>  
-
             <div className="w-4/5 mt-10 mx-auto xl:columns-4 lg:columns-3 md:columns-2">
                 {galleryContent}
             </div>

@@ -20,6 +20,15 @@ const config = require('../../jwt.config.js')
 
 /* routes
 --------------------------------------------------------------- */
+//get user (trying out secure method) 
+// router.get('/:userId', (req, res) => {
+//     db.User.findById(req.params.userId)
+//         .then(user => {
+//             const token = jwt.encode({ id: user.id }, config.jwtSecret)
+//             res.json({ token: token })
+//         })
+// })
+
 // create user (signup route)
 router.post('/signup', (req, res) => {
     db.User.create(req.body)
@@ -42,10 +51,7 @@ router.post('/login', async (req, res) => {
         // if true, send the JWT to the browser
         const payload = { id: foundUser.id }
         const token = jwt.encode(payload, config.jwtSecret)
-        res.json({
-            token: token,
-            email: foundUser.email
-        })
+        res.json({token: token})
         // if user not found OR pw incorrect, send error
     } else {
         res.status(401)

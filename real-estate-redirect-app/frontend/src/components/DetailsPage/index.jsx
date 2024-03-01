@@ -8,7 +8,10 @@ import {seedData} from '../../assets/seedData'
 
 export default function DetailsPage(props) {
     const [listing, setListing] = useState({ ...props.listing})
+    const [loginStatus, setLoginStatus] = useState({...props.loginStatus})
     const params = useParams()
+
+    // don't use until api problem resolved
     // useEffect(() => {
     //     if (!listing.identifier || !listing.summary || !listing.building) {
     //         async function getListingFromAPI() {
@@ -36,6 +39,11 @@ export default function DetailsPage(props) {
         }
     }, [])
 
+    useEffect(() => {
+        localStorage.getItem("userToken") ? setLoginStatus(true) : setLoginStatus(false)
+    }, [])
+
+    // don't use until api problem resolved
     // if (listing.identifier && listing.summary && listing.building) {
     //     return (
     //         <div className="w-4/5 mx-auto min-h-[300px] border-2 border-black rounded-lg">
@@ -139,14 +147,19 @@ export default function DetailsPage(props) {
         }
 
         let hoas = ''
-        for (let j = 0; j < listing.HOA.length; j++) {
-            hoas += `${listing.HOA[j].name}: $${listing.HOA[j].monthlyFee} / mo\n`
+        if (listing.HOA.length === 0) {
+            hoas = 'None'
+        } else {
+            for (let j = 0; j < listing.HOA.length; j++) {
+                hoas += `${listing.HOA[j].name}: $${listing.HOA[j].monthlyFee} / mo\n`
+            }
         }
+
 
         return (
             <>
-                <div className="w-4/5 mx-auto min-h-[300px] border-2 border-black rounded-lg">
-                    <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover cursor-pointer"/>
+                <div className="w-4/5 mx-auto min-h-[300px] border-2 border-stone-400 rounded-lg text-stone-400 p-5 m-5">
+                    <img src="/src/assets/placeholder.jpeg" className="card-image rounded-xl mb-5 min-h-[200px] min-w-full object-cover cursor-pointer"/>
                     <p>ADDRESS</p>
                     <p>{listing.location.address}</p>
                     <p>{listing.location.city}, {listing.location.state} {listing.location.zip}</p>
@@ -232,11 +245,11 @@ export default function DetailsPage(props) {
                 </div>
                 <div>
                     <p className="text-center">OFFERS</p>
-                    <OfferSection listingId={listing.identifier.rerListingId} />
+                    <OfferSection listingId={listing.identifier.rerListingId} loginStatus={loginStatus}/>
                 </div>
                 <div>
                     <p className="text-center">SHOWING REQUESTS</p>
-                    <ShowingRequestSection listingId={listing.identifier.rerListingId} />
+                    <ShowingRequestSection listingId={listing.identifier.rerListingId} loginStatus={loginStatus}/>
                 </div>
             </>
         )

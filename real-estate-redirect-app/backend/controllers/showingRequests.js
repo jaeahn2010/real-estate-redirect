@@ -23,7 +23,6 @@ const config = require('../../jwt.config.js')
 const authMiddleware = (req, res, next) => {
     // Check if the 'Authorization' header is present and has the token
     const token = req.headers.authorization;
-    console.log(token)
     if (token) {
         try {
             // Decode the token using the secret key and add the decoded payload to the request object

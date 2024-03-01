@@ -2,24 +2,22 @@ import { useState, useEffect } from "react"
 import { postShowingRequest, getShowingRequests } from "../../../utils/backend"
 import ShowingRequest from "../ShowingRequest"
 
-export default function showingRequestSection({ listingId }) {
+export default function showingRequestSection({ listingId, loginStatus }) {
     // Save showing requests queried from the database in state
     const [showingRequests, setShowingRequests] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false)
     const [createFormData, setCreateFormData] = useState({
-        // buyerId: buyerId,
+        userId: localStorage.getItem("userToken"),
         listingId: listingId,
         status: 'pending',
         requestedDateTime: new Date(),
     })
 
-    // Query the database for all comments that pertain to this offer on component mount
     useEffect(() => {
         getShowingRequests(listingId)
             .then(showingRequests => setShowingRequests(showingRequests))
     }, [])
 
-    // Update the form fields as the user types
     function handleInputChange(event) {
         setCreateFormData({
             ...createFormData,
@@ -27,35 +25,28 @@ export default function showingRequestSection({ listingId }) {
         })
     }
 
-    // Render a form that allows a user to create an offer on submit
     function toggleCreateForm() {
         setShowCreateForm(!showCreateForm)
     }
 
-    // Update the offers in the offer section after a database transaction
     function refreshShowingRequests() {
         getShowingRequests(listingId)
             .then(newShowingRequestData => setShowingRequests(newShowingRequestData))
     }
 
-    // Execute form submission logic
     function handleSubmit(event) {
         event.preventDefault()
-        // clear the form
         setCreateFormData({
-            // buyerId: buyerId,
+            userId: localStorage.getItem("userToken"),
             listingId: listingId,
             status: 'pending',
             requestedDateTime: new Date()
         })
-        // close the form
         setShowCreateForm(false)
-        // create the showing request in the backend
         postShowingRequest({ ...createFormData, listingId: listingId })
             .then(() => refreshShowingRequests())
     }
 
-    // conditionally render showing requests
     let showingRequestElements = [<p key='0' className='text-center'>No showing requests yet</p>]
     if (showingRequests.length > 0) {
         showingRequestElements = showingRequests.map(showingRequest => {
@@ -67,23 +58,23 @@ export default function showingRequestSection({ listingId }) {
         })
     }
 
-    // conditionally display the text of the create form button
-    let btnText = 'Create'
-    if (showCreateForm) {
-        btnText = 'Close'
-    }
-
-    return (
-        <div className='comment-section bg-gray-300 rounded-t-lg p-4 pb-10 mt-4 mx-10 space-y-4 relative'>
-            <h1 className='text-xl font-bold'>Showing Requests</h1>
+    let createBtn
+    if (loginStatus) {
+        let btnText = 'Create'
+        if (showCreateForm) btnText = 'Close'
+        createBtn = 
             <button
-                onClick={toggleCreateForm}
-                className="top-0 right-5 absolute text-white hover:bg-green-800 font-bold py-2 px-4 bg-green-900 rounded cursor-pointer mr-2"
+            onClick={toggleCreateForm}
+            className="top-0 right-5 absolute text-white hover:bg-green-800 font-bold py-2 px-4 bg-green-900 rounded cursor-pointer mr-2"
             >
                 {btnText}
             </button>
+    }
 
-            {/* Conditionally render the create form */}
+    return (
+        <div className='comment-section bg-gray-300 rounded-lg p-4 pb-10 my-5 mx-10 space-y-4 relative'>
+            <h1 className='text-xl font-bold'>Showing Requests</h1>
+            {createBtn}
             {
                 showCreateForm && <form
                     onSubmit={handleSubmit}
@@ -121,8 +112,6 @@ export default function showingRequestSection({ listingId }) {
                     </button>
                 </form>
             }
-
-            {/* Display the value of the showingRequestElements variable */}
             {showingRequestElements}
         </div>
     )

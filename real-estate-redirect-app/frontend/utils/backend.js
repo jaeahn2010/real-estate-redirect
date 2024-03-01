@@ -56,3 +56,9 @@ export async function logIn(user) {
     const { data } = await axios.post('/api/users/login', user)
     return data
 }
+
+//trying this out: securely find user by id
+// export async function getUser(userId) {
+//     const { data } = await axios.get(`/api/users/${userId}`)
+//     return data
+// }

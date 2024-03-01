@@ -2,12 +2,12 @@ import { useState, useEffect } from "react"
 import { postOffer, getOffers } from "../../../utils/backend"
 import Offer from "../Offer"
 
-export default function offerSection({ listingId }) {
+export default function offerSection({ listingId, loginStatus }) {
     // Save offers queried from the database in state
     const [offers, setOffers] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false)
     const [createFormData, setCreateFormData] = useState({
-        // buyerId: buyerId,
+        userId: localStorage.getItem("userToken"),
         listingId: listingId,
         status: 'pending',
         offerPrice: 0,
@@ -20,13 +20,11 @@ export default function offerSection({ listingId }) {
         // proofOfFunds: false,
     })
 
-    // Query the database for all comments that pertain to this offer on component mount
     useEffect(() => {
         getOffers(listingId)
             .then(offers => setOffers(offers))
     }, [])
 
-    // Update the form fields as the user types
     function handleInputChange(event) {
         setCreateFormData({
             ...createFormData,
@@ -34,22 +32,19 @@ export default function offerSection({ listingId }) {
         })
     }
 
-    // Render a form that allows a user to create an offer on submit
     function toggleCreateForm() {
         setShowCreateForm(!showCreateForm)
     }
 
-    // Update the offers in the offer section after a database transaction
     function refreshOffers() {
         getOffers(listingId)
             .then(newOfferData => setOffers(newOfferData))
     }
 
-    // Execute form submission logic
     function handleSubmit(event) {
         event.preventDefault()
-        // clear the form
         setCreateFormData({
+            userId: localStorage.getItem("userToken"),
             listingId: listingId,
             status: 'pending',
             offerPrice: 0,
@@ -61,14 +56,11 @@ export default function offerSection({ listingId }) {
             loanAmount: 0,
             // proofOfFunds: false,
         })
-        // close the form
         setShowCreateForm(false)
-        // create the offer in the backend
         postOffer({ ...createFormData, listingId: listingId })
             .then(() => refreshOffers())
     }
 
-    // conditionally render offers
     let offerElements = [<p key='0' className='text-center'>No offers yet</p>]
     if (offers.length > 0) {
         offerElements = offers.map(offer => {
@@ -80,23 +72,23 @@ export default function offerSection({ listingId }) {
         })
     }
 
-    // conditionally display the text of the create form button
-    let btnText = 'Create'
-    if (showCreateForm) {
-        btnText = 'Close'
-    }
-
-    return (
-        <div className='comment-section bg-gray-300 rounded-t-lg p-4 pb-10 mt-4 mx-10 space-y-4 relative'>
-            <h1 className='text-xl font-bold'>Offers</h1>
+    let createBtn
+    if (loginStatus) {
+        let btnText = 'Create'
+        if (showCreateForm) btnText = 'Close'
+        createBtn = 
             <button
-                onClick={toggleCreateForm}
-                className="top-0 right-5 absolute text-white hover:bg-green-800 font-bold py-2 px-4 bg-green-900 rounded cursor-pointer mr-2"
+            onClick={toggleCreateForm}
+            className="top-0 right-5 absolute text-white hover:bg-green-800 font-bold py-2 px-4 bg-green-900 rounded cursor-pointer mr-2"
             >
                 {btnText}
             </button>
+    }
 
-            {/* Conditionally render the create form */}
+    return (
+        <div className='comment-section bg-gray-300 rounded-lg p-4 pb-10 mt-4 mx-10 space-y-4 relative'>
+            <h1 className='text-xl font-bold'>Offers</h1>
+            {createBtn}
             {
                 showCreateForm && <form
                     onSubmit={handleSubmit}
@@ -199,8 +191,6 @@ export default function offerSection({ listingId }) {
                     </button>
                 </form>
             }
-
-            {/* Display the value of the offerElements variable */}
             {offerElements}
         </div>
     )

@@ -64,6 +64,8 @@ export default function App() {
           Log Out
       </button>
     </div>
+  } else if (localStorage.userToken) {
+    setLoginStatus(true)
   }
 
   return (
@@ -84,11 +86,12 @@ export default function App() {
             refreshQueue={getData}
             setListings={setListings}
             updateDetails={setDetailsData}
+            loginStatus={loginStatus}
           />}
         />
         <Route path="/auth/:formType" element={<AuthFormPage setLoginStatus={setLoginStatus}/>} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/details/:listingId" element={<DetailsPage listing={detailsData} />} />
+        <Route path="/details/:listingId" element={<DetailsPage listing={detailsData} loginStatus={loginStatus}/>} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </>

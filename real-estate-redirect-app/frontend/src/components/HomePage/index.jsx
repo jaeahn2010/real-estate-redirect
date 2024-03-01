@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Gallery from '../Gallery'
 
-export default function HomePage({ listings, setListings, refreshQueue, updateDetails }) {
+export default function HomePage({ listings, setListings, refreshQueue, updateDetails, loginStatus }) {
     let zipCodesList = [89002, 89011, 89012, 89014, 89015, 89030, 89031, 89032, 89044, 89052, 89054, 89074, 89081, 89084, 89086, 89087, 89101, 89102, 89103, 89104, 89106, 89107, 89108, 89109, 89110, 89113, 89115, 89117, 89118, 89119, 89120, 89121, 89122, 89123, 89124, 89128, 89129, 89130, 89131, 89134, 89135, 89138, 89139, 89141, 89142, 89143, 89144, 89145, 89146, 89147, 89148, 89149, 89156, 89158, 89161, 89166, 89169, 89178, 89179, 89183, 89191]
     let zipCodeOptions = []
     for (let zip of zipCodesList) {
@@ -22,7 +22,7 @@ export default function HomePage({ listings, setListings, refreshQueue, updateDe
     }
     
     return (
-        <>
+        <main className="text-stone-400">
             <h1 className="mt-5 text-center md:text-3xl text-2xl font-bold">Real estate Redirect</h1>
             <h2 className="text-center md:text-xl text-lg font-semibold italic">A platform for home buyers and sellers to communicate directly and save on commissions</h2>
             <br />
@@ -57,7 +57,8 @@ export default function HomePage({ listings, setListings, refreshQueue, updateDe
                 listings={listings}
                 refreshQueue={refreshQueue}
                 updateDetails={updateDetails}
+                loginStatus={loginStatus}
             />
-        </>
+        </main>
     )
 }

@@ -1,10 +1,16 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { updateOffer, deleteOffer } from "../../../utils/backend"
-
+//
+// import { getUser } from "../../../utils/backend"
+//
 export default function Offer({ data, refreshOffers }) {
+    //
+    // const [currentUser, setCurrentUser] = useState({})
+    //
     const [showEditForm, setShowEditForm] = useState(false)
     const [editFormData, setEditFormData] = useState({
         offerId: data._id,
+        userId: data.userId,
         listingId: data.listingId,
         status: data.status,
         // expiration: data.terms.expiration,
@@ -16,7 +22,12 @@ export default function Offer({ data, refreshOffers }) {
         // proofOfFunds: data.terms.proofOfFunds,
     })
 
-    // Update the form fields as the user types
+    // useEffect(() => {
+    //     getUser(data.userId)
+    //         .then(user => setCurrentUser(user))
+    // }, [])
+    // console.log(currentUser)
+
     function handleInputChange(event) {
         setEditFormData({
             ...editFormData,
@@ -24,23 +35,18 @@ export default function Offer({ data, refreshOffers }) {
         })
     }
 
-    // Execute form submission logic
     function handleSubmit(event) {
         event.preventDefault()
-        // close the form
         setShowEditForm(false)
-        // update the offer in the backend
         updateOffer(editFormData, data._id)
             .then(() => refreshOffers())
     }
 
-    // Delete an offer
     function handleDelete() {
         deleteOffer(data._id)
             .then(() => refreshOffers())
     }
 
-    // Change the offer to a form if the showEditForm state variable is true
     if (showEditForm) {
         return (
             <form
@@ -154,8 +160,6 @@ export default function Offer({ data, refreshOffers }) {
                 </div>
             </form>
         )
-
-        //  Default JSX of each comment
     } else {
         return (
             <div
