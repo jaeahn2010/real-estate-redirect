@@ -1,8 +1,7 @@
-export const seedData = [
+const listings = [
     {
         identifier: {
             apn: "178-18-514-050",
-            rerListingId: 1,
         },
         location: {
             address: "2325 Windmill Pkwy #721",
@@ -15,18 +14,9 @@ export const seedData = [
             price: 301400,
             pricePerSF: 233,
             listDate: new Date("2024-02-26"),
-            daysOnMarket: 1,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 1,
-                lastName: "Altman",
-                firstName: "Michael James",
-            },
-        ],   
+        homeowner: ['65e2d26c5ed4ba02d68f36bf'],
         generalInfo: {
             propertyType: "condominium",
             zoning: "single family",
@@ -108,7 +98,6 @@ export const seedData = [
     {
         identifier: {
             apn: "139-25-310-091",
-            rerListingId: 2,
         },
         location: {
             address: "2528 Willoughby Ave",
@@ -121,23 +110,9 @@ export const seedData = [
             price: 273800,
             pricePerSF: 249,
             listDate: new Date("2024-02-20"),
-            daysOnMarket: 7,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 2,
-                lastName: "Chapman",
-                firstName: "Robert",
-            },
-            {
-                rerSellerId: 3,
-                lastName: "Au",
-                firstName: "Beth",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36c0", "65e2d26c5ed4ba02d68f36c1"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -193,7 +168,12 @@ export const seedData = [
             water: "public",
             otherUtilities: "underground"
         },
-        HOA: [],
+        HOA: [{
+            name: "none",
+            monthlyFee: 0,
+            phone: "none",
+            feeIncludes: ["none"]
+        }],
         community: {
             amenities: [],
             isSeniorCommunity: false
@@ -212,7 +192,6 @@ export const seedData = [
     {
         identifier: {
             apn: "179-18-310-028",
-            rerListingId: 3,
         },
         location: {
             address: "326 Tungsten",
@@ -225,18 +204,9 @@ export const seedData = [
             price: 356500,
             pricePerSF: 347,
             listDate: new Date("2024-01-31"),
-            daysOnMarket: 27,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 4,
-                lastName: "Broyles",
-                firstName: "Elora",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36c2"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -292,7 +262,12 @@ export const seedData = [
             water: "public",
             otherUtilities: "cable wired"
         },
-        HOA: [],
+        HOA: [{
+            name: "none",
+            monthlyFee: 0,
+            phone: "none",
+            feeIncludes: ["none"]
+        }],
         community: {
             amenities: [],
             isSeniorCommunity: false
@@ -311,7 +286,6 @@ export const seedData = [
     {
         identifier: {
             apn: "176-36-615-036",
-            rerListingId: 4,
         },
         location: {
             address: "5307 Cappellini Ct",
@@ -324,23 +298,9 @@ export const seedData = [
             price: 746900,
             pricePerSF: 188,
             listDate: new Date("2024-02-24"),
-            daysOnMarket: 3,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 5,
-                lastName: "Caldwell",
-                firstName: "John Randy",
-            },
-            {
-                rerSellerId: 6,
-                lastName: "Street-Caldwell",
-                firstName: "Sharon",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36c3", "65e2d26c5ed4ba02d68f36c4"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -422,7 +382,6 @@ export const seedData = [
     {
         identifier: {
             apn: "177-24-112-005",
-            rerListingId: 5,
         },
         location: {
             address: "2710 Celebrate Ct",
@@ -435,23 +394,9 @@ export const seedData = [
             price: 657000,
             pricePerSF: 185,
             listDate: new Date("2024-02-14"),
-            daysOnMarket: 13,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 7,
-                lastName: "Benton",
-                firstName: "Jimmie Fielding",
-            },
-            {
-                rerSellerId: 8,
-                lastName: "Benton",
-                firstName: "Mi Ok",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36c5", "65e2d26c5ed4ba02d68f36c6"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -533,7 +478,6 @@ export const seedData = [
     {
         identifier: {
             apn: "138-28-510-032",
-            rerListingId: 6,
         },
         location: {
             address: "1325 Cinder Rock Dr #202",
@@ -546,18 +490,9 @@ export const seedData = [
             price: 251600,
             pricePerSF: 221,
             listDate: new Date("2024-02-03"),
-            daysOnMarket: 24,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 9,
-                lastName: "Chenes",
-                firstName: "Maria",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36c7"],  
         generalInfo: {
             propertyType: "condominium",
             zoning: "single family",
@@ -639,7 +574,6 @@ export const seedData = [
     {
         identifier: {
             apn: "176-11-110-160",
-            rerListingId: 7,
         },
         location: {
             address: "6684 Topley Pike Ave",
@@ -652,23 +586,9 @@ export const seedData = [
             price: 376100,
             pricePerSF: 236,
             listDate: new Date("2024-02-26"),
-            daysOnMarket: 1,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 10,
-                lastName: "Ahn-Benton",
-                firstName: "Jae Young",
-            },
-            {
-                rerSellerId: 11,
-                lastName: "Kolesnyk",
-                firstName: "Maria",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36c8","65e2d26c5ed4ba02d68f36c9"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -750,7 +670,6 @@ export const seedData = [
     {
         identifier: {
             apn: "160-14-815-022",
-            rerListingId: 8,
         },
         location: {
             address: "30 Via Mantova #302",
@@ -763,18 +682,9 @@ export const seedData = [
             price: 494500,
             pricePerSF: 245,
             listDate: new Date("2024-02-20"),
-            daysOnMarket: 7,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 12,
-                lastName: "Williams",
-                firstName: "Valinda",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36ca"],   
         generalInfo: {
             propertyType: "condominium",
             zoning: "single family",
@@ -856,7 +766,6 @@ export const seedData = [
     {
         identifier: {
             apn: "176-36-713-008",
-            rerListingId: 9,
         },
         location: {
             address: "11070 Ampus Pl",
@@ -869,23 +778,9 @@ export const seedData = [
             price: 383800,
             pricePerSF: 301,
             listDate: new Date("2024-02-11"),
-            daysOnMarket: 16,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 13,
-                lastName: "Tscha",
-                firstName: "Moon-Soo",
-            },
-            {
-                rerSellerId: 14,
-                lastName: "Lee",
-                firstName: "Hyo-Ok"
-            }
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36cb", "65e2d26c5ed4ba02d68f36cc"],   
         generalInfo: {
             propertyType: "townhouse",
             zoning: "single family",
@@ -973,7 +868,6 @@ export const seedData = [
     {
         identifier: {
             apn: "178-05-516-073",
-            rerListingId: 10,
         },
         location: {
             address: "1943 Sunset Village Cir",
@@ -986,18 +880,9 @@ export const seedData = [
             price: 428700,
             pricePerSF: 223,
             listDate: new Date("2024-02-19"),
-            daysOnMarket: 8,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 15,
-                lastName: "Paik",
-                firstName: "Elora Merry",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36cd"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -1079,7 +964,6 @@ export const seedData = [
     {
         identifier: {
             apn: "161-26-210-077",
-            rerListingId: 11,
         },
         location: {
             address: "5169 Midnight Oil Dr",
@@ -1092,18 +976,9 @@ export const seedData = [
             price: 318900,
             pricePerSF: 299,
             listDate: new Date("2024-02-07"),
-            daysOnMarket: 20,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 16,
-                lastName: "Medins",
-                firstName: "Tatiana",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36ce"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -1185,7 +1060,6 @@ export const seedData = [
     {
         identifier: {
             apn: "178-17-810-018",
-            rerListingId: 12,
         },
         location: {
             address: "1908 Grey Eagle St",
@@ -1198,18 +1072,9 @@ export const seedData = [
             price: 896700,
             pricePerSF: 229,
             listDate: new Date("2024-02-25"),
-            daysOnMarket: 2,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 17,
-                lastName: "DeVol",
-                firstName: "Luana",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36cf"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -1291,7 +1156,6 @@ export const seedData = [
     {
         identifier: {
             apn: "163-06-320-026",
-            rerListingId: 13,
         },
         location: {
             address: "2000 Turquoise Ridge St #103",
@@ -1304,23 +1168,9 @@ export const seedData = [
             price: 295200,
             pricePerSF: 259,
             listDate: new Date("2024-02-02"),
-            daysOnMarket: 25,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 18,
-                lastName: "McKeeman",
-                firstName: "Garrett",
-            },
-            {
-                rerSellerId: 19,
-                lastName: "McKeeman",
-                firstName: "Debra",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36d0","65e2d26c5ed4ba02d68f36d1"],   
         generalInfo: {
             propertyType: "condominium",
             zoning: "single family",
@@ -1408,7 +1258,6 @@ export const seedData = [
     {
         identifier: {
             apn: "125-17-411-016",
-            rerListingId: 14,
         },
         location: {
             address: "7348 Nautical Stone",
@@ -1421,18 +1270,9 @@ export const seedData = [
             price: 396100,
             pricePerSF: 230,
             listDate: new Date("2024-01-28"),
-            daysOnMarket: 30,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 20,
-                lastName: "Janushan",
-                firstName: "Aaron",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36d2"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -1514,7 +1354,6 @@ export const seedData = [
     {
         identifier: {
             apn: "179-07-515-023",
-            rerListingId: 15,
         },
         location: {
             address: "358 Andy Wheeler",
@@ -1527,23 +1366,9 @@ export const seedData = [
             price: 442700,
             pricePerSF: 236,
             listDate: new Date("2024-02-18"),
-            daysOnMarket: 9,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 21,
-                lastName: "Hart",
-                firstName: "Troy",
-            },
-            {
-                rerSellerId: 22,
-                lastName: "Mata",
-                firstName: "Judith",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36d3","65e2d26c5ed4ba02d68f36d4"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -1625,7 +1450,6 @@ export const seedData = [
     {
         identifier: {
             apn: "138-07-113-039",
-            rerListingId: 16,
         },
         location: {
             address: "3975 N Hualapai Way #287",
@@ -1638,18 +1462,9 @@ export const seedData = [
             price: 345700,
             pricePerSF: 208,
             listDate: new Date("2024-02-22"),
-            daysOnMarket: 5,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 23,
-                lastName: "Guthrie",
-                firstName: "Carolina Melody",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36d5"],   
         generalInfo: {
             propertyType: "condominium",
             zoning: "single family",
@@ -1731,7 +1546,6 @@ export const seedData = [
     {
         identifier: {
             apn: "163-20-111-022",
-            rerListingId: 17,
         },
         location: {
             address: "4241 Flaming Ridge Trl",
@@ -1744,18 +1558,9 @@ export const seedData = [
             price: 527500,
             pricePerSF: 248,
             listDate: new Date("2024-02-21"),
-            daysOnMarket: 6,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 24,
-                lastName: "Chenes",
-                firstName: "Steven",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36d6"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -1811,7 +1616,12 @@ export const seedData = [
             water: "public",
             otherUtilities: "underground"
         },
-        HOA: [],
+        HOA: [{
+            name: "none",
+            monthlyFee: 0,
+            phone: "none",
+            feeIncludes: ["none"]
+        }],
         community: {
             amenities: ["community pool", "playgrounds"],
             isSeniorCommunity: false
@@ -1830,7 +1640,6 @@ export const seedData = [
     {
         identifier: {
             apn: "163-29-613-018",
-            rerListingId: 18,
         },
         location: {
             address: "5140 Rustic Ridge Dr",
@@ -1843,23 +1652,9 @@ export const seedData = [
             price: 4175300,
             pricePerSF: 380,
             listDate: new Date("2024-02-27"),
-            daysOnMarket: 0,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 25,
-                lastName: "Forman",
-                firstName: "Don",
-            },
-            {
-                rerSellerId: 26,
-                lastName: "Forman",
-                firstName: "Lorie",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36d7", "65e2d26c5ed4ba02d68f36d8"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -1941,7 +1736,6 @@ export const seedData = [
     {
         identifier: {
             apn: "137-12-615-158",
-            rerListingId: 19,
         },
         location: {
             address: "3647 Wild Springs St",
@@ -1954,18 +1748,9 @@ export const seedData = [
             price: 354400,
             pricePerSF: 311,
             listDate: new Date("2024-02-23"),
-            daysOnMarket: 4,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 27,
-                lastName: "Ivanov",
-                firstName: "Ivan",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36d9"],   
         generalInfo: {
             propertyType: "single family residence",
             zoning: "single family",
@@ -2047,7 +1832,6 @@ export const seedData = [
     {
         identifier: {
             apn: "162-25-111-091",
-            rerListingId: 20,
         },
         location: {
             address: "4923 Calle Del Oya",
@@ -2060,18 +1844,9 @@ export const seedData = [
             price: 281800,
             pricePerSF: 162,
             listDate: new Date("2024-02-11"),
-            daysOnMarket: 16,
             status: "active",
-            offers: [],
-            showingRequests: [],
         },
-        homeowner: [
-            {
-                rerSellerId: 28,
-                lastName: "Herndon",
-                firstName: "Matthew",
-            },
-        ],   
+        homeowner: ["65e2d26c5ed4ba02d68f36da"],   
         generalInfo: {
             propertyType: "townhouse",
             zoning: "single family",
@@ -2150,3 +1925,6 @@ export const seedData = [
         }
     }
 ]
+
+//export seed data to models/index.js
+module.exports = listings;

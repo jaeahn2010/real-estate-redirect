@@ -14,6 +14,7 @@ const db = require('./models');
 const offersCtrl = require('./controllers/offers')
 const showingRequestsCtrl = require('./controllers/showingRequests')
 const usersCtrl = require('./controllers/users')
+const listingsCtrl = require('./controllers/listings')
 // const favoritesCtrl = require('./controllers/favorites')
 
 /* create express app
@@ -34,7 +35,41 @@ app.use(express.json())
 app.use('/api/offers', offersCtrl)
 app.use('/api/showingRequests', showingRequestsCtrl)
 app.use('/api/users', usersCtrl)
+app.use('/api/listings', listingsCtrl)
 // app.use('/api/favorites', favoritesCtrl)
+
+// seed with mock listings and sellers for testing - do this locally before presentation - localhost:3000/seed
+// always seed user first, listings last
+// if (process.env.ON_HEROKU === 'false') {
+    app.get('/seed', function (req, res) {
+        db.User.deleteMany({})
+            .then(removedUsers => {
+                console.log(`Removed ${removedUsers.deletedCount} users.`)
+                db.User.insertMany(db.seedSellers)
+                    .then(addedUsers => {
+                        console.log(`Added ${addedUsers.length} sellers. Reset to original database.`)
+                        res.json(addedUsers)
+                })
+        })
+        db.Listing.deleteMany({})
+            .then(removedListings => {
+                console.log(`Removed ${removedListings.deletedCount} listings.`)
+                db.Listing.insertMany(db.seedListings)
+                    .then(addedListings => {
+                        console.log(`Added ${addedListings.length} listings. Reset to original database.`)
+                        res.json(addedListings)
+                    })
+            })
+        db.Offer.deleteMany({})
+            .then(removedOffers => {
+                console.log(`Removed ${removedOffers.deletedCount} offers.`)
+            })
+        db.ShowingRequest.deleteMany({})
+            .then(removedShowingRequests => {
+                console.log(`Removed ${removedShowingRequests.deletedCount} showing requests.`)
+            })            
+    });
+// }
 
 /* listen to port
 ---------------------------------------------------------- */

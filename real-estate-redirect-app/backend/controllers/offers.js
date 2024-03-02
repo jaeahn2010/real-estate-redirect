@@ -114,7 +114,7 @@ router.delete('/:offerId', authMiddleware, async (req, res) => {
     const userOffer = await db.Offer.findById(req.params.offerId)
     if (userOffer.userId == req.user.id) {
         const deletedOffer = await db.Offer.findByIdAndDelete(req.params.offerId)
-        res.send('You deleted comment ' + deletedOffer._id)
+        res.send('You deleted offer ' + deletedOffer._id)
     } else {
         res.status(401).json({ message: 'Invalid user or token' });
     }

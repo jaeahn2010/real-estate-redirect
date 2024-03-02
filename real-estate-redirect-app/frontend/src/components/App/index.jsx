@@ -7,8 +7,7 @@ import DetailsPage from '../DetailsPage'
 import AuthFormPage from '../AuthFormPage'
 import './styles.css'
 
-//for seed data
-import {seedData} from '../../assets/seedData'
+import { getListings } from '../../../utils/backend'
 
 export default function App() {
   const [listings, setListings] = useState([])
@@ -34,12 +33,22 @@ export default function App() {
   //   getData("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&pageSize=20")
   // }, [])
 
-  async function getData(filteredData) {
-    setListings(listings => listings.concat(filteredData))
-  }
+  //for when seed data was in front end
+  // async function getData(filteredData) {
+  //   setListings(listings => listings.concat(filteredData))
+  // }
+  // useEffect(() => {
+  //   getData(seedData)
+  // }, [])
+
+  // async function getData(url) {
+  //   const res = await fetch(url)
+  //   const data = await res.json()
+  //   setListings(listings => listings.concat(data))
+  // }
   useEffect(() => {
-    getData(seedData)
-  }, [])
+    getListings().then(listings => console.log(listings))
+  })
 
   let authLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
     <Link to="/auth/signup">
@@ -83,7 +92,7 @@ export default function App() {
         <Route path="/" element={
           <HomePage
             listings={listings}
-            refreshQueue={getData}
+            // refreshQueue={getData}
             setListings={setListings}
             updateDetails={setDetailsData}
             loginStatus={loginStatus}

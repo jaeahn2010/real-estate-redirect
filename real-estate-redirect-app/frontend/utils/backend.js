@@ -46,6 +46,29 @@ export async function deleteShowingRequest(showingRequestId) {
     return data
 }
 
+//listings CRUD
+export async function getListings() {
+    const { data } = await axios.get(`/api/listings`)
+    return data
+}
+
+export async function postListing(listing) {
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.post('/api/listings', listing, authHeader)
+    return data
+}
+export async function updateListing(listing, listingId) {
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.put(`/api/listings/${listingId}`, listing, authHeader)
+    return data
+}
+
+export async function deleteListing(listingId) {
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.delete(`/api/listings/${listingId}`, authHeader)
+    return data
+}
+
 //signup & login
 export async function signUp(user) {
     const { data } = await axios.post('/api/users/signup', user)

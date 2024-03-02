@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 import OfferSection from "../OfferSection"
 import ShowingRequestSection from "../ShowingRequestSection"
 
-//for seed data
-import {seedData} from '../../assets/seedData'
+// //for seed data
+// import {seedData} from '../../assets/seedData'
 
 export default function DetailsPage(props) {
     const [listing, setListing] = useState({ ...props.listing})
@@ -29,15 +29,16 @@ export default function DetailsPage(props) {
     //     }
     // }, [])
 
-    useEffect(() => {
-        if (!listing.identifier) {
-            async function getListing() {
-                const property = seedData.filter(listing => listing.identifier.rerListingId == params.listingId)
-                setListing(property[0])
-            }
-            getListing()
-        }
-    }, [])
+    // for when seed was in front end
+    // useEffect(() => {
+    //     if (!listing.identifier) {
+    //         async function getListing() {
+    //             const property = seedData.filter(listing => listing.identifier.rerListingId == params.listingId)
+    //             setListing(property[0])
+    //         }
+    //         getListing()
+    //     }
+    // }, [])
 
     useEffect(() => {
         localStorage.getItem("userToken") ? setLoginStatus(true) : setLoginStatus(false)
