@@ -5,8 +5,10 @@ import NotFoundPage from '../NotFoundPage'
 import HomePage from '../HomePage'
 import DetailsPage from '../DetailsPage'
 import AuthFormPage from '../AuthFormPage'
+import SellerProfilePage from '../SellerProfilePage'
+// import BuyerProfilePage from '../BuyerProfilePage'
 import './styles.css'
-import { getListings } from '../../../utils/backend'
+import { getListings, getUserByToken } from '../../../utils/backend'
 
 export default function App() {
   const [listings, setListings] = useState([])
@@ -53,10 +55,15 @@ export default function App() {
       filteredData = data
     } else if (category === "zip") {
       filteredData = data.filter(listing => listing.location.zip == filter)
+    } else if (category === "userToken" && filter === "none") {
+      const currentUserData = await getUserByToken()
+      filteredData = data.filter(listing => {
+        if (listing.homeowner.includes(currentUserData.userId)) return listing
+      })
     }
     setListings(filteredData)
-    //   setListings(listings => listings.concat(data))
   }
+  
   useEffect(() => {
     getData("none", "none")
   }, [])
@@ -69,6 +76,7 @@ export default function App() {
         <h2 className="text-white md:text-lg sm:text-md">Log In</h2>
     </Link>
   </div>
+  let profileLink = ''
 
   if (loginStatus) {
     authLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
@@ -84,6 +92,19 @@ export default function App() {
           Log Out
       </button>
     </div>
+    if (localStorage.getItem("userCategory") === "seller") {
+      profileLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
+      <Link to={"/sellerProfile/" + localStorage.getItem("userToken")}>
+          <h2 className="text-white md:text-lg sm:text-md">My Seller Profile</h2>
+      </Link>
+    </div>
+    } else {
+      profileLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
+      <Link to="/buyerProfile">
+          <h2 className="text-white md:text-lg sm:text-md">My Buyer Profile</h2>
+      </Link>
+    </div>
+    }
   } else if (localStorage.userToken) {
     setLoginStatus(true)
   }
@@ -97,6 +118,7 @@ export default function App() {
         <Link to="/about">
           <h2 className="text-white md:text-lg sm:text-md">About</h2>
         </Link>
+        {profileLink}
         {authLink}
       </nav>
       <Routes>
@@ -107,6 +129,15 @@ export default function App() {
             getFilteredData={getData}
             updateDetails={setDetailsData}
             loginStatus={loginStatus}
+          />}
+        />
+        <Route path="/sellerProfile/:userId" element={
+          <SellerProfilePage
+            loginStatus={loginStatus}
+            listings={listings}
+            setListings={setListings}
+            getFilteredData={getData}
+            updateDetails={setDetailsData}
           />}
         />
         <Route path="/auth/:formType" element={<AuthFormPage setLoginStatus={setLoginStatus}/>} />

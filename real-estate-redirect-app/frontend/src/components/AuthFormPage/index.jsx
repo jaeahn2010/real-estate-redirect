@@ -20,6 +20,7 @@ export default function AuthFormPage({ setLoginStatus }) {
             try {
                 const userCredentials = await logIn(formData)
                 localStorage.setItem('userToken', userCredentials.token)
+                localStorage.setItem('userCategory', userCredentials.category)
                 setLoginStatus(true)
                 navigate('/')
             } catch(error) {
@@ -30,6 +31,7 @@ export default function AuthFormPage({ setLoginStatus }) {
             try {
                 const userCredentials = await signUp(formData)
                 localStorage.setItem('userToken', userCredentials.token)
+                localStorage.setItem('userCategory', userCredentials.category)
                 setLoginStatus(true)
                 navigate('/')
             } catch(error) {

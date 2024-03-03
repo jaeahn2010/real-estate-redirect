@@ -74,7 +74,7 @@ router.post('/', authMiddleware, (req, res) => {
     //         additionalTerms: req.body.additionalTerms,
     //     }
     // }
-    db.Offer.create({
+    db.Listing.create({
         // ...reformat,
         ...req.body,
         userId: req.user.id

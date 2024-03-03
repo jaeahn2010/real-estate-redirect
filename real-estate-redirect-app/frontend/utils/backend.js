@@ -90,3 +90,10 @@ export async function getUser(userId) {
     const { data } = await axios.get(`/api/users/${userId}`)
     return data
 }
+
+//find current user by token - need to find alternative method, probably not secure
+export async function getUserByToken() {
+    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const { data } = await axios.get(`/api/users/token`, authHeader)
+    return data
+}

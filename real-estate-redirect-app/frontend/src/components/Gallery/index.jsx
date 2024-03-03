@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Card from '../Card'
 
-export default function Gallery({ listings, getFilteredData, updateDetails, zipCode, loginStatus }) {
+export default function Gallery({ listings, getFilteredData, updateDetails, loginStatus }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(5)
 
     // don't user until api problem solved
