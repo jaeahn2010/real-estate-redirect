@@ -6,7 +6,6 @@ import HomePage from '../HomePage'
 import DetailsPage from '../DetailsPage'
 import AuthFormPage from '../AuthFormPage'
 import './styles.css'
-
 import { getListings } from '../../../utils/backend'
 
 export default function App() {

@@ -47,6 +47,12 @@ router.get('/', function (req, res) {
         .then(listings => res.json(listings))
 })
 
+// index: display specific listing
+router.get('/:listingId', function (req, res) {
+    db.Listing.findById(req.params.listingId)
+        .then(listing => res.json(listing))
+})
+
 // create: create new listing
 router.post('/', authMiddleware, (req, res) => {
     // const reformat = {

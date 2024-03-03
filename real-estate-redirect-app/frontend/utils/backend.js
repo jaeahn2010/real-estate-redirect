@@ -52,6 +52,11 @@ export async function getListings() {
     return data
 }
 
+export async function getListingById(listingId) {
+    const { data } = await axios.get(`/api/listings/${listingId}`)
+    return data
+}
+
 export async function postListing(listing) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
     const { data } = await axios.post('/api/listings', listing, authHeader)

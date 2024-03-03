@@ -44,7 +44,7 @@ export default function Gallery({ listings, getFilteredData, updateDetails, zipC
         galleryContent = listings
             .slice(0, endDisplayIndex)
             .map(listing => <Card
-                key={listing.identifier.rerListingId}
+                key={listing._id}
                 listing={listing}
                 updateDetails={updateDetails}
                 loginStatus={loginStatus}

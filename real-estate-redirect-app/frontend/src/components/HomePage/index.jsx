@@ -35,9 +35,9 @@ export default function HomePage({ listings, setListings, getFilteredData, updat
                     <select
                         name="zip-code" 
                         id="zip-code"
-                        defaultValue={0}
+                        defaultValue='0'
                         onChange={event => setZipCode(event.target.value)}>
-                        <option key='0' disabled selected>Select a zip code</option>
+                        <option key='0' value='0' disabled>Select a zip code</option>
                         {zipCodeOptions}
                     </select>
                     <button

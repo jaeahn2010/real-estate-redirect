@@ -2,11 +2,23 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import OfferSection from "../OfferSection"
 import ShowingRequestSection from "../ShowingRequestSection"
+import { getListingById } from '../../../utils/backend'
 
 export default function DetailsPage(props) {
     const [listing, setListing] = useState({ ...props.listing})
     const [loginStatus, setLoginStatus] = useState({...props.loginStatus})
     const params = useParams()
+
+    async function getListingData() {
+        const data = await getListingById(params.listingId)
+        setListing(data)
+    }
+
+    useEffect(() => {
+        if (!listing._id) {
+            getListingData()
+        }
+    }, [])
 
     // don't use until api problem resolved
     // useEffect(() => {
