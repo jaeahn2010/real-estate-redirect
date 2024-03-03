@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Card from '../Card'
 
 export default function Gallery({ listings, getFilteredData, updateDetails, zipCode, loginStatus }) {
-    const [currentPage, setCurrentPage] = useState(1)
+    const [endDisplayIndex, setEndDisplayIndex] = useState(5)
 
     // don't user until api problem solved
     // function getNextPage() {
@@ -41,49 +41,25 @@ export default function Gallery({ listings, getFilteredData, updateDetails, zipC
     // }
 
     if (listings.length > 0) {
-        // const startIndex = (currentPage - 1) * 5;
-        // const endIndex = startIndex + 5
         galleryContent = listings
-            // .slice(startIndex, endIndex)
+            .slice(0, endDisplayIndex)
             .map(listing => <Card
                 key={listing.identifier.rerListingId}
                 listing={listing}
                 updateDetails={updateDetails}
                 loginStatus={loginStatus}
             />)
-    }   
+    }
 
-    // let prevBtn = <button onClick={getPrevPage} className='mx-10 border-2 border-neutral-900 border-solid rounded-xl p-2'>&#11104; Previous Page</button>
-    // let nextBtn = <button onClick={getNextPage} className='mx-10 border-2 border-neutral-900 border-solid rounded-xl p-2'>Next Page &#11106;</button>
-    // let btnsDisplay =
-    //     <p className='text-xl'>
-    //         <span>{prevBtn}</span>
-    //         <span> Current page: {currentPage} </span>
-    //         <span>{nextBtn}</span>
-    //     </p>
+    window.onscroll = () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight && endDisplayIndex < listings.length) {
+            setEndDisplayIndex(endDisplayIndex + 5)
+        }
+    }
 
-    // if (currentPage === 1) {
-    //     btnsDisplay = 
-    //     <p className='text-xl'>
-    //         <span> Current page: {currentPage} </span>
-    //         <span>{nextBtn}</span>
-    //     </p>
-    // } else if (currentPage === 4) { //refactor
-    //     btnsDisplay =
-    //     <p className='text-xl'>
-    //         <span>{prevBtn}</span>
-    //         <span> Current page: {currentPage} </span>
-    //     </p>    
-    // }
-    
     return (
-        <>
-            {/* <div className='page-controls text-center'>
-                {btnsDisplay}
-            </div>   */}
-            <div className="w-4/5 mt-10 mx-auto md:columns-2">
-                {galleryContent}
-            </div>
-        </>
+        <div className="w-4/5 mt-10 mx-auto md:columns-2">
+            {galleryContent}
+        </div>
     )
 }

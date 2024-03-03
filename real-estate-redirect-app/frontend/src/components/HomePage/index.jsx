@@ -31,11 +31,6 @@ export default function HomePage({ listings, setListings, getFilteredData, updat
             <div className="pb-10">
                 <p className="text-center">SEARCH CRITERIA</p>
                 <form onSubmit={handleSubmit} className="mt-4 text-center">
-                    {/* <input
-                        className="box-border p-2 w-3/5 rounded-md border border-gray-300 focus:outline-none focus:border-gray-500"
-                        name="search"
-                        value={query} 
-                        onChange={event => setQuery(event.target.value)} /> */}
                     <label htmlFor="zip-code" className="text-stone-400">Zip code:</label>
                     <select
                         name="zip-code" 
