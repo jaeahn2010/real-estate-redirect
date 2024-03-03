@@ -2,22 +2,28 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import OfferSection from "../OfferSection"
 import ShowingRequestSection from "../ShowingRequestSection"
-import { getListingById } from '../../../utils/backend'
+import { getListingById, getUser } from '../../../utils/backend'
 
 export default function DetailsPage(props) {
     const [listing, setListing] = useState({ ...props.listing})
+    const [homeowners, setHomeowners] = useState([])
     const [loginStatus, setLoginStatus] = useState({...props.loginStatus})
     const params = useParams()
 
     async function getListingData() {
-        const data = await getListingById(params.listingId)
-        setListing(data)
+        const listingData = await getListingById(params.listingId)
+        setListing(listingData)
+        setHomeowners([])
+        let ownerName = ''
+        for (let owner of listingData.homeowner) {
+            const homeownerData = await getUser(owner)
+            ownerName = `${homeownerData.firstName} ${homeownerData.lastName}`
+            setHomeowners(homeowners => homeowners.concat(ownerName))
+        }
     }
 
     useEffect(() => {
-        if (!listing._id) {
-            getListingData()
-        }
+        getListingData()
     }, [])
 
     // don't use until api problem resolved
@@ -136,14 +142,14 @@ export default function DetailsPage(props) {
             level = <p>Unit located on: level {listing.generalInfo.level}</p>
         }
 
-        let dom = Math.floor((new Date() - listing.currentActivity.listDate) / 1000 / 60 / 60 / 24) + 1
+        let dom = Math.floor((new Date() - new Date(listing.currentActivity.listDate)) / 1000 / 60 / 60 / 24) + 1
 
-        let homeowners = ''
-        for (let i = 0; i < listing.homeowner.length; i++) {
+        let homeownersStr = ''
+        for (let i = 0; i < homeowners.length; i++) {
             if (i === 0) {
-                homeowners = `${listing.homeowner[i].firstName} ${listing.homeowner[i].lastName}`
+                homeownersStr = homeowners[i]
             } else {
-                homeowners += `, ${listing.homeowner[i].firstName} ${listing.homeowner[i].lastName}`
+                homeownersStr += `, ${homeowners[i]}`
             }
         }
 
@@ -167,7 +173,7 @@ export default function DetailsPage(props) {
                     <p>Subdivision: {listing.location.subdivision}</p>
                     <br/>
                     <p>IDENTIFICATION</p>
-                    <p>RER ID: {listing.identifier.rerListingId}</p>
+                    <p>RER ID: {listing._id}</p>
                     <p>Parcel number: {listing.identifier.apn}</p>
                     <br/>
                     <p>CURRENT STATUS</p>
@@ -178,7 +184,7 @@ export default function DetailsPage(props) {
                     <p>Days on market: {dom}</p>
                     <br/>
                     <p>HOMEOWNER INFORMATION</p>
-                    <p>Name: {homeowners}</p>
+                    <p>Name: {homeownersStr}</p>
                     <br/>
                     <p>GENERAL PROPERTY INFORMATION</p>
                     <p>Property type: {listing.generalInfo.propertyType}</p>

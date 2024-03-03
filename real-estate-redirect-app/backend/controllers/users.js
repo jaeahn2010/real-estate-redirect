@@ -20,13 +20,13 @@ const config = require('../../jwt.config.js')
 
 /* routes
 --------------------------------------------------------------- */
-// get user (trying out secure method) 
+// get user
 router.get('/:userId', (req, res) => {
     // const decodedToken = jwt.decode(req.params.userToken, config.jwtSecret);
     db.User.findById(req.params.userId)
         .then(user => {
             const token = jwt.encode({ id: user.id }, config.jwtSecret)
-            res.json({ token: token })
+            res.json({ token: token, firstName: user.firstName, lastName: user.lastName })
         })
 })
 
