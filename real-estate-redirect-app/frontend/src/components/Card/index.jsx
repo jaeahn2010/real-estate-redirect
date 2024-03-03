@@ -2,11 +2,6 @@ import { Link } from 'react-router-dom'
 import heartIcon from '../../assets/heart.svg'
 import './styles.css'
 
-/* refactor if api resolved:
-rerListingId -> attomId
-listing.location.address/city/state/zip -> listing.address.line1/line2
-*/
-
 export default function Card({ listing, updateDetails, loginStatus }) {
     return (
         <figure className="relative mb-4 text-stone-400 break-inside-avoid-column border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">

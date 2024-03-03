@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Gallery from '../Gallery'
 
-export default function HomePage({ listings, setListings, refreshQueue, updateDetails, loginStatus }) {
+export default function HomePage({ listings, setListings, getFilteredData, updateDetails, loginStatus }) {
     let zipCodesList = [89002, 89011, 89012, 89014, 89015, 89030, 89031, 89032, 89044, 89052, 89054, 89074, 89081, 89084, 89086, 89087, 89101, 89102, 89103, 89104, 89106, 89107, 89108, 89109, 89110, 89113, 89115, 89117, 89118, 89119, 89120, 89121, 89122, 89123, 89124, 89128, 89129, 89130, 89131, 89134, 89135, 89138, 89139, 89141, 89142, 89143, 89144, 89145, 89146, 89147, 89148, 89149, 89156, 89158, 89161, 89166, 89169, 89178, 89179, 89183, 89191]
     let zipCodeOptions = []
     for (let zip of zipCodesList) {
@@ -9,16 +9,17 @@ export default function HomePage({ listings, setListings, refreshQueue, updateDe
     }
     const [zipCode, setZipCode] = useState(0)
     
+    // don't use until api problem resolved
     // function handleSubmit(event) {
     //     event.preventDefault()
     //     setListings([])
     //     refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?postalcode=${zipCode}&page=1&pageSize=20`)
     // }
+
     function handleSubmit(evt) {
         evt.preventDefault()
         setListings([])
-        const filtered = listings.filter(listing => listing.location.zip == zipCode)
-        refreshQueue(filtered)
+        getFilteredData("zip", zipCode)
     }
     
     return (
@@ -35,7 +36,7 @@ export default function HomePage({ listings, setListings, refreshQueue, updateDe
                         name="search"
                         value={query} 
                         onChange={event => setQuery(event.target.value)} /> */}
-                    <label htmlFor="zip-code">Zip code:</label>
+                    <label htmlFor="zip-code" className="text-stone-400">Zip code:</label>
                     <select
                         name="zip-code" 
                         id="zip-code"
@@ -55,7 +56,7 @@ export default function HomePage({ listings, setListings, refreshQueue, updateDe
             <Gallery 
                 zipCode={zipCode}
                 listings={listings}
-                refreshQueue={refreshQueue}
+                getFilteredData={getFilteredData}
                 updateDetails={updateDetails}
                 loginStatus={loginStatus}
             />

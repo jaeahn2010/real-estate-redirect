@@ -3,9 +3,6 @@ import { useParams } from "react-router-dom"
 import OfferSection from "../OfferSection"
 import ShowingRequestSection from "../ShowingRequestSection"
 
-// //for seed data
-// import {seedData} from '../../assets/seedData'
-
 export default function DetailsPage(props) {
     const [listing, setListing] = useState({ ...props.listing})
     const [loginStatus, setLoginStatus] = useState({...props.loginStatus})

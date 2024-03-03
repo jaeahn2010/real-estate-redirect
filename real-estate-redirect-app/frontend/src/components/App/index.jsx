@@ -46,9 +46,21 @@ export default function App() {
   //   const data = await res.json()
   //   setListings(listings => listings.concat(data))
   // }
+
+  async function getData(category, filter) {
+    const data = await getListings()
+    let filteredData = []
+    if (category === "none") {
+      filteredData = data
+    } else if (category === "zip") {
+      filteredData = data.filter(listing => listing.location.zip == filter)
+    }
+    setListings(filteredData)
+    //   setListings(listings => listings.concat(data))
+  }
   useEffect(() => {
-    getListings().then(listings => console.log(listings))
-  })
+    getData("none", "none")
+  }, [])
 
   let authLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
     <Link to="/auth/signup">
@@ -92,8 +104,8 @@ export default function App() {
         <Route path="/" element={
           <HomePage
             listings={listings}
-            // refreshQueue={getData}
             setListings={setListings}
+            getFilteredData={getData}
             updateDetails={setDetailsData}
             loginStatus={loginStatus}
           />}
