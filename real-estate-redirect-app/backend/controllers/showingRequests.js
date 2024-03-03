@@ -3,6 +3,9 @@
 `localhost:3000/api/showingRequests`
 ------------------------------------------------------------- */
 
+//require mongoose to access objectId
+const mongoose = require('mongoose');
+
 /* modules
 ---------------------------------------------------------- */
 const jwt = require('jwt-simple');
@@ -43,7 +46,7 @@ const authMiddleware = (req, res, next) => {
 ---------------------------------------------------------- */
 // index: display all showing requests
 router.get('/:listingId', function (req, res) {
-    db.ShowingRequest.find({ listingId: req.params.listingId })
+    db.ShowingRequest.find({ listingId: new mongoose.Types.ObjectId(req.params.listingId) })
         .then(showingRequests => res.json(showingRequests))
 })
 
@@ -83,7 +86,6 @@ router.delete('/:showingRequestId', authMiddleware, async (req, res) => {
         res.status(401).json({ message: 'Invalid user or token' });
     }
 })
-
 
 /* export to server.js
 ---------------------------------------------------------- */

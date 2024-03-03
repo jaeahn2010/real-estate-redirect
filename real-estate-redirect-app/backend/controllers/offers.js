@@ -3,6 +3,9 @@
 `localhost:3000/api/offers`
 ------------------------------------------------------------- */
 
+//require mongoose to access objectId
+const mongoose = require('mongoose');
+
 /* modules
 ---------------------------------------------------------- */
 const jwt = require('jwt-simple');
@@ -41,9 +44,9 @@ const authMiddleware = (req, res, next) => {
 
 /* routes
 ---------------------------------------------------------- */
-// index: display all offers
+// index: display all offers of a specific listing
 router.get('/:listingId', function (req, res) {
-    db.Offer.find({ listingId: req.params.listingId })
+    db.Offer.find({ listingId: new mongoose.Types.ObjectId(req.params.listingId) })
         .then(offers => res.json(offers))
 })
 

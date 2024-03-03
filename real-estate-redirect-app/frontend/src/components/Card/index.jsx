@@ -23,7 +23,7 @@ export default function Card({ listing, updateDetails, loginStatus }) {
     }
     return (
         <figure className="relative mb-4 text-stone-400 break-inside-avoid-column border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
-            <Link to={"/details/" + listing.identifier.rerListingId} onClick={() => updateDetails(listing)}>
+            <Link to={"/details/" + listing._id} onClick={() => updateDetails(listing)}>
                 <div className="card-overlay absolute cursor-pointer w-full h-2/3 flex items-center justify-center bg-black rounded-t-lg z-10">
                     <p className="w-40 text-slate-50 text-3xl" id='hover-msg'>See Details</p>
                 </div>

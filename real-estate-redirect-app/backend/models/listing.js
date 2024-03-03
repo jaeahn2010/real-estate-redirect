@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const assert = require('assert')
 
 const listingSchema = new mongoose.Schema(
     {

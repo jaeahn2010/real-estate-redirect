@@ -26,17 +26,6 @@ export default function DetailsPage(props) {
     //     }
     // }, [])
 
-    // for when seed was in front end
-    // useEffect(() => {
-    //     if (!listing.identifier) {
-    //         async function getListing() {
-    //             const property = seedData.filter(listing => listing.identifier.rerListingId == params.listingId)
-    //             setListing(property[0])
-    //         }
-    //         getListing()
-    //     }
-    // }, [])
-
     useEffect(() => {
         localStorage.getItem("userToken") ? setLoginStatus(true) : setLoginStatus(false)
     }, [])
@@ -122,9 +111,11 @@ export default function DetailsPage(props) {
         let spa = displayBool(listing.exterior.hasSpa)
         let senior = displayBool(listing.community.isSeniorCommunity)
 
-        function displayDate(dateObj) {
+        function displayDate(dateStr) {
+            let dateObj = new Date(dateStr)
             return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
         }
+
         let listed = displayDate(listing.currentActivity.listDate)
         let sold = displayDate(listing.lastSoldInfo.soldDate)
 
@@ -173,8 +164,6 @@ export default function DetailsPage(props) {
                     <p>Price per sq ft: ${listing.currentActivity.pricePerSF}</p>
                     <p>List date: {listed}</p>
                     <p>Days on market: {dom}</p>
-                    <p>Offers: {listing.currentActivity.offers.length}</p>
-                    <p>Showing requests: {listing.currentActivity.showingRequests.length}</p>
                     <br/>
                     <p>HOMEOWNER INFORMATION</p>
                     <p>Name: {homeowners}</p>
@@ -243,11 +232,11 @@ export default function DetailsPage(props) {
                 </div>
                 <div>
                     <p className="text-center">OFFERS</p>
-                    <OfferSection listingId={listing.identifier.rerListingId} loginStatus={loginStatus}/>
+                    <OfferSection listingId={listing._id} loginStatus={loginStatus}/>
                 </div>
                 <div>
                     <p className="text-center">SHOWING REQUESTS</p>
-                    <ShowingRequestSection listingId={listing.identifier.rerListingId} loginStatus={loginStatus}/>
+                    <ShowingRequestSection listingId={listing._id} loginStatus={loginStatus}/>
                 </div>
             </>
         )
