@@ -15,29 +15,29 @@ const listingSchema = new mongoose.Schema(
         currentActivity: {
             price: {type: Number, required: true},
             pricePerSF: {type: Number, required: true},
-            listDate: {type: Date, required: true, default: new Date()},
-            status: {type: String, required: true, default: "active"},
+            listDate: {type: Date, default: new Date()},
+            status: {type: String, default: "active"},
         },
         homeowner: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'}],
         generalInfo: {
-            propertyType: {type: String, required: true},
-            zoning: {type: String, required: true},
-            stories: {type: Number, required: true},
-            level: {type: Number, required: true},
-            yearBuilt: {type: Number, required: true},
-            isDetached: {type: Boolean, required: true},
-            houseFaces: {type: String, required: true},
+            propertyType: {type: String},
+            zoning: {type: String, default: "single family"},
+            stories: {type: Number},
+            level: {type: Number, default: 1},
+            yearBuilt: {type: Number},
+            isDetached: {type: Boolean, default: true},
+            houseFaces: {type: String},
         },
         exterior: {
             construction: {
-                roof: {type: String, required: true},
-                walls: {type: String, required: true},
-                fencing: {type: String, required: true},
+                roof: {type: String},
+                walls: {type: String},
+                fencing: {type: String},
             }, 
             lot: {
-                size: {type: Number, required: true},
-                features: [{type: String, required: true},],
-                vegetation: [{type: String, required: true},]
+                size: {type: Number},
+                features: [{type: String}],
+                vegetation: [{type: String}]
             },
             hasSolar: {type: Boolean, required: true},
             hasBalcony: {type: Boolean, required: true},
@@ -46,7 +46,7 @@ const listingSchema = new mongoose.Schema(
         },
         interior: {
             construction: {
-                flooring: [{type: String, required: true},],
+                flooring: [{type: String}],
             },
             rooms: {
                 bedrooms: {type: Number, required: true},
@@ -54,46 +54,46 @@ const listingSchema = new mongoose.Schema(
                 bathsFull: {type: Number, required: true},
                 roomsTotal: {type: Number, required: true},
             },
-            livingArea: {type: Number, required: true},
-            cooling: {type: String, required: true},
-            heating: {type: String, required: true},
-            appliancesIncluded: [{type: String, required: true},],
+            livingArea: {type: Number},
+            cooling: {type: String},
+            heating: {type: String},
+            appliancesIncluded: [{type: String}],
             features: {
-                fixtures: [{type: String, required: true},],
-                window: [{type: String, required: true},],
-                fireplace: {type: String, required: true},
-                other: {type: String, required: true},
+                fixtures: [{type: String}],
+                window: [{type: String}],
+                fireplace: {type: String},
+                other: {type: String},
             }
         },
         parking: {
-            type: {type: String, required: true},
-            size: {type: Number, required: true},
+            type: {type: String},
+            size: {type: Number},
         },
         utilities: {
-            sewer: {type: String, required: true},
-            water: {type: String, required: true},
-            otherUtilities: {type: String, required: true},
+            sewer: {type: String, default: "public"},
+            water: {type: String, default: "public"},
+            otherUtilities: {type: String, default: "underground utilities"},
         },
         HOA: [
                 {
-                name: {type: String, required: true},
-                monthlyFee: {type: Number, required: true},
-                phone: {type: String, required: true},
-                feeIncludes: [{type: String, required: true},]
+                name: {type: String},
+                monthlyFee: {type: Number},
+                phone: {type: String},
+                feeIncludes: [{type: String}]
                 }
             ],
         community: {
-            amenities: [{type: String, required: true},],
-            isSeniorCommunity: {type: Boolean, required: true},
+            amenities: [{type: String}],
+            isSeniorCommunity: {type: Boolean, default: false},
         },
         lastSoldInfo: {
-            soldDate: {type: Date, required: true},
-            price: {type: Number, required: true},
-            pricePerSF: {type: Number, required: true},
+            soldDate: {type: Date},
+            price: {type: Number},
+            pricePerSF: {type: Number},
         },
         tax: {
-            annualTax: {type: Number, required: true},
-            year: {type: Number, required: true},
+            annualTax: {type: Number},
+            year: {type: Number, default: 2023},
         }
     },
     { timestamps: true }
