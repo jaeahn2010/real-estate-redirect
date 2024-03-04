@@ -11,6 +11,7 @@ import './styles.css'
 import { getListings, getUserByToken } from '../../../utils/backend'
 
 export default function App() {
+  const [username, setUsername] = useState('')
   const [listings, setListings] = useState([])
   const [detailsData, setDetailsData] = useState({})
   const [loginStatus, setLoginStatus] = useState(false)
@@ -64,9 +65,15 @@ export default function App() {
     setListings(filteredData)
     return filteredData
   }
+
+  async function getUserData() {
+    const currentUserData = await getUserByToken()
+    setUsername(`${currentUserData.firstName} ${currentUserData.lastName}`)
+  }
   
   useEffect(() => {
     getData("none", "none")
+    getUserData()
   }, [])
 
   let authLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
@@ -78,6 +85,7 @@ export default function App() {
     </Link>
   </div>
   let profileLink = ''
+  let userGreeting = ''
 
   if (loginStatus) {
     authLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
@@ -93,6 +101,7 @@ export default function App() {
           Log Out
       </button>
     </div>
+    userGreeting = <h1 className="text-white">Hello, {username}!</h1>
     if (localStorage.getItem("userCategory") === "seller") {
       profileLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
       <Link to={"/sellerProfile/" + localStorage.getItem("userToken")}>
@@ -122,6 +131,7 @@ export default function App() {
         {profileLink}
         {authLink}
       </nav>
+      {userGreeting}
       <Routes>
         <Route path="/" element={
           <HomePage
