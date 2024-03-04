@@ -173,6 +173,7 @@ export default function SellerProfilePage(props) {
         <Gallery 
             listings={listings}
             getFilteredData={props.getFilteredData}
+            refreshListings={refreshListings}
             updateDetails={props.updateDetails}
             loginStatus={props.loginStatus}
         />
@@ -939,7 +940,7 @@ export default function SellerProfilePage(props) {
                                     id="parkingType"
                                     type="text"
                                     placeholder="Parking Type"
-                                    defaultValue={createFormData.other}
+                                    defaultValue={createFormData.parkingType}
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>

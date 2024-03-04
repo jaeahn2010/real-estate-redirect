@@ -55,7 +55,6 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new listing
 router.post('/', authMiddleware, (req, res) => {
-    console.log(req.body)
     const reformat = {
         identifier: {
             apn: req.body.apn,
@@ -160,31 +159,106 @@ router.post('/', authMiddleware, (req, res) => {
 
 // update: edit listing
 router.put('/:listingId', authMiddleware, async (req, res) => {
-    // const reformat = {
-    //     listingId: req.body.listingId,
-    //     status: req.body.status,
-    //     terms: {
-    //         offerPrice: req.body.offerPrice,
-    //         expiration: req.body.expiration,
-    //         EMD: req.body.EMD,
-    //         downPayment: req.body.downPayment,
-    //         loanType: req.body.loanType, 
-    //         loanAmount: req.body.loanAmount,
-    //         appraisalContingencyDate: req.body.appraisalContingencyDate,
-    //         loanContingencyDate: req.body.loanContingencyDate,
-    //         personalPropertyIncluded: req.body.personalPropertyIncluded,
-    //         escrowCompany: req.body.escrowCompany,
-    //         walkthrough: req.body.walkthrough,
-    //         closeOfEscrow: req.body.closeOfEscrow,
-    //         additionalTerms: req.body.additionalTerms,
-    //     }
-    // }
+    const reformat = {
+        identifier: {
+            apn: req.body.apn,
+        },
+        location: {
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            zip: req.body.zip,
+            subdivision: req.body.subdivision,
+        },
+        currentActivity: {
+            price: req.body.price,
+            pricePerSF: req.body.pricePerSF,
+            listDate: req.body.listDate,
+            status: req.body.status,
+        },
+        homeowner: req.body.homeowner,
+        generalInfo: {
+            propertyType: req.body.propertyType,
+            zoning: req.body.zoning,
+            stories: req.body.stories,
+            level: req.body.level,
+            yearBuilt: req.body.yearBuilt,
+            isDetached: req.body.isDetached,
+            houseFaces: req.body.houseFaces,
+        },
+        exterior: {
+            construction: {
+                roof: req.body.roof,
+                walls: req.body.walls,
+                fencing: req.body.fencing,
+            }, 
+            lot: {
+                size: req.body.lotSize,
+                features: req.body.lotFeatures,
+                vegetation: req.body.vegetation
+            },
+            hasSolar: req.body.hasSolar,
+            hasBalcony: req.body.hasBalcony,
+            hasPool: req.body.hasPool,
+            hasSpa: req.body.hasSpa,
+        },
+        interior: {
+            construction: {
+                flooring: req.body.flooring,
+            },
+            rooms: {
+                bedrooms: req.body.bedrooms,
+                bathrooms: req.body.bathrooms,
+                bathsFull: req.body.bathsFull,
+                roomsTotal: req.body.roomsTotal,
+            },
+            livingArea: req.body.livingArea,
+            cooling: req.body.cooling,
+            heating: req.body.heating,
+            appliancesIncluded: req.body.appliancesIncluded,
+            features: {
+                fixtures: req.body.fixtures,
+                window: req.body.window,
+                fireplace: req.body.fireplace,
+                other: req.body.other,
+            }
+        },
+        parking: {
+            type: req.body.parkingType,
+            size: req.body.parkingSize,
+        },
+        utilities: {
+            sewer: req.body.sewer,
+            water: req.body.water,
+            otherUtilities: req.body.otherUtilities
+        },
+        HOA: [
+                {
+                name: req.body.HOAName,
+                monthlyFee: req.body.HOAMonthlyFee,
+                phone: req.body.HOAPhone,
+                feeIncludes: req.body.HOAFeeIncludes
+                }
+            ],
+        community: {
+            amenities: req.body.communityAmenities,
+            isSeniorCommunity: req.body.isSeniorCommunity
+        },
+        lastSoldInfo: {
+            soldDate: req.body.lastSoldDate,
+            price: req.body.lastSoldPrice,
+            pricePerSF: req.body.lastSoldPricePerSF,
+        },
+        tax: {
+            annualTax: req.body.annualTax,
+            year: req.body.lastTaxYear,
+        }
+    }
     const userListing = await db.Listing.findById(req.params.listingId)
-    if (userListing.userId == req.user.id) {
+    if (userListing.homeowner[0] == req.user.id) {
         const newListing = await db.Listing.findByIdAndUpdate(
             req.params.listingId,
-            // reformat,
-            req.body,
+            reformat,
             { new: true }
         )
         res.json(newListing)
@@ -196,7 +270,7 @@ router.put('/:listingId', authMiddleware, async (req, res) => {
 // destroy: delete listing
 router.delete('/:listingId', authMiddleware, async (req, res) => {
     const userListing = await db.Listing.findById(req.params.listingId)
-    if (userListing.userId == req.user.id) {
+    if (userListing.homeowner[0] == req.user.id) {
         const deletedListing = await db.Listing.findByIdAndDelete(req.params.listingId)
         res.send('You deleted listing ' + deletedListing._id)
     } else {
