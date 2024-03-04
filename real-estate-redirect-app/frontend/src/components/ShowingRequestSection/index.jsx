@@ -58,7 +58,7 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
     }
 
     let createBtn
-    if (loginStatus) {
+    if (loginStatus && localStorage.userCategory === "buyer") {
         let btnText = 'Request a Showing'
         if (showCreateForm) btnText = 'Close'
         createBtn = 

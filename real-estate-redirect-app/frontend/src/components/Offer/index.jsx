@@ -59,26 +59,11 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
 
     let btns = ''
     let buyerIdDisplay = " Buyer **********" + data.userId.slice(-6)
+    let offerForm = ''
     //only display edit/delete buttons if user is logged in & offer is their own
-    if (loginStatus && currentUserToken === offerUserToken) {
+    if (loginStatus && currentUserToken === offerUserToken && localStorage.userCategory === 'buyer') {
         buyerIdDisplay = data.userId.slice(-6) + " (Your offer)"
-        btns = 
-            <div className="flex justify-end">
-                <button
-                    onClick={() => { setShowEditForm(true) }}
-                    className="text-white hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
-                    Edit this Offer
-                </button>
-                <button
-                    onClick={handleDelete}
-                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                    Delete this Offer
-                </button>
-            </div>
-    }
-
-    if (showEditForm) {
-        return (
+        offerForm =
             <form
                 onSubmit={handleSubmit}
                 className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
@@ -268,6 +253,90 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     </button>
                 </div>
             </form>
+        btns = 
+            <div className="flex justify-end">
+                <button
+                    onClick={() => { setShowEditForm(true) }}
+                    className="text-white hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
+                    Edit this Offer
+                </button>
+                <button
+                    onClick={handleDelete}
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Delete this Offer
+                </button>
+            </div>
+    } else if (loginStatus && localStorage.userCategory === 'seller'){
+        offerForm = 
+        <form
+            onSubmit={handleSubmit}
+            className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
+            <table>
+                {/* input for buyer id, autopopulate name/email */}
+                <tbody>
+                    <tr>
+                        <td><input
+                            name="status"
+                            id="accept"
+                            type="radio"
+                            defaultValue="accept"
+                            onChange={handleInputChange}
+                        /></td>
+                        <td><label htmlFor="accept">Accept</label></td>
+                    </tr>
+                    <tr>
+                        <td><input
+                            name="status"
+                            id="reject"
+                            type="radio"
+                            defaultValue="reject"
+                            onChange={handleInputChange}
+                        /></td>
+                        <td><label htmlFor="accept">Reject</label></td>
+                    </tr>
+                    <tr>
+                        <td><input
+                            name="status"
+                            id="counter"
+                            type="radio"
+                            defaultValue="counter"
+                            onChange={handleInputChange}
+                        /></td>
+                        <td><label htmlFor="accept">Counteroffer</label></td>
+                    </tr>
+                    <tr>
+                        <td><label htmlFor="additionalTerms">Proposed counteroffer terms (if any): </label></td>
+                        <td><input
+                            name="additionalTerms"
+                            type="text"
+                            defaultValue=''
+                            onChange={handleInputChange}
+                        /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button
+                type="submit"
+                className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                Submit
+            </button>
+        </form>
+        btns = 
+        <div className="flex justify-end">
+            <button
+                onClick={() => { setShowEditForm(true) }}
+                className="text-white hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
+                Respond
+            </button>
+        </div>
+    }
+
+    if (showEditForm) {
+        return (
+            <>
+                {offerForm}
+                {btns}
+            </>
         )
     } else {
         // display more details if user logged in and viewing own offer
@@ -299,16 +368,19 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
             )
         } else {
             return (
-                <div
-                    className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
-                    <p className="font-bold">Offer from {buyerIdDisplay}</p>
-                    <p className="my-2">for listing #{data.listingId}</p>
-                    <p>Status: {data.status}</p>
-                    <p>TERMS</p>
-                    <p>Offer price: ${data.terms.offerPrice.toLocaleString()}</p>
-                    <p>Offer expires on: {data.terms.expiration}</p>
-                    {/* <p>Buyer has seen the property? ${data.terms.listingShown}</p> */}
-                </div>
+                <>
+                    <div
+                        className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
+                        <p className="font-bold">Offer from {buyerIdDisplay}</p>
+                        <p className="my-2">for listing #{data.listingId}</p>
+                        <p>Status: {data.status}</p>
+                        <p>TERMS</p>
+                        <p>Offer price: ${data.terms.offerPrice.toLocaleString()}</p>
+                        <p>Offer expires on: {data.terms.expiration}</p>
+                        {/* <p>Buyer has seen the property? ${data.terms.listingShown}</p> */}
+                    </div>
+                    {btns}
+                </>
             )
         }
     }

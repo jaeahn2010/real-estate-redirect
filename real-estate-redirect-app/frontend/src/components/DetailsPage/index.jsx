@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import OfferSection from "../OfferSection"
 import ShowingRequestSection from "../ShowingRequestSection"
-import { getListingById, getUser } from '../../../utils/backend'
+import { getListingById, getUser, getUserByToken } from '../../../utils/backend'
 
 export default function DetailsPage(props) {
+    const [userId, setUserId] = useState('')
     const [listing, setListing] = useState({ ...props.listing})
     const [homeowners, setHomeowners] = useState([])
     const [loginStatus, setLoginStatus] = useState({...props.loginStatus})
@@ -22,8 +23,14 @@ export default function DetailsPage(props) {
         }
     }
 
+    async function getUserData() {
+        const currentUserData = await getUserByToken()
+        setUserId(currentUserData.userId)
+    }
+    
     useEffect(() => {
         getListingData()
+        getUserData()
     }, [])
 
     // don't use until api problem resolved
@@ -162,6 +169,25 @@ export default function DetailsPage(props) {
             }
         }
 
+        let offersAndShowingRequests = ''
+        if (loginStatus && localStorage.userCategory === "buyer" || loginStatus && localStorage.userCategory === "seller" && userId == listing.homeowner[0]) {
+            offersAndShowingRequests = 
+            <>
+                <div>
+                    <p className="text-center">OFFERS</p>
+                    <OfferSection listingId={listing._id} loginStatus={loginStatus}/>
+                </div>
+                <div>
+                    <p className="text-center">SHOWING REQUESTS</p>
+                    <ShowingRequestSection listingId={listing._id} loginStatus={loginStatus}/>
+                </div>
+            </>
+        } else if (loginStatus && localStorage.userCategory === "seller") {
+            offersAndShowingRequests =
+            <h1 className="text-white">Please log in as a buyer to see information on offers and showing requests for this property.</h1>
+        }
+
+        let addressForGoogle = listing.location.address.split(" ").join("+")
 
         return (
             <>
@@ -171,6 +197,15 @@ export default function DetailsPage(props) {
                     <p>{listing.location.address}</p>
                     <p>{listing.location.city}, {listing.location.state} {listing.location.zip}</p>
                     <p>Subdivision: {listing.location.subdivision}</p>
+                    <br/>
+                    <iframe
+                        className="mx-auto w-5/6 border-solid border-black border-2"
+                        height="450"
+                        loading="lazy"
+                        allowFullScreen
+                        referrerPolicy="no-referrer-when-downgrade"
+                        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDdwlwZ1lufnj3okOOPi4qY38RWUTH5ndg&q=${addressForGoogle}`}>
+                    </iframe>
                     <br/>
                     <p>IDENTIFICATION</p>
                     <p>RER ID: {listing._id}</p>
@@ -248,14 +283,7 @@ export default function DetailsPage(props) {
                     <br/>
                     <br/>
                 </div>
-                <div>
-                    <p className="text-center">OFFERS</p>
-                    <OfferSection listingId={listing._id} loginStatus={loginStatus}/>
-                </div>
-                <div>
-                    <p className="text-center">SHOWING REQUESTS</p>
-                    <ShowingRequestSection listingId={listing._id} loginStatus={loginStatus}/>
-                </div>
+                {offersAndShowingRequests}
             </>
         )
     }
