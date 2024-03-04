@@ -340,6 +340,10 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         )
     } else {
         // display more details if user logged in and viewing own offer
+        function dateDisplay(dateStr) {
+            let dateObj = new Date(dateStr)
+            return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`
+        }
         if (loginStatus && currentUserToken === offerUserToken) {
             let POF = data.terms.proofOfFunds ? "Yes" : "No";
             return (
@@ -350,19 +354,18 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     <p>Status: {data.status}</p>
                     <p>TERMS</p>
                     <p>Offer price: ${data.terms.offerPrice.toLocaleString()}</p>
-                    <p>Offer expires on: {data.terms.expiration}</p>
-                    {/* <p>Buyer has seen the property? ${data.terms.listingShown}</p> */}
+                    <p>Offer expires on: {dateDisplay(data.terms.expiration)}</p>
                     <p>Earnest money deposit: ${data.terms.EMD}</p>
                     <p>Down payment: ${data.terms.downPayment.toLocaleString()}</p>
                     <p>Loan type: {data.terms.loanType}</p>
                     <p>Loan amount: ${data.terms.loanAmount.toLocaleString()}</p>
                     <p>Proof of funds submitted: {POF}</p>
-                    <p>Appraisal contingency date: {data.terms.appraisalContingencyDate}</p>
-                    <p>Loan contingency date: {data.terms.loanContingencyDate}</p>
+                    <p>Appraisal contingency date: {dateDisplay(data.terms.appraisalContingencyDate)}</p>
+                    <p>Loan contingency date: {dateDisplay(data.terms.loanContingencyDate)}</p>
                     <p>Personal properties to be included in sale: {data.terms.personalPropertyIncluded}</p>
                     <p>Escrow company: {data.terms.escrowCompany}</p>
-                    <p>Walkthrough date: {data.terms.walkthrough}</p>
-                    <p>Closing date: {data.terms.closeOfEscrow}</p>
+                    <p>Walkthrough date: {dateDisplay(data.terms.walkthrough)}</p>
+                    <p>Closing date: {dateDisplay(data.terms.closeOfEscrow)}</p>
                     <p>Additional terms: {data.terms.additionalTerms}</p>
                     {btns}
                 </div>
@@ -377,8 +380,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                         <p>Status: {data.status}</p>
                         <p>TERMS</p>
                         <p>Offer price: ${data.terms.offerPrice.toLocaleString()}</p>
-                        <p>Offer expires on: {data.terms.expiration}</p>
-                        {/* <p>Buyer has seen the property? ${data.terms.listingShown}</p> */}
+                        <p>Offer expires on: {dateDisplay(data.terms.expiration)}</p>
                     </div>
                     {btns}
                 </>

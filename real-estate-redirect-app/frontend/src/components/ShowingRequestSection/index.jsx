@@ -18,6 +18,7 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
     }, [])
 
     function handleInputChange(event) {
+        console.log(event.target.value)
         setCreateFormData({
             ...createFormData,
             [event.target.name]: event.target.value
@@ -42,7 +43,8 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
             requestedDateTime: new Date()
         })
         setShowCreateForm(false)
-        postShowingRequest({ ...createFormData, listingId: listingId })
+        let convertedDateTime = new Date(event.target[2].value + "T" + event.target[3].value + ":00Z")
+        postShowingRequest({ ...createFormData, listingId: listingId, convertedDateTime: convertedDateTime })
             .then(() => refreshShowingRequests())
     }
 
@@ -95,12 +97,19 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
                         value="pending"
                     />
                     <br />
-                    <label htmlFor="requestedDateTime">Requested date & time:</label>
+                    <label htmlFor="requestedDateTime">Requested date:</label>
                     <input
-                        name="requestedDateTime"
+                        name="requestedDate"
                         type="date"
                         className="mx-2 bg-gray-100"
-                        defaultValue={createFormData.requestedDateTime}
+                        onChange={handleInputChange}
+                    />
+                    <br/>
+                    <label htmlFor="requestedDateTime">Requested time:</label>
+                    <input
+                        name="requestedTime"
+                        type="time"
+                        className="mx-2 bg-gray-100"
                         onChange={handleInputChange}
                     />
                     <br />

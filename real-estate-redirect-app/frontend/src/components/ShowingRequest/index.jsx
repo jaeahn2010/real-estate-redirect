@@ -108,13 +108,29 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
             </form>
         )
     } else {
+        function dateDisplay(dateStr) {
+            let dateObj = new Date(dateStr)
+            let ampm = ''
+            let hourDisplay = 0
+            if (dateObj.getHours() > 12) {
+                ampm = "PM"
+                hourDisplay = dateObj.getHours() - 12
+            } else {
+                ampm = dateObj.getHours === 12 ? 'PM' : 'AM'
+                hourDisplay = dateObj.getHours()
+            }
+            function timeDisplay(time) {
+                return time < 10 ? `0${String(time)}` : String(time)
+            }
+            return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()} ${timeDisplay(hourDisplay)}:${timeDisplay(dateObj.getMinutes())} ${ampm}`
+        }
         return (
             <div
                 className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
                 <p className="font-bold">Showing Request from {data.userId}</p>
                 <p className="my-2">for listing #{data.listingId}</p>
                 <p>Status: {data.status}</p>
-                <p>Requested date & time: {data.requestedDateTime}</p>
+                <p>Requested date & time: {dateDisplay(data.requestedDateTime)}</p>
                 {btns}
             </div>
         )
