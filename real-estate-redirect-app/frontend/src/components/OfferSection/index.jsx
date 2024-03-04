@@ -17,7 +17,7 @@ export default function OfferSection({ listingId, loginStatus }) {
         downPayment: 0,
         loanType: '',
         loanAmount: 0,
-        // proofOfFunds: false,
+        proofOfFunds: '',
         appraisalContingencyDate: new Date(),
         loanContingencyDate: new Date(),
         personalPropertyIncluded: '',
@@ -57,12 +57,11 @@ export default function OfferSection({ listingId, loginStatus }) {
             status: 'pending',
             offerPrice: 0,
             expiration: new Date(),
-            // listingShown: false,
             EMD: 0,
             downPayment: 0,
             loanType: '',
             loanAmount: 0,
-            // proofOfFunds: false,
+            proofOfFunds: '',
             appraisalContingencyDate: new Date(),
             loanContingencyDate: new Date(),
             personalPropertyIncluded: '',
@@ -72,7 +71,11 @@ export default function OfferSection({ listingId, loginStatus }) {
             additionalTerms: '',
         })
         setShowCreateForm(false)
-        postOffer({ ...createFormData, listingId: listingId })
+        postOffer({
+            ...createFormData,
+            listingId: listingId,
+            POFFile: event.target[8].files[0]
+        })
             .then(() => refreshOffers())
     }
 
@@ -106,6 +109,7 @@ export default function OfferSection({ listingId, loginStatus }) {
         offerForm =
         <form
             onSubmit={handleSubmit}
+            encType="multipart/form-data"
             className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
             <table>
                 {/* input for buyer id, autopopulate name/email */}
@@ -147,16 +151,6 @@ export default function OfferSection({ listingId, loginStatus }) {
                         /></td>
                     </tr>
                     <tr>
-                        {/* <td><label htmlFor="listingShown">Have you already seen the property in person?</label></td>
-                        <td><input
-                            name="listingShown"
-                            type="text" //change to boolean
-                            placeholder="Y / N"
-                            defaultValue={createFormData.listingShown}
-                            onChange={handleInputChange}
-                        /></td> */}
-                    </tr>
-                    <tr>
                         <td><label htmlFor="EMD">Earnest money deposit: $</label></td>
                         <td><input
                             name="EMD"
@@ -193,13 +187,12 @@ export default function OfferSection({ listingId, loginStatus }) {
                         /></td>
                     </tr>
                     <tr>
-                        {/* <td><label htmlFor="proofOfFunds">Upload your proof of funds or preapproval letter here: $</label></td>
+                        <td><label htmlFor="proofOfFunds">Upload your proof of funds or preapproval letter here: </label></td>
                         <td><input
-                            name="proofOfFunds"
                             type="file"
-                            defaultValue={createFormData.proofOfFunds}
-                            onChange={handleInputChange}
-                        /></td> */}
+                            name="proofOfFunds"
+                            id="proofOfFunds"
+                        /></td>
                     </tr>
                     <tr>
                         <td><label htmlFor="appraisalContingencyDate">Appraisal Contingency Date: </label></td>

@@ -42,6 +42,17 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
+const multer = require('multer')
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./public/uploads")
+    },
+    filename: (req, res, cb) => {
+        cb(null, res.originalname)
+    }
+})
+const upload = multer({storage: storage})
+
 /* routes
 ---------------------------------------------------------- */
 // index: display all offers of a specific listing
@@ -51,7 +62,9 @@ router.get('/:listingId', function (req, res) {
 })
 
 // create: create new offer
-router.post('/', authMiddleware, (req, res) => {
+router.post('/', authMiddleware, upload.single('POFFile'), (req, res) => {
+    console.log(req.file)
+    let POFSubmitted = (req.file ? true : false)
     const reformat = {
         listingId: req.body.listingId,
         status: req.body.status,
@@ -62,6 +75,7 @@ router.post('/', authMiddleware, (req, res) => {
             downPayment: req.body.downPayment,
             loanType: req.body.loanType, 
             loanAmount: req.body.loanAmount,
+            proofOfFunds: POFSubmitted,
             appraisalContingencyDate: req.body.appraisalContingencyDate,
             loanContingencyDate: req.body.loanContingencyDate,
             personalPropertyIncluded: req.body.personalPropertyIncluded,
@@ -90,6 +104,7 @@ router.put('/:offerId', authMiddleware, async (req, res) => {
             downPayment: req.body.downPayment,
             loanType: req.body.loanType, 
             loanAmount: req.body.loanAmount,
+            proofOfFunds: req.body.proofOfFunds,
             appraisalContingencyDate: req.body.appraisalContingencyDate,
             loanContingencyDate: req.body.loanContingencyDate,
             personalPropertyIncluded: req.body.personalPropertyIncluded,

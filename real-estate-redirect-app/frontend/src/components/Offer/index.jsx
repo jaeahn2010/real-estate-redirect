@@ -341,6 +341,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
     } else {
         // display more details if user logged in and viewing own offer
         if (loginStatus && currentUserToken === offerUserToken) {
+            let POF = data.terms.proofOfFunds ? "Yes" : "No";
             return (
                 <div
                     className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
@@ -355,7 +356,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     <p>Down payment: ${data.terms.downPayment.toLocaleString()}</p>
                     <p>Loan type: {data.terms.loanType}</p>
                     <p>Loan amount: ${data.terms.loanAmount.toLocaleString()}</p>
-                    {/* <p>Proof of funds: ${data.terms.proofOfFunds}</p> */}
+                    <p>Proof of funds submitted: {POF}</p>
                     <p>Appraisal contingency date: {data.terms.appraisalContingencyDate}</p>
                     <p>Loan contingency date: {data.terms.loanContingencyDate}</p>
                     <p>Personal properties to be included in sale: {data.terms.personalPropertyIncluded}</p>

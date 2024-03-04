@@ -28,12 +28,11 @@ const offerSchema = new mongoose.Schema(
         terms: {
             offerPrice: {type: Number, required: true},
             expiration: {type: Date, required: true},
-            // listingShown: {type: Boolean, required: true},
             EMD: {type: Number, required: true},
             downPayment: {type: Number, required: true},
             loanType: {type: String, required: true},
             loanAmount: {type: Number, required: true},
-            // proofOfFunds: {type: Boolean, required: true},
+            proofOfFunds: {type: Boolean, required: true},
             appraisalContingencyDate: {type: Date},
             loanContingencyDate: {type: Date},
             personalPropertyIncluded: {type: String, required: true},

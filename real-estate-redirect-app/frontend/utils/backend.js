@@ -7,7 +7,10 @@ export async function getOffers(listingId) {
 }
 
 export async function postOffer(offer) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const authHeader = { headers: {
+        'Authorization': localStorage.getItem('userToken'),
+        'Content-Type': 'multipart/form-data'
+    } }
     const { data } = await axios.post('/api/offers', offer, authHeader)
     return data
 }
