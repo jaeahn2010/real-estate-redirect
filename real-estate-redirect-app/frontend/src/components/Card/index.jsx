@@ -1,8 +1,26 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import heartIcon from '../../assets/heart.svg'
 import './styles.css'
+import { updateListing, deleteListing, getUser } from "../../../utils/backend"
 
 export default function Card({ listing, updateDetails, loginStatus }) {
+    const [homeownerToken, setHomeownerToken] = useState('')
+
+    async function getHomeownerData() {
+        const ownerData = await getUser(listing.homeowner[0])
+        setHomeownerToken(ownerData.token)
+    }
+    
+    useEffect(() => {
+        getHomeownerData()
+    }, [])
+
+    let listingBtns = ''
+    if (localStorage.userToken === homeownerToken && localStorage.userCategory === 'seller') {
+        listingBtns =
+        <p>This is your listing. Edit or delete.</p>
+    }
     let statusColor = ""
     switch(listing.currentActivity.status) {
         case "active":
@@ -38,6 +56,7 @@ export default function Card({ listing, updateDetails, loginStatus }) {
                     <p className="px-1">{listing.currentActivity.status.toUpperCase()}</p>
                 </div>
                 <img src={heartIcon} className="cursor-pointer hover:transform hover:scale-125 transition-all duration-200 ease-in-out"/>
+                {listingBtns}
             </figcaption>
         </figure>
     )
