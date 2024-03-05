@@ -73,8 +73,12 @@ export default function App() {
   
   useEffect(() => {
     getData("none", "none")
-    getUserData()
+    if (loginStatus) getUserData()
   }, [])
+
+  useEffect(() => {
+    getData("none", "none")
+  }, [loginStatus])
 
   let authLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
     <Link to="/auth/signup">
@@ -122,7 +126,10 @@ export default function App() {
   return (
     <>
       <nav className="flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
-        <Link to="/">
+        <Link to="/" onClick={(evt) => {
+          evt.preventDefault()
+          getData("none", "none")
+        }}>
           <h1 className="text-white font-bold md:text-3xl sm:text-2xl">Real Estate Redirect</h1>
         </Link>
         <Link to="/about">
@@ -151,7 +158,11 @@ export default function App() {
             updateDetails={setDetailsData}
           />}
         />
-        <Route path="/auth/:formType" element={<AuthFormPage setLoginStatus={setLoginStatus}/>} />
+        <Route path="/auth/:formType" element={
+          <AuthFormPage
+            setLoginStatus={setLoginStatus}
+          />}
+        />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/details/:listingId" element={<DetailsPage listing={detailsData} loginStatus={loginStatus}/>} />
         <Route path="/*" element={<NotFoundPage />} />
