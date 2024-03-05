@@ -1,0 +1,12 @@
+input {
+    margin-left: 10px !important;
+    background-color: rgb(68, 69, 70) !important;
+}
+
+/* td:first-child {
+    text-align: right !important;
+} */
+
+label {
+    color: black;
+}
