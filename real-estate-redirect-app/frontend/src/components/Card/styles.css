@@ -9,10 +9,6 @@ figure:hover .card-overlay{
     display: flex !important;
 }
 
-figure:hover .card-image {
-    filter: blur(10px);
-}
-
 #heart-icon {
     animation: pulse 1s ease-in-out infinite;
 }

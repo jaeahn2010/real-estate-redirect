@@ -1166,14 +1166,10 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
             statusColor = "stone-200"
             break;
     }
+
     return (
         <figure className="relative mb-4 text-stone-400 break-inside-avoid-column border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
-            <Link to={"/details/" + listing._id} onClick={() => updateDetails(listing)}>
-                <div className="card-overlay absolute cursor-pointer w-full h-[200px] flex items-center justify-center rounded-t-lg z-9">
-                    <p className="w-40 text-slate-800 z-10 text-3xl" id='hover-msg'>See Details</p>
-                </div>
-            </Link>
-            <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover cursor-pointer"/> 
+            <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover"/> 
                      
             <figcaption className="py-2 px-2">
                 <h1 className="p-2 text-center">{listing.location.address}</h1>
@@ -1183,7 +1179,12 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                     <p className={`border-2 border-white px-1 rounded-3xl w-4 h-4 bg-${statusColor}`}></p>
                     <p className="px-1">{listing.currentActivity.status.toUpperCase()}</p>
                 </div>
-                <img src={heartIcon} className="cursor-pointer mx-auto my-5 hover:transform hover:scale-150 transition-all duration-200 ease-in-out"/>
+                <div className="flex justify-between items-center">
+                    <img src={heartIcon} className="cursor-pointer my-5 mx-5 hover:transform hover:scale-150 transition-all duration-200 ease-in-out"/>
+                    <Link to={"/details/" + listing._id} onClick={() => updateDetails(listing)}>
+                        <p className="border-white border-2 text-center w-40 rounded-xl bg-sky-800 text-slate-800 text-l mx-5" id='hover-msg'>See Details</p>
+                    </Link>
+                </div>
                 {listingBtns}
                 {editForm}
             </figcaption>

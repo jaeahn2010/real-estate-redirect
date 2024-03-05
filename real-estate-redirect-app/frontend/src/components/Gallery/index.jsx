@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Card from '../Card'
 
-export default function Gallery({ listings, getFilteredData, refreshListings, updateDetails, loginStatus }) {
+export default function Gallery({ listings, getFilteredData, updateDetails, loginStatus }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(5)
     let galleryContent = <p>None found</p>
 
