@@ -37,8 +37,10 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
     }
 
     function handleDelete() {
-        deleteShowingRequest(data._id)
-            .then(() => refreshShowingRequests())
+        if (confirm("Are you sure you would like to delete this showing request?")) {
+            deleteShowingRequest(data._id)
+                .then(() => refreshShowingRequests())
+        }
     }
 
     let btns = ''
@@ -65,7 +67,7 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
         return (
             <form
                 onSubmit={handleSubmit}
-                className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2">
+                className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
                 <br />
                 <label htmlFor="requestedDateTime">Requested date: </label>
                 <input
