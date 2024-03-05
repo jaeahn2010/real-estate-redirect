@@ -7,12 +7,15 @@ export default function HomePage({ listings, setListings, getFilteredData, updat
     for (let zip of zipCodesList) {
         zipCodeOptions.push(<option key={zip} value={zip}>{zip}</option>)
     }
-    const [zipCode, setZipCode] = useState(0)
+    const [zipCode, setZipCode] = useState('none')
+    const [address, setAddress] = useState('none')
 
     function handleSubmit(evt) {
         evt.preventDefault()
         setListings([])
-        getFilteredData("zip", zipCode)
+        if (zipCode !== "none") getFilteredData("zip", zipCode)
+        if (address !== "none") getFilteredData("address", address)
+        if (zipCode === "none" && address === "none") getFilteredData("none", "none")
     }
     
     return (
@@ -21,21 +24,35 @@ export default function HomePage({ listings, setListings, getFilteredData, updat
             <h2 className="text-center md:text-xl text-lg font-semibold italic">A platform for home buyers and sellers to communicate directly and save on commissions</h2>
             <br />
             <h3 className="text-center text-lg font-bold">Browse the gallery below!</h3>
-            <div className="pb-10">
-                <p className="text-center">SEARCH CRITERIA</p>
-                <form onSubmit={handleSubmit} className="mt-4 text-center">
-                    <label htmlFor="zip-code" className="text-stone-400">Zip code:</label>
-                    <select
-                        name="zip-code" 
-                        id="zip-code"
-                        defaultValue='0'
-                        onChange={event => setZipCode(event.target.value)}>
-                        <option key='0' value='0' disabled>Select a zip code</option>
-                        {zipCodeOptions}
-                    </select>
+            <div className="border-white border-2 rounded-xl bg-stone-800 py-10 m-5">
+                <p className="text-center mb-10 underline">SEARCH CRITERIA</p>
+                <form onSubmit={handleSubmit} className="mt-4 text-center flex justify-around items-center">
+                    <div>
+                        <label htmlFor="zip-code" className="text-stone-400">Zip code:</label>
+                        <select
+                            className="mx-5"
+                            name="zip-code" 
+                            id="zip-code"
+                            defaultValue='none'
+                            onChange={event => setZipCode(event.target.value)}>
+                            <option key='0' value='none' disabled>Select a zip code</option>
+                            {zipCodeOptions}
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="address" className="text-stone-400">Street name:</label>
+                        <input
+                            className="mx-3"
+                            name="address"
+                            id="address"
+                            defaultValue="none"
+                            placeholder="Search by street name"
+                            onChange={event => setAddress(event.target.value)}
+                        />
+                    </div>
                     <button
                         type="submit"
-                        className="box-border mx-1 px-3 py-[6px] text-lg border-2 border-gray-700 rounded-lg font-semibold hover:bg-gray-700 hover:opacity-70 transition-all duration-200 ease-in-out">
+                        className="box-border mx-1 px-3 py-[6px] text-lg text-white border-2 border-gray-700 rounded-lg font-semibold bg-sky-700 hover:bg-sky-500 transition-all duration-200 ease-in-out">
                         Search
                     </button>
                 </form>

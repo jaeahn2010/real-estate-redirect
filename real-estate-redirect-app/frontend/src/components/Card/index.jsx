@@ -1151,19 +1151,19 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
     let statusColor = ""
     switch(listing.currentActivity.status) {
         case "active":
-            statusColor = "green-600"
+            statusColor = <p className="rounded-3xl w-4 h-4 bg-green-600"></p>
             break;
         case "under contract":
-            statusColor = "yellow-400"
+            statusColor = <p className="rounded-3xl w-4 h-4 bg-yellow-400"></p>
             break;
         case "sold":
-            statusColor = "sky-500"
+            statusColor = <p className="rounded-3xl w-4 h-4 bg-sky-500"></p>
             break;
         case "expired":
-            statusColor = "red-600"
+            statusColor = <p className="rounded-3xl w-4 h-4 bg-red-600"></p>
             break;
         case "withdrawn":
-            statusColor = "stone-200"
+            statusColor = <p className="rounded-3xl w-4 h-4 bg-stone-200"></p>
             break;
     }
 
@@ -1176,13 +1176,13 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 <h1 className="p-2 text-center">{listing.location.city}, {listing.location.state} {listing.location.zip}</h1>
                 <h1 className="p-2 text-center">${listing.currentActivity.price.toLocaleString()}</h1>
                 <div className="p-2 flex justify-center items-center">
-                    <p className={`border-2 border-white px-1 rounded-3xl w-4 h-4 bg-${statusColor}`}></p>
+                    {statusColor}
                     <p className="px-1">{listing.currentActivity.status.toUpperCase()}</p>
                 </div>
                 <div className="flex justify-between items-center">
                     <img src={heartIcon} className="cursor-pointer my-5 mx-5 hover:transform hover:scale-150 transition-all duration-200 ease-in-out"/>
                     <Link to={"/details/" + listing._id} onClick={() => updateDetails(listing)}>
-                        <p className="border-white border-2 text-center w-40 rounded-xl bg-sky-800 text-slate-800 text-l mx-5" id='hover-msg'>See Details</p>
+                        <p className="border-white border-2 text-center w-40 rounded-xl bg-sky-800 text-slate-800 text-l mx-5 hover:bg-sky-600">See Details</p>
                     </Link>
                 </div>
                 {listingBtns}

@@ -20,10 +20,12 @@ export default function App() {
   async function getData(category, filter) {
     const data = await getListings()
     let filteredData = []
-    if (category === "none") {
+    if (category === "none" && filter === "none") {
       filteredData = data
     } else if (category === "zip") {
       filteredData = data.filter(listing => listing.location.zip == filter)
+    } else if (category === "address") {
+      filteredData = data.filter(listing => listing.location.address.toLowerCase().includes(filter))
     } else if (category === "userToken" && filter === "none") {
       const currentUserData = await getUserByToken()
       filteredData = data.filter(listing => {
