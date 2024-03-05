@@ -105,7 +105,7 @@ export default function App() {
           Log Out
       </button>
     </div>
-    userGreeting = <h1 className="text-white">Hello, {username}!</h1>
+    userGreeting = <h1 className="bg-stone-700 z-10 text-white text-right text-sm sticky top-0">Hello, {username}!</h1>
     if (localStorage.getItem("userCategory") === "seller") {
       profileLink = <div className="flex lg:gap-5 md:gap-4 sm:gap-3 gap-2">
       <Link to={"/sellerProfile/" + localStorage.getItem("userToken")}>
@@ -125,9 +125,8 @@ export default function App() {
 
   return (
     <>
-      <nav className="flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
+      <nav className="rer-font-nav flex items-center justify-between h-16 bg-gray-800 shadow-lg lg:px-9 md:px-6 px-3">
         <Link to="/" onClick={(evt) => {
-          evt.preventDefault()
           getData("none", "none")
         }}>
           <h1 className="text-white font-bold md:text-3xl sm:text-2xl">Real Estate Redirect</h1>

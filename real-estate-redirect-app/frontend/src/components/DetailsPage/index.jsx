@@ -9,9 +9,8 @@ export default function DetailsPage(props) {
     const [userId, setUserId] = useState('')
     const [listing, setListing] = useState({ ...props.listing})
     const [homeowners, setHomeowners] = useState([])
-    const [loginStatus, setLoginStatus] = useState({...props.loginStatus})
+    const [loginStatus, setLoginStatus] = useState(props.loginStatus)
     const params = useParams()
-
     async function getListingData() {
         const listingData = await getListingById(params.listingId)
         setListing(listingData)

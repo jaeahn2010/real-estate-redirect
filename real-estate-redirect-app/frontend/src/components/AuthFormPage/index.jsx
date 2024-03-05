@@ -13,7 +13,6 @@ export default function AuthFormPage({ setLoginStatus }) {
         category: "",
     });
 
-    // Execute auth logic on form submit
     async function handleSubmit(event) {
         event.preventDefault()
         if (formType === 'login') {
@@ -56,7 +55,7 @@ export default function AuthFormPage({ setLoginStatus }) {
                         First name
                     </label>
                     <input
-                        className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600"
+                        className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
                         id="firstName"
                         name="firstName"
                         type="text"
@@ -71,7 +70,7 @@ export default function AuthFormPage({ setLoginStatus }) {
                         Last name
                     </label>
                     <input
-                        className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600"
+                        className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
                         id="lastName"
                         name="lastName"
                         type="text"
@@ -91,7 +90,7 @@ export default function AuthFormPage({ setLoginStatus }) {
                         value="buyer"
                         onChange={handleInputChange}
                     />
-                    <label htmlFor="categoryBuyer" className="ml-2 mr-4">Buy</label>
+                    <label htmlFor="categoryBuyer" className="ml-2 mr-4 text-gray-200">Buy</label>
                     <input
                         id="categorySeller"
                         name="category"
@@ -100,7 +99,7 @@ export default function AuthFormPage({ setLoginStatus }) {
                         value="seller"
                         onChange={handleInputChange}
                     />
-                    <label htmlFor="categoryBuyer" className="ml-2 mr-4">Sell</label>
+                    <label htmlFor="categoryBuyer" className="ml-2 mr-4 text-gray-200">Sell</label>
                 </div>
             </>
     }
@@ -114,7 +113,7 @@ export default function AuthFormPage({ setLoginStatus }) {
                             Email
                         </label>
                         <input
-                            className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600"
+                            className="w-full p-2 text-gray-200 rounded-md focus:outline-none focus:ring focus:border-blue-600"
                             id="email"
                             name="email"
                             type="email"
@@ -129,7 +128,7 @@ export default function AuthFormPage({ setLoginStatus }) {
                             Password
                         </label>
                         <input
-                            className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600"
+                            className="w-full p-2 text-gray-200 rounded-md focus:outline-none focus:ring focus:border-blue-600"
                             id="password"
                             name="password"
                             type="password"
@@ -141,10 +140,10 @@ export default function AuthFormPage({ setLoginStatus }) {
                         />
                     </div>
                     {signupFields}
-                    <div>
+                    <div className="text-center">
                         <button
                             type="submit"
-                            className="w-full py-2 px-4 bg-green-700 text-gray-100 rounded-md hover:bg-green-800 transition duration-300">
+                            className="w-1/2 py-2 px-4 bg-green-700 text-gray-100 rounded-md hover:bg-green-500 transition duration-300">
                             {actionText}
                         </button>
                     </div>

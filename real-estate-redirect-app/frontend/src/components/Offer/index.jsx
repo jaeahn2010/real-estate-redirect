@@ -13,7 +13,6 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         status: data.status,
         offerPrice: data.terms.offerPrice,
         expiration: data.terms.expiration,
-        // listingShown: data.terms.listingShown,
         EMD: data.terms.EMD,
         downPayment: data.terms.downPayment,
         loanType: data.terms.loanType,
@@ -66,7 +65,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         offerForm =
             <form
                 onSubmit={handleSubmit}
-                className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
+                className="offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                     <table>
                         {/* input for buyer id, autopopulate name/email */}
                         <tbody>
@@ -270,7 +269,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         offerForm = 
         <form
             onSubmit={handleSubmit}
-            className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
+            className="offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
             <table>
                 {/* input for buyer id, autopopulate name/email */}
                 <tbody>
@@ -316,13 +315,18 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                 </tbody>
             </table>
             <button
+                onClick={() => { setShowEditForm(false) }}
+                className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                Close
+            </button>
+            <button
                 type="submit"
                 className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                Submit
+                Submit Response
             </button>
         </form>
         btns = 
-        <div className="flex justify-end">
+        <div className="text-center">
             <button
                 onClick={() => { setShowEditForm(true) }}
                 className="text-white hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
@@ -348,7 +352,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
             let POF = data.terms.proofOfFunds ? "Yes" : "No";
             return (
                 <div
-                    className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
+                    className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                     <p className="font-bold">Offer from {buyerIdDisplay}</p>
                     <p className="my-2">for listing #{data.listingId}</p>
                     <p>Status: {data.status}</p>
@@ -374,7 +378,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
             return (
                 <>
                     <div
-                        className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
+                        className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                         <p className="font-bold">Offer from {buyerIdDisplay}</p>
                         <p className="my-2">for listing #{data.listingId}</p>
                         <p>Status: {data.status}</p>

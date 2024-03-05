@@ -104,16 +104,16 @@ export default function Card({ listing, getFilteredData, refreshListings, update
     if (loginStatus && localStorage.userToken === homeownerToken && localStorage.userCategory === 'seller') {
         listingBtns =
         <>
-            <p>This is your listing. You may edit or delete.</p>
-            <div className="flex justify-end">
+            <p className="text-xs text-center my-5">This is your listing. You may edit or delete.</p>
+            <div className="flex justify-center">
                 <button
                     onClick={() => { setShowEditForm(true) }}
-                    className="text-white hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
+                    className="text-white text-xs hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
                     Edit this Listing
                 </button>
                 <button
                     onClick={handleDelete}
-                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 px-4 rounded">
                     Delete this Listing
                 </button>
             </div>
@@ -125,10 +125,10 @@ export default function Card({ listing, getFilteredData, refreshListings, update
         editForm =
         <form
             onSubmit={handleSubmit}
-            className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
-            <table>
-                <tbody>
-                    <tr>
+            className="bg-stone-400 rounded-lg p-10 my-4 border-gray-700 border-2 w-[100%]">
+            <table className="w-[90%]">
+                <tbody clasName="w-[90%]">
+                    <tr className="border-solid border-white border-2 pr-20">
                         <td><label htmlFor="apn">Parcel number: </label></td>
                         <td><input
                             name="apn"
@@ -1133,11 +1133,18 @@ export default function Card({ listing, getFilteredData, refreshListings, update
                     </tr>
                 </tbody>
             </table>
-            <button
-                type="submit"
-                className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                Submit
-            </button>
+            <div className="flex justify-center mt-5">
+                <button
+                    onClick={() => { setShowEditForm(false) }}
+                    className="text-white text-xs hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
+                    Close
+                </button>
+                <button
+                    type="submit"
+                    className="text-white text-xs hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
+                    Submit
+                </button>
+            </div>
         </form>
     }
 
@@ -1162,20 +1169,21 @@ export default function Card({ listing, getFilteredData, refreshListings, update
     return (
         <figure className="relative mb-4 text-stone-400 break-inside-avoid-column border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
             <Link to={"/details/" + listing._id} onClick={() => updateDetails(listing)}>
-                <div className="card-overlay absolute cursor-pointer w-full h-2/3 flex items-center justify-center bg-black rounded-t-lg z-10">
-                    <p className="w-40 text-slate-50 text-3xl" id='hover-msg'>See Details</p>
+                <div className="card-overlay absolute cursor-pointer w-full h-[200px] flex items-center justify-center rounded-t-lg z-9">
+                    <p className="w-40 text-slate-800 z-10 text-3xl" id='hover-msg'>See Details</p>
                 </div>
             </Link>
-            <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover cursor-pointer"/>          
+            <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover cursor-pointer"/> 
+                     
             <figcaption className="py-2 px-2">
                 <h1 className="p-2 text-center">{listing.location.address}</h1>
                 <h1 className="p-2 text-center">{listing.location.city}, {listing.location.state} {listing.location.zip}</h1>
                 <h1 className="p-2 text-center">${listing.currentActivity.price.toLocaleString()}</h1>
                 <div className="p-2 flex justify-center items-center">
-                    <p className={`px-1 rounded-3xl w-4 h-4 bg-${statusColor}`}></p>
+                    <p className={`border-2 border-white px-1 rounded-3xl w-4 h-4 bg-${statusColor}`}></p>
                     <p className="px-1">{listing.currentActivity.status.toUpperCase()}</p>
                 </div>
-                <img src={heartIcon} className="cursor-pointer hover:transform hover:scale-125 transition-all duration-200 ease-in-out"/>
+                <img src={heartIcon} className="cursor-pointer mx-auto my-5 hover:transform hover:scale-150 transition-all duration-200 ease-in-out"/>
                 {listingBtns}
                 {editForm}
             </figcaption>

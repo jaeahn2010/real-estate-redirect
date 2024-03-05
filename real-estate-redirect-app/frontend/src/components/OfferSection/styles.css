@@ -3,9 +3,9 @@ input {
     background-color: rgb(68, 69, 70) !important;
 }
 
-td:first-child {
+/* td:first-child {
     text-align: right !important;
-}
+} */
 
 label {
     color: black;

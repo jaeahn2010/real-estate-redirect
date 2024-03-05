@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Gallery from '../Gallery'
 import { postListing, getListings, getUserByToken } from "../../../utils/backend"
+import './styles.css'
 
 export default function SellerProfilePage(props) {
     const [username, setUsername] = useState('')
@@ -193,15 +194,16 @@ export default function SellerProfilePage(props) {
     }
 
     return (
-        <div className='offer-section bg-stone-600 rounded-lg p-4 pb-10 mt-4 mx-10 space-y-4 relative text-stone-300'>
+        <div className='bg-stone-600 rounded-lg p-4 pb-10 mt-4 mx-10 space-y-4 relative text-stone-300'>
             <h1 className='text-xl font-bold'>Listings</h1>
             {createBtn}
             {
                 showCreateForm && <form
                     onSubmit={handleSubmit}
-                    className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
-                    <table>
+                    className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
+                    <table className="text-left">
                         <tbody>
+                            <tr><td colspan="2"><p className="table-title text-black-800">IDENTIFIER</p></td></tr>
                             <tr>
                                 <td><label htmlFor="apn">Parcel number: </label></td>
                                 <td><input
@@ -213,6 +215,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">LOCATION</p></td></tr>
                             <tr>
                                 <td><label htmlFor="address">Street address: </label></td>
                                 <td><input
@@ -269,6 +272,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">LISTING DATA</p></td></tr>
                             <tr>
                                 <td><label htmlFor="price">List price: $</label></td>
                                 <td><input
@@ -311,15 +315,16 @@ export default function SellerProfilePage(props) {
                                 /></td>
                             </tr>
                             <tr>
-                                <td><label htmlFor="homeowner">Homeowner ID: </label></td>
                                 <td><input
                                     name="homeowner"
                                     id="homeowner"
+                                    hidden={true}
                                     disabled={true}
                                     type="text"
                                     defaultValue={listings[0].homeowner[0]}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">ZONING & STRUCTURE</p></td></tr>
                             <tr>
                                 <td><label htmlFor="propertyType">Property Type: </label></td>
                                 <td><input
@@ -396,6 +401,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">EXTERIOR: CONSTRUCTION</p></td></tr>
                             <tr>
                                 <td><label htmlFor="roof">Roof materials: </label></td>
                                 <td><input
@@ -440,9 +446,9 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
-                            <tr><td><p>Lot features:</p></td></tr>
-                            <tr>
-                                <td>
+                            <tr><td colspan="2"><p className="table-title text-black-800">EXTERIOR: LOT</p></td></tr>
+                            <tr className="radio-tr">
+                                <td className="text-left">
                                     <input
                                     name="lotFeatures"
                                     id="desertLandscaping"
@@ -451,6 +457,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="desertLandscaping">Desert Landscaping</label>
+                                </td>
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="rockGravelLandscaping"
@@ -459,6 +467,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="rockGravelLandscaping">Rock/Gravel Landscaping</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="rearLawn"
@@ -467,6 +479,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="rearLawn">Rear Lawn</label>
+                                </td>
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="shed"
@@ -475,6 +489,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="shed">Shed</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="rvHookup"
@@ -483,6 +501,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="rvHookup">RV Hookup</label>
+                                </td>
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="patio"
@@ -491,6 +511,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="patio">Patio</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="syntheticGrass"
@@ -499,6 +523,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="syntheticGrass">Synthetic Grass</label>
+                                </td>
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="matureLandscaping"
@@ -507,6 +533,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="matureLandscaping">Mature Landscaping</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="grass"
@@ -515,6 +545,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="grass">Grass</label>
+                                </td>
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="coveredPatio"
@@ -523,6 +555,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="desertLandscaping">Covered Patio</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="lotFeatures"
                                     id="paved"
@@ -533,8 +569,8 @@ export default function SellerProfilePage(props) {
                                     <label htmlFor="paved">Paved</label>
                                 </td>
                             </tr>
-                            <tr><td><p>Vegetation:</p></td></tr>
-                            <tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">EXTERIOR: VEGETATION</p></td></tr>
+                            <tr className="radio-tr">
                                 <td>
                                     <input
                                     name="vegetation"
@@ -544,6 +580,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="shrubs">Shrubs</label>
+                                </td>
+                                <td>
                                     <input
                                     name="vegetation"
                                     id="fountain"
@@ -552,6 +590,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="fountain">Fountain</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="vegetation"
                                     id="trees"
@@ -560,6 +602,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="trees">Trees</label>
+                                </td>
+                                <td>
                                     <input
                                     name="vegetation"
                                     id="grass"
@@ -568,6 +612,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="grass">Grass</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="vegetation"
                                     id="brush"
@@ -576,6 +624,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="brush">Brush</label>
+                                </td>
+                                <td>
                                     <input
                                     name="vegetation"
                                     id="bushes"
@@ -586,6 +636,7 @@ export default function SellerProfilePage(props) {
                                     <label htmlFor="bushes">Bushes</label>
                                 </td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">EXTERIOR: OTHER</p></td></tr>
                             <tr>
                                 <td><label htmlFor="hasSolar">Does this property have solar panels? </label></td>
                                 <td><input
@@ -630,8 +681,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
-                            <tr><td><p>Flooring:</p></td></tr>
-                            <tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">INTERIOR: FLOORING</p></td></tr>
+                            <tr className="radio-tr">
                                 <td>
                                     <input
                                     name="flooring"
@@ -641,6 +692,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="tile">Tile</label>
+                                </td>
+                                <td>
                                     <input
                                     name="flooring"
                                     id="vinyl"
@@ -649,6 +702,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="vinyl">Vinyl</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="flooring"
                                     id="hardwood"
@@ -657,6 +714,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="hardwood">Hardwood</label>
+                                </td>
+                                <td>
                                     <input
                                     name="flooring"
                                     id="laminate"
@@ -665,6 +724,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="laminate">Laminate</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="flooring"
                                     id="marble"
@@ -673,6 +736,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="marble">Marble</label>
+                                </td>
+                                <td>
                                     <input
                                     name="flooring"
                                     id="concrete"
@@ -681,6 +746,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="concrete">Concrete</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="flooring"
                                     id="stone"
@@ -689,6 +758,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="stone">Stone</label>
+                                </td>
+                                <td>
                                     <input
                                     name="flooring"
                                     id="linoleum"
@@ -697,6 +768,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="linoleum">Linoleum</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="flooring"
                                     id="carpet"
@@ -707,6 +782,7 @@ export default function SellerProfilePage(props) {
                                     <label htmlFor="carpet">Carpet</label>
                                 </td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">INTERIOR: ROOMS</p></td></tr>
                             <tr>
                                 <td><label htmlFor="bedrooms">Bedrooms: </label></td>
                                 <td><input
@@ -762,6 +838,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">INTERIOR: COOLING/HEATING</p></td></tr>
                             <tr>
                                 <td><label htmlFor="cooling">Cooling: </label></td>
                                 <td><input
@@ -784,8 +861,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
-                            <tr><td><p>Appliances to be included in sale:</p></td></tr>
-                            <tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">APPLIANCES INCLUDED IN SALE</p></td></tr>
+                            <tr className="radio-tr">
                                 <td>
                                     <input
                                     name="appliancesIncluded"
@@ -795,6 +872,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="washer">Washer</label>
+                                </td>
+                                <td>
                                     <input
                                     name="appliancesIncluded"
                                     id="dryer"
@@ -803,6 +882,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="dryer">Dryer</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="appliancesIncluded"
                                     id="refrigerator"
@@ -811,6 +894,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="refrigerator">Refrigerator</label>
+                                </td>
+                                <td>
                                     <input
                                     name="appliancesIncluded"
                                     id="dishwasher"
@@ -819,6 +904,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="dishwasher">Dishwasher</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="appliancesIncluded"
                                     id="stove"
@@ -827,6 +916,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="stove">Stove/Oven</label>
+                                </td>
+                                <td>
                                     <input
                                     name="appliancesIncluded"
                                     id="microwave"
@@ -835,6 +926,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="microwave">Microwave</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="appliancesIncluded"
                                     id="garbageDisposal"
@@ -845,8 +940,8 @@ export default function SellerProfilePage(props) {
                                     <label htmlFor="garbageDisposal">Garbage Disposal</label>
                                 </td>
                             </tr>
-                            <tr><td><p>Fixtures:</p></td></tr>
-                            <tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">FIXTURES</p></td></tr>
+                            <tr className="radio-tr">
                                 <td>
                                     <input
                                     name="fixtures"
@@ -856,6 +951,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="ceilingFans">Ceiling Fans</label>
+                                </td>
+                                <td>
                                     <input
                                     name="fixtures"
                                     id="potShelves"
@@ -864,6 +961,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="potShelves">Pot Shelves</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="fixtures"
                                     id="chandeliers"
@@ -874,8 +975,8 @@ export default function SellerProfilePage(props) {
                                     <label htmlFor="chandeliers">Chandeliers</label>
                                 </td>
                             </tr>
-                            <tr><td><p>Window features:</p></td></tr>
-                            <tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">WINDOW FEATURES</p></td></tr>
+                            <tr className="radio-tr">
                                 <td>
                                     <input
                                     name="window"
@@ -885,6 +986,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="curtains">Curtains</label>
+                                </td>
+                                <td>
                                     <input
                                     name="window"
                                     id="blinds"
@@ -893,6 +996,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="blinds">Blinds</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="window"
                                     id="drapes"
@@ -901,6 +1008,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="drapes">Drapes</label>
+                                </td>
+                                <td>
                                     <input
                                     name="window"
                                     id="plantationShutters"
@@ -911,6 +1020,7 @@ export default function SellerProfilePage(props) {
                                     <label htmlFor="plantationShutters">Plantation Shutters</label>
                                 </td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">OTHER</p></td></tr>
                             <tr>
                                 <td><label htmlFor="fireplace">Fireplace: </label></td>
                                 <td><input
@@ -933,6 +1043,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">PARKING</p></td></tr>
                             <tr>
                                 <td><label htmlFor="parkingType">Parking type: </label></td>
                                 <td><input
@@ -955,6 +1066,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">UTILITIES</p></td></tr>
                             <tr>
                                 <td><label htmlFor="sewer">Sewer: </label></td>
                                 <td><input
@@ -988,6 +1100,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">HOA/COMMUNITY</p></td></tr>
                             <tr>
                                 <td><label htmlFor="HOACount">How many HOAs? </label></td>
                                 <td><input
@@ -1032,8 +1145,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
-                            <tr><td><p>What does the HOA fee cover?</p></td></tr>
-                            <tr>
+                            <tr><td colspan="2"><p className="underline my-5">What does the HOA fee cover?</p></td></tr>
+                            <tr className="radio-tr">
                                 <td>
                                     <input
                                     name="HOAFeeIncludes"
@@ -1043,6 +1156,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="management">Management</label>
+                                </td>
+                                <td>
                                     <input
                                     name="HOAFeeIncludes"
                                     id="landscapeMaintenance"
@@ -1051,6 +1166,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="landscapeMaintenance">Landscape Maintenance</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="HOAFeeIncludes"
                                     id="recreationalFacilities"
@@ -1059,6 +1178,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="recreationalFacilities">Reacreational Facilities</label>
+                                </td>
+                                <td>
                                     <input
                                     name="HOAFeeIncludes"
                                     id="gated"
@@ -1067,6 +1188,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="gated">Gated</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="HOAFeeIncludes"
                                     id="HOAWater"
@@ -1075,6 +1200,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="HOAWater">Water</label>
+                                </td>
+                                <td>
                                     <input
                                     name="HOAFeeIncludes"
                                     id="HOASewer"
@@ -1083,6 +1210,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="HOASewer">Sewer</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="HOAFeeIncludes"
                                     id="HOATrash"
@@ -1091,6 +1222,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="HOATrash">Trash</label>
+                                </td>
+                                <td>
                                     <input
                                     name="HOAFeeIncludes"
                                     id="guardGated"
@@ -1101,8 +1234,8 @@ export default function SellerProfilePage(props) {
                                     <label htmlFor="guardGated">Guard Gated</label>
                                 </td>
                             </tr>
-                            <tr><td><p>Community amenities:</p></td></tr>
-                            <tr>
+                            <tr><td colspan="2"><p className="underline my-5">Community amenities</p></td></tr>
+                            <tr className="radio-tr">
                                 <td>
                                     <input
                                     name="communityAmenities"
@@ -1112,6 +1245,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="communityPool">Community Pool</label>
+                                </td>
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="communitySpa"
@@ -1120,6 +1255,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="communitySpa">Community Spa</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="communityPark"
@@ -1128,6 +1267,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="communityPark">Community Park</label>
+                                </td>
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="fitnessCenter"
@@ -1136,6 +1277,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="fitnessCenter"> Fitness Center</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="playgrounds"
@@ -1144,6 +1289,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="playgrounds">Playgrounds</label>
+                                </td>
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="clubhouse"
@@ -1152,6 +1299,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="clubhouse">Clubhouse</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="golfCourse"
@@ -1160,6 +1311,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="golfCourse">Golf Course</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="basketballCourt"
@@ -1168,6 +1323,8 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="basketballCourt">Basketball Court</label>
+                                </td>
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="tennisCourt"
@@ -1176,6 +1333,10 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 />
                                     <label htmlFor="tennisCourt">Tennis Court</label>
+                                </td>
+                            </tr>
+                            <tr className="radio-tr">
+                                <td>
                                     <input
                                     name="communityAmenities"
                                     id="joggingPath"
@@ -1197,6 +1358,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">LAST SALE INFORMATION</p></td></tr>
                             <tr>
                                 <td><label htmlFor="lastSoldDate">Last Sold Date: </label></td>
                                 <td><input
@@ -1229,6 +1391,7 @@ export default function SellerProfilePage(props) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
+                            <tr><td colspan="2"><p className="table-title text-black-800">TAX INFORMATION</p></td></tr>
                             <tr>
                                 <td><label htmlFor="annualTax">Annual Tax: </label></td>
                                 <td><input

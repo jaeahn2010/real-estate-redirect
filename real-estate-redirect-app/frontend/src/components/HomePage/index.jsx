@@ -23,7 +23,7 @@ export default function HomePage({ listings, setListings, getFilteredData, updat
     }
     
     return (
-        <main className="text-stone-400">
+        <main className="rer-font-body text-stone-400">
             <h1 className="mt-5 text-center md:text-3xl text-2xl font-bold">Real estate Redirect</h1>
             <h2 className="text-center md:text-xl text-lg font-semibold italic">A platform for home buyers and sellers to communicate directly and save on commissions</h2>
             <br />
