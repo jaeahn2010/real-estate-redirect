@@ -18,7 +18,6 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
     }, [])
 
     function handleInputChange(event) {
-        console.log(event.target.value)
         setCreateFormData({
             ...createFormData,
             [event.target.name]: event.target.value
@@ -43,8 +42,12 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
             requestedDateTime: new Date()
         })
         setShowCreateForm(false)
-        let convertedDateTime = new Date(event.target[2].value + "T" + event.target[3].value + ":00Z")
-        postShowingRequest({ ...createFormData, listingId: listingId, convertedDateTime: convertedDateTime })
+        let convertedDateTime = new Date(event.target[0].value + "T" + event.target[1].value + ":00Z")
+        postShowingRequest({
+            ...createFormData,
+            listingId: listingId,
+            convertedDateTime: convertedDateTime
+        })
             .then(() => refreshShowingRequests())
     }
 
@@ -55,6 +58,7 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
                 key={showingRequest._id}
                 data={showingRequest}
                 refreshShowingRequests={refreshShowingRequests}
+                loginStatus={loginStatus}
             />
         })
     }
@@ -79,29 +83,13 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
             {
                 showCreateForm && <form
                     onSubmit={handleSubmit}
-                    className="bg-gray-100 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
-                    {/* input for buyer id, autopopulate name/email */}
-                    <label htmlFor="listingId">Listing ID:</label>
-                    <input
-                        name="listingId"
-                        className="pl-2 bg-gray-100"
-                        disabled={true}
-                        value={listingId}
-                    />
-                    <br />
-                    <label htmlFor="status">Status:</label>
-                    <input
-                        name="status"
-                        className="pl-2 bg-gray-100"
-                        disabled={true}
-                        value="pending"
-                    />
+                    className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 text-center">
                     <br />
                     <label htmlFor="requestedDateTime">Requested date:</label>
                     <input
                         name="requestedDate"
                         type="date"
-                        className="mx-2 bg-gray-100"
+                        className="mx-2 bg-gray-100 my-5"
                         onChange={handleInputChange}
                     />
                     <br/>
@@ -113,11 +101,13 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
                         onChange={handleInputChange}
                     />
                     <br />
-                    <button
-                        type="submit"
-                        className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                        Submit
-                    </button>
+                    <div className="text-center my-5">
+                        <button
+                            type="submit"
+                            className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                            Submit
+                        </button>
+                    </div>
                 </form>
             }
             {showingRequestElements}

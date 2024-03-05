@@ -17,7 +17,6 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         downPayment: data.terms.downPayment,
         loanType: data.terms.loanType,
         loanAmount: data.terms.loanAmount,
-        // proofOfFunds: data.terms.proofOfFunds,
         appraisalContingencyDate: data.terms.appraisalContingencyDate,
         loanContingencyDate: data.terms.loanContingencyDate,
         personalPropertyIncluded: data.terms.personalPropertyIncluded,
@@ -67,43 +66,17 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                 onSubmit={handleSubmit}
                 className="offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                     <table>
-                        {/* input for buyer id, autopopulate name/email */}
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td><input 
-                                    type="hidden"
-                                    name="_id"
-                                    defaultValue={data._id}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="listingId">Listing ID:</label></td>
-                                <td><input
-                                    name="listingId"
-                                    disabled={true}
-                                    defaultValue={data.listingId}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><input
-                                    name="listingId"
-                                    disabled={true}
-                                    defaultValue={data.listingId}
-                                /></td>
-                            </tr>
                             <tr>
                                 <td><label htmlFor="status">Status:</label></td>
                                 <td><input
                                     name="status"
                                     disabled={true}
-                                    defaultValue={data.status}
+                                    defaultValue="pending"
                                 /></td>
                             </tr>
-                            <tr>
-                                <td><p>Terms of the counteroffer</p></td>
-                                <td><p>(if any)</p></td>
+                            <tr className="h-10 my-5">
+                                <td colSpan={2} className="border-y-2 border-black"><p>Terms of the counteroffer (if any)</p></td>
                             </tr>
                             <tr>
                                 <td><label htmlFor="offerPrice">Your offer price: $</label></td>
@@ -122,16 +95,6 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
-                            {/*<tr>
-                                <td><label htmlFor="listingShown">Have you already seen the property in person?</label></td>
-                                <td><input
-                                    name="listingShown"
-                                    type="text" //change to boolean
-                                    placeholder="Y / N"
-                                    defaultValue={data.terms.listingShown}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>*/}
                             <tr>
                                 <td><label htmlFor="EMD">Earnest money deposit: $</label></td>
                                 <td><input
@@ -169,15 +132,6 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                                     onChange={handleInputChange}
                                 /></td>
                             </tr>
-                            {/* <tr>
-                                <td><label htmlFor="proofOfFunds">Upload your proof of funds or preapproval letter here: $</label></td>
-                                <td><input
-                                    name="proofOfFunds"
-                                    type="file"
-                                    defaultValue={editFormData.terms.proofOfFunds}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr> */}
                             <tr>
                                 <td><label htmlFor="appraisalContingencyDate">Appraisal Contingency Date: </label></td>
                                 <td><input
@@ -235,11 +189,10 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                                     defaultValue={data.terms.additionalTerms}
                                     onChange={handleInputChange}
                                 /></td>
-                            </tr>
-                                                        
+                            </tr>                            
                         </tbody>
                     </table>
-                <div>
+                <div className="flex justify-center py-5">
                     <button
                         onClick={() => { setShowEditForm(false) }}
                         className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
@@ -253,7 +206,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                 </div>
             </form>
         btns = 
-            <div className="flex justify-end">
+            <div className="flex justify-center">
                 <button
                     onClick={() => { setShowEditForm(true) }}
                     className="text-white hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
@@ -271,7 +224,6 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
             onSubmit={handleSubmit}
             className="offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
             <table>
-                {/* input for buyer id, autopopulate name/email */}
                 <tbody>
                     <tr>
                         <td><input
@@ -354,7 +306,6 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                 <div
                     className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                     <p className="font-bold">Offer from {buyerIdDisplay}</p>
-                    <p className="my-2">for listing #{data.listingId}</p>
                     <p>Status: {data.status}</p>
                     <p>TERMS</p>
                     <p>Offer price: ${data.terms.offerPrice.toLocaleString()}</p>
@@ -380,7 +331,6 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     <div
                         className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                         <p className="font-bold">Offer from {buyerIdDisplay}</p>
-                        <p className="my-2">for listing #{data.listingId}</p>
                         <p>Status: {data.status}</p>
                         <p>TERMS</p>
                         <p>Offer price: ${data.terms.offerPrice.toLocaleString()}</p>

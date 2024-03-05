@@ -4,6 +4,7 @@ import OfferSection from "../OfferSection"
 import ShowingRequestSection from "../ShowingRequestSection"
 import { getListingById, getUser, getUserByToken } from '../../../utils/backend'
 import attention from '../../assets/attention.png'
+import placeholder from '../../assets/placeholder.png'
 import './styles.css'
 
 export default function DetailsPage(props) {
@@ -84,15 +85,16 @@ export default function DetailsPage(props) {
 
         let offersAndShowingRequests = ''
         //show offers & showing requests sections only if logged in as a buyer or the seller of this listing
-        if (loginStatus && localStorage.userCategory === "buyer" || loginStatus && localStorage.userCategory === "seller" && userId == listing.homeowner[0]) {
+        if (loginStatus && localStorage.userCategory === "buyer" || loginStatus && localStorage.userCategory === "seller" && listing.homeowner.includes(userId)) {
             offersAndShowingRequests = 
             <>
                 <div>
-                    <p className="text-center">OFFERS</p>
+                    <p className="text-center underline text-xl">OFFERS</p>
                     <OfferSection listingId={listing._id} loginStatus={loginStatus}/>
                 </div>
+                <br/>
                 <div>
-                    <p className="text-center">SHOWING REQUESTS</p>
+                    <p className="text-center underline text-xl">SHOWING REQUESTS</p>
                     <ShowingRequestSection listingId={listing._id} loginStatus={loginStatus}/>
                 </div>
             </>
@@ -100,7 +102,7 @@ export default function DetailsPage(props) {
             offersAndShowingRequests =
             <div className="flex justify-center items-center border-2 my-5 bg-yellow-400">
                 <img src={attention} className="max-h-[30px] max-w-[30px]"/>
-                <h1 className="my-3 text-center text-slate-800 mx-2">Please log in as a buyer or the seller of this listing to see information on offers and showing requests for this property.</h1>
+                <h1 className="my-3 text-center text-slate-800 mx-2">Please log in as a buyer or as the seller of this listing to see information on offers and showing requests for this property.</h1>
                 <img src={attention} className="max-h-[30px] max-w-[30px]"/>
             </div>
         } 
@@ -110,7 +112,7 @@ export default function DetailsPage(props) {
         return (
             <>
                 <div className="w-4/5 mx-auto min-h-[300px] border-2 border-stone-400 rounded-lg text-stone-400 p-5 m-5 flex-col justify-center bg-stone-700">
-                    <img src="/src/assets/placeholder.jpeg" className="card-image rounded-xl mb-5 min-h-[200px] min-w-full object-cover cursor-pointer"/>
+                    <img src={placeholder} className="card-image rounded-xl mb-5 min-h-[200px] min-w-full object-cover cursor-pointer"/>
                     <div className="detail-section">
                         <p className="detail-section-title">LOCATION</p>
                         <p>{listing.location.address}</p>

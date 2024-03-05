@@ -3,10 +3,32 @@ input {
     background-color: rgb(68, 69, 70) !important;
 }
 
-/* td:first-child {
-    text-align: right !important;
-} */
+.offer-table td {
+    padding: 5px 15px 5px 5px;
+}
+
+.offer-table td:first-child {
+    width: 800px;
+}
+
+.offer-table input {
+    max-width: 500px;
+}
+
+.file-input {
+    border: 1px solid white;
+    max-width: 300px !important;
+}
 
 label {
     color: black;
+    font-size: 1rem;
+}
+
+.long-text {
+    text-align: center !important;
+}
+
+@media (max-width: 640px) {
+    label, input {font-size: 0.5rem}
 }

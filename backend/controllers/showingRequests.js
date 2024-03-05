@@ -66,12 +66,18 @@ router.post('/', authMiddleware, (req, res) => {
 
 // update: edit showing request
 router.put('/:showingRequestId', authMiddleware, async (req, res) => {
+    const reformat = {
+        listingId: req.body.listingId,
+        status: req.body.status,
+        requestedDateTime: new Date(req.body.requestedDate + "T" + req.body.requestedTime + ":00Z")
+    }
     const userShowingRequest = await db.ShowingRequest.findById(req.params.showingRequestId)
+    
     if (userShowingRequest.userId == req.user.id) {
         // If it is the original author, update the showing request
         const newShowingRequest = await db.ShowingRequest.findByIdAndUpdate(
             req.params.showingRequestId,
-            req.body,
+            reformat,
             { new: true }
         )
         res.json(newShowingRequest)

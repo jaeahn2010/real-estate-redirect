@@ -12,7 +12,6 @@ export default function OfferSection({ listingId, loginStatus }) {
         status: 'pending',
         offerPrice: 0,
         expiration: new Date(),
-        // listingShown: false,
         EMD: 0,
         downPayment: 0,
         loanType: '',
@@ -49,8 +48,8 @@ export default function OfferSection({ listingId, loginStatus }) {
     }
 
     function handleSubmit(event) {
+        console.log(event)
         event.preventDefault()
-        //reset form
         setCreateFormData({
             userId: localStorage.getItem("userToken"),
             listingId: listingId,
@@ -74,7 +73,7 @@ export default function OfferSection({ listingId, loginStatus }) {
         postOffer({
             ...createFormData,
             listingId: listingId,
-            POFFile: event.target[8].files[0]
+            POFFile: event.target[6].files[0]
         })
             .then(() => refreshOffers())
     }
@@ -110,27 +109,10 @@ export default function OfferSection({ listingId, loginStatus }) {
         <form
             onSubmit={handleSubmit}
             encType="multipart/form-data"
-            className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 w-[80vw] mx-auto">
-            <table>
-                {/* input for buyer id, autopopulate name/email */}
+            className="bg-stone-400 rounded-lg border-gray-700 border-2">
+            <table id="offer-table" className="offer-table my-10">
                 <tbody>
-                    <tr>
-                        <td><label htmlFor="listingId">Listing ID:</label></td>
-                        <td><input
-                            name="listingId"
-                            disabled={true}
-                            value={listingId}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="status">Status:</label></td>
-                        <td><input
-                            name="status"
-                            disabled={true}
-                            value="pending"
-                        /></td>
-                    </tr>
-                    <tr className="border-y-2 border-black"><td><p className="text-right text-black">TERMS</p></td><td></td></tr>
+                    <tr className="border-b-2 border-black"><td><p className="text-right text-black">TERMS</p></td><td></td></tr>
                     <tr>
                         <td><label htmlFor="offerPrice">Your offer price: $</label></td>
                         <td><input
@@ -187,11 +169,15 @@ export default function OfferSection({ listingId, loginStatus }) {
                         /></td>
                     </tr>
                     <tr>
-                        <td><label htmlFor="proofOfFunds">Upload your proof of funds or preapproval letter here: </label></td>
-                        <td><input
+                        <td colspan="2" className="long-text"><label htmlFor="proofOfFunds">Upload your proof of funds or preapproval letter below </label></td>
+                    </tr>
+                    <tr className="h-[70px]">
+                        <td colspan="2" className="!text-center"><input
+                            className="file-input"
                             type="file"
                             name="proofOfFunds"
                             id="proofOfFunds"
+                            required
                         /></td>
                     </tr>
                     <tr>
@@ -259,11 +245,13 @@ export default function OfferSection({ listingId, loginStatus }) {
                     </tr>
                 </tbody>
             </table>
-            <button
-                type="submit"
-                className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                Submit
-            </button>
+            <div className="text-center py-5">
+                <button
+                    type="submit"
+                    className="mx-auto text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    Submit
+                </button>
+            </div>
         </form>
     } 
     return (
