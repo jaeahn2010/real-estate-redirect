@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import heartIcon from '../../assets/heart.svg'
+import placeholder from '../../assets/placeholder.png'
 import './styles.css'
 import { updateListing, deleteListing, getUser } from "../../../utils/backend"
 
@@ -1169,7 +1170,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
 
     return (
         <figure className="relative mb-4 text-stone-400 break-inside-avoid-column border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
-            <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover"/> 
+            <img src={placeholder} className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover"/> 
                      
             <figcaption className="py-2 px-2">
                 <h1 className="p-2 text-center">{listing.location.address}</h1>

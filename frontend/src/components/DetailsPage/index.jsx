@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import OfferSection from "../OfferSection"
 import ShowingRequestSection from "../ShowingRequestSection"
 import { getListingById, getUser, getUserByToken } from '../../../utils/backend'
+import attention from '../../assets/attention.png'
 import './styles.css'
 
 export default function DetailsPage(props) {
@@ -33,97 +34,9 @@ export default function DetailsPage(props) {
         if (loginStatus) getUserData()
     }, [])
 
-    // don't use until api problem resolved
-    // useEffect(() => {
-    //     if (!listing.identifier || !listing.summary || !listing.building) {
-    //         async function getListingFromAPI() {
-    //             const res = await fetch(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/expandedprofile?attomId=${params.listingId}`, {
-    //                 mode: 'cors',
-    //                 headers: {
-    //                   'apikey': '8eaefa810fce7a9efaed84eb8b9559c9',
-    //                   'Accept': 'applicaton/json'
-    //                 }
-    //             })
-    //             const data = await res.json()
-    //             setListing(data.property[0])
-    //         }
-    //         getListingFromAPI()
-    //     }
-    // }, [])
-
     useEffect(() => {
         localStorage.getItem("userToken") ? setLoginStatus(true) : setLoginStatus(false)
     }, [])
-
-    // don't use until api problem resolved
-    // if (listing.identifier && listing.summary && listing.building) {
-    //     return (
-    //         <div className="w-4/5 mx-auto min-h-[300px] border-2 border-black rounded-lg">
-    //             <img src="/src/assets/placeholder.jpeg" className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover cursor-pointer"/>
-    //             <h1>Address:</h1>
-    //             <h1 className="p-2 text-center">{listing.address.line1}</h1>
-    //             <h1 className="p-2 text-center">{listing.address.line2}</h1>
-    //             <h3>General facts:</h3>
-    //             <p>Parcel number: {listing.identifier.apn}</p>
-    //             <p>Property type: {listing.summary.propertyType}</p>
-    //             <p>Subdivision: {listing.area.subdName}</p>
-    //             <p>Year Built: {listing.summary.yearBuilt}</p>
-    //             <p>Stories/Level: {listing.building.summary.levels}</p>
-    //             <p>Living area: {listing.building.size.livingSize} sq ft</p>
-    //             <p>Lot size: {listing.lot.lotSize1} acres</p>
-    //             <p>Pool/Spa: {listing.lot.poolType}</p>
-    //             <p>Views: {listing.building.summary.view}</p>
-    //             <p>Current Occupancy: {listing.summary.absenteeInd}</p>
-    //             <p>Bank-owned: {listing.summary.REOflag}</p>
-    //             <br/>
-    //             <h3>Rooms information:</h3>
-    //             <p>Total rooms: {listing.building.rooms.roomsTotal}</p>
-    //             <p>Bedrooms: {listing.building.rooms.beds}</p>
-    //             <p>Total bathrooms: {listing.building.rooms.bathsTotal}</p>
-    //             <p>Full bathrooms: {listing.building.rooms.bathsFull}</p>
-    //             <p>Partial bathrooms: {listing.building.rooms.bathsPartial}</p>
-    //             <br/>
-    //             <h3>Parking information:</h3>
-    //             <p>Type: {listing.building.parking.prkgType}</p>
-    //             <p>Size: {listing.building.parking.prkgSize} sq ft</p>
-    //             <p>Parking spaces: {listing.building.parking.prkgSpaces}</p>
-    //             <br/>
-    //             <h3>Utilities information:</h3>
-    //             <p>Cooling: {listing.utilities.coolingType}</p>
-    //             <p>Heating: {listing.utilities.heatingType}</p>
-    //             <br/>
-    //             <h3>Construction information:</h3>
-    //             <p>Construction type: {listing.building.construction.constructionType}</p>
-    //             <p>Frame type: {listing.building.construction.frameType}</p>
-    //             <p>Roof: {listing.building.construction.roofCover}</p>
-    //             <p>Wall: {listing.building.construction.wallType}</p>
-    //             <p>Floor: {listing.building.interior.floors}</p>
-    //             <br/>
-    //             <h3>Primary owner information:</h3>
-    //             <p>Name: {listing.assessment.owner.owner1.lastName}, {listing.assessment.owner.owner1.firstNameAndMi}</p>
-    //             <p>Type: {listing.assessment.owner.type}</p>
-    //             <br/>
-    //             <h3>Mortgage information:</h3>
-    //             <p>Mortgage company: {listing.assessment.mortgage.title.companyName}</p>
-    //             <p>Mortgage amount: ${listing.assessment.mortgage.FirstConcurrent.amount}</p>
-    //             <p>Mortgage type: {listing.assessment.mortgage.FirstConcurrent.loanTypeCode}, {listing.assessment.mortgage.FirstConcurrent.interestRateType}</p>
-    //             <p>Mortgage start date: {listing.assessment.mortgage.FirstConcurrent.date}</p>
-    //             <br/>
-    //             <h2>Tax information</h2>
-    //             <p>Annual tax: ${listing.assessment.tax.taxAmt}</p>
-    //             <br/>
-    //             <h3>Most recent sale information</h3>
-    //             <p>Recorded date: {listing.sale.amount.saleRecDate}</p>
-    //             <p>Sales price: ${listing.sale.amount.saleAmt}</p>
-    //             <p>Price per sq ft: ${listing.sale.calculation.pricePerSizeUnit}</p>
-    //             <p>Seller: {listing.sale.sellerName}</p>
-    //         </div>
-    //     )
-    // } else {
-    //     return (
-    //         <p>The listing data is loading...</p>
-    //     )
-    // }
 
     if (listing.identifier) {
         function displayBool(attr) {
@@ -186,9 +99,9 @@ export default function DetailsPage(props) {
         } else if (loginStatus && localStorage.userCategory === "seller" || !loginStatus) {
             offersAndShowingRequests =
             <div className="flex justify-center items-center border-2 my-5 bg-yellow-400">
-                <img src="/src/assets/attention.png" className="max-h-[30px] max-w-[30px]"/>
+                <img src={attention} className="max-h-[30px] max-w-[30px]"/>
                 <h1 className="my-3 text-center text-slate-800 mx-2">Please log in as a buyer or the seller of this listing to see information on offers and showing requests for this property.</h1>
-                <img src="/src/assets/attention.png" className="max-h-[30px] max-w-[30px]"/>
+                <img src={attention} className="max-h-[30px] max-w-[30px]"/>
             </div>
         } 
 
