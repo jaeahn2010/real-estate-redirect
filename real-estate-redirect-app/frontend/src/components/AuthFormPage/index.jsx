@@ -150,5 +150,5 @@ export default function AuthFormPage({ setLoginStatus }) {
                 </form>
             </div>
         </div>
-    );
+    )
 }

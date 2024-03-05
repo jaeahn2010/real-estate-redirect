@@ -3,42 +3,7 @@ import Card from '../Card'
 
 export default function Gallery({ listings, getFilteredData, refreshListings, updateDetails, loginStatus }) {
     const [endDisplayIndex, setEndDisplayIndex] = useState(5)
-
-    // don't user until api problem solved
-    // function getNextPage() {
-    //     if (!zipCode) {
-    //         refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&page=${listings.length / 20 + 1}&pageSize=20`)
-    //     } else {
-    //         let zipCodeParam = `postalcode=${zipCode}`
-    //         refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?${zipCodeParam}&page=${listings.length / 20 + 1}&pageSize=20`)
-    //     }
-    //     setCurrentPage(currentPage + 1)
-    // }
-
-    // function getNextPage() {
-    //     if (!zipCode) {
-    //         refreshQueue(listings.slice(currentPage * 5, (currentPage + 1) * 5))
-    //     } else {
-    //         const filtered = listings.filter(listing => listing.location.zip == zipCode)
-    //         refreshQueue(filtered.slice(currentPage * 5, (currentPage + 1) * 5))
-    //     }
-    //     setCurrentPage(currentPage + 1)
-    // }
-    
-    // function getPrevPage() {
-    //     setCurrentPage(currentPage - 1)
-    // }
-
     let galleryContent = <p>None found</p>
-
-    // don't use until api problem resolved
-    // if (listings.length > 0) {
-    //     const startIndex = (currentPage - 1) * 20;
-    //     const endIndex = startIndex + 20
-    //     galleryContent = listings
-    //         .slice(startIndex, endIndex)
-    //         .map(listing => <Card key={listing.identifier.attomId} listing={listing} updateDetails={updateDetails}/>)
-    // }
 
     if (listings.length > 0) {
         galleryContent = listings
@@ -47,7 +12,6 @@ export default function Gallery({ listings, getFilteredData, refreshListings, up
                 key={listing._id}
                 listing={listing}
                 getFilteredData={getFilteredData}
-                refreshListings={refreshListings}
                 updateDetails={updateDetails}
                 loginStatus={loginStatus}
             />)

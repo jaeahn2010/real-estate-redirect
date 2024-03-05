@@ -8,13 +8,6 @@ export default function HomePage({ listings, setListings, getFilteredData, updat
         zipCodeOptions.push(<option key={zip} value={zip}>{zip}</option>)
     }
     const [zipCode, setZipCode] = useState(0)
-    
-    // don't use until api problem resolved
-    // function handleSubmit(event) {
-    //     event.preventDefault()
-    //     setListings([])
-    //     refreshQueue(`https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address?postalcode=${zipCode}&page=1&pageSize=20`)
-    // }
 
     function handleSubmit(evt) {
         evt.preventDefault()

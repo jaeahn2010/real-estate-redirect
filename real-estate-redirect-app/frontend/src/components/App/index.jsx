@@ -17,38 +17,6 @@ export default function App() {
   const [loginStatus, setLoginStatus] = useState(false)
   const navigate = useNavigate()
 
-  // don't use until api problem resolved
-  // async function getData(url) {
-  //   const res = await fetch(url, {
-  //     mode: 'cors',
-  //     headers: {
-  //       'apikey': '8eaefa810fce7a9efaed84eb8b9559c9',
-  //       'Accept': 'applicaton/json'
-  //     }
-  //   })
-  //   const { property } = await res.json()
-  //   setListings(listings => listings.concat(property))
-  //   console.log("current list: ", listings)
-  // }
-
-  // useEffect(() => {
-  //   getData("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?latitude=36.188110&longitude=-115.176468&radius=20&pageSize=20")
-  // }, [])
-
-  //for when seed data was in front end
-  // async function getData(filteredData) {
-  //   setListings(listings => listings.concat(filteredData))
-  // }
-  // useEffect(() => {
-  //   getData(seedData)
-  // }, [])
-
-  // async function getData(url) {
-  //   const res = await fetch(url)
-  //   const data = await res.json()
-  //   setListings(listings => listings.concat(data))
-  // }
-
   async function getData(category, filter) {
     const data = await getListings()
     let filteredData = []

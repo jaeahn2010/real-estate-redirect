@@ -4,7 +4,7 @@ import heartIcon from '../../assets/heart.svg'
 import './styles.css'
 import { updateListing, deleteListing, getUser } from "../../../utils/backend"
 
-export default function Card({ listing, getFilteredData, refreshListings, updateDetails, loginStatus }) {
+export default function Card({ listing, getFilteredData, updateDetails, loginStatus }) {
     const [homeownerToken, setHomeownerToken] = useState('')
     const [showEditForm, setShowEditForm] = useState(false)
     const [editFormData, setEditFormData] = useState({
@@ -90,13 +90,13 @@ export default function Card({ listing, getFilteredData, refreshListings, update
         event.preventDefault()
         setShowEditForm(false)
         updateListing(editFormData, listing._id)
-            .then(() => refreshListings())
+            .then(() => getFilteredData("none", "none"))
     }
 
     function handleDelete() {
         if (confirm("Are you sure you would like to delete this listing?")) {
             deleteListing(listing._id)
-                .then(() => refreshListings())
+                .then(() => getFilteredData("none", "none"))
         }
     }
 
@@ -127,7 +127,7 @@ export default function Card({ listing, getFilteredData, refreshListings, update
             onSubmit={handleSubmit}
             className="bg-stone-400 rounded-lg p-10 my-4 border-gray-700 border-2 w-[100%]">
             <table className="w-[90%]">
-                <tbody clasName="w-[90%]">
+                <tbody className="w-[90%]">
                     <tr className="border-solid border-white border-2 pr-20">
                         <td><label htmlFor="apn">Parcel number: </label></td>
                         <td><input
