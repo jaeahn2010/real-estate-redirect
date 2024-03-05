@@ -28,6 +28,9 @@ app.use(cors())
 // body parser - used for POST/PUT/PATCH routes:
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+// use the React build folder for static files
+app.use(express.static(path.join(path.dirname(__dirname), 'frontend', 'dist')))
+
 
 /* mount routes
 ---------------------------------------------------------- */
@@ -70,6 +73,11 @@ app.use('/api/listings', listingsCtrl)
             })            
     });
 // }
+
+// Any other route not matching the routes above gets routed by React
+app.get('*', (req, res) => {
+    res.sendFile(path.join(path.dirname(__dirname), 'frontend', 'dist', 'index.html'));
+});
 
 /* listen to port
 ---------------------------------------------------------- */
