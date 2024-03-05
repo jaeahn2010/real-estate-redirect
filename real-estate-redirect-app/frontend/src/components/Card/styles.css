@@ -1,0 +1,19 @@
+.card-overlay {
+    display: none !important;
+    opacity: 0;
+    height: 30%;
+}
+
+figure:hover .card-overlay{
+    background-color: rgb(52, 52, 52);
+    display: flex !important;
+}
+
+#heart-icon {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    from {transform: scale(1)}
+    to {transform: scale(1.1)}
+}
