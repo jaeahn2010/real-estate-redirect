@@ -1,8 +1,8 @@
-label {
+.seller-profile-form label {
     margin: 5px 0 0 10px;
 }
 
-input {
+.seller-profile-form input {
     margin: 10px 0;
 }
 
@@ -10,4 +10,5 @@ input {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     margin: 20px 0 5px 0;
+    color: black !important;
 }

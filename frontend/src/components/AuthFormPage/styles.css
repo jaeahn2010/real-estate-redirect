@@ -1,0 +1,18 @@
+.auth-div {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.auth-p {
+    padding: 25px 0;
+}
+
+.auth-table {
+    table-layout: fixed;
+    margin: 10px auto;
+    width: 60px;
+}

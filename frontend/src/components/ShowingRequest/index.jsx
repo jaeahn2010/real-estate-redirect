@@ -112,7 +112,7 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
         showingRequestForm = 
         <form
             onSubmit={handleSubmit}
-            className="seller-request-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
+            className="text-black seller-request-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
             <input
                 name="status"
                 id="approve"
@@ -120,7 +120,7 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
                 defaultValue="approved"
                 onChange={handleInputChange}
             />
-            <label htmlFor="approve">Approve</label>
+            <label htmlFor="approve">Approve</label><br/>
             <input
                 name="status"
                 id="deny"
@@ -132,12 +132,12 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
             <div className="text-center my-3">
                 <button
                     onClick={() => { setShowEditForm(false) }}
-                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    className="my-3 text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
                     Close
                 </button>
                 <button
                     type="submit"
-                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    className="my-3 text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
                     Submit Response
                 </button>
             </div>
@@ -179,10 +179,10 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
         return (
             <div
                 className="bg-stone-400 rounded-lg p-4 my-4 border-stone-700 border-2">
-                <p className="font-bold">Showing Request from {buyerIdDisplay}</p>
+                <p className="!text-black font-bold">Showing Request from {buyerIdDisplay}</p>
                 <br/>
-                <p>Status: {data.status}</p>
-                <p>Requested date & time: {dateDisplay(data.requestedDateTime)}</p>
+                <p className="!text-black">Status: {data.status}</p><br/>
+                <p className="!text-black">Requested date & time: {dateDisplay(data.requestedDateTime)}</p>
                 {btns}
             </div>
         )

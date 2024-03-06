@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { postShowingRequest, getShowingRequests } from "../../../utils/backend"
 import ShowingRequest from "../ShowingRequest"
-import './styles.css'
 
 export default function ShowingRequestSection({ listingId, loginStatus }) {
     const [showingRequests, setShowingRequests] = useState([])
@@ -86,19 +85,19 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
                     onSubmit={handleSubmit}
                     className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 text-center">
                     <br />
-                    <label htmlFor="requestedDateTime">Requested date:</label>
+                    <label htmlFor="requestedDateTime" className="text-black">Requested date:</label><br/>
                     <input
                         name="requestedDate"
                         type="date"
-                        className="mx-2 bg-gray-100 my-5"
+                        className="mx-2 bg-gray-700 my-5"
                         onChange={handleInputChange}
                     />
                     <br/>
-                    <label htmlFor="requestedDateTime">Requested time:</label>
+                    <label htmlFor="requestedDateTime" className="text-black">Requested time:</label><br/>
                     <input
                         name="requestedTime"
                         type="time"
-                        className="mx-2 bg-gray-100"
+                        className="mx-2 bg-gray-700"
                         onChange={handleInputChange}
                     />
                     <br />

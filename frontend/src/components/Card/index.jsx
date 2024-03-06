@@ -126,32 +126,32 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
         editForm =
         <form
             onSubmit={handleSubmit}
-            className="bg-stone-400 rounded-lg p-10 my-4 border-gray-700 border-2 w-[100%]">
-            <label htmlFor="apn">Parcel number: </label>
+            className="bg-stone-400 rounded-lg p-5 my-4 border-gray-700 border-2 w-[100%]">
+            <label htmlFor="apn">Parcel number: </label><br/>
             <input
                 name="apn"
                 id="apn"
                 type="text"
                 defaultValue={listing.identifier.apn}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="address">Street address: </label>
+            /><br/>
+            <label htmlFor="address">Street address: </label><br/>
             <input
                 name="address"
                 id="address"
                 type="text"
                 defaultValue={listing.location.address}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="city">City: </label>
+            /><br/>
+            <label htmlFor="city">City: </label><br/>
             <input
                 name="city"
                 id="city"
                 type="text"
                 defaultValue={listing.location.city}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="state">State: </label>
+            /><br/>
+            <label htmlFor="state">State: </label><br/>
             <input
                 name="state"
                 id="state"
@@ -159,53 +159,53 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 disabled={true}
                 defaultValue={listing.location.state}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="zip">Zip code: </label>
+            /><br/>
+            <label htmlFor="zip">Zip code: </label><br/>
             <input
                 name="zip"
                 id="zip"
                 type="number"
                 defaultValue={listing.location.zip}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="subdivision">Subdivision: </label>
+            /><br/>
+            <label htmlFor="subdivision">Subdivision: </label><br/>
             <input
                 name="subdivision"
                 id="subdivision"
                 type="text"
                 defaultValue={listing.location.subdivision}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="price">List price: $</label>
+            /><br/>
+            <label htmlFor="price">List price: $</label><br/>
             <input
                 name="price"
                 id="price"
                 type="number"
                 defaultValue={listing.currentActivity.price}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="pricePerSF">Price per square foot: </label>
+            /><br/>
+            <label htmlFor="pricePerSF">Price per square foot: </label><br/>
             <input
                 name="pricePerSF"
                 type="number"
                 defaultValue={listing.currentActivity.pricePerSF}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="listDate">List Date: </label>
+            /><br/>
+            <label htmlFor="listDate">List Date: </label><br/>
             <input
                 name="listDate"
                 id="listDate"
                 type="date"
                 defaultValue={listing.currentActivity.listDate}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="status">Status: </label>
+            /><br/>
+            <label htmlFor="status">Status: </label><br/>
             <input
                 name="status"
                 type="text"
                 defaultValue={listing.currentActivity.status}
                 onChange={handleInputChange}
-            />
+            /><br/>
             <input
                 name="homeowner"
                 id="homeowner"
@@ -213,95 +213,95 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 hidden={true}
                 type="text"
                 defaultValue={listing.homeowner[0]}
-            />
-            <label htmlFor="propertyType">Property Type: </label>
+            /><br/>
+            <label htmlFor="propertyType">Property Type: </label><br/>
             <input
                 name="propertyType"
                 id="propertyType"
                 type="text"
                 defaultValue={listing.generalInfo.propertyType}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="zoning">Zoning: </label>
+            /><br/>
+            <label htmlFor="zoning">Zoning: </label><br/>
             <input
                 name="zoning"
                 type="text"
                 defaultValue={listing.generalInfo.zoning}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="stories">Stories: </label>
+            /><br/>
+            <label htmlFor="stories">Stories: </label><br/>
             <input
                 name="stories"
                 id="stories"
                 type="number"
                 defaultValue={listing.generalInfo.stories}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="level">This property is located on level: </label>
+            /><br/>
+            <label htmlFor="level">This property is located on level: </label><br/>
             <input
                 name="level"
                 id="level"
                 type="number"
                 defaultValue={listing.generalInfo.level}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="yearBuilt">Year Built: </label>
+            /><br/>
+            <label htmlFor="yearBuilt">Year Built: </label><br/>
             <input
                 name="yearBuilt"
                 id="yearBuilt"
                 type="number"
                 defaultValue={listing.generalInfo.yearBuilt}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="isDetached">Is this property detached? </label>
+            /><br/>
+            <label htmlFor="isDetached">Is this property detached? </label><br/>
             <input
                 name="isDetached"
                 id="isDetached"
                 type="text"
                 defaultValue={listing.generalInfo.isDetached}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="houseFaces">Which direction does the house face? </label>
+            /><br/>
+            <label htmlFor="houseFaces">Which direction does the house face? </label><br/>
             <input
                 name="houseFaces"
                 id="houseFaces"
                 type="text"
                 defaultValue={listing.generalInfo.houseFaces}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="roof">Roof materials: </label>
+            /><br/>
+            <label htmlFor="roof">Roof materials: </label><br/>
             <input
                 name="roof"
                 id="roof"
                 type="text"
                 defaultValue={listing.exterior.construction.roof}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="walls">Wall materials: </label>
+            /><br/>
+            <label htmlFor="walls">Wall materials: </label><br/>
             <input
                 name="walls"
                 id="walls"
                 type="text"
                 defaultValue={listing.exterior.construction.walls}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="fencing">Fencing materials: </label>
+            /><br/>
+            <label htmlFor="fencing">Fencing materials: </label><br/>
             <input
                 name="fencing"
                 id="fencing"
                 type="text"
                 defaultValue={listing.exterior.construction.fencing}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="lotSize">Lot size (sq ft): </label>
+            /><br/>
+            <label htmlFor="lotSize">Lot size (sq ft): </label><br/>
             <input
                 name="lotSize"
                 id="lotSize"
                 type="number"
                 defaultValue={listing.exterior.lot.size}
                 onChange={handleInputChange}
-            />
-            <p className="!text-black">Lot features:</p>
+            /><br/>
+            <p className="!text-black py-3 text-center">Lot features:</p>
             <input
                 name="lotFeatures"
                 id="desertLandscaping"
@@ -309,7 +309,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="desertLandscaping"
                 onChange={handleInputChange}
                 />
-            <label htmlFor="desertLandscaping">Desert Landscaping</label>
+            <label htmlFor="desertLandscaping">Desert Landscaping</label><br/>
             <input
                 name="lotFeatures"
                 id="rockGravelLandscaping"
@@ -317,7 +317,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="rockGravelLandscaping"
                 onChange={handleInputChange}
             />
-            <label htmlFor="rockGravelLandscaping">Rock/Gravel Landscaping</label>
+            <label htmlFor="rockGravelLandscaping">Rock/Gravel Landscaping</label><br/>
             <input
                 name="lotFeatures"
                 id="rearLawn"
@@ -325,7 +325,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="rearLawn"
                 onChange={handleInputChange}
             />
-            <label htmlFor="rearLawn">Rear Lawn</label>
+            <label htmlFor="rearLawn">Rear Lawn</label><br/>
             <input
                 name="lotFeatures"
                 id="shed"
@@ -333,7 +333,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="shed"
                 onChange={handleInputChange}
             />
-            <label htmlFor="shed">Shed</label>
+            <label htmlFor="shed">Shed</label><br/>
             <input
                 name="lotFeatures"
                 id="rvHookup"
@@ -341,7 +341,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="rvHookup"
                 onChange={handleInputChange}
             />
-            <label htmlFor="rvHookup">RV Hookup</label>
+            <label htmlFor="rvHookup">RV Hookup</label><br/>
             <input
                 name="lotFeatures"
                 id="patio"
@@ -349,7 +349,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="patio"
                 onChange={handleInputChange}
             />
-            <label htmlFor="patio">Patio</label>
+            <label htmlFor="patio">Patio</label><br/>
             <input
                 name="lotFeatures"
                 id="syntheticGrass"
@@ -357,7 +357,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="syntheticGrass"
                 onChange={handleInputChange}
             />
-            <label htmlFor="syntheticGrass">Synthetic Grass</label>
+            <label htmlFor="syntheticGrass">Synthetic Grass</label><br/>
             <input
                 name="lotFeatures"
                 id="matureLandscaping"
@@ -365,7 +365,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="matureLandscaping"
                 onChange={handleInputChange}
             />
-            <label htmlFor="matureLandscaping">Mature Landscaping</label>
+            <label htmlFor="matureLandscaping">Mature Landscaping</label><br/>
             <input
                 name="lotFeatures"
                 id="grass"
@@ -373,7 +373,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="grass"
                 onChange={handleInputChange}
             />
-            <label htmlFor="grass">Grass</label>
+            <label htmlFor="grass">Grass</label><br/>
             <input
                 name="lotFeatures"
                 id="coveredPatio"
@@ -381,7 +381,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="coveredPatio"
                 onChange={handleInputChange}
             />
-            <label htmlFor="desertLandscaping">Covered Patio</label>
+            <label htmlFor="desertLandscaping">Covered Patio</label><br/>
             <input
                 name="lotFeatures"
                 id="paved"
@@ -389,8 +389,8 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="paved"
                 onChange={handleInputChange}
             />
-            <label htmlFor="paved">Paved</label>
-            <p className="!text-black">Vegetation:</p>
+            <label htmlFor="paved">Paved</label><br/>
+            <p className="!text-black py-3 text-center">Vegetation:</p>
             <input
                 name="vegetation"
                 id="shrubs"
@@ -398,7 +398,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="shrubs"
                 onChange={handleInputChange}
             />
-            <label htmlFor="shrubs">Shrubs</label>
+            <label htmlFor="shrubs">Shrubs</label><br/>
             <input
                 name="vegetation"
                 id="fountain"
@@ -406,7 +406,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="fountain"
                 onChange={handleInputChange}
             />
-            <label htmlFor="fountain">Fountain</label>
+            <label htmlFor="fountain">Fountain</label><br/>
             <input
                 name="vegetation"
                 id="trees"
@@ -414,7 +414,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="trees"
                 onChange={handleInputChange}
             />
-            <label htmlFor="trees">Trees</label>
+            <label htmlFor="trees">Trees</label><br/>
             <input
                 name="vegetation"
                 id="grass"
@@ -422,7 +422,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="grass"
                 onChange={handleInputChange}
             />
-            <label htmlFor="grass">Grass</label>
+            <label htmlFor="grass">Grass</label><br/>
             <input
                 name="vegetation"
                 id="brush"
@@ -430,7 +430,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="brush"
                 onChange={handleInputChange}
             />
-            <label htmlFor="brush">Brush</label>
+            <label htmlFor="brush">Brush</label><br/>
             <input
                 name="vegetation"
                 id="bushes"
@@ -438,40 +438,40 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="bushes"
                 onChange={handleInputChange}
             />
-            <label htmlFor="bushes">Bushes</label>
-            <label htmlFor="hasSolar">Does this property have solar panels? </label>
+            <label htmlFor="bushes">Bushes</label><br/>
+            <label htmlFor="hasSolar">Does this property have solar panels? </label><br/>
             <input
                 name="hasSolar"
                 id="hasSolar"
                 type="text"
                 defaultValue={listing.exterior.hasSolar}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="hasBalcony">Does this property have a balcony? </label>
+            /><br/>
+            <label htmlFor="hasBalcony">Does this property have a balcony? </label><br/>
             <input
                 name="hasBalcony"
                 id="hasBalcony"
                 type="text"
                 defaultValue={listing.exterior.hasBalcony}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="hasPool">Does this property have a pool? </label>
+            /><br/>
+            <label htmlFor="hasPool">Does this property have a pool? </label><br/>
             <input
                 name="hasPool"
                 id="hasPool"
                 type="text"
                 defaultValue={listing.exterior.hasPool}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="isDetached">Does this property have a spa? </label>
+            /><br/>
+            <label htmlFor="isDetached">Does this property have a spa? </label><br/>
             <input
                 name="hasSpa"
                 id="hasSpa"
                 type="text"
                 defaultValue={listing.exterior.hasSpa}
                 onChange={handleInputChange}
-            />
-            <p className="!text-black">Flooring:</p>
+            /><br/>
+            <p className="!text-black py-3 text-center">Flooring:</p>
             <input
                 name="flooring"
                 id="tile"
@@ -479,7 +479,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="tile"
                 onChange={handleInputChange}
             />
-            <label htmlFor="tile">Tile</label>
+            <label htmlFor="tile">Tile</label><br/>
             <input
                 name="flooring"
                 id="vinyl"
@@ -487,7 +487,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="vinyl"
                 onChange={handleInputChange}
             />
-            <label htmlFor="vinyl">Vinyl</label>
+            <label htmlFor="vinyl">Vinyl</label><br/>
             <input
                 name="flooring"
                 id="hardwood"
@@ -495,7 +495,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="hardwood"
                 onChange={handleInputChange}
             />
-            <label htmlFor="hardwood">Hardwood</label>
+            <label htmlFor="hardwood">Hardwood</label><br/>
             <input
                 name="flooring"
                 id="laminate"
@@ -503,7 +503,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="laminate"
                 onChange={handleInputChange}
             />
-            <label htmlFor="laminate">Laminate</label>
+            <label htmlFor="laminate">Laminate</label><br/>
             <input
                 name="flooring"
                 id="marble"
@@ -511,7 +511,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="marble"
                 onChange={handleInputChange}
             />
-            <label htmlFor="marble">Marble</label>
+            <label htmlFor="marble">Marble</label><br/>
             <input
                 name="flooring"
                 id="concrete"
@@ -519,7 +519,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="concrete"
                 onChange={handleInputChange}
             />
-            <label htmlFor="concrete">Concrete</label>
+            <label htmlFor="concrete">Concrete</label><br/>
             <input
                 name="flooring"
                 id="stone"
@@ -527,7 +527,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="stone"
                 onChange={handleInputChange}
             />
-            <label htmlFor="stone">Stone</label>
+            <label htmlFor="stone">Stone</label><br/>
             <input
                 name="flooring"
                 id="linoleum"
@@ -535,7 +535,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="linoleum"
                 onChange={handleInputChange}
             />
-            <label htmlFor="linoleum">Linoleum</label>
+            <label htmlFor="linoleum">Linoleum</label><br/>
             <input
                 name="flooring"
                 id="carpet"
@@ -543,64 +543,64 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="carpet"
                 onChange={handleInputChange}
             />
-            <label htmlFor="carpet">Carpet</label>
-            <label htmlFor="bedrooms">Bedrooms: </label>
+            <label htmlFor="carpet">Carpet</label><br/>
+            <label htmlFor="bedrooms">Bedrooms: </label><br/>
             <input
                 name="bedrooms"
                 id="bedrooms"
                 type="number"
                 defaultValue={listing.interior.rooms.bedrooms}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="bathrooms">Bathrooms: </label>
+            /><br/>
+            <label htmlFor="bathrooms">Bathrooms: </label><br/>
             <input
                 name="bathrooms"
                 id="bathrooms"
                 type="number"
                 defaultValue={listing.interior.rooms.bathrooms}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="bathsFull">Full baths: </label>
+            /><br/>
+            <label htmlFor="bathsFull">Full baths: </label><br/>
             <input
                 name="bathsFull"
                 id="bathsFull"
                 type="number"
                 defaultValue={listing.interior.rooms.bathsFull}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="roomsTotal">Total rooms: </label>
+            /><br/>
+            <label htmlFor="roomsTotal">Total rooms: </label><br/>
             <input
                 name="roomsTotal"
                 id="roomsTotal"
                 type="number"
                 defaultValue={listing.interior.rooms.roomsTotal}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="livingArea">Living area (sq ft): </label>
+            /><br/>
+            <label htmlFor="livingArea">Living area (sq ft): </label><br/>
             <input
                 name="livingArea"
                 id="livingArea"
                 type="number"
                 defaultValue={listing.interior.livingArea}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="cooling">Cooling: </label>
+            /><br/>
+            <label htmlFor="cooling">Cooling: </label><br/>
             <input
                 name="cooling"
                 id="cooling"
                 type="text"
                 defaultValue={listing.interior.cooling}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="heating">Heating: </label>
+            /><br/>
+            <label htmlFor="heating">Heating: </label><br/>
             <input
                 name="heating"
                 id="heating"
                 type="text"
                 defaultValue={listing.interior.heating}
                 onChange={handleInputChange}
-            />
-            <p className="!text-black">Appliances to be included in sale:</p>
+            /><br/>
+            <p className="!text-black py-3 text-center">Appliances to be included in sale:</p>
             <input
                 name="appliancesIncluded"
                 id="washer"
@@ -608,7 +608,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="washer"
                 onChange={handleInputChange}
             />
-            <label htmlFor="washer">Washer</label>
+            <label htmlFor="washer">Washer</label><br/>
             <input
                 name="appliancesIncluded"
                 id="dryer"
@@ -616,7 +616,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="dryer"
                 onChange={handleInputChange}
             />
-            <label htmlFor="dryer">Dryer</label>
+            <label htmlFor="dryer">Dryer</label><br/>
             <input
                 name="appliancesIncluded"
                 id="refrigerator"
@@ -624,7 +624,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="refrigerator"
                 onChange={handleInputChange}
             />
-            <label htmlFor="refrigerator">Refrigerator</label>
+            <label htmlFor="refrigerator">Refrigerator</label><br/>
             <input
                 name="appliancesIncluded"
                 id="dishwasher"
@@ -632,7 +632,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="dishwasher"
                 onChange={handleInputChange}
             />
-            <label htmlFor="dishwasher">Dishwasher</label>
+            <label htmlFor="dishwasher">Dishwasher</label><br/>
             <input
                 name="appliancesIncluded"
                 id="stove"
@@ -640,7 +640,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="stove"
                 onChange={handleInputChange}
             />
-            <label htmlFor="stove">Stove/Oven</label>
+            <label htmlFor="stove">Stove/Oven</label><br/>
             <input
                 name="appliancesIncluded"
                 id="microwave"
@@ -648,7 +648,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="microwave"
                 onChange={handleInputChange}
             />
-            <label htmlFor="microwave">Microwave</label>
+            <label htmlFor="microwave">Microwave</label><br/>
             <input
                 name="appliancesIncluded"
                 id="garbageDisposal"
@@ -656,8 +656,8 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="garbageDisposal"
                 onChange={handleInputChange}
             />
-            <label htmlFor="garbageDisposal">Garbage Disposal</label>
-            <p className="!text-black">Fixtures:</p>
+            <label htmlFor="garbageDisposal">Garbage Disposal</label><br/>
+            <p className="!text-black text-center py-3">Fixtures:</p>
             <input
                 name="fixtures"
                 id="ceilingFans"
@@ -665,7 +665,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="ceilingFans"
                 onChange={handleInputChange}
             />
-            <label htmlFor="ceilingFans">Ceiling Fans</label>
+            <label htmlFor="ceilingFans">Ceiling Fans</label><br/>
             <input
                 name="fixtures"
                 id="potShelves"
@@ -673,7 +673,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="potShelves"
                 onChange={handleInputChange}
             />
-            <label htmlFor="potShelves">Pot Shelves</label>
+            <label htmlFor="potShelves">Pot Shelves</label><br/>
             <input
                 name="fixtures"
                 id="chandeliers"
@@ -681,8 +681,8 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="chandeliers"
                 onChange={handleInputChange}
             />
-            <label htmlFor="chandeliers">Chandeliers</label>
-            <p className="!text-black">Window features:</p>
+            <label htmlFor="chandeliers">Chandeliers</label><br/>
+            <p className="!text-black text-center py-3">Window features:</p>
             <input
                 name="window"
                 id="curtains"
@@ -690,7 +690,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="curtains"
                 onChange={handleInputChange}
             />
-            <label htmlFor="curtains">Curtains</label>
+            <label htmlFor="curtains">Curtains</label><br/>
             <input
                 name="window"
                 id="blinds"
@@ -698,7 +698,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="blinds"
                 onChange={handleInputChange}
             />
-            <label htmlFor="blinds">Blinds</label>
+            <label htmlFor="blinds">Blinds</label><br/>
             <input
                 name="window"
                 id="drapes"
@@ -706,7 +706,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="drapes"
                 onChange={handleInputChange}
             />
-            <label htmlFor="drapes">Drapes</label>
+            <label htmlFor="drapes">Drapes</label><br/>
             <input
                 name="window"
                 id="plantationShutters"
@@ -714,16 +714,16 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="plantationShutters"
                 onChange={handleInputChange}
             />
-            <label htmlFor="plantationShutters">Plantation Shutters</label>
-            <label htmlFor="fireplace">Fireplace: </label>
+            <label htmlFor="plantationShutters">Plantation Shutters</label><br/>
+            <label htmlFor="fireplace">Fireplace: </label><br/>
             <input
                 name="fireplace"
                 id="fireplace"
                 type="text"
                 defaultValue={listing.interior.features.fireplace}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="other">Other interior features: </label>
+            /><br/>
+            <label htmlFor="other">Other interior features: </label><br/>
             <input
                 name="other"
                 id="other"
@@ -731,80 +731,80 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 placeholder="Other features"
                 defaultValue={listing.interior.features.other}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="parkingType">Parking type: </label>
+            /><br/>
+            <label htmlFor="parkingType">Parking type: </label><br/>
             <input
                 name="parkingType"
                 id="parkingType"
                 type="text"
                 defaultValue={listing.parking.type}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="parkingSize">Parking size: </label>
+            /><br/>
+            <label htmlFor="parkingSize">Parking size: </label><br/>
             <input
                 name="parkingSize"
                 id="parkingSize"
                 type="number"
                 defaultValue={listing.parking.size}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="sewer">Sewer: </label>
+            /><br/>
+            <label htmlFor="sewer">Sewer: </label><br/>
             <input
                 name="sewer"
                 id="sewer"
                 type="text"
                 defaultValue={listing.utilities.sewer}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="water">Water: </label>
+            /><br/>
+            <label htmlFor="water">Water: </label><br/>
             <input
                 name="water"
                 id="water"
                 type="text"
                 defaultValue={listing.utilities.water}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="otherUtilities">Other Utilities: </label>
+            /><br/>
+            <label htmlFor="otherUtilities">Other Utilities: </label><br/>
             <input
                 name="otherUtilities"
                 id="otherUtilities"
                 type="text"
                 defaultValue={listing.utilities.otherUtilities}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="HOACount">How many HOAs? </label>
+            /><br/>
+            <label htmlFor="HOACount">How many HOAs? </label><br/>
             <input
                 name="HOACount"
                 id="HOACount"
                 type="number"
                 defaultValue={listing.HOA.length}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="HOAName">HOA name: </label>
+            /><br/>
+            <label htmlFor="HOAName">HOA name: </label><br/>
             <input
                 name="HOAName"
                 id="HOAName"
                 type="text"                            
                 defaultValue={listing.HOA[0].name}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="HOAMonthlyFee">HOA monthly fee: </label>
+            /><br/>
+            <label htmlFor="HOAMonthlyFee">HOA monthly fee: </label><br/>
             <input
                 name="HOAMonthlyFee"
                 id="HOAMonthlyFee"
                 type="number"
                 defaultValue={listing.HOA[0].monthlyFee}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="HOAPhone">HOA Phone Number: </label>
+            /><br/>
+            <label htmlFor="HOAPhone">HOA Phone Number: </label><br/>
             <input
                 name="HOAPhone"
                 id="HOAPhone"
                 type="text"
                 defaultValue={listing.HOA[0].phone}
                 onChange={handleInputChange}
-            />
-            <p className="!text-black">What does the HOA fee cover?</p>
+            /><br/>
+            <p className="!text-black text-center py-3">What does the HOA fee cover?</p>
             <input
                 name="HOAFeeIncludes"
                 id="management"
@@ -812,7 +812,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="management"
                 onChange={handleInputChange}
             />
-            <label htmlFor="management">Management</label>
+            <label htmlFor="management">Management</label><br/>
             <input
                 name="HOAFeeIncludes"
                 id="landscapeMaintenance"
@@ -820,7 +820,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="landscapeMaintenance"
                 onChange={handleInputChange}
             />
-            <label htmlFor="landscapeMaintenance">Landscape Maintenance</label>
+            <label htmlFor="landscapeMaintenance">Landscape Maintenance</label><br/>
             <input
                 name="HOAFeeIncludes"
                 id="recreationalFacilities"
@@ -828,7 +828,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="recreationalFacilities"
                 onChange={handleInputChange}
             />
-            <label htmlFor="recreationalFacilities">Reacreational Facilities</label>
+            <label htmlFor="recreationalFacilities">Reacreational Facilities</label><br/>
             <input
                 name="HOAFeeIncludes"
                 id="gated"
@@ -836,7 +836,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="gated"
                 onChange={handleInputChange}
             />
-            <label htmlFor="gated">Gated</label>
+            <label htmlFor="gated">Gated</label><br/>
             <input
                 name="HOAFeeIncludes"
                 id="HOAWater"
@@ -844,7 +844,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="HOAWater"
                 onChange={handleInputChange}
             />
-            <label htmlFor="HOAWater">Water</label>
+            <label htmlFor="HOAWater">Water</label><br/>
             <input
                 name="HOAFeeIncludes"
                 id="HOASewer"
@@ -852,7 +852,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="HOASewer"
                 onChange={handleInputChange}
             />
-            <label htmlFor="HOASewer">Sewer</label>
+            <label htmlFor="HOASewer">Sewer</label><br/>
             <input
                 name="HOAFeeIncludes"
                 id="HOATrash"
@@ -860,7 +860,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="HOATrash"
                 onChange={handleInputChange}
             />
-            <label htmlFor="HOATrash">Trash</label>
+            <label htmlFor="HOATrash">Trash</label><br/>
             <input
                 name="HOAFeeIncludes"
                 id="guardGated"
@@ -868,8 +868,8 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="guardGated"
                 onChange={handleInputChange}
             />
-            <label htmlFor="guardGated">Guard Gated</label>
-            <p className="!text-black">Community amenities:</p>
+            <label htmlFor="guardGated">Guard Gated</label><br/>
+            <p className="!text-black text-center py-3">Community amenities:</p>
             <input
                 name="communityAmenities"
                 id="communityPool"
@@ -877,7 +877,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="communityPool"
                 onChange={handleInputChange}
             />
-            <label htmlFor="communityPool">Community Pool</label>
+            <label htmlFor="communityPool">Community Pool</label><br/>
             <input
                 name="communityAmenities"
                 id="communitySpa"
@@ -885,7 +885,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="communitySpa"
                 onChange={handleInputChange}
             />
-            <label htmlFor="communitySpa">Community Spa</label>
+            <label htmlFor="communitySpa">Community Spa</label><br/>
             <input
                 name="communityAmenities"
                 id="communityPark"
@@ -893,7 +893,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="communityPark"
                 onChange={handleInputChange}
             />
-            <label htmlFor="communityPark">Community Park</label>
+            <label htmlFor="communityPark">Community Park</label><br/>
             <input
                 name="communityAmenities"
                 id="fitnessCenter"
@@ -901,7 +901,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="fitnessCenter"
                 onChange={handleInputChange}
             />
-            <label htmlFor="fitnessCenter"> Fitness Center</label>
+            <label htmlFor="fitnessCenter"> Fitness Center</label><br/>
             <input
                 name="communityAmenities"
                 id="playgrounds"
@@ -909,7 +909,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="playgrounds"
                 onChange={handleInputChange}
             />
-            <label htmlFor="playgrounds">Playgrounds</label>
+            <label htmlFor="playgrounds">Playgrounds</label><br/>
             <input
                 name="communityAmenities"
                 id="clubhouse"
@@ -917,7 +917,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="clubhouse"
                 onChange={handleInputChange}
             />
-            <label htmlFor="clubhouse">Clubhouse</label>
+            <label htmlFor="clubhouse">Clubhouse</label><br/>
             <input
                 name="communityAmenities"
                 id="golfCourse"
@@ -925,7 +925,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="golfCourse"
                 onChange={handleInputChange}
             />
-            <label htmlFor="golfCourse">Golf Course</label>
+            <label htmlFor="golfCourse">Golf Course</label><br/>
             <input
                 name="communityAmenities"
                 id="basketballCourt"
@@ -933,7 +933,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="basketballCourt"
                 onChange={handleInputChange}
             />
-            <label htmlFor="basketballCourt">Basketball Court</label>
+            <label htmlFor="basketballCourt">Basketball Court</label><br/>
             <input
                 name="communityAmenities"
                 id="tennisCourt"
@@ -941,7 +941,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="tennisCourt"
                 onChange={handleInputChange}
             />
-            <label htmlFor="tennisCourt">Tennis Court</label>
+            <label htmlFor="tennisCourt">Tennis Court</label><br/>
             <input
                 name="communityAmenities"
                 id="joggingPath"
@@ -949,16 +949,16 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue="joggingPath"
                 onChange={handleInputChange}
             />
-            <label htmlFor="joggingPath">Jogging Path</label>
+            <label htmlFor="joggingPath">Jogging Path</label><br/>
             <br/>
-            <label htmlFor="isSeniorCommunity" className="text-black">Is this property in a senior community? </label>
+            <label htmlFor="isSeniorCommunity" className="text-black">Is this property in a senior community? </label><br/>
             <input
                 name="isSeniorCommunity"
                 id="isSeniorCommunity"
                 type="text"
                 defaultValue={listing.community.isSeniorCommunity}
                 onChange={handleInputChange}
-            />
+            /><br/>
             <label htmlFor="lastSoldDate">Last Sold Date: </label>
             <input
                 name="lastSoldDate"
@@ -966,39 +966,40 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 type="date"
                 defaultValue={listing.lastSoldInfo.soldDate}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="lastSoldPrice">Last Sold Price: </label>
+            /><br/>
+            <label htmlFor="lastSoldPrice">Last Sold Price: </label><br/>
             <input
                 name="lastSoldPrice"
                 id="lastSoldPrice"
                 type="number"
                 defaultValue={listing.lastSoldInfo.price}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="lastSoldPricPerSF">Last Sold Price Per SF: </label>
+            /><br/>
+            <label htmlFor="lastSoldPricPerSF">Last Sold Price Per SF: </label><br/>
             <input
                 name="lastSoldPricPerSF"
                 id="lastSoldPricPerSF"
                 type="number"
                 defaultValue={listing.lastSoldInfo.pricePerSF}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="annualTax">Annual Tax: </label>
+            /><br/>
+            <label htmlFor="annualTax">Annual Tax: </label><br/>
             <input
                 name="annualTax"
                 id="annualTax"
                 type="number"
                 defaultValue={listing.tax.annualTax}
                 onChange={handleInputChange}
-            />
-            <label htmlFor="lastTaxYear">Last Tax Year: </label><input
+            /><br/>
+            <label htmlFor="lastTaxYear">Last Tax Year: </label><br/>
+            <input
                 name="lastTaxYear"
                 id="lastTaxYear"
                 type="number"
                 placeholder="Last Tax Year"
                 defaultValue={listing.tax.year}
                 onChange={handleInputChange}
-            />
+            /><br/>
             <div className="flex justify-center mt-5">
                 <button
                     onClick={() => { setShowEditForm(false) }}
@@ -1034,7 +1035,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
     }
 
     return (
-        <figure className="relative mb-4 text-stone-400 break-inside-avoid-column border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+        <figure className=" mb-4 text-stone-400 break-inside-avoid-column border-2 border-stone-400 rounded-xl bg-stone-800 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
             <img src={placeholder} className="card-image rounded-t-xl min-h-[200px] min-w-full object-cover"/> 
                      
             <figcaption className="py-2 px-2">

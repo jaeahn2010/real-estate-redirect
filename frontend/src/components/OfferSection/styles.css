@@ -1,4 +1,4 @@
-input {
+.offer-form input {
     margin-left: 10px !important;
     background-color: rgb(68, 69, 70) !important;
     color: white !important;
@@ -16,7 +16,7 @@ input {
     font-size: 10px;
 }
 
-label {
+.offer-form label {
     color: black;
     font-size: 1rem;
 }
@@ -26,6 +26,6 @@ label {
 }
 
 @media (max-width: 640px) {
-    label, input {font-size: 16px;}
-    input {width: 150px;}
+    .offer-form label, input {font-size: 16px;}
+    .offer-form input {width: 75% !important;}
 }

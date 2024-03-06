@@ -1,16 +1,20 @@
-input {
+.buyer-offer-form input, .seller-offer-form input {
     margin-left: 10px !important;
     background-color: rgb(68, 69, 70) !important;
 }
 
-label {
+.buyer-offer-form label, .seller-offer-form label {
     color: black;
 }
 
-.seller-offer-form{
+.buyer-offer-form, .seller-offer-form {
     text-align: left !important;
 }
 
 .terms {
     text-align: center !important;
+}
+
+.offer-display-div p {
+    color: black !important;
 }

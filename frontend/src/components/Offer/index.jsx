@@ -80,99 +80,105 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         offerForm =
             <form
                 onSubmit={handleSubmit}
-                className="offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
-                <label htmlFor="status">Status:</label>
+                className="buyer-offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                 <input
                     name="status"
                     disabled={true}
+                    hidden={true}
                     defaultValue="pending"
-                />
-                <p>Terms of the counteroffer (if any)</p>
-                <label htmlFor="offerPrice">Your offer price: $</label>
+                /><br/>
+                <p className="!text-black">Terms of the counteroffer (if any)</p>
+                <label htmlFor="offerPrice">Your offer price: $</label><br/>
                 <input
                     name="offerPrice"
                     defaultValue={data.terms.offerPrice}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="expiration">This offer expires on: </label>
+                /><br/>
+                <label htmlFor="expiration">This offer expires on: </label><br/>
                 <input
                     name="expiration"
                     type="date"
                     defaultValue={data.terms.expiration}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="EMD">Earnest money deposit: $</label>
+                /><br/>
+                <label htmlFor="EMD">Earnest money deposit: $</label><br/>
                 <input
                     name="EMD"
                     type="number"
                     defaultValue={data.terms.EMD}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="downPayment">Down payment: $</label>
+                /><br/>
+                <label htmlFor="downPayment">Down payment: $</label><br/>
                 <input
                     name="downPayment"
                     type="number"
                     className="mx-2 bg-gray-100"
                     defaultValue={data.terms.downPayment}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="loanType">Loan type: </label>
+                /><br/>
+                <label htmlFor="loanType">Loan type: </label><br/>
                 <input
                     name="loanType"
                     type="text"
                     defaultValue={data.terms.loanType}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="loanAmount">Loan amount: $</label>
+                /><br/>
+                <label htmlFor="loanAmount">Loan amount: $</label><br/>
                 <input
                     name="loanAmount"
                     type="number"
                     defaultValue={data.terms.loanAmount}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="appraisalContingencyDate">Appraisal Contingency Date: </label>
+                /><br/>
+                <label htmlFor="appraisalContingencyDate">Appraisal Contingency Date: </label><br/>
                 <input
                     name="appraisalContingencyDate"
                     type="date"
                     defaultValue={data.terms.appraisalContingencyDate}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="loanContingencyDate">Loan Contingency Date: </label>
+                /><br/>
+                <label htmlFor="loanContingencyDate">Loan Contingency Date: </label><br/>
                 <input
                     name="loanContingencyDate"
                     type="date"
                     defaultValue={data.terms.loanContingencyDate}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="personalPropertyIncluded">Personal properties to be included in sale: </label>
-                <label htmlFor="escrowCompany">Escrow company: </label>
+                /><br/>
+                <label htmlFor="personalPropertyIncluded">Personal properties to be included in sale: </label><br/>
                 <input
                     name="personalPropertyIncluded"
                     type="text"
                     defaultValue={data.terms.personalPropertyIncluded}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="walkthrough">Walkthrough Date: </label>
+                /><br/>
+                <label htmlFor="escrowCompany">Escrow company: </label><br/>
+                <input
+                    name="escrowCompany"
+                    type="text"
+                    defaultValue={data.terms.escrowCompany}
+                    onChange={handleInputChange}
+                /><br/>
+                <label htmlFor="walkthrough">Walkthrough Date: </label><br/>
                 <input
                     name="walkthrough"
                     type="date"
                     defaultValue={data.terms.walkthrough}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="closeOfEscrow">Closing Date: </label>
+                /><br/>
+                <label htmlFor="closeOfEscrow">Closing Date: </label><br/>
                 <input
                     name="closeOfEscrow"
                     type="date"
                     defaultValue={data.terms.closeOfEscrow}
                     onChange={handleInputChange}
-                />
-                <label htmlFor="additionalTerms">Additional Terms: </label>
+                /><br/>
+                <label htmlFor="additionalTerms">Additional Terms: </label><br/>
                 <input
                     name="additionalTerms"
                     type="text"
                     defaultValue={data.terms.additionalTerms}
                     onChange={handleInputChange}
-                />
+                /><br/>
                 <div className="flex justify-center py-5">
                     <button
                         onClick={() => { setShowEditForm(false) }}
@@ -211,7 +217,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                 defaultValue="accepted"
                 onChange={handleInputChange}
             />
-            <label htmlFor="accept">Accept</label>
+            <label htmlFor="accept">Accept</label><br/>
             <input
                 name="status"
                 id="reject"
@@ -219,7 +225,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                 defaultValue="rejected"
                 onChange={handleInputChange}
             />
-            <label htmlFor="accept">Reject</label>
+            <label htmlFor="accept">Reject</label><br/>
             <input
                 name="status"
                 id="counter"
@@ -227,24 +233,24 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                 defaultValue="countered"
                 onChange={handleInputChange}
             />
-            <label htmlFor="accept">Counteroffer</label>
-            <label className="my-5" htmlFor="additionalTerms">Proposed counteroffer terms (if any): </label>
+            <label htmlFor="accept">Counteroffer</label><br/><br/>
+            <label className="py-5" htmlFor="additionalTerms">Proposed counteroffer terms (if any): </label><br/><br/>
             <input
                 className="h-20 text-center"
                 name="additionalTerms"
                 type="text"
                 defaultValue=''
                 onChange={handleInputChange}
-            />
+            /><br/>
             <div className="text-center my-3">
                 <button
                     onClick={() => { setShowEditForm(false) }}
-                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2 my-3">
                     Close
                 </button>
                 <button
                     type="submit"
-                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2 my-3">
                     Submit Response
                 </button>
             </div>
@@ -276,7 +282,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
             let POF = data.terms.proofOfFunds ? "Yes" : "No";
             return (
                 <div
-                    className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
+                    className="offer-display-div bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                     <p className="font-bold">Offer from {buyerIdDisplay}</p>
                     <p>Status: {data.status}</p>
                     <p>TERMS</p>
@@ -301,7 +307,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
             return (
                 <>
                     <div
-                        className="bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
+                        className="offer-display-div bg-stone-400 text-stone-800 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                         <p className="font-bold">Offer from {buyerIdDisplay}</p>
                         <p>Status: {data.status}</p>
                         <p>TERMS</p>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { signUp, logIn } from "../../../utils/backend"
+import './styles.css'
 
 export default function AuthFormPage({ setLoginStatus }) {
     const { formType } = useParams()
@@ -49,13 +50,13 @@ export default function AuthFormPage({ setLoginStatus }) {
     let signupFields;
     if (formType !== 'login') {
         signupFields = 
-            <>
-                <div>
+            <div>
+                <div className="auth-div">
                     <label className="block text-gray-100 font-bold mb-2" htmlFor="email">
                         First name
                     </label>
                     <input
-                        className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
+                        className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
                         id="firstName"
                         name="firstName"
                         type="text"
@@ -65,12 +66,12 @@ export default function AuthFormPage({ setLoginStatus }) {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div>
-                    <label className="block text-gray-100 font-bold mb-2" htmlFor="email">
+                <div className="auth-div">
+                    <label className="block text-gray-00 font-bold mb-2" htmlFor="email">
                         Last name
                     </label>
                     <input
-                        className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
+                        className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600 text-gray-200"
                         id="lastName"
                         name="lastName"
                         type="text"
@@ -80,40 +81,46 @@ export default function AuthFormPage({ setLoginStatus }) {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="flex-col text-gray-100">
-                    <p>Are you planning to buy or sell a home?</p>
-                    <input
-                        id="categoryBuyer"
-                        name="category"
-                        type="radio"
-                        required
-                        value="buyer"
-                        onChange={handleInputChange}
-                    />
-                    <label htmlFor="categoryBuyer" className="ml-2 mr-4 text-gray-200">Buy</label>
-                    <input
-                        id="categorySeller"
-                        name="category"
-                        type="radio"
-                        required
-                        value="seller"
-                        onChange={handleInputChange}
-                    />
-                    <label htmlFor="categoryBuyer" className="ml-2 mr-4 text-gray-200">Sell</label>
-                </div>
-            </>
+                <p className='auth-p text-center'>Are you planning to buy or sell a home?</p>
+                <table className="auth-table text-gray-100">
+                    <tbody>
+                        <tr>
+                            <td><input
+                                id="categoryBuyer"
+                                name="category"
+                                type="radio"
+                                required
+                                value="buyer"
+                                onChange={handleInputChange}
+                            /></td>
+                            <td><label htmlFor="categoryBuyer" className="text-gray-200">Buy</label></td>
+                        </tr>
+                        <tr>
+                            <td><input
+                                id="categorySeller"
+                                name="category"
+                                type="radio"
+                                required
+                                value="seller"
+                                onChange={handleInputChange}
+                            /></td>
+                            <td><label htmlFor="categoryBuyer" className="text-gray-200">Sell</label></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
     }
     return (
-        <div className="flex items-center justify-center h-[90vh]">
-            <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
+        <div className="py-12">
+            <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md mx-auto grid place-items-center">
                 <h2 className="text-3xl text-center font-bold text-gray-100 mb-8">{actionText}</h2>
-                <form className="space-y-6" onSubmit={handleSubmit}>
-                    <div>
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    <div className="auth-div">
                         <label className="block text-gray-100 font-bold mb-2" htmlFor="email">
                             Email
                         </label>
                         <input
-                            className="w-full p-2 text-gray-200 rounded-md focus:outline-none focus:ring focus:border-blue-600"
+                            className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600"
                             id="email"
                             name="email"
                             type="email"
@@ -123,12 +130,12 @@ export default function AuthFormPage({ setLoginStatus }) {
                             onChange={handleInputChange}
                         />
                     </div>
-                    <div>
+                    <div className="auth-div">
                         <label className="block text-gray-100 font-bold mb-2" htmlFor="password">
                             Password
                         </label>
                         <input
-                            className="w-full p-2 text-gray-200 rounded-md focus:outline-none focus:ring focus:border-blue-600"
+                            className="w-full p-2 text-gray-800 rounded-md focus:outline-none focus:ring focus:border-blue-600"
                             id="password"
                             name="password"
                             type="password"
@@ -136,14 +143,15 @@ export default function AuthFormPage({ setLoginStatus }) {
                             required
                             placeholder="Password"
                             value={formData.password}
-                            onChange={handleInputChange}
+                            onChange
+                            ={handleInputChange}
                         />
                     </div>
                     {signupFields}
                     <div className="text-center">
                         <button
                             type="submit"
-                            className="w-1/2 py-2 px-4 bg-green-700 text-gray-100 rounded-md hover:bg-green-500 transition duration-300">
+                            className="w-1/2 my-5 py-2 px-4 bg-green-700 text-gray-100 rounded-md hover:bg-green-500 transition duration-300">
                             {actionText}
                         </button>
                     </div>
