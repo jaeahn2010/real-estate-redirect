@@ -126,7 +126,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
         editForm =
         <form
             onSubmit={handleSubmit}
-            className="bg-stone-400 rounded-lg p-5 my-4 border-gray-700 border-2 w-[100%]">
+            className="listing-edit-form bg-stone-400 rounded-lg p-5 my-4 border-gray-700 border-2 w-[100%]">
             <label htmlFor="apn">Parcel number: </label><br/>
             <input
                 name="apn"

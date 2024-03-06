@@ -202,7 +202,7 @@ export default function SellerProfilePage(props) {
                     onSubmit={handleSubmit}
                     className="seller-profile-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
                     <p className="table-title text-black-800">IDENTIFIER</p>
-                    <label htmlFor="apn">Parcel number: </label>
+                    <label htmlFor="apn">Parcel number: </label><br/>
                     <input
                         name="apn"
                         id="apn"
@@ -311,7 +311,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={listings[0].homeowner[0]}
                     />
                     <p className="table-title text-black-800">ZONING & STRUCTURE</p>
-                    <label htmlFor="propertyType">Property Type: </label>
+                    <label htmlFor="propertyType">Property Type: </label><br/>
                     <input
                         name="propertyType"
                         id="propertyType"
@@ -337,7 +337,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.stories}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="level">This property is located on level: </label>
+                    <label htmlFor="level">This property is located on level: </label><br/>
                     <input
                         name="level"
                         id="level"
@@ -355,7 +355,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.yearBuilt}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="isDetached">Is this property detached? </label>
+                    <label htmlFor="isDetached">Is this property detached? </label><br/>
                     <input
                         name="isDetached"
                         id="isDetached"
@@ -364,7 +364,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.isDetached}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="houseFaces">Which direction does the house face? </label>
+                    <label htmlFor="houseFaces">Which direction does the house face? </label><br/>
                     <input
                         name="houseFaces"
                         id="houseFaces"
@@ -374,7 +374,7 @@ export default function SellerProfilePage(props) {
                         onChange={handleInputChange}
                     /><br/>
                     <p className="table-title text-black-800">EXTERIOR: CONSTRUCTION</p>
-                    <label htmlFor="roof">Roof materials: </label>
+                    <label htmlFor="roof">Roof materials: </label><br/>
                     <input
                         name="roof"
                         id="roof"
@@ -383,7 +383,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.roof}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="walls">Wall materials: </label>
+                    <label htmlFor="walls">Wall materials: </label><br/>
                     <input
                         name="walls"
                         id="walls"
@@ -392,7 +392,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.walls}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="fencing">Fencing materials: </label>
+                    <label htmlFor="fencing">Fencing materials: </label><br/>
                     <input
                         name="fencing"
                         id="fencing"
@@ -401,7 +401,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.fencing}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="lotSize">Lot size (sq ft): </label>
+                    <label htmlFor="lotSize">Lot size (sq ft): </label><br/>
                     <input
                         name="lotSize"
                         id="lotSize"
@@ -549,7 +549,7 @@ export default function SellerProfilePage(props) {
                     />
                         <label htmlFor="bushes">Bushes</label>
                 <p className="table-title text-black-800">EXTERIOR: OTHER</p>
-                    <label htmlFor="hasSolar">Does this property have solar panels? </label>
+                    <label htmlFor="hasSolar">Does this property have solar panels? </label><br/>
                     <input
                         name="hasSolar"
                         id="hasSolar"
@@ -558,7 +558,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.hasSolar}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="hasBalcony">Does this property have a balcony? </label>
+                    <label htmlFor="hasBalcony">Does this property have a balcony? </label><br/>
                     <input
                         name="hasBalcony"
                         id="hasBalcony"
@@ -567,7 +567,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.hasBalcony}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="hasPool">Does this property have a pool? </label>
+                    <label htmlFor="hasPool">Does this property have a pool? </label><br/>
                     <input
                         name="hasPool"
                         id="hasPool"
@@ -576,7 +576,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.hasPool}
                         onChange={handleInputChange}
                     /><br/>
-                    <label htmlFor="isDetached">Does this property have a spa? </label>
+                    <label htmlFor="isDetached">Does this property have a spa? </label><br/>
                     <input
                         name="hasSpa"
                         id="hasSpa"
