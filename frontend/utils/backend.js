@@ -33,6 +33,7 @@ export async function getShowingRequests(listingId) {
 }
 
 export async function postShowingRequest(showingRequest) {
+    console.log(showingRequest)
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
     const { data } = await axios.post('/api/showingRequests', showingRequest, authHeader)
     return data

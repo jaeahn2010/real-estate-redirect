@@ -52,13 +52,8 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new showing request
 router.post('/', authMiddleware, (req, res) => {
-    const reformat = {
-        listingId: req.body.listingId,
-        status: req.body.status,
-        requestedDateTime: req.body.convertedDateTime,
-    }
     db.ShowingRequest.create({
-        ...reformat,
+        ...req.body,
         userId: req.user.id
     })
         .then(showingRequest => res.json(showingRequest))

@@ -46,7 +46,7 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
         postShowingRequest({
             ...createFormData,
             listingId: listingId,
-            convertedDateTime: convertedDateTime
+            requestedDateTime: convertedDateTime
         })
             .then(() => refreshShowingRequests())
     }

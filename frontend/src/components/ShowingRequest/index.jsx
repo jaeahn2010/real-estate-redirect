@@ -67,19 +67,20 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
             onSubmit={handleSubmit}
             className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
             <br />
-            <label htmlFor="requestedDateTime">Requested date: </label>
+            <label htmlFor="requestedDateTime" className="text-black">Requested date: </label>
             <input
                 name="requestedDate"
                 type="date"
-                className="mx-2 bg-gray-100"
+                className="mx-2 bg-gray-700"
                 onChange={handleInputChange}
             />
             <br/>
-                <label htmlFor="requestedDateTime">Requested time:</label>
+            <br/>
+                <label htmlFor="requestedDateTime" className="text-black">Requested time:</label>
                 <input
                     name="requestedTime"
                     type="time"
-                    className="mx-2 bg-gray-100"
+                    className="mx-2 bg-gray-700"
                     onChange={handleInputChange}
                 />
             <div className="flex justify-center my-5">
