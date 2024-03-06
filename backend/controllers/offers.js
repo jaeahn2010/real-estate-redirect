@@ -63,7 +63,6 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new offer
 router.post('/', authMiddleware, upload.single('POFFile'), (req, res) => {
-    console.log(req.file)
     let POFSubmitted = (req.file ? true : false)
     const reformat = {
         listingId: req.body.listingId,
@@ -115,7 +114,8 @@ router.put('/:offerId', authMiddleware, async (req, res) => {
         }
     }
     const userOffer = await db.Offer.findById(req.params.offerId)
-    if (userOffer.userId == req.user.id) {
+    const currentUser = await db.User.findById(req.user.id)
+    if (userOffer.userId == req.user.id || currentUser.category === "seller") {
         const newOffer = await db.Offer.findByIdAndUpdate(
             req.params.offerId,
             reformat,

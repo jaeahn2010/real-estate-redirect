@@ -32,7 +32,8 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
         event.preventDefault()
         setShowEditForm(false)
         let convertedDateTime = new Date(event.target[0].value + "T" + event.target[1].value + ":00Z")
-        updateShowingRequest(editFormData, data._id, convertedDateTime)
+        setEditFormData({...editFormData, requestedDateTime: convertedDateTime})
+        updateShowingRequest(editFormData, data._id)
             .then(() => refreshShowingRequests())
     }
 
@@ -84,7 +85,7 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
                         className="mx-2 bg-gray-100"
                         onChange={handleInputChange}
                     />
-                <div className="flex justify-center">
+                <div className="flex justify-center my-5">
                     <button
                         onClick={() => { setShowEditForm(false) }}
                         className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">

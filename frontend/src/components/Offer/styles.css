@@ -6,3 +6,11 @@ input {
 label {
     color: black;
 }
+
+.seller-offer-form table, tr, td {
+    text-align: left !important;
+}
+
+.terms, .terms td {
+    text-align: center !important;
+}

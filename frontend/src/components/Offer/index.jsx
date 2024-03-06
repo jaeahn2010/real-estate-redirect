@@ -44,8 +44,24 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
     function handleSubmit(event) {
         event.preventDefault()
         setShowEditForm(false)
-        updateOffer(editFormData, data._id)
-            .then(() => refreshOffers())
+        if (localStorage.userCategory === 'buyer') {
+            updateOffer(editFormData, data._id)
+                .then(() => refreshOffers())
+        } else {
+            if (event.target[0].checked) {
+                alert("You have accepted this buyer's offer.")
+                setEditFormData({...editFormData, status: "accepted"})
+            } else if (event.target[1].checked) {
+                alert("You have rejected this buyer's offer.")
+                setEditFormData({...editFormData, status: "rejected"})
+            } else if (event.target[2].checked) {
+                alert(`You have countered this buyer's offer with the terms: ${event.target[3].value}`)
+                setEditFormData({...editFormData, status: "countered"})
+            }
+            updateOffer(editFormData, data._id)
+                .then(() => refreshOffers)
+        }
+        
     }
 
     function handleDelete() {
@@ -222,42 +238,45 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         offerForm = 
         <form
             onSubmit={handleSubmit}
-            className="offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
-            <table>
-                <tbody>
+            className="seller-offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
+            <table className="text-left">
+                <tbody className="text-left">
                     <tr>
                         <td><input
                             name="status"
                             id="accept"
                             type="radio"
-                            defaultValue="accept"
+                            defaultValue="accepted"
                             onChange={handleInputChange}
-                        /></td>
-                        <td><label htmlFor="accept">Accept</label></td>
+                        />
+                        <label htmlFor="accept">Accept</label></td>
                     </tr>
                     <tr>
                         <td><input
                             name="status"
                             id="reject"
                             type="radio"
-                            defaultValue="reject"
+                            defaultValue="rejected"
                             onChange={handleInputChange}
-                        /></td>
-                        <td><label htmlFor="accept">Reject</label></td>
+                        />
+                        <label htmlFor="accept">Reject</label></td>
                     </tr>
                     <tr>
                         <td><input
                             name="status"
                             id="counter"
                             type="radio"
-                            defaultValue="counter"
+                            defaultValue="countered"
                             onChange={handleInputChange}
-                        /></td>
-                        <td><label htmlFor="accept">Counteroffer</label></td>
+                        />
+                        <label htmlFor="accept">Counteroffer</label></td>
                     </tr>
                     <tr>
-                        <td><label htmlFor="additionalTerms">Proposed counteroffer terms (if any): </label></td>
-                        <td><input
+                        <td className="h-10"><label className="my-5" htmlFor="additionalTerms">Proposed counteroffer terms (if any): </label></td>
+                    </tr>
+                    <tr className="terms text-center">
+                        <td className="text-center"><input
+                            className="h-20 text-center"
                             name="additionalTerms"
                             type="text"
                             defaultValue=''
@@ -266,16 +285,18 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     </tr>
                 </tbody>
             </table>
-            <button
-                onClick={() => { setShowEditForm(false) }}
-                className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                Close
-            </button>
-            <button
-                type="submit"
-                className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                Submit Response
-            </button>
+            <div className="text-center my-3">
+                <button
+                    onClick={() => { setShowEditForm(false) }}
+                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    Close
+                </button>
+                <button
+                    type="submit"
+                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    Submit Response
+                </button>
+            </div>
         </form>
         btns = 
         <div className="text-center">
