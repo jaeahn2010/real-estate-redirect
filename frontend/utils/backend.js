@@ -37,7 +37,7 @@ export async function postShowingRequest(showingRequest) {
     const { data } = await axios.post('/api/showingRequests', showingRequest, authHeader)
     return data
 }
-export async function updateShowingRequest(showingRequest, showingRequestId, convertedDateTime) {
+export async function updateShowingRequest(showingRequest, showingRequestId) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
     const { data } = await axios.put(`/api/showingRequests/${showingRequestId}`, showingRequest, authHeader)
     return data

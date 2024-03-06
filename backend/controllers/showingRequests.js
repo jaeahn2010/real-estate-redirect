@@ -72,9 +72,9 @@ router.put('/:showingRequestId', authMiddleware, async (req, res) => {
         requestedDateTime: new Date(req.body.requestedDate + "T" + req.body.requestedTime + ":00Z")
     }
     const userShowingRequest = await db.ShowingRequest.findById(req.params.showingRequestId)
+    const currentUser = await db.User.findById(req.user.id)
     
-    if (userShowingRequest.userId == req.user.id) {
-        // If it is the original author, update the showing request
+    if (userShowingRequest.userId == req.user.id || currentUser.category === "seller") {
         const newShowingRequest = await db.ShowingRequest.findByIdAndUpdate(
             req.params.showingRequestId,
             reformat,

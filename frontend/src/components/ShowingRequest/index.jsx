@@ -31,10 +31,22 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
     function handleSubmit(event) {
         event.preventDefault()
         setShowEditForm(false)
-        let convertedDateTime = new Date(event.target[0].value + "T" + event.target[1].value + ":00Z")
-        setEditFormData({...editFormData, requestedDateTime: convertedDateTime})
-        updateShowingRequest(editFormData, data._id)
-            .then(() => refreshShowingRequests())
+        if (localStorage.userCategory === 'buyer') {
+            let convertedDateTime = new Date(event.target[0].value + "T" + event.target[1].value + ":00Z")
+            setEditFormData({...editFormData, requestedDateTime: convertedDateTime})
+            updateShowingRequest(editFormData, data._id)
+                .then(() => refreshShowingRequests())
+        } else {
+            if (event.target[0].checked) {
+                alert("You have approved this showing request.")
+                setEditFormData({...editFormData, status: "approved"})
+            } else if (event.target[1].checked) {
+                alert("You have denied this showing request.")
+                setEditFormData({...editFormData, status: "denied"})
+            }
+            updateShowingRequest(editFormData, data._id)
+                .then(() => refreshShowingRequests)
+        }
     }
 
     function handleDelete() {
@@ -45,7 +57,44 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
     }
 
     let btns = ''
-    if (currentUserToken === offerUserToken) {
+    let buyerIdDisplay = " Buyer **********" + data.userId.slice(-6)
+    let showingRequestForm = ''
+    //only display edit/delete buttons if user is logged in & showing request is their own
+    if (loginStatus && currentUserToken === offerUserToken && localStorage.userCategory === 'buyer') {
+        buyerIdDisplay += " (Your request)"
+        showingRequestForm = 
+        <form
+            onSubmit={handleSubmit}
+            className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
+            <br />
+            <label htmlFor="requestedDateTime">Requested date: </label>
+            <input
+                name="requestedDate"
+                type="date"
+                className="mx-2 bg-gray-100"
+                onChange={handleInputChange}
+            />
+            <br/>
+                <label htmlFor="requestedDateTime">Requested time:</label>
+                <input
+                    name="requestedTime"
+                    type="time"
+                    className="mx-2 bg-gray-100"
+                    onChange={handleInputChange}
+                />
+            <div className="flex justify-center my-5">
+                <button
+                    onClick={() => { setShowEditForm(false) }}
+                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    Close
+                </button>
+                <button
+                    type="submit"
+                    className="text-white hover:bg-green-800 font-bold py-2 px-4 bg-green-900 rounded cursor-pointer mr-2">
+                    Submit Changes
+                </button>
+            </div>
+        </form>
         btns = 
             <div className="flex justify-center my-5">
                 <button
@@ -59,45 +108,64 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
                     Delete Request
                 </button>
             </div>
+    } else if (loginStatus && localStorage.userCategory === 'seller') {
+        showingRequestForm = 
+        <form
+            onSubmit={handleSubmit}
+            className="seller-request-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
+            <table className="text-left">
+                <tbody className="text-left">
+                    <tr>
+                        <td><input
+                            name="status"
+                            id="approve"
+                            type="radio"
+                            defaultValue="approved"
+                            onChange={handleInputChange}
+                        />
+                        <label htmlFor="approve">Approve</label></td>
+                    </tr>
+                    <tr>
+                        <td><input
+                            name="status"
+                            id="deny"
+                            type="radio"
+                            defaultValue="denied"
+                            onChange={handleInputChange}
+                        />
+                        <label htmlFor="deny">Deny</label></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div className="text-center my-3">
+                <button
+                    onClick={() => { setShowEditForm(false) }}
+                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    Close
+                </button>
+                <button
+                    type="submit"
+                    className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
+                    Submit Response
+                </button>
+            </div>
+        </form>
+        btns = 
+            <div className="text-center">
+                <button
+                    onClick={() => { setShowEditForm(true) }}
+                    className="text-white hover:bg-gray-700 font-bold py-2 px-4 bg-gray-600 rounded cursor-pointer mr-2">
+                    Respond
+                </button>
+            </div>
     }
-
-    let buyerIdDisplay = " Buyer **********" + data.userId.slice(-6)
-    if (loginStatus && currentUserToken === offerUserToken) buyerIdDisplay += " (Your request)"
 
     if (showEditForm) {
         return (
-            <form
-                onSubmit={handleSubmit}
-                className="bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
-                <br />
-                <label htmlFor="requestedDateTime">Requested date: </label>
-                <input
-                    name="requestedDate"
-                    type="date"
-                    className="mx-2 bg-gray-100"
-                    onChange={handleInputChange}
-                />
-                <br/>
-                    <label htmlFor="requestedDateTime">Requested time:</label>
-                    <input
-                        name="requestedTime"
-                        type="time"
-                        className="mx-2 bg-gray-100"
-                        onChange={handleInputChange}
-                    />
-                <div className="flex justify-center my-5">
-                    <button
-                        onClick={() => { setShowEditForm(false) }}
-                        className="text-white hover:bg-gray-800 font-bold py-2 px-4 bg-gray-700 rounded cursor-pointer mr-2">
-                        Close
-                    </button>
-                    <button
-                        type="submit"
-                        className="text-white hover:bg-green-800 font-bold py-2 px-4 bg-green-900 rounded cursor-pointer mr-2">
-                        Submit Changes
-                    </button>
-                </div>
-            </form>
+            <>
+                {showingRequestForm}
+                {btns}
+            </>
         )
     } else {
         function dateDisplay(dateStr) {
