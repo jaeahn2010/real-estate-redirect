@@ -5,3 +5,7 @@
 .rer-font-body {
     font-family: "Comfortaa", sans-serif;
 }
+
+@media screen and (min-width: 300px) {
+    .rer-font-nav {font-size: 12px}
+}

@@ -1,23 +1,19 @@
 input {
     margin-left: 10px !important;
     background-color: rgb(68, 69, 70) !important;
+    color: white !important;
+    display: block;
+    width: 220px !important;
 }
 
-.offer-table td {
-    padding: 5px 15px 5px 5px;
-}
-
-.offer-table td:first-child {
-    width: 800px;
-}
-
-.offer-table input {
-    max-width: 500px;
+.offer-section {
+    width: 100% !important;
 }
 
 .file-input {
     border: 1px solid white;
-    max-width: 300px !important;
+    width: 90%;
+    font-size: 10px;
 }
 
 label {
@@ -30,5 +26,6 @@ label {
 }
 
 @media (max-width: 640px) {
-    label, input {font-size: 0.5rem}
+    label, input {font-size: 16px;}
+    input {width: 150px;}
 }

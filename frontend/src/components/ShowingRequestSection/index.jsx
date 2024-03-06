@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { postShowingRequest, getShowingRequests } from "../../../utils/backend"
 import ShowingRequest from "../ShowingRequest"
+import './styles.css'
 
 export default function ShowingRequestSection({ listingId, loginStatus }) {
     const [showingRequests, setShowingRequests] = useState([])
@@ -70,15 +71,15 @@ export default function ShowingRequestSection({ listingId, loginStatus }) {
         createBtn = 
             <button
             onClick={toggleCreateForm}
-            className="top-0 right-5 absolute text-stone-300hover:bg-green-800 font-bold py-2 px-4 bg-green-700 rounded cursor-pointer mr-2"
+            className="top-0 right-5 text-stone-300hover:bg-green-800 font-bold py-2 px-4 bg-green-700 rounded cursor-pointer mr-2"
             >
                 {btnText}
             </button>
     }
 
     return (
-        <div className='showingRequest-section bg-stone-600 rounded-lg p-4 pb-10 my-5 mx-10 space-y-4 relative text-stone-300'>
-            <h1 className='text-xl font-bold'>Showing Requests</h1>
+        <div className='showingRequest-section bg-stone-600 rounded-lg p-4 pb-10 my-5 space-y-4 text-stone-300'>
+            <h1 className='text-xl text-center font-bold'>Showing Requests</h1>
             {createBtn}
             {
                 showCreateForm && <form

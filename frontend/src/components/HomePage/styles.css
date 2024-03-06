@@ -1,0 +1,6 @@
+@media screen and (min-width: 300px) {
+    .rer-font-nav {font-size: 12px}
+    .zip-label, .street-label {font-size: 15px}
+    #zip-code, #address {margin: 8px 0 8px 8px}
+    .submit-btn {font-size: 14px; margin: 10px 0; padding: 0 10px;}
+}

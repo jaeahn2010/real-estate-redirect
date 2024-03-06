@@ -127,1013 +127,878 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
         <form
             onSubmit={handleSubmit}
             className="bg-stone-400 rounded-lg p-10 my-4 border-gray-700 border-2 w-[100%]">
-            <table className="w-[90%]">
-                <tbody className="w-[90%]">
-                    <tr className="border-solid border-white border-2 pr-20">
-                        <td><label htmlFor="apn">Parcel number: </label></td>
-                        <td><input
-                            name="apn"
-                            id="apn"
-                            type="text"
-                            defaultValue={listing.identifier.apn}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="address">Street address: </label></td>
-                        <td><input
-                            name="address"
-                            id="address"
-                            type="text"
-                            defaultValue={listing.location.address}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="city">City: </label></td>
-                        <td><input
-                            name="city"
-                            id="city"
-                            type="text"
-                            defaultValue={listing.location.city}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="state">State: </label></td>
-                        <td><input
-                            name="state"
-                            id="state"
-                            type="text"
-                            disabled={true}
-                            defaultValue={listing.location.state}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="zip">Zip code: </label></td>
-                        <td><input
-                            name="zip"
-                            id="zip"
-                            type="number"
-                            defaultValue={listing.location.zip}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="subdivision">Subdivision: </label></td>
-                        <td><input
-                            name="subdivision"
-                            id="subdivision"
-                            type="text"
-                            defaultValue={listing.location.subdivision}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="price">List price: $</label></td>
-                        <td><input
-                            name="price"
-                            id="price"
-                            type="number"
-                            defaultValue={listing.currentActivity.price}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="pricePerSF">Price per square foot: </label></td>
-                        <td><input
-                            name="pricePerSF"
-                            type="number"
-                            defaultValue={listing.currentActivity.pricePerSF}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="listDate">List Date: </label></td>
-                        <td><input
-                            name="listDate"
-                            id="listDate"
-                            type="date"
-                            defaultValue={listing.currentActivity.listDate}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="status">Status: </label></td>
-                        <td><input
-                            name="status"
-                            type="text"
-                            defaultValue={listing.currentActivity.status}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="homeowner">Homeowner ID: </label></td>
-                        <td><input
-                            name="homeowner"
-                            id="homeowner"
-                            disabled={true}
-                            type="text"
-                            defaultValue={listing.homeowner[0]}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="propertyType">Property Type: </label></td>
-                        <td><input
-                            name="propertyType"
-                            id="propertyType"
-                            type="text"
-                            defaultValue={listing.generalInfo.propertyType}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="zoning">Zoning: </label></td>
-                        <td><input
-                            name="zoning"
-                            type="text"
-                            defaultValue={listing.generalInfo.zoning}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="stories">Stories: </label></td>
-                        <td><input
-                            name="stories"
-                            id="stories"
-                            type="number"
-                            defaultValue={listing.generalInfo.stories}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="level">This property is located on level: </label></td>
-                        <td><input
-                            name="level"
-                            id="level"
-                            type="number"
-                            defaultValue={listing.generalInfo.level}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="yearBuilt">Year Built: </label></td>
-                        <td><input
-                            name="yearBuilt"
-                            id="yearBuilt"
-                            type="number"
-                            defaultValue={listing.generalInfo.yearBuilt}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="isDetached">Is this property detached? </label></td>
-                        <td><input
-                            name="isDetached"
-                            id="isDetached"
-                            type="text"
-                            defaultValue={listing.generalInfo.isDetached}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="houseFaces">Which direction does the house face? </label></td>
-                        <td><input
-                            name="houseFaces"
-                            id="houseFaces"
-                            type="text"
-                            defaultValue={listing.generalInfo.houseFaces}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="roof">Roof materials: </label></td>
-                        <td><input
-                            name="roof"
-                            id="roof"
-                            type="text"
-                            defaultValue={listing.exterior.construction.roof}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="walls">Wall materials: </label></td>
-                        <td><input
-                            name="walls"
-                            id="walls"
-                            type="text"
-                            defaultValue={listing.exterior.construction.walls}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="fencing">Fencing materials: </label></td>
-                        <td><input
-                            name="fencing"
-                            id="fencing"
-                            type="text"
-                            defaultValue={listing.exterior.construction.fencing}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="lotSize">Lot size (sq ft): </label></td>
-                        <td><input
-                            name="lotSize"
-                            id="lotSize"
-                            type="number"
-                            defaultValue={listing.exterior.lot.size}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr><td><p>Lot features:</p></td></tr>
-                    <tr>
-                        <td>
-                            <input
-                            name="lotFeatures"
-                            id="desertLandscaping"
-                            type="checkbox"
-                            defaultValue="desertLandscaping"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="desertLandscaping">Desert Landscaping</label>
-                            <input
-                            name="lotFeatures"
-                            id="rockGravelLandscaping"
-                            type="checkbox"
-                            defaultValue="rockGravelLandscaping"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="rockGravelLandscaping">Rock/Gravel Landscaping</label>
-                            <input
-                            name="lotFeatures"
-                            id="rearLawn"
-                            type="checkbox"
-                            defaultValue="rearLawn"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="rearLawn">Rear Lawn</label>
-                            <input
-                            name="lotFeatures"
-                            id="shed"
-                            type="checkbox"
-                            defaultValue="shed"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="shed">Shed</label>
-                            <input
-                            name="lotFeatures"
-                            id="rvHookup"
-                            type="checkbox"
-                            defaultValue="rvHookup"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="rvHookup">RV Hookup</label>
-                            <input
-                            name="lotFeatures"
-                            id="patio"
-                            type="checkbox"
-                            defaultValue="patio"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="patio">Patio</label>
-                            <input
-                            name="lotFeatures"
-                            id="syntheticGrass"
-                            type="checkbox"
-                            defaultValue="syntheticGrass"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="syntheticGrass">Synthetic Grass</label>
-                            <input
-                            name="lotFeatures"
-                            id="matureLandscaping"
-                            type="checkbox"
-                            defaultValue="matureLandscaping"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="matureLandscaping">Mature Landscaping</label>
-                            <input
-                            name="lotFeatures"
-                            id="grass"
-                            type="checkbox"
-                            defaultValue="grass"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="grass">Grass</label>
-                            <input
-                            name="lotFeatures"
-                            id="coveredPatio"
-                            type="checkbox"
-                            defaultValue="coveredPatio"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="desertLandscaping">Covered Patio</label>
-                            <input
-                            name="lotFeatures"
-                            id="paved"
-                            type="checkbox"
-                            defaultValue="paved"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="paved">Paved</label>
-                        </td>
-                    </tr>
-                    <tr><td><p>Vegetation:</p></td></tr>
-                    <tr>
-                        <td>
-                            <input
-                            name="vegetation"
-                            id="shrubs"
-                            type="checkbox"
-                            defaultValue="shrubs"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="shrubs">Shrubs</label>
-                            <input
-                            name="vegetation"
-                            id="fountain"
-                            type="checkbox"
-                            defaultValue="fountain"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="fountain">Fountain</label>
-                            <input
-                            name="vegetation"
-                            id="trees"
-                            type="checkbox"
-                            defaultValue="trees"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="trees">Trees</label>
-                            <input
-                            name="vegetation"
-                            id="grass"
-                            type="checkbox"
-                            defaultValue="grass"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="grass">Grass</label>
-                            <input
-                            name="vegetation"
-                            id="brush"
-                            type="checkbox"
-                            defaultValue="brush"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="brush">Brush</label>
-                            <input
-                            name="vegetation"
-                            id="bushes"
-                            type="checkbox"
-                            defaultValue="bushes"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="bushes">Bushes</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="hasSolar">Does this property have solar panels? </label></td>
-                        <td><input
-                            name="hasSolar"
-                            id="hasSolar"
-                            type="text"
-                            defaultValue={listing.exterior.hasSolar}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="hasBalcony">Does this property have a balcony? </label></td>
-                        <td><input
-                            name="hasBalcony"
-                            id="hasBalcony"
-                            type="text"
-                            defaultValue={listing.exterior.hasBalcony}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="hasPool">Does this property have a pool? </label></td>
-                        <td><input
-                            name="hasPool"
-                            id="hasPool"
-                            type="text"
-                            defaultValue={listing.exterior.hasPool}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="isDetached">Does this property have a spa? </label></td>
-                        <td><input
-                            name="hasSpa"
-                            id="hasSpa"
-                            type="text"
-                            defaultValue={listing.exterior.hasSpa}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr><td><p>Flooring:</p></td></tr>
-                    <tr>
-                        <td>
-                            <input
-                            name="flooring"
-                            id="tile"
-                            type="checkbox"
-                            defaultValue="tile"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="tile">Tile</label>
-                            <input
-                            name="flooring"
-                            id="vinyl"
-                            type="checkbox"
-                            defaultValue="vinyl"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="vinyl">Vinyl</label>
-                            <input
-                            name="flooring"
-                            id="hardwood"
-                            type="checkbox"
-                            defaultValue="hardwood"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="hardwood">Hardwood</label>
-                            <input
-                            name="flooring"
-                            id="laminate"
-                            type="checkbox"
-                            defaultValue="laminate"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="laminate">Laminate</label>
-                            <input
-                            name="flooring"
-                            id="marble"
-                            type="checkbox"
-                            defaultValue="marble"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="marble">Marble</label>
-                            <input
-                            name="flooring"
-                            id="concrete"
-                            type="checkbox"
-                            defaultValue="concrete"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="concrete">Concrete</label>
-                            <input
-                            name="flooring"
-                            id="stone"
-                            type="checkbox"
-                            defaultValue="stone"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="stone">Stone</label>
-                            <input
-                            name="flooring"
-                            id="linoleum"
-                            type="checkbox"
-                            defaultValue="linoleum"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="linoleum">Linoleum</label>
-                            <input
-                            name="flooring"
-                            id="carpet"
-                            type="checkbox"
-                            defaultValue="carpet"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="carpet">Carpet</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="bedrooms">Bedrooms: </label></td>
-                        <td><input
-                            name="bedrooms"
-                            id="bedrooms"
-                            type="number"
-                            defaultValue={listing.interior.rooms.bedrooms}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="bathrooms">Bathrooms: </label></td>
-                        <td><input
-                            name="bathrooms"
-                            id="bathrooms"
-                            type="number"
-                            defaultValue={listing.interior.rooms.bathrooms}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="bathsFull">Full baths: </label></td>
-                        <td><input
-                            name="bathsFull"
-                            id="bathsFull"
-                            type="number"
-                            defaultValue={listing.interior.rooms.bathsFull}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="roomsTotal">Total rooms: </label></td>
-                        <td><input
-                            name="roomsTotal"
-                            id="roomsTotal"
-                            type="number"
-                            defaultValue={listing.interior.rooms.roomsTotal}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="livingArea">Living area (sq ft): </label></td>
-                        <td><input
-                            name="livingArea"
-                            id="livingArea"
-                            type="number"
-                            defaultValue={listing.interior.livingArea}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="cooling">Cooling: </label></td>
-                        <td><input
-                            name="cooling"
-                            id="cooling"
-                            type="text"
-                            defaultValue={listing.interior.cooling}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="heating">Heating: </label></td>
-                        <td><input
-                            name="heating"
-                            id="heating"
-                            type="text"
-                            defaultValue={listing.interior.heating}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr><td><p>Appliances to be included in sale:</p></td></tr>
-                    <tr>
-                        <td>
-                            <input
-                            name="appliancesIncluded"
-                            id="washer"
-                            type="checkbox"
-                            defaultValue="washer"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="washer">Washer</label>
-                            <input
-                            name="appliancesIncluded"
-                            id="dryer"
-                            type="checkbox"
-                            defaultValue="dryer"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="dryer">Dryer</label>
-                            <input
-                            name="appliancesIncluded"
-                            id="refrigerator"
-                            type="checkbox"
-                            defaultValue="refrigerator"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="refrigerator">Refrigerator</label>
-                            <input
-                            name="appliancesIncluded"
-                            id="dishwasher"
-                            type="checkbox"
-                            defaultValue="dishwasher"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="dishwasher">Dishwasher</label>
-                            <input
-                            name="appliancesIncluded"
-                            id="stove"
-                            type="checkbox"
-                            defaultValue="stove"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="stove">Stove/Oven</label>
-                            <input
-                            name="appliancesIncluded"
-                            id="microwave"
-                            type="checkbox"
-                            defaultValue="microwave"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="microwave">Microwave</label>
-                            <input
-                            name="appliancesIncluded"
-                            id="garbageDisposal"
-                            type="checkbox"
-                            defaultValue="garbageDisposal"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="garbageDisposal">Garbage Disposal</label>
-                        </td>
-                    </tr>
-                    <tr><td><p>Fixtures:</p></td></tr>
-                    <tr>
-                        <td>
-                            <input
-                            name="fixtures"
-                            id="ceilingFans"
-                            type="checkbox"
-                            defaultValue="ceilingFans"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="ceilingFans">Ceiling Fans</label>
-                            <input
-                            name="fixtures"
-                            id="potShelves"
-                            type="checkbox"
-                            defaultValue="potShelves"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="potShelves">Pot Shelves</label>
-                            <input
-                            name="fixtures"
-                            id="chandeliers"
-                            type="checkbox"
-                            defaultValue="chandeliers"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="chandeliers">Chandeliers</label>
-                        </td>
-                    </tr>
-                    <tr><td><p>Window features:</p></td></tr>
-                    <tr>
-                        <td>
-                            <input
-                            name="window"
-                            id="curtains"
-                            type="checkbox"
-                            defaultValue="curtains"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="curtains">Curtains</label>
-                            <input
-                            name="window"
-                            id="blinds"
-                            type="checkbox"
-                            defaultValue="blinds"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="blinds">Blinds</label>
-                            <input
-                            name="window"
-                            id="drapes"
-                            type="checkbox"
-                            defaultValue="drapes"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="drapes">Drapes</label>
-                            <input
-                            name="window"
-                            id="plantationShutters"
-                            type="checkbox"
-                            defaultValue="plantationShutters"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="plantationShutters">Plantation Shutters</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="fireplace">Fireplace: </label></td>
-                        <td><input
-                            name="fireplace"
-                            id="fireplace"
-                            type="text"
-                            defaultValue={listing.interior.features.fireplace}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="other">Other interior features: </label></td>
-                        <td><input
-                            name="other"
-                            id="other"
-                            type="text"
-                            placeholder="Other features"
-                            defaultValue={listing.interior.features.other}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="parkingType">Parking type: </label></td>
-                        <td><input
-                            name="parkingType"
-                            id="parkingType"
-                            type="text"
-                            defaultValue={listing.parking.type}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="parkingSize">Parking size: </label></td>
-                        <td><input
-                            name="parkingSize"
-                            id="parkingSize"
-                            type="number"
-                            defaultValue={listing.parking.size}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="sewer">Sewer: </label></td>
-                        <td><input
-                            name="sewer"
-                            id="sewer"
-                            type="text"
-                            defaultValue={listing.utilities.sewer}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="water">Water: </label></td>
-                        <td><input
-                            name="water"
-                            id="water"
-                            type="text"
-                            defaultValue={listing.utilities.water}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="otherUtilities">Other Utilities: </label></td>
-                        <td><input
-                            name="otherUtilities"
-                            id="otherUtilities"
-                            type="text"
-                            defaultValue={listing.utilities.otherUtilities}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="HOACount">How many HOAs? </label></td>
-                        <td><input
-                            name="HOACount"
-                            id="HOACount"
-                            type="number"
-                            defaultValue={listing.HOA.length}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="HOAName">HOA name: </label></td>
-                        <td><input
-                            name="HOAName"
-                            id="HOAName"
-                            type="text"                            defaultValue={listing.HOA[0].name}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="HOAMonthlyFee">HOA monthly fee: </label></td>
-                        <td><input
-                            name="HOAMonthlyFee"
-                            id="HOAMonthlyFee"
-                            type="number"
-                            defaultValue={listing.HOA[0].monthlyFee}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="HOAPhone">HOA Phone Number: </label></td>
-                        <td><input
-                            name="HOAPhone"
-                            id="HOAPhone"
-                            type="text"
-                            defaultValue={listing.HOA[0].phone}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr><td><p>What does the HOA fee cover?</p></td></tr>
-                    <tr>
-                        <td>
-                            <input
-                            name="HOAFeeIncludes"
-                            id="management"
-                            type="checkbox"
-                            defaultValue="management"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="management">Management</label>
-                            <input
-                            name="HOAFeeIncludes"
-                            id="landscapeMaintenance"
-                            type="checkbox"
-                            defaultValue="landscapeMaintenance"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="landscapeMaintenance">Landscape Maintenance</label>
-                            <input
-                            name="HOAFeeIncludes"
-                            id="recreationalFacilities"
-                            type="checkbox"
-                            defaultValue="recreationalFacilities"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="recreationalFacilities">Reacreational Facilities</label>
-                            <input
-                            name="HOAFeeIncludes"
-                            id="gated"
-                            type="checkbox"
-                            defaultValue="gated"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="gated">Gated</label>
-                            <input
-                            name="HOAFeeIncludes"
-                            id="HOAWater"
-                            type="checkbox"
-                            defaultValue="HOAWater"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="HOAWater">Water</label>
-                            <input
-                            name="HOAFeeIncludes"
-                            id="HOASewer"
-                            type="checkbox"
-                            defaultValue="HOASewer"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="HOASewer">Sewer</label>
-                            <input
-                            name="HOAFeeIncludes"
-                            id="HOATrash"
-                            type="checkbox"
-                            defaultValue="HOATrash"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="HOATrash">Trash</label>
-                            <input
-                            name="HOAFeeIncludes"
-                            id="guardGated"
-                            type="checkbox"
-                            defaultValue="guardGated"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="guardGated">Guard Gated</label>
-                        </td>
-                    </tr>
-                    <tr><td><p>Community amenities:</p></td></tr>
-                    <tr>
-                        <td>
-                            <input
-                            name="communityAmenities"
-                            id="communityPool"
-                            type="checkbox"
-                            defaultValue="communityPool"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="communityPool">Community Pool</label>
-                            <input
-                            name="communityAmenities"
-                            id="communitySpa"
-                            type="checkbox"
-                            defaultValue="communitySpa"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="communitySpa">Community Spa</label>
-                            <input
-                            name="communityAmenities"
-                            id="communityPark"
-                            type="checkbox"
-                            defaultValue="communityPark"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="communityPark">Community Park</label>
-                            <input
-                            name="communityAmenities"
-                            id="fitnessCenter"
-                            type="checkbox"
-                            defaultValue="fitnessCenter"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="fitnessCenter"> Fitness Center</label>
-                            <input
-                            name="communityAmenities"
-                            id="playgrounds"
-                            type="checkbox"
-                            defaultValue="playgrounds"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="playgrounds">Playgrounds</label>
-                            <input
-                            name="communityAmenities"
-                            id="clubhouse"
-                            type="checkbox"
-                            defaultValue="clubhouse"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="clubhouse">Clubhouse</label>
-                            <input
-                            name="communityAmenities"
-                            id="golfCourse"
-                            type="checkbox"
-                            defaultValue="golfCourse"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="golfCourse">Golf Course</label>
-                            <input
-                            name="communityAmenities"
-                            id="basketballCourt"
-                            type="checkbox"
-                            defaultValue="basketballCourt"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="basketballCourt">Basketball Court</label>
-                            <input
-                            name="communityAmenities"
-                            id="tennisCourt"
-                            type="checkbox"
-                            defaultValue="tennisCourt"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="tennisCourt">Tennis Court</label>
-                            <input
-                            name="communityAmenities"
-                            id="joggingPath"
-                            type="checkbox"
-                            defaultValue="joggingPath"
-                            onChange={handleInputChange}
-                        />
-                            <label htmlFor="joggingPath">Jogging Path</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="isSeniorCommunity">Is this property in a senior community? </label></td>
-                        <td><input
-                            name="isSeniorCommunity"
-                            id="isSeniorCommunity"
-                            type="text"
-                            defaultValue={listing.community.isSeniorCommunity}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="lastSoldDate">Last Sold Date: </label></td>
-                        <td><input
-                            name="lastSoldDate"
-                            id="lastSoldDate"
-                            type="date"
-                            defaultValue={listing.lastSoldInfo.soldDate}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="lastSoldPrice">Last Sold Price: </label></td>
-                        <td><input
-                            name="lastSoldPrice"
-                            id="lastSoldPrice"
-                            type="number"
-                            defaultValue={listing.lastSoldInfo.price}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="lastSoldPricPerSF">Last Sold Price Per SF: </label></td>
-                        <td><input
-                            name="lastSoldPricPerSF"
-                            id="lastSoldPricPerSF"
-                            type="number"
-                            defaultValue={listing.lastSoldInfo.pricePerSF}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="annualTax">Annual Tax: </label></td>
-                        <td><input
-                            name="annualTax"
-                            id="annualTax"
-                            type="number"
-                            defaultValue={listing.tax.annualTax}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                    <tr>
-                        <td><label htmlFor="lastTaxYear">Last Tax Year: </label></td>
-                        <td><input
-                            name="lastTaxYear"
-                            id="lastTaxYear"
-                            type="number"
-                            placeholder="Last Tax Year"
-                            defaultValue={listing.tax.year}
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                </tbody>
-            </table>
+            <label htmlFor="apn">Parcel number: </label>
+            <input
+                name="apn"
+                id="apn"
+                type="text"
+                defaultValue={listing.identifier.apn}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="address">Street address: </label>
+            <input
+                name="address"
+                id="address"
+                type="text"
+                defaultValue={listing.location.address}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="city">City: </label>
+            <input
+                name="city"
+                id="city"
+                type="text"
+                defaultValue={listing.location.city}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="state">State: </label>
+            <input
+                name="state"
+                id="state"
+                type="text"
+                disabled={true}
+                defaultValue={listing.location.state}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="zip">Zip code: </label>
+            <input
+                name="zip"
+                id="zip"
+                type="number"
+                defaultValue={listing.location.zip}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="subdivision">Subdivision: </label>
+            <input
+                name="subdivision"
+                id="subdivision"
+                type="text"
+                defaultValue={listing.location.subdivision}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="price">List price: $</label>
+            <input
+                name="price"
+                id="price"
+                type="number"
+                defaultValue={listing.currentActivity.price}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="pricePerSF">Price per square foot: </label>
+            <input
+                name="pricePerSF"
+                type="number"
+                defaultValue={listing.currentActivity.pricePerSF}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="listDate">List Date: </label>
+            <input
+                name="listDate"
+                id="listDate"
+                type="date"
+                defaultValue={listing.currentActivity.listDate}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="status">Status: </label>
+            <input
+                name="status"
+                type="text"
+                defaultValue={listing.currentActivity.status}
+                onChange={handleInputChange}
+            />
+            <input
+                name="homeowner"
+                id="homeowner"
+                disabled={true}
+                hidden={true}
+                type="text"
+                defaultValue={listing.homeowner[0]}
+            />
+            <label htmlFor="propertyType">Property Type: </label>
+            <input
+                name="propertyType"
+                id="propertyType"
+                type="text"
+                defaultValue={listing.generalInfo.propertyType}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="zoning">Zoning: </label>
+            <input
+                name="zoning"
+                type="text"
+                defaultValue={listing.generalInfo.zoning}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="stories">Stories: </label>
+            <input
+                name="stories"
+                id="stories"
+                type="number"
+                defaultValue={listing.generalInfo.stories}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="level">This property is located on level: </label>
+            <input
+                name="level"
+                id="level"
+                type="number"
+                defaultValue={listing.generalInfo.level}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="yearBuilt">Year Built: </label>
+            <input
+                name="yearBuilt"
+                id="yearBuilt"
+                type="number"
+                defaultValue={listing.generalInfo.yearBuilt}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="isDetached">Is this property detached? </label>
+            <input
+                name="isDetached"
+                id="isDetached"
+                type="text"
+                defaultValue={listing.generalInfo.isDetached}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="houseFaces">Which direction does the house face? </label>
+            <input
+                name="houseFaces"
+                id="houseFaces"
+                type="text"
+                defaultValue={listing.generalInfo.houseFaces}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="roof">Roof materials: </label>
+            <input
+                name="roof"
+                id="roof"
+                type="text"
+                defaultValue={listing.exterior.construction.roof}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="walls">Wall materials: </label>
+            <input
+                name="walls"
+                id="walls"
+                type="text"
+                defaultValue={listing.exterior.construction.walls}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="fencing">Fencing materials: </label>
+            <input
+                name="fencing"
+                id="fencing"
+                type="text"
+                defaultValue={listing.exterior.construction.fencing}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="lotSize">Lot size (sq ft): </label>
+            <input
+                name="lotSize"
+                id="lotSize"
+                type="number"
+                defaultValue={listing.exterior.lot.size}
+                onChange={handleInputChange}
+            />
+            <p className="!text-black">Lot features:</p>
+            <input
+                name="lotFeatures"
+                id="desertLandscaping"
+                type="checkbox"
+                defaultValue="desertLandscaping"
+                onChange={handleInputChange}
+                />
+            <label htmlFor="desertLandscaping">Desert Landscaping</label>
+            <input
+                name="lotFeatures"
+                id="rockGravelLandscaping"
+                type="checkbox"
+                defaultValue="rockGravelLandscaping"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="rockGravelLandscaping">Rock/Gravel Landscaping</label>
+            <input
+                name="lotFeatures"
+                id="rearLawn"
+                type="checkbox"
+                defaultValue="rearLawn"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="rearLawn">Rear Lawn</label>
+            <input
+                name="lotFeatures"
+                id="shed"
+                type="checkbox"
+                defaultValue="shed"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="shed">Shed</label>
+            <input
+                name="lotFeatures"
+                id="rvHookup"
+                type="checkbox"
+                defaultValue="rvHookup"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="rvHookup">RV Hookup</label>
+            <input
+                name="lotFeatures"
+                id="patio"
+                type="checkbox"
+                defaultValue="patio"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="patio">Patio</label>
+            <input
+                name="lotFeatures"
+                id="syntheticGrass"
+                type="checkbox"
+                defaultValue="syntheticGrass"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="syntheticGrass">Synthetic Grass</label>
+            <input
+                name="lotFeatures"
+                id="matureLandscaping"
+                type="checkbox"
+                defaultValue="matureLandscaping"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="matureLandscaping">Mature Landscaping</label>
+            <input
+                name="lotFeatures"
+                id="grass"
+                type="checkbox"
+                defaultValue="grass"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="grass">Grass</label>
+            <input
+                name="lotFeatures"
+                id="coveredPatio"
+                type="checkbox"
+                defaultValue="coveredPatio"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="desertLandscaping">Covered Patio</label>
+            <input
+                name="lotFeatures"
+                id="paved"
+                type="checkbox"
+                defaultValue="paved"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="paved">Paved</label>
+            <p className="!text-black">Vegetation:</p>
+            <input
+                name="vegetation"
+                id="shrubs"
+                type="checkbox"
+                defaultValue="shrubs"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="shrubs">Shrubs</label>
+            <input
+                name="vegetation"
+                id="fountain"
+                type="checkbox"
+                defaultValue="fountain"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="fountain">Fountain</label>
+            <input
+                name="vegetation"
+                id="trees"
+                type="checkbox"
+                defaultValue="trees"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="trees">Trees</label>
+            <input
+                name="vegetation"
+                id="grass"
+                type="checkbox"
+                defaultValue="grass"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="grass">Grass</label>
+            <input
+                name="vegetation"
+                id="brush"
+                type="checkbox"
+                defaultValue="brush"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="brush">Brush</label>
+            <input
+                name="vegetation"
+                id="bushes"
+                type="checkbox"
+                defaultValue="bushes"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="bushes">Bushes</label>
+            <label htmlFor="hasSolar">Does this property have solar panels? </label>
+            <input
+                name="hasSolar"
+                id="hasSolar"
+                type="text"
+                defaultValue={listing.exterior.hasSolar}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="hasBalcony">Does this property have a balcony? </label>
+            <input
+                name="hasBalcony"
+                id="hasBalcony"
+                type="text"
+                defaultValue={listing.exterior.hasBalcony}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="hasPool">Does this property have a pool? </label>
+            <input
+                name="hasPool"
+                id="hasPool"
+                type="text"
+                defaultValue={listing.exterior.hasPool}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="isDetached">Does this property have a spa? </label>
+            <input
+                name="hasSpa"
+                id="hasSpa"
+                type="text"
+                defaultValue={listing.exterior.hasSpa}
+                onChange={handleInputChange}
+            />
+            <p className="!text-black">Flooring:</p>
+            <input
+                name="flooring"
+                id="tile"
+                type="checkbox"
+                defaultValue="tile"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="tile">Tile</label>
+            <input
+                name="flooring"
+                id="vinyl"
+                type="checkbox"
+                defaultValue="vinyl"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="vinyl">Vinyl</label>
+            <input
+                name="flooring"
+                id="hardwood"
+                type="checkbox"
+                defaultValue="hardwood"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="hardwood">Hardwood</label>
+            <input
+                name="flooring"
+                id="laminate"
+                type="checkbox"
+                defaultValue="laminate"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="laminate">Laminate</label>
+            <input
+                name="flooring"
+                id="marble"
+                type="checkbox"
+                defaultValue="marble"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="marble">Marble</label>
+            <input
+                name="flooring"
+                id="concrete"
+                type="checkbox"
+                defaultValue="concrete"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="concrete">Concrete</label>
+            <input
+                name="flooring"
+                id="stone"
+                type="checkbox"
+                defaultValue="stone"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="stone">Stone</label>
+            <input
+                name="flooring"
+                id="linoleum"
+                type="checkbox"
+                defaultValue="linoleum"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="linoleum">Linoleum</label>
+            <input
+                name="flooring"
+                id="carpet"
+                type="checkbox"
+                defaultValue="carpet"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="carpet">Carpet</label>
+            <label htmlFor="bedrooms">Bedrooms: </label>
+            <input
+                name="bedrooms"
+                id="bedrooms"
+                type="number"
+                defaultValue={listing.interior.rooms.bedrooms}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="bathrooms">Bathrooms: </label>
+            <input
+                name="bathrooms"
+                id="bathrooms"
+                type="number"
+                defaultValue={listing.interior.rooms.bathrooms}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="bathsFull">Full baths: </label>
+            <input
+                name="bathsFull"
+                id="bathsFull"
+                type="number"
+                defaultValue={listing.interior.rooms.bathsFull}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="roomsTotal">Total rooms: </label>
+            <input
+                name="roomsTotal"
+                id="roomsTotal"
+                type="number"
+                defaultValue={listing.interior.rooms.roomsTotal}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="livingArea">Living area (sq ft): </label>
+            <input
+                name="livingArea"
+                id="livingArea"
+                type="number"
+                defaultValue={listing.interior.livingArea}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="cooling">Cooling: </label>
+            <input
+                name="cooling"
+                id="cooling"
+                type="text"
+                defaultValue={listing.interior.cooling}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="heating">Heating: </label>
+            <input
+                name="heating"
+                id="heating"
+                type="text"
+                defaultValue={listing.interior.heating}
+                onChange={handleInputChange}
+            />
+            <p className="!text-black">Appliances to be included in sale:</p>
+            <input
+                name="appliancesIncluded"
+                id="washer"
+                type="checkbox"
+                defaultValue="washer"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="washer">Washer</label>
+            <input
+                name="appliancesIncluded"
+                id="dryer"
+                type="checkbox"
+                defaultValue="dryer"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="dryer">Dryer</label>
+            <input
+                name="appliancesIncluded"
+                id="refrigerator"
+                type="checkbox"
+                defaultValue="refrigerator"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="refrigerator">Refrigerator</label>
+            <input
+                name="appliancesIncluded"
+                id="dishwasher"
+                type="checkbox"
+                defaultValue="dishwasher"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="dishwasher">Dishwasher</label>
+            <input
+                name="appliancesIncluded"
+                id="stove"
+                type="checkbox"
+                defaultValue="stove"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="stove">Stove/Oven</label>
+            <input
+                name="appliancesIncluded"
+                id="microwave"
+                type="checkbox"
+                defaultValue="microwave"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="microwave">Microwave</label>
+            <input
+                name="appliancesIncluded"
+                id="garbageDisposal"
+                type="checkbox"
+                defaultValue="garbageDisposal"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="garbageDisposal">Garbage Disposal</label>
+            <p className="!text-black">Fixtures:</p>
+            <input
+                name="fixtures"
+                id="ceilingFans"
+                type="checkbox"
+                defaultValue="ceilingFans"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="ceilingFans">Ceiling Fans</label>
+            <input
+                name="fixtures"
+                id="potShelves"
+                type="checkbox"
+                defaultValue="potShelves"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="potShelves">Pot Shelves</label>
+            <input
+                name="fixtures"
+                id="chandeliers"
+                type="checkbox"
+                defaultValue="chandeliers"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="chandeliers">Chandeliers</label>
+            <p className="!text-black">Window features:</p>
+            <input
+                name="window"
+                id="curtains"
+                type="checkbox"
+                defaultValue="curtains"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="curtains">Curtains</label>
+            <input
+                name="window"
+                id="blinds"
+                type="checkbox"
+                defaultValue="blinds"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="blinds">Blinds</label>
+            <input
+                name="window"
+                id="drapes"
+                type="checkbox"
+                defaultValue="drapes"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="drapes">Drapes</label>
+            <input
+                name="window"
+                id="plantationShutters"
+                type="checkbox"
+                defaultValue="plantationShutters"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="plantationShutters">Plantation Shutters</label>
+            <label htmlFor="fireplace">Fireplace: </label>
+            <input
+                name="fireplace"
+                id="fireplace"
+                type="text"
+                defaultValue={listing.interior.features.fireplace}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="other">Other interior features: </label>
+            <input
+                name="other"
+                id="other"
+                type="text"
+                placeholder="Other features"
+                defaultValue={listing.interior.features.other}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="parkingType">Parking type: </label>
+            <input
+                name="parkingType"
+                id="parkingType"
+                type="text"
+                defaultValue={listing.parking.type}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="parkingSize">Parking size: </label>
+            <input
+                name="parkingSize"
+                id="parkingSize"
+                type="number"
+                defaultValue={listing.parking.size}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="sewer">Sewer: </label>
+            <input
+                name="sewer"
+                id="sewer"
+                type="text"
+                defaultValue={listing.utilities.sewer}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="water">Water: </label>
+            <input
+                name="water"
+                id="water"
+                type="text"
+                defaultValue={listing.utilities.water}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="otherUtilities">Other Utilities: </label>
+            <input
+                name="otherUtilities"
+                id="otherUtilities"
+                type="text"
+                defaultValue={listing.utilities.otherUtilities}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="HOACount">How many HOAs? </label>
+            <input
+                name="HOACount"
+                id="HOACount"
+                type="number"
+                defaultValue={listing.HOA.length}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="HOAName">HOA name: </label>
+            <input
+                name="HOAName"
+                id="HOAName"
+                type="text"                            
+                defaultValue={listing.HOA[0].name}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="HOAMonthlyFee">HOA monthly fee: </label>
+            <input
+                name="HOAMonthlyFee"
+                id="HOAMonthlyFee"
+                type="number"
+                defaultValue={listing.HOA[0].monthlyFee}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="HOAPhone">HOA Phone Number: </label>
+            <input
+                name="HOAPhone"
+                id="HOAPhone"
+                type="text"
+                defaultValue={listing.HOA[0].phone}
+                onChange={handleInputChange}
+            />
+            <p className="!text-black">What does the HOA fee cover?</p>
+            <input
+                name="HOAFeeIncludes"
+                id="management"
+                type="checkbox"
+                defaultValue="management"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="management">Management</label>
+            <input
+                name="HOAFeeIncludes"
+                id="landscapeMaintenance"
+                type="checkbox"
+                defaultValue="landscapeMaintenance"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="landscapeMaintenance">Landscape Maintenance</label>
+            <input
+                name="HOAFeeIncludes"
+                id="recreationalFacilities"
+                type="checkbox"
+                defaultValue="recreationalFacilities"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="recreationalFacilities">Reacreational Facilities</label>
+            <input
+                name="HOAFeeIncludes"
+                id="gated"
+                type="checkbox"
+                defaultValue="gated"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="gated">Gated</label>
+            <input
+                name="HOAFeeIncludes"
+                id="HOAWater"
+                type="checkbox"
+                defaultValue="HOAWater"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="HOAWater">Water</label>
+            <input
+                name="HOAFeeIncludes"
+                id="HOASewer"
+                type="checkbox"
+                defaultValue="HOASewer"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="HOASewer">Sewer</label>
+            <input
+                name="HOAFeeIncludes"
+                id="HOATrash"
+                type="checkbox"
+                defaultValue="HOATrash"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="HOATrash">Trash</label>
+            <input
+                name="HOAFeeIncludes"
+                id="guardGated"
+                type="checkbox"
+                defaultValue="guardGated"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="guardGated">Guard Gated</label>
+            <p className="!text-black">Community amenities:</p>
+            <input
+                name="communityAmenities"
+                id="communityPool"
+                type="checkbox"
+                defaultValue="communityPool"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="communityPool">Community Pool</label>
+            <input
+                name="communityAmenities"
+                id="communitySpa"
+                type="checkbox"
+                defaultValue="communitySpa"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="communitySpa">Community Spa</label>
+            <input
+                name="communityAmenities"
+                id="communityPark"
+                type="checkbox"
+                defaultValue="communityPark"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="communityPark">Community Park</label>
+            <input
+                name="communityAmenities"
+                id="fitnessCenter"
+                type="checkbox"
+                defaultValue="fitnessCenter"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="fitnessCenter"> Fitness Center</label>
+            <input
+                name="communityAmenities"
+                id="playgrounds"
+                type="checkbox"
+                defaultValue="playgrounds"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="playgrounds">Playgrounds</label>
+            <input
+                name="communityAmenities"
+                id="clubhouse"
+                type="checkbox"
+                defaultValue="clubhouse"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="clubhouse">Clubhouse</label>
+            <input
+                name="communityAmenities"
+                id="golfCourse"
+                type="checkbox"
+                defaultValue="golfCourse"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="golfCourse">Golf Course</label>
+            <input
+                name="communityAmenities"
+                id="basketballCourt"
+                type="checkbox"
+                defaultValue="basketballCourt"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="basketballCourt">Basketball Court</label>
+            <input
+                name="communityAmenities"
+                id="tennisCourt"
+                type="checkbox"
+                defaultValue="tennisCourt"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="tennisCourt">Tennis Court</label>
+            <input
+                name="communityAmenities"
+                id="joggingPath"
+                type="checkbox"
+                defaultValue="joggingPath"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="joggingPath">Jogging Path</label>
+            <br/>
+            <label htmlFor="isSeniorCommunity" className="text-black">Is this property in a senior community? </label>
+            <input
+                name="isSeniorCommunity"
+                id="isSeniorCommunity"
+                type="text"
+                defaultValue={listing.community.isSeniorCommunity}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="lastSoldDate">Last Sold Date: </label>
+            <input
+                name="lastSoldDate"
+                id="lastSoldDate"
+                type="date"
+                defaultValue={listing.lastSoldInfo.soldDate}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="lastSoldPrice">Last Sold Price: </label>
+            <input
+                name="lastSoldPrice"
+                id="lastSoldPrice"
+                type="number"
+                defaultValue={listing.lastSoldInfo.price}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="lastSoldPricPerSF">Last Sold Price Per SF: </label>
+            <input
+                name="lastSoldPricPerSF"
+                id="lastSoldPricPerSF"
+                type="number"
+                defaultValue={listing.lastSoldInfo.pricePerSF}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="annualTax">Annual Tax: </label>
+            <input
+                name="annualTax"
+                id="annualTax"
+                type="number"
+                defaultValue={listing.tax.annualTax}
+                onChange={handleInputChange}
+            />
+            <label htmlFor="lastTaxYear">Last Tax Year: </label><input
+                name="lastTaxYear"
+                id="lastTaxYear"
+                type="number"
+                placeholder="Last Tax Year"
+                defaultValue={listing.tax.year}
+                onChange={handleInputChange}
+            />
             <div className="flex justify-center mt-5">
                 <button
                     onClick={() => { setShowEditForm(false) }}

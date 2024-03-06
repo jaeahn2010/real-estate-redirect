@@ -113,30 +113,22 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
         <form
             onSubmit={handleSubmit}
             className="seller-request-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
-            <table className="text-left">
-                <tbody className="text-left">
-                    <tr>
-                        <td><input
-                            name="status"
-                            id="approve"
-                            type="radio"
-                            defaultValue="approved"
-                            onChange={handleInputChange}
-                        />
-                        <label htmlFor="approve">Approve</label></td>
-                    </tr>
-                    <tr>
-                        <td><input
-                            name="status"
-                            id="deny"
-                            type="radio"
-                            defaultValue="denied"
-                            onChange={handleInputChange}
-                        />
-                        <label htmlFor="deny">Deny</label></td>
-                    </tr>
-                </tbody>
-            </table>
+            <input
+                name="status"
+                id="approve"
+                type="radio"
+                defaultValue="approved"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="approve">Approve</label>
+            <input
+                name="status"
+                id="deny"
+                type="radio"
+                defaultValue="denied"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="deny">Deny</label>
             <div className="text-center my-3">
                 <button
                     onClick={() => { setShowEditForm(false) }}

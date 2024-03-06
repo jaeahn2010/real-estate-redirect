@@ -81,133 +81,98 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
             <form
                 onSubmit={handleSubmit}
                 className="offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td><label htmlFor="status">Status:</label></td>
-                                <td><input
-                                    name="status"
-                                    disabled={true}
-                                    defaultValue="pending"
-                                /></td>
-                            </tr>
-                            <tr className="h-10 my-5">
-                                <td colSpan={2} className="border-y-2 border-black"><p>Terms of the counteroffer (if any)</p></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="offerPrice">Your offer price: $</label></td>
-                                <td><input
-                                    name="offerPrice"
-                                    defaultValue={data.terms.offerPrice}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="expiration">This offer expires on: </label></td>
-                                <td><input
-                                    name="expiration"
-                                    type="date"
-                                    defaultValue={data.terms.expiration}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="EMD">Earnest money deposit: $</label></td>
-                                <td><input
-                                    name="EMD"
-                                    type="number"
-                                    defaultValue={data.terms.EMD}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="downPayment">Down payment: $</label></td>
-                                <td><input
-                                    name="downPayment"
-                                    type="number"
-                                    className="mx-2 bg-gray-100"
-                                    defaultValue={data.terms.downPayment}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="loanType">Loan type: </label></td>
-                                <td><input
-                                    name="loanType"
-                                    type="text"
-                                    defaultValue={data.terms.loanType}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="loanAmount">Loan amount: $</label></td>
-                                <td><input
-                                    name="loanAmount"
-                                    type="number"
-                                    defaultValue={data.terms.loanAmount}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="appraisalContingencyDate">Appraisal Contingency Date: </label></td>
-                                <td><input
-                                    name="appraisalContingencyDate"
-                                    type="date"
-                                    defaultValue={data.terms.appraisalContingencyDate}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="loanContingencyDate">Loan Contingency Date: </label></td>
-                                <td><input
-                                    name="loanContingencyDate"
-                                    type="date"
-                                    defaultValue={data.terms.loanContingencyDate}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="personalPropertyIncluded">Personal properties to be included in sale: </label></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="escrowCompany">Escrow company: </label></td>
-                                <td><input
-                                    name="personalPropertyIncluded"
-                                    type="text"
-                                    defaultValue={data.terms.personalPropertyIncluded}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="walkthrough">Walkthrough Date: </label></td>
-                                <td><input
-                                    name="walkthrough"
-                                    type="date"
-                                    defaultValue={data.terms.walkthrough}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="closeOfEscrow">Closing Date: </label></td>
-                                <td><input
-                                    name="closeOfEscrow"
-                                    type="date"
-                                    defaultValue={data.terms.closeOfEscrow}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><label htmlFor="additionalTerms">Additional Terms: </label></td>
-                                <td><input
-                                    name="additionalTerms"
-                                    type="text"
-                                    defaultValue={data.terms.additionalTerms}
-                                    onChange={handleInputChange}
-                                /></td>
-                            </tr>                            
-                        </tbody>
-                    </table>
+                <label htmlFor="status">Status:</label>
+                <input
+                    name="status"
+                    disabled={true}
+                    defaultValue="pending"
+                />
+                <p>Terms of the counteroffer (if any)</p>
+                <label htmlFor="offerPrice">Your offer price: $</label>
+                <input
+                    name="offerPrice"
+                    defaultValue={data.terms.offerPrice}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="expiration">This offer expires on: </label>
+                <input
+                    name="expiration"
+                    type="date"
+                    defaultValue={data.terms.expiration}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="EMD">Earnest money deposit: $</label>
+                <input
+                    name="EMD"
+                    type="number"
+                    defaultValue={data.terms.EMD}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="downPayment">Down payment: $</label>
+                <input
+                    name="downPayment"
+                    type="number"
+                    className="mx-2 bg-gray-100"
+                    defaultValue={data.terms.downPayment}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="loanType">Loan type: </label>
+                <input
+                    name="loanType"
+                    type="text"
+                    defaultValue={data.terms.loanType}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="loanAmount">Loan amount: $</label>
+                <input
+                    name="loanAmount"
+                    type="number"
+                    defaultValue={data.terms.loanAmount}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="appraisalContingencyDate">Appraisal Contingency Date: </label>
+                <input
+                    name="appraisalContingencyDate"
+                    type="date"
+                    defaultValue={data.terms.appraisalContingencyDate}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="loanContingencyDate">Loan Contingency Date: </label>
+                <input
+                    name="loanContingencyDate"
+                    type="date"
+                    defaultValue={data.terms.loanContingencyDate}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="personalPropertyIncluded">Personal properties to be included in sale: </label>
+                <label htmlFor="escrowCompany">Escrow company: </label>
+                <input
+                    name="personalPropertyIncluded"
+                    type="text"
+                    defaultValue={data.terms.personalPropertyIncluded}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="walkthrough">Walkthrough Date: </label>
+                <input
+                    name="walkthrough"
+                    type="date"
+                    defaultValue={data.terms.walkthrough}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="closeOfEscrow">Closing Date: </label>
+                <input
+                    name="closeOfEscrow"
+                    type="date"
+                    defaultValue={data.terms.closeOfEscrow}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="additionalTerms">Additional Terms: </label>
+                <input
+                    name="additionalTerms"
+                    type="text"
+                    defaultValue={data.terms.additionalTerms}
+                    onChange={handleInputChange}
+                />
                 <div className="flex justify-center py-5">
                     <button
                         onClick={() => { setShowEditForm(false) }}
@@ -239,52 +204,38 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         <form
             onSubmit={handleSubmit}
             className="seller-offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2">
-            <table className="text-left">
-                <tbody className="text-left">
-                    <tr>
-                        <td><input
-                            name="status"
-                            id="accept"
-                            type="radio"
-                            defaultValue="accepted"
-                            onChange={handleInputChange}
-                        />
-                        <label htmlFor="accept">Accept</label></td>
-                    </tr>
-                    <tr>
-                        <td><input
-                            name="status"
-                            id="reject"
-                            type="radio"
-                            defaultValue="rejected"
-                            onChange={handleInputChange}
-                        />
-                        <label htmlFor="accept">Reject</label></td>
-                    </tr>
-                    <tr>
-                        <td><input
-                            name="status"
-                            id="counter"
-                            type="radio"
-                            defaultValue="countered"
-                            onChange={handleInputChange}
-                        />
-                        <label htmlFor="accept">Counteroffer</label></td>
-                    </tr>
-                    <tr>
-                        <td className="h-10"><label className="my-5" htmlFor="additionalTerms">Proposed counteroffer terms (if any): </label></td>
-                    </tr>
-                    <tr className="terms text-center">
-                        <td className="text-center"><input
-                            className="h-20 text-center"
-                            name="additionalTerms"
-                            type="text"
-                            defaultValue=''
-                            onChange={handleInputChange}
-                        /></td>
-                    </tr>
-                </tbody>
-            </table>
+            <input
+                name="status"
+                id="accept"
+                type="radio"
+                defaultValue="accepted"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="accept">Accept</label>
+            <input
+                name="status"
+                id="reject"
+                type="radio"
+                defaultValue="rejected"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="accept">Reject</label>
+            <input
+                name="status"
+                id="counter"
+                type="radio"
+                defaultValue="countered"
+                onChange={handleInputChange}
+            />
+            <label htmlFor="accept">Counteroffer</label>
+            <label className="my-5" htmlFor="additionalTerms">Proposed counteroffer terms (if any): </label>
+            <input
+                className="h-20 text-center"
+                name="additionalTerms"
+                type="text"
+                defaultValue=''
+                onChange={handleInputChange}
+            />
             <div className="text-center my-3">
                 <button
                     onClick={() => { setShowEditForm(false) }}

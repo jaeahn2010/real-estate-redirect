@@ -6,7 +6,6 @@ import HomePage from '../HomePage'
 import DetailsPage from '../DetailsPage'
 import AuthFormPage from '../AuthFormPage'
 import SellerProfilePage from '../SellerProfilePage'
-// import BuyerProfilePage from '../BuyerProfilePage'
 import './styles.css'
 import { getListings, getUserByToken } from '../../../utils/backend'
 
@@ -25,7 +24,7 @@ export default function App() {
     } else if (category === "zip") {
       filteredData = data.filter(listing => listing.location.zip == filter)
     } else if (category === "address") {
-      filteredData = data.filter(listing => listing.location.address.toLowerCase().includes(filter))
+      filteredData = data.filter(listing => listing.location.address.toLowerCase().includes(filter.toLowerCase()))
     } else if (category === "userToken" && filter === "none") {
       const currentUserData = await getUserByToken()
       filteredData = data.filter(listing => {

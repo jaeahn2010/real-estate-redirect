@@ -7,10 +7,10 @@ label {
     color: black;
 }
 
-.seller-offer-form table, tr, td {
+.seller-offer-form{
     text-align: left !important;
 }
 
-.terms, .terms td {
+.terms {
     text-align: center !important;
 }

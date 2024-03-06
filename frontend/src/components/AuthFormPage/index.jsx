@@ -80,7 +80,7 @@ export default function AuthFormPage({ setLoginStatus }) {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="text-center text-gray-100">
+                <div className="flex-col text-gray-100">
                     <p>Are you planning to buy or sell a home?</p>
                     <input
                         id="categoryBuyer"
