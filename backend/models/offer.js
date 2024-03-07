@@ -39,7 +39,7 @@ const offerSchema = new mongoose.Schema(
             escrowCompany: {type: String, required: true},
             walkthrough: {type: Date, required: true},
             closeOfEscrow: {type: Date, required: true},
-            additionalTerms: {type: String, required: true},
+            additionalTerms: {type: String},
         }
     },
     { timestamps: true }

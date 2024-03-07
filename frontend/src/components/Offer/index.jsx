@@ -25,6 +25,11 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         closeOfEscrow: data.terms.closeOfEscrow,
         additionalTerms: data.terms.additionalTerms,
     })
+    let loanTypes = ["Conventional", "FHA", "VA", "Other - please specify", "None - Cash offer"]
+    let loanTypeOptions = []
+    for (let loanType of loanTypes) {
+        loanTypeOptions.push(<option key={loanType} value={loanType}>{loanType}</option>)
+    }
 
     useEffect(() => {
         if (loginStatus) {
@@ -33,6 +38,19 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
         setCurrentUserToken(localStorage.getItem("userToken"))
         }
     }, [])
+
+    function zeroPad(num) {
+        return num < 10 ? `0${String(num)}` : String(num)
+    }
+
+    function extractDate(date) {
+        return `${date.getFullYear()}-${zeroPad(date.getMonth() + 1)}-${zeroPad(date.getDate())}`
+    }
+    let formattedExpiration = extractDate(new Date(data.terms.expiration))
+    let formattedAppraisalContingencyDate = extractDate(new Date(data.terms.appraisalContingencyDate))
+    let formattedLoanContingencyDate = extractDate(new Date(data.terms.loanContingencyDate))
+    let formattedWalkthrough = extractDate(new Date(data.terms.walkthrough))
+    let formattedCloseOfEscrow = extractDate(new Date(data.terms.closeOfEscrow))
 
     function handleInputChange(event) {
         setEditFormData({
@@ -76,11 +94,12 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
     let offerForm = ''
     //only display edit/delete buttons if user is logged in & offer is their own
     if (loginStatus && currentUserToken === offerUserToken && localStorage.userCategory === 'buyer') {
-        buyerIdDisplay = data.userId.slice(-6) + " (Your offer)"
+        buyerIdDisplay += data.userId.slice(-6) + " (Your offer)"
         offerForm =
             <form
                 onSubmit={handleSubmit}
                 className="buyer-offer-form bg-stone-400 rounded-lg p-4 my-4 border-gray-700 border-2 mx-auto">
+                {buyerIdDisplay}
                 <input
                     name="status"
                     disabled={true}
@@ -93,13 +112,15 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     name="offerPrice"
                     defaultValue={data.terms.offerPrice}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="expiration">This offer expires on: </label><br/>
                 <input
                     name="expiration"
                     type="date"
-                    defaultValue={data.terms.expiration}
+                    defaultValue={formattedExpiration}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="EMD">Earnest money deposit: $</label><br/>
                 <input
@@ -107,6 +128,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     type="number"
                     defaultValue={data.terms.EMD}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="downPayment">Down payment: $</label><br/>
                 <input
@@ -115,33 +137,39 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     className="mx-2 bg-gray-100"
                     defaultValue={data.terms.downPayment}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="loanType">Loan type: </label><br/>
-                <input
+                <select
                     name="loanType"
-                    type="text"
-                    defaultValue={data.terms.loanType}
+                    id="loanType"
+                    defaultValue={null}
                     onChange={handleInputChange}
-                /><br/>
+                    required
+                >
+                    <option key="default" value={null} disabled>Select a loan type</option>
+                {loanTypeOptions}
+                </select>
                 <label htmlFor="loanAmount">Loan amount: $</label><br/>
                 <input
                     name="loanAmount"
                     type="number"
                     defaultValue={data.terms.loanAmount}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="appraisalContingencyDate">Appraisal Contingency Date: </label><br/>
                 <input
                     name="appraisalContingencyDate"
                     type="date"
-                    defaultValue={data.terms.appraisalContingencyDate}
+                    defaultValue={formattedAppraisalContingencyDate}
                     onChange={handleInputChange}
                 /><br/>
                 <label htmlFor="loanContingencyDate">Loan Contingency Date: </label><br/>
                 <input
                     name="loanContingencyDate"
                     type="date"
-                    defaultValue={data.terms.loanContingencyDate}
+                    defaultValue={formattedLoanContingencyDate}
                     onChange={handleInputChange}
                 /><br/>
                 <label htmlFor="personalPropertyIncluded">Personal properties to be included in sale: </label><br/>
@@ -150,6 +178,7 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     type="text"
                     defaultValue={data.terms.personalPropertyIncluded}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="escrowCompany">Escrow company: </label><br/>
                 <input
@@ -157,25 +186,30 @@ export default function Offer({ data, refreshOffers, loginStatus }) {
                     type="text"
                     defaultValue={data.terms.escrowCompany}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="walkthrough">Walkthrough Date: </label><br/>
                 <input
                     name="walkthrough"
                     type="date"
-                    defaultValue={data.terms.walkthrough}
+                    defaultValue={formattedWalkthrough}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="closeOfEscrow">Closing Date: </label><br/>
                 <input
                     name="closeOfEscrow"
                     type="date"
-                    defaultValue={data.terms.closeOfEscrow}
+                    defaultValue={formattedCloseOfEscrow}
                     onChange={handleInputChange}
+                    required
                 /><br/>
                 <label htmlFor="additionalTerms">Additional Terms: </label><br/>
-                <input
+                <textarea
+                    className="bg-stone-700 ml-3"
                     name="additionalTerms"
-                    type="text"
+                    rows='10'
+                    cols='40'
                     defaultValue={data.terms.additionalTerms}
                     onChange={handleInputChange}
                 /><br/>

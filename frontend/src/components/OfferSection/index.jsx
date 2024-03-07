@@ -26,12 +26,19 @@ export default function OfferSection({ listingId, loginStatus }) {
         additionalTerms: '',
     })
 
+    let loanTypes = ["Conventional", "FHA", "VA", "Other - please specify", "None - Cash offer"]
+    let loanTypeOptions = []
+    for (let loanType of loanTypes) {
+        loanTypeOptions.push(<option key={loanType} value={loanType}>{loanType}</option>)
+    }
+
     useEffect(() => {
         getOffers(listingId)
             .then(offers => setOffers(offers))
     }, [])
 
     function handleInputChange(event) {
+        console.log(event.target.value)
         setCreateFormData({
             ...createFormData,
             [event.target.name]: event.target.value
@@ -48,7 +55,6 @@ export default function OfferSection({ listingId, loginStatus }) {
     }
 
     function handleSubmit(event) {
-        console.log(event)
         event.preventDefault()
         setCreateFormData({
             userId: localStorage.getItem("userToken"),
@@ -120,6 +126,7 @@ export default function OfferSection({ listingId, loginStatus }) {
                 placeholder="Your offer price"
                 defaultValue={createFormData.offerPrice}
                 onChange={handleInputChange}
+                required
             />
             </div>
             <label htmlFor="expiration">This offer expires on: </label>
@@ -128,6 +135,7 @@ export default function OfferSection({ listingId, loginStatus }) {
                 type="date"
                 defaultValue={createFormData.expiration}
                 onChange={handleInputChange}
+                required
             />
             <label htmlFor="EMD">Earnest money deposit:</label>
             <div className="flex ml-2">
@@ -136,6 +144,7 @@ export default function OfferSection({ listingId, loginStatus }) {
                 type="number"
                 defaultValue={createFormData.EMD}
                 onChange={handleInputChange}
+                required
             />
             </div>
             <label htmlFor="downPayment">Down payment:</label>
@@ -146,14 +155,20 @@ export default function OfferSection({ listingId, loginStatus }) {
                 type="number"
                 defaultValue={createFormData.downPayment}
                 onChange={handleInputChange}
+                required
             />
             </div>
-            <label htmlFor="loanType">Loan type: </label><input
+            <label htmlFor="loanType">Loan type: </label>
+            <select
                 name="loanType"
-                type="text"
-                defaultValue={createFormData.loanType}
+                id="loanType"
+                defaultValue={null}
                 onChange={handleInputChange}
-            />
+                required
+            >
+                <option key="default" value={null} selected disabled>Select a loan type</option>
+                {loanTypeOptions}
+            </select>
             <label htmlFor="loanAmount">Loan amount:</label>
             <div className="flex ml-2">
             <p className="!text-black">$</p>
@@ -162,6 +177,7 @@ export default function OfferSection({ listingId, loginStatus }) {
                 type="number"
                 defaultValue={createFormData.loanAmount}
                 onChange={handleInputChange}
+                required
             />
             </div>
             <label htmlFor="proofOfFunds" className="block">Upload your proof of funds or preapproval letter below </label>
@@ -191,6 +207,7 @@ export default function OfferSection({ listingId, loginStatus }) {
                 type="text"
                 defaultValue={createFormData.personalPropertyIncluded}
                 onChange={handleInputChange}
+                required
             />
             <label htmlFor="escrowCompany">Escrow company: </label>
             <input
@@ -198,12 +215,14 @@ export default function OfferSection({ listingId, loginStatus }) {
                 type="text"
                 defaultValue={createFormData.escrowCompany}
                 onChange={handleInputChange}
+                required
             />
             <label htmlFor="walkthrough">Walkthrough Date: </label><input
             name="walkthrough"
             type="date"
             defaultValue={createFormData.walkthrough}
             onChange={handleInputChange}
+            required
             />
             <label htmlFor="closeOfEscrow">Closing Date: </label>
             <input
@@ -211,11 +230,14 @@ export default function OfferSection({ listingId, loginStatus }) {
                 type="date"
                 defaultValue={createFormData.closeOfEscrow}
                 onChange={handleInputChange}
+                required
                 />
             <label htmlFor="additionalTerms">Additional Terms: </label>
-            <input
+            <textarea
+                className="bg-stone-700 ml-3"
                 name="additionalTerms"
-                type="text"
+                rows="10"
+                cols="40"
                 defaultValue={createFormData.additionalTerms}
                 onChange={handleInputChange}
                 />
