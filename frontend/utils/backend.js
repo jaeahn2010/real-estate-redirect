@@ -33,10 +33,13 @@ export async function getShowingRequests(listingId) {
 }
 
 export async function postShowingRequest(showingRequest) {
-    console.log(showingRequest)
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
-    const { data } = await axios.post('/api/showingRequests', showingRequest, authHeader)
-    return data
+    try {
+        const { data } = await axios.post('/api/showingRequests', showingRequest, authHeader)
+        return data
+    } catch(err) {
+        alert(err.response.data.message)
+    }
 }
 export async function updateShowingRequest(showingRequest, showingRequestId) {
     const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }

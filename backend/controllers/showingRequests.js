@@ -52,19 +52,23 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new showing request
 router.post('/', authMiddleware, (req, res) => {
-    db.ShowingRequest.create({
-        ...req.body,
-        userId: req.user.id
-    })
-        .then(showingRequest => res.json(showingRequest))
+    if (req.body.requestedDateTime) {
+        db.ShowingRequest.create({
+            ...req.body,
+            userId: req.user.id
+        })
+            .then(showingRequest => res.json(showingRequest))
+    } else {
+        console.log("should get here")
+        res.status(400).json({message: "Invalid date/time input. Please try again."})
+    }
 })
 
 // update: edit showing request
 router.put('/:showingRequestId', authMiddleware, async (req, res) => {
     const reformat = {
-        listingId: req.body.listingId,
-        status: req.body.status,
-        requestedDateTime: new Date(req.body.requestedDate + "T" + req.body.requestedTime + ":00Z")
+        ...req.body,
+        requestedDateTime: new Date(`${req.body.requestedDate}T${req.body.requestedTime}:00.000Z`)
     }
     const userShowingRequest = await db.ShowingRequest.findById(req.params.showingRequestId)
     const currentUser = await db.User.findById(req.user.id)

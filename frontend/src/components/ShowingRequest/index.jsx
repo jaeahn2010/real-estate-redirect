@@ -21,6 +21,11 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
         }
     }, [])
 
+    //may need to use this function for day and month displays also
+    function timeDisplay(time) {
+        return time < 10 ? `0${String(time)}` : String(time)
+    }
+
     function handleInputChange(event) {
         setEditFormData({
             ...editFormData,
@@ -32,8 +37,7 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
         event.preventDefault()
         setShowEditForm(false)
         if (localStorage.userCategory === 'buyer') {
-            let convertedDateTime = new Date(event.target[0].value + "T" + event.target[1].value + ":00Z")
-            setEditFormData({...editFormData, requestedDateTime: convertedDateTime})
+            setEditFormData({...editFormData, requestedDate: event.target[0].value, requestedTime: event.target[1].value})
             updateShowingRequest(editFormData, data._id)
                 .then(() => refreshShowingRequests())
         } else {
@@ -61,6 +65,9 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
     let showingRequestForm = ''
     //only display edit/delete buttons if user is logged in & showing request is their own
     if (loginStatus && currentUserToken === offerUserToken && localStorage.userCategory === 'buyer') {
+        let dateToBeSplit = new Date(data.requestedDateTime)
+        let currentRequestedDate = `${dateToBeSplit.getFullYear()}-${timeDisplay(dateToBeSplit.getMonth() + 1)}-${timeDisplay(dateToBeSplit.getDate())}`
+        let currentRequestedTime = `${timeDisplay(dateToBeSplit.getHours())}:${timeDisplay(dateToBeSplit.getMinutes())}`
         buyerIdDisplay += " (Your request)"
         showingRequestForm = 
         <form
@@ -72,6 +79,7 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
                 name="requestedDate"
                 type="date"
                 className="mx-2 bg-gray-700"
+                defaultValue={currentRequestedDate}
                 onChange={handleInputChange}
             />
             <br/>
@@ -81,6 +89,7 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
                     name="requestedTime"
                     type="time"
                     className="mx-2 bg-gray-700"
+                    defaultValue={currentRequestedTime}
                     onChange={handleInputChange}
                 />
             <div className="flex justify-center my-5">
@@ -171,9 +180,6 @@ export default function ShowingRequest({ data, refreshShowingRequests, loginStat
             } else {
                 ampm = dateObj.getHours === 12 ? 'PM' : 'AM'
                 hourDisplay = dateObj.getHours()
-            }
-            function timeDisplay(time) {
-                return time < 10 ? `0${String(time)}` : String(time)
             }
             return `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()} ${timeDisplay(hourDisplay)}:${timeDisplay(dateObj.getMinutes())} ${ampm}`
         }
