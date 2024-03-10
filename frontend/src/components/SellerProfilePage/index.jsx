@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom"
 import Gallery from '../Gallery'
 import { postListing, getListings, getUserByToken } from "../../../utils/backend"
 import './styles.css'
+let zipCodeOptions = []
+let dom = 0
 
 export default function SellerProfilePage(props) {
     const [username, setUsername] = useState('')
@@ -16,10 +18,10 @@ export default function SellerProfilePage(props) {
         state: 'NV',
         zip: 0,
         subdivision: '',
-        price: 0,
-        pricePerSF: 0,
+        price: '',
+        pricePerSF:'',
         listDate: new Date(),
-        status: "active",
+        listingStatus: "",
         homeowner: '',
         propertyType: '',
         zoning: '',
@@ -43,7 +45,7 @@ export default function SellerProfilePage(props) {
         bathrooms: 0,
         bathsFull: 0,
         roomsTotal: 0,
-        livingArea: 0,
+        livingArea: '',
         cooling: '',
         heating: '',
         appliancesIncluded: '',
@@ -71,6 +73,33 @@ export default function SellerProfilePage(props) {
     })
     const params = useParams()
 
+    //city options
+    let cityList = ["Boulder City", "Henderson", "Las Vegas", "North Las Vegas"]
+    let cityOptions = []
+    cityList.forEach(city => cityOptions.push(<option key={city} value={city}>{city}</option>))
+
+    //zip code options based on city choice
+    let zipCodesBoulderCity = [89005]
+    let zipCodesHenderson = [89002, 89011, 89012, 89014, 89015, 89044, 89052, 89074]
+    let zipCodesLV = [89101, 89102, 89103, 89104, 89106, 89107, 89108, 89109, 89110, 89113, 89115, 89117, 89118, 89119, 89120, 89121, 89122, 89123, 89124, 89128, 89129, 89130, 89131, 89134, 89135, 89138, 89139, 89141, 89142, 89143, 89144, 89145, 89146, 89147, 89148, 89149, 89156, 89158, 89161, 89166, 89169, 89178, 89179, 89183, 89191]
+    let zipCodesNLV = [89030, 89031, 89032, 89033, 89081, 89084, 89085, 89086, 89087]
+
+    function zipCodeChoices(zipList) {
+        zipCodeOptions = []
+        zipList.forEach(zip => zipCodeOptions.push(<option key={zip} value={zip}>{zip}</option>))
+    }
+   
+    //property type options
+    let propertyTypeList = ["Single-Family Residence", "Townhouse", "Condominium", "Apartment", "Duplex/Triplex/Quadruplex", "Manufactured Home", "Mobile Home"]
+    let propertyTypeOptions = []
+    propertyTypeList.forEach(type => propertyTypeOptions.push(<option key={type} value={type}>{type}</option>))
+
+    //house direction options
+    let directionsList = ["north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest"]
+    let directionOptions = []
+    directionsList.forEach(direction => directionOptions.push(<option key={direction} value={direction}>{direction}</option>))
+
+
     async function getUserData() {
         const currentUserData = await getUserByToken()
         setUsername(`${currentUserData.firstName} ${currentUserData.lastName}`)
@@ -86,10 +115,86 @@ export default function SellerProfilePage(props) {
     }, [])
 
     function handleInputChange(event) {
-        setCreateFormData({
-            ...createFormData,
-            [event.target.name]: event.target.value
-        })
+        console.log(createFormData)
+        if (event.target.name === "city") {
+            switch(event.target.value) {
+                case "Boulder City":
+                    zipCodeChoices(zipCodesBoulderCity)
+                    break;
+                case "Henderson":
+                    zipCodeChoices(zipCodesHenderson)
+                    break;
+                case "Las Vegas":
+                    zipCodeChoices(zipCodesLV)
+                    break;
+                case "North Las Vegas":
+                    zipCodeChoices(zipCodesNLV)
+                    break;
+            }
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: event.target.value
+            })
+        } else if (event.target.name === "listDate") {
+            let targetListDate = new Date(event.target.value)
+            let today = new Date()
+            targetListDate = targetListDate.setHours(0,0,0,0)
+            today = today.setHours(0,0,0,0)
+            //still calculates in UTC - need to fix
+            dom = Math.round((today - targetListDate) / 1000 / 60 / 60 / 24)
+            listingStatus = dom < 0 ? "COMING SOON" : "ACTIVE"
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: event.target.value,
+                listingStatus: listingStatus
+            })
+        } else if (event.target.name === "price") {
+            price = event.target.value
+            if (livingArea > 0) {
+                setCreateFormData({
+                    ...createFormData,
+                    [event.target.name]: event.target.value,
+                    livingArea: livingArea,
+                    pricePerSF: Math.round(price / livingArea),
+                })
+            } else {
+                setCreateFormData({
+                    ...createFormData,
+                    [event.target.name]: event.target.value
+                })                
+            }
+        } else if (event.target.name === "livingArea") {
+            livingArea = event.target.value
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: event.target.value,
+                pricePerSF: Math.round(price / livingArea),
+            })
+        } else if (event.target.name === "propertyType") {
+            let levelInput = document.getElementById("level")
+            let levelLabel = document.getElementById("level-label")
+            if (event.target.value === "Single-Family Residence" || event.target.value === "Townhouse" || event.target.value === "Manufactured Home" || event.target.value === "Mobile Home") {
+                levelInput.style.display = "none"
+                levelLabel.style.display = "none"
+                setCreateFormData({
+                    ...createFormData,
+                    [event.target.name]: event.target.value,
+                    level: 1
+                })
+            } else {
+                levelInput.style.display = "block"
+                levelLabel.style.display = "block"
+                setCreateFormData({
+                    ...createFormData,
+                    [event.target.name]: event.target.value
+                })
+            }
+        } else {
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: event.target.value
+            })
+        }
     }
 
     function toggleCreateForm() {
@@ -210,6 +315,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Parcel number"
                         defaultValue={createFormData.apn}
                         onChange={handleInputChange}
+                        required
                     />
                     <br/>
                     <p className="table-title text-black-800">LOCATION</p>
@@ -221,17 +327,19 @@ export default function SellerProfilePage(props) {
                         placeholder="Street number and name"
                         defaultValue={createFormData.address}
                         onChange={handleInputChange}
+                        required
                     />
                     <br/>
                     <label htmlFor="city">City: </label><br/>
-                    <input
+                    <select
                         name="city"
                         id="city"
-                        type="text"
-                        placeholder="City"
-                        defaultValue={createFormData.city}
+                        defaultValue="Las Vegas"
                         onChange={handleInputChange}
-                    />
+                        required>
+                        <option key='0' value='none' disabled>Select a city</option>
+                        {cityOptions}
+                    </select>
                     <br/>
                     <label htmlFor="state">State: </label><br/>
                     <input
@@ -242,17 +350,19 @@ export default function SellerProfilePage(props) {
                         disabled={true}
                         defaultValue={createFormData.state}
                         onChange={handleInputChange}
+                        required
                     />
                     <br/>
                     <label htmlFor="zip">Zip code: </label><br/>
-                    <input
+                    <select
                         name="zip"
                         id="zip"
-                        type="number"
-                        placeholder="Zip code"
-                        defaultValue={createFormData.zip}
+                        defaultValue={0}
                         onChange={handleInputChange}
-                    />
+                        required>
+                        <option key='0' value={0} disabled>Select a zip code</option>
+                        {zipCodeOptions}
+                    </select>
                     <br/>
                     <label htmlFor="subdivision">Subdivision: </label><br/>
                     <input
@@ -273,13 +383,14 @@ export default function SellerProfilePage(props) {
                         placeholder="List price"
                         defaultValue={createFormData.price}
                         onChange={handleInputChange}
+                        required
                     />
                     <br/>
                     <label htmlFor="pricePerSF">Price per square foot: </label><br/>
                     <input
                         name="pricePerSF"
                         type="number"
-                        placeholder="Price per sq ft"
+                        disabled={true}
                         defaultValue={createFormData.pricePerSF}
                         onChange={handleInputChange}
                     />
@@ -291,14 +402,16 @@ export default function SellerProfilePage(props) {
                         type="date"
                         defaultValue={createFormData.listDate}
                         onChange={handleInputChange}
+                        required
                     />
                     <br/>
+                    <label htmlFor="listingStatus">Listing status: </label><br/>
                     <input
-                        name="status"
+                        name="listingStatus"
+                        id="listingStatus"
                         type="text"
-                        placeholder="Status"
-                        hidden={true}
-                        defaultValue={createFormData.status}
+                        disabled={true}
+                        defaultValue={createFormData.listingStatus}
                         onChange={handleInputChange}
                     />
                     <br/>
@@ -309,24 +422,28 @@ export default function SellerProfilePage(props) {
                         disabled={true}
                         type="text"
                         defaultValue={listings[0].homeowner[0]}
+                        required
                     />
                     <p className="table-title text-black-800">ZONING & STRUCTURE</p>
                     <label htmlFor="propertyType">Property Type: </label><br/>
-                    <input
+                    <select
                         name="propertyType"
                         id="propertyType"
-                        type="text"
-                        placeholder="Property Type"
-                        defaultValue={createFormData.propertyType}
+                        defaultValue=""
                         onChange={handleInputChange}
-                    /><br/>
+                        required>
+                        <option key='0' value='none' disabled>Select a property type</option>
+                        {propertyTypeOptions}
+                    </select>
+                    <br/>
                     <label htmlFor="zoning">Zoning: </label><br/>
                     <input
                         name="zoning"
                         type="text"
-                        placeholder="Zoning"
-                        defaultValue={createFormData.zoning}
+                        defaultValue="Residential"
+                        disabled={true}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="stories">Stories: </label><br/>
                     <input
@@ -336,15 +453,18 @@ export default function SellerProfilePage(props) {
                         placeholder="Stories"
                         defaultValue={createFormData.stories}
                         onChange={handleInputChange}
+                        required
                     /><br/>
-                    <label htmlFor="level">This property is located on level: </label><br/>
+                    <label htmlFor="level" className="hidden" id="level-label">This property is located on level: </label><br/>
                     <input
+                        className="hidden"
                         name="level"
                         id="level"
                         type="number"
                         placeholder="Level"
                         defaultValue={createFormData.level}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="yearBuilt">Year Built: </label><br/>
                     <input
@@ -354,25 +474,31 @@ export default function SellerProfilePage(props) {
                         placeholder="Year Built"
                         defaultValue={createFormData.yearBuilt}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="isDetached">Is this property detached? </label><br/>
-                    <input
+                    <select
                         name="isDetached"
                         id="isDetached"
-                        type="text"
-                        placeholder="Y/N"
-                        defaultValue={createFormData.isDetached}
+                        defaultValue=""
                         onChange={handleInputChange}
-                    /><br/>
+                        required>
+                        <option key='0' value='none' disabled>Select an option</option>
+                        <option key='true' value={true}>Yes</option>
+                        <option key='false' value={false}>No</option>
+                    </select>
+                    <br/>
                     <label htmlFor="houseFaces">Which direction does the house face? </label><br/>
-                    <input
+                    <select
                         name="houseFaces"
                         id="houseFaces"
-                        type="text"
-                        placeholder="Direction"
-                        defaultValue={createFormData.houseFaces}
+                        defaultValue=""
                         onChange={handleInputChange}
-                    /><br/>
+                        required>
+                        <option key='0' value='none' disabled>Select a direction</option>
+                        {directionOptions}
+                    </select>
+                    <br/>
                     <p className="table-title text-black-800">EXTERIOR: CONSTRUCTION</p>
                     <label htmlFor="roof">Roof materials: </label><br/>
                     <input
@@ -401,6 +527,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.fencing}
                         onChange={handleInputChange}
                     /><br/>
+                    <p className="table-title text-black-800">EXTERIOR: LOT</p>
                     <label htmlFor="lotSize">Lot size (sq ft): </label><br/>
                     <input
                         name="lotSize"
@@ -409,8 +536,8 @@ export default function SellerProfilePage(props) {
                         placeholder="Lot size"
                         defaultValue={createFormData.lotSize}
                         onChange={handleInputChange}
+                        required
                     /><br/>
-                    <p className="table-title text-black-800">EXTERIOR: LOT</p>
                     <input
                         name="lotFeatures"
                         id="desertLandscaping"
@@ -550,41 +677,53 @@ export default function SellerProfilePage(props) {
                         <label htmlFor="bushes">Bushes</label>
                 <p className="table-title text-black-800">EXTERIOR: OTHER</p>
                     <label htmlFor="hasSolar">Does this property have solar panels? </label><br/>
-                    <input
+                    <select
                         name="hasSolar"
                         id="hasSolar"
-                        type="text"
-                        placeholder="Y/N"
-                        defaultValue={createFormData.hasSolar}
+                        defaultValue=""
                         onChange={handleInputChange}
-                    /><br/>
+                        required>
+                        <option key='0' value='none' disabled>Select an option</option>
+                        <option key='true' value={true}>Yes</option>
+                        <option key='false' value={false}>No</option>
+                    </select>
+                    <br/>
                     <label htmlFor="hasBalcony">Does this property have a balcony? </label><br/>
-                    <input
+                    <select
                         name="hasBalcony"
                         id="hasBalcony"
-                        type="text"
-                        placeholder="Y/N"
-                        defaultValue={createFormData.hasBalcony}
+                        defaultValue=""
                         onChange={handleInputChange}
-                    /><br/>
+                        required>
+                        <option key='0' value='none' disabled>Select an option</option>
+                        <option key='true' value={true}>Yes</option>
+                        <option key='false' value={false}>No</option>
+                    </select>
+                    <br/>
                     <label htmlFor="hasPool">Does this property have a pool? </label><br/>
-                    <input
+                    <select
                         name="hasPool"
                         id="hasPool"
-                        type="text"
-                        placeholder="Y/N"
-                        defaultValue={createFormData.hasPool}
+                        defaultValue=""
                         onChange={handleInputChange}
-                    /><br/>
+                        required>
+                        <option key='0' value='none' disabled>Select an option</option>
+                        <option key='true' value={true}>Yes</option>
+                        <option key='false' value={false}>No</option>
+                    </select>
+                    <br/>
                     <label htmlFor="isDetached">Does this property have a spa? </label><br/>
-                    <input
+                    <select
                         name="hasSpa"
                         id="hasSpa"
-                        type="text"
-                        placeholder="Y/N"
-                        defaultValue={createFormData.hasSpa}
+                        defaultValue=""
                         onChange={handleInputChange}
-                    /><br/>
+                        required>
+                        <option key='0' value='none' disabled>Select an option</option>
+                        <option key='true' value={true}>Yes</option>
+                        <option key='false' value={false}>No</option>
+                    </select>
+                    <br/>
                     <p className="table-title text-black-800">INTERIOR: FLOORING</p>
                         <input
                         name="flooring"
@@ -667,6 +806,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Bedrooms"
                         defaultValue={createFormData.bedrooms}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="bathrooms">Bathrooms: </label><br/>
                     <input
@@ -676,6 +816,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Bathrooms"
                         defaultValue={createFormData.bathrooms}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="bathsFull">Full baths: </label><br/>
                     <input
@@ -685,6 +826,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Full baths"
                         defaultValue={createFormData.bathsFull}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="roomsTotal">Total rooms: </label><br/>
                     <input
@@ -703,6 +845,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Living area (sq ft)"
                         defaultValue={createFormData.livingArea}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                 <p className="table-title text-black-800">INTERIOR: COOLING/HEATING</p>
                     <label htmlFor="cooling">Cooling: </label><br/>
@@ -713,6 +856,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Cooling"
                         defaultValue={createFormData.cooling}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="heating">Heating: </label><br/>
                     <input
@@ -722,6 +866,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Heating"
                         defaultValue={createFormData.heating}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                 <p className="table-title text-black-800">APPLIANCES INCLUDED IN SALE</p>
                         <input
@@ -866,6 +1011,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Parking Type"
                         defaultValue={createFormData.parkingType}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="parkingSize">Parking size: </label><br/>
                     <input
@@ -875,9 +1021,9 @@ export default function SellerProfilePage(props) {
                         placeholder="Parking Size"
                         defaultValue={createFormData.parkingSize}
                         onChange={handleInputChange}
+                        required
                     /><br/>
-                <p className="table-title text-black-800">UTILITIES</p>
-                
+                    <p className="table-title text-black-800">UTILITIES</p>
                     <label htmlFor="sewer">Sewer: </label><br/>
                     <input
                         name="sewer"
@@ -914,6 +1060,7 @@ export default function SellerProfilePage(props) {
                         placeholder="HOA count"
                         defaultValue={createFormData.HOACount}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="HOAName">HOA name: </label><br/>
                     <input
@@ -942,7 +1089,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.HOAPhone}
                         onChange={handleInputChange}
                     /><br/>
-                <p className="!text-black underline my-5">What does the HOA fee cover?</p>
+                    <p className="!text-black underline my-5">What does the HOA fee cover?</p>
                         <input
                         name="HOAFeeIncludes"
                         id="management"
@@ -1089,14 +1236,17 @@ export default function SellerProfilePage(props) {
                     />
                         <label htmlFor="joggingPath">Jogging Path</label><br/>
                     <label htmlFor="isSeniorCommunity">Is this property in a senior community? </label><br/>
-                    <input
+                    <select
                         name="isSeniorCommunity"
                         id="isSeniorCommunity"
-                        type="text"
-                        placeholder="Y/N"
-                        defaultValue={createFormData.isSeniorCommunity}
+                        defaultValue=""
                         onChange={handleInputChange}
-                    /><br/>
+                        required>
+                        <option key='0' value='none' disabled>Select an option</option>
+                        <option key='true' value={true}>Yes</option>
+                        <option key='false' value={false}>No</option>
+                    </select>
+                    <br/>
                 <p className="table-title text-black-800">LAST SALE INFORMATION</p>
                     <label htmlFor="lastSoldDate">Last Sold Date: </label><br/>
                     <input
@@ -1105,6 +1255,7 @@ export default function SellerProfilePage(props) {
                         type="date"
                         defaultValue={createFormData.lastSoldDate}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="lastSoldPrice">Last Sold Price: </label><br/>
                     <input
@@ -1114,8 +1265,9 @@ export default function SellerProfilePage(props) {
                         placeholder="Last Sold Price"
                         defaultValue={createFormData.lastSoldPrice}
                         onChange={handleInputChange}
+                        required
                     /><br/>
-                    <label htmlFor="lastSoldPricPerSF">Last Sold Price Per SF: </label><br/>
+                    {/* <label htmlFor="lastSoldPricPerSF">Last Sold Price Per SF: </label><br/>
                     <input
                         name="lastSoldPricPerSF"
                         id="lastSoldPricPerSF"
@@ -1123,7 +1275,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Last Sold Price Per SF"
                         defaultValue={createFormData.lastSoldPricPerSF}
                         onChange={handleInputChange}
-                    /><br/>
+                    /><br/> */}
                 <p className="table-title text-black-800">TAX INFORMATION</p>
                     <label htmlFor="annualTax">Annual Tax: </label><br/>
                     <input
@@ -1133,6 +1285,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Annual Tax"
                         defaultValue={createFormData.annualTax}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <label htmlFor="lastTaxYear">Last Tax Year: </label><br/>
                     <input
@@ -1142,6 +1295,7 @@ export default function SellerProfilePage(props) {
                         placeholder="Last Tax Year"
                         defaultValue={createFormData.lastTaxYear}
                         onChange={handleInputChange}
+                        required
                     /><br/>
                     <div className="text-center">
                         <button

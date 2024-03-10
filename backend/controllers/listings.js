@@ -55,6 +55,7 @@ router.get('/:listingId', function (req, res) {
 
 // create: create new listing
 router.post('/', authMiddleware, (req, res) => {
+    console.log(req.body)
     const reformat = {
         identifier: {
             apn: req.body.apn,
@@ -70,7 +71,7 @@ router.post('/', authMiddleware, (req, res) => {
             price: req.body.price,
             pricePerSF: req.body.pricePerSF,
             listDate: req.body.listDate,
-            status: req.body.status,
+            listingStatus: req.body.listingStatus,
         },
         homeowner: req.body.homeowner,
         generalInfo: {
@@ -174,7 +175,7 @@ router.put('/:listingId', authMiddleware, async (req, res) => {
             price: req.body.price,
             pricePerSF: req.body.pricePerSF,
             listDate: req.body.listDate,
-            status: req.body.status,
+            listingStatus: req.body.listingStatus,
         },
         homeowner: req.body.homeowner,
         generalInfo: {

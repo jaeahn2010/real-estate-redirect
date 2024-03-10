@@ -134,6 +134,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 type="text"
                 defaultValue={listing.identifier.apn}
                 onChange={handleInputChange}
+                required
             /><br/>
             <label htmlFor="address">Street address: </label><br/>
             <input
@@ -142,6 +143,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 type="text"
                 defaultValue={listing.location.address}
                 onChange={handleInputChange}
+                required
             /><br/>
             <label htmlFor="city">City: </label><br/>
             <input
@@ -150,6 +152,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 type="text"
                 defaultValue={listing.location.city}
                 onChange={handleInputChange}
+                required
             /><br/>
             <label htmlFor="state">State: </label><br/>
             <input
@@ -167,6 +170,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 type="number"
                 defaultValue={listing.location.zip}
                 onChange={handleInputChange}
+                required
             /><br/>
             <label htmlFor="subdivision">Subdivision: </label><br/>
             <input
@@ -183,6 +187,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 type="number"
                 defaultValue={listing.currentActivity.price}
                 onChange={handleInputChange}
+                required
             /><br/>
             <label htmlFor="pricePerSF">Price per square foot: </label><br/>
             <input
@@ -1016,7 +1021,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
     }
 
     let statusColor = ""
-    switch(listing.currentActivity.status) {
+    switch(listing.currentActivity.listingStatus.toLowerCase()) {
         case "active":
             statusColor = <p className="rounded-3xl w-4 h-4 bg-green-600"></p>
             break;
@@ -1032,6 +1037,8 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
         case "withdrawn":
             statusColor = <p className="rounded-3xl w-4 h-4 bg-stone-200"></p>
             break;
+        case "coming soon":
+            statusColor = <p className="rounded-3xl w-4 h-4 bg-violet-500"></p>
     }
 
     return (
@@ -1044,7 +1051,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 <h1 className="p-2 text-center">${listing.currentActivity.price.toLocaleString()}</h1>
                 <div className="p-2 flex justify-center items-center">
                     {statusColor}
-                    <p className="px-1">{listing.currentActivity.status.toUpperCase()}</p>
+                    <p className="px-1">{listing.currentActivity.listingStatus.toUpperCase()}</p>
                 </div>
                 <div className="flex justify-between items-center">
                     <img src={heartIcon} className="cursor-pointer my-5 mx-5 hover:transform hover:scale-150 transition-all duration-200 ease-in-out"/>

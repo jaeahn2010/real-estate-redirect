@@ -16,7 +16,7 @@ const listingSchema = new mongoose.Schema(
             price: {type: Number, required: true},
             pricePerSF: {type: Number, required: true},
             listDate: {type: Date, default: new Date()},
-            status: {type: String, default: "active"},
+            listingStatus: {type: String, default: "active"},
         },
         homeowner: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'}],
         generalInfo: {
