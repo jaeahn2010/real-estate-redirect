@@ -34,13 +34,13 @@ export default function SellerProfilePage(props) {
         walls: '',
         fencing: '',
         lotSize: 0,
-        lotFeatures: '',
-        vegetation: '',
+        lotFeatures: [],
+        vegetation: [],
         hasSolar: false,
         hasBalcony: false,
         hasPool: false,
         hasSpa: false,
-        flooring: '',
+        flooring: [],
         bedrooms: 0,
         bathrooms: 0,
         bathsFull: 0,
@@ -48,9 +48,9 @@ export default function SellerProfilePage(props) {
         livingArea: '',
         cooling: '',
         heating: '',
-        appliancesIncluded: '',
-        fixtures: '',
-        window: '',
+        appliancesIncluded: [],
+        fixtures: [],
+        window: [],
         fireplace: '',
         other: '',
         parkingType: '',
@@ -62,8 +62,8 @@ export default function SellerProfilePage(props) {
         HOAName: '',
         HOAMonthlyFee: 0,
         HOAPhone: '',
-        HOAFeeIncludes: '',
-        communityAmenities: '',
+        HOAFeeIncludes: [],
+        communityAmenities: [],
         isSeniorCommunity: false,
         lastSoldDate: new Date(),
         lastSoldPrice: 0,
@@ -115,7 +115,6 @@ export default function SellerProfilePage(props) {
     }, [])
 
     function handleInputChange(event) {
-        console.log(createFormData)
         if (event.target.name === "city") {
             switch(event.target.value) {
                 case "Boulder City":
@@ -189,6 +188,62 @@ export default function SellerProfilePage(props) {
                     [event.target.name]: event.target.value
                 })
             }
+        } else if (event.target.name === "lotFeatures") {
+            let tempLotFeaturesArr = createFormData.lotFeatures
+            tempLotFeaturesArr.push(event.target.value)
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: tempLotFeaturesArr
+            })
+        } else if (event.target.name === "vegetation") {
+            let tempVegetationArr = createFormData.vegetation
+            tempVegetationArr.push(event.target.value)
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: tempVegetationArr
+            })
+        } else if (event.target.name === "flooring") {
+            let tempFlooringArr = createFormData.flooring
+            tempFlooringArr.push(event.target.value)
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: tempFlooringArr
+            })
+        } else if (event.target.name === "appliancesIncluded") {
+            let tempAppliancesIncludedArr = createFormData.appliancesIncluded
+            tempAppliancesIncludedArr.push(event.target.value)
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: tempAppliancesIncludedArr
+            })
+        } else if (event.target.name === "fixtures") {
+            let tempFixturesArr = createFormData.fixtures
+            tempFixturesArr.push(event.target.value)
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: tempFixturesArr
+            })
+        } else if (event.target.name === "window") {
+            let tempWindowArr = createFormData.window
+            tempWindowArr.push(event.target.value)
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: tempWindowArr
+            })
+        } else if (event.target.name === "HOAFeeIncludes") {
+            let tempHOAFeeIncludesArr = createFormData.HOAFeeIncludes
+            tempHOAFeeIncludesArr.push(event.target.value)
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: tempHOAFeeIncludesArr
+            })
+        } else if (event.target.name === "communityAmenities") {
+            let tempCommunityAmenitiesArr = createFormData.communityAmenities
+            tempCommunityAmenitiesArr.push(event.target.value)
+            setCreateFormData({
+                ...createFormData,
+                [event.target.name]: tempCommunityAmenitiesArr
+            })
         } else {
             setCreateFormData({
                 ...createFormData,
@@ -218,8 +273,8 @@ export default function SellerProfilePage(props) {
             price: 0,
             pricePerSF: 0,
             listDate: new Date(),
-            status: "active",
-            homeowner: listings[0].homeowner[0],
+            status: "",
+            homeowner: '',
             propertyType: '',
             zoning: '',
             stories: 0,
@@ -231,8 +286,8 @@ export default function SellerProfilePage(props) {
             walls: '',
             fencing: '',
             lotSize: 0,
-            lotFeatures: '',
-            vegetation: '',
+            lotFeatures: [],
+            vegetation: [],
             hasSolar: false,
             hasBalcony: false,
             hasPool: false,
@@ -245,9 +300,9 @@ export default function SellerProfilePage(props) {
             livingArea: 0,
             cooling: '',
             heating: '',
-            appliancesIncluded: '',
-            fixtures: '',
-            window: '',
+            appliancesIncluded: [],
+            fixtures: [],
+            window: [],
             fireplace: '',
             other: '',
             parkingType: '',
@@ -259,8 +314,8 @@ export default function SellerProfilePage(props) {
             HOAName: '',
             HOAMonthlyFee: 0,
             HOAPhone: '',
-            HOAFeeIncludes: '',
-            communityAmenities: '',
+            HOAFeeIncludes: [],
+            communityAmenities: [],
             isSeniorCommunity: false,
             lastSoldDate: new Date(),
             lastSoldPrice: 0,
@@ -269,6 +324,7 @@ export default function SellerProfilePage(props) {
             lastTaxYear: 0,      
         })
         setShowCreateForm(false)
+        console.log(createFormData)
         postListing({...createFormData, homeowner: listings[0].homeowner[0]})
             .then(() => refreshListings())
     }
