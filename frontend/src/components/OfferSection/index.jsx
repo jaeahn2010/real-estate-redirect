@@ -38,7 +38,6 @@ export default function OfferSection({ listingId, loginStatus }) {
     }, [])
 
     function handleInputChange(event) {
-        console.log(event.target.value)
         setCreateFormData({
             ...createFormData,
             [event.target.name]: event.target.value

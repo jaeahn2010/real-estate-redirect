@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import Gallery from '../Gallery'
 import { postListing, getListings, getUserByToken } from "../../../utils/backend"
 import './styles.css'
+
 let zipCodeOptions = []
 let dom = 0
 
@@ -190,27 +191,28 @@ export default function SellerProfilePage(props) {
             }
         } else if (event.target.name === "lotFeatures") {
             let tempLotFeaturesArr = createFormData.lotFeatures
-            tempLotFeaturesArr.push(event.target.value)
+            if (!tempLotFeaturesArr.includes(event.target.value)) tempLotFeaturesArr.push(event.target.value)
             setCreateFormData({
                 ...createFormData,
                 [event.target.name]: tempLotFeaturesArr
             })
         } else if (event.target.name === "vegetation") {
             let tempVegetationArr = createFormData.vegetation
-            tempVegetationArr.push(event.target.value)
+            if (!tempVegetationArr.includes(event.target.value)) tempVegetationArr.push(event.target.value)
             setCreateFormData({
                 ...createFormData,
                 [event.target.name]: tempVegetationArr
             })
         } else if (event.target.name === "flooring") {
             let tempFlooringArr = createFormData.flooring
-            tempFlooringArr.push(event.target.value)
+            if (!tempFlooringArr.includes(event.target.value)) tempFlooringArr.push(event.target.value)
             setCreateFormData({
                 ...createFormData,
                 [event.target.name]: tempFlooringArr
             })
         } else if (event.target.name === "appliancesIncluded") {
             let tempAppliancesIncludedArr = createFormData.appliancesIncluded
+            if (!tempAppliancesIncludedArr.includes(event.target.value)) 
             tempAppliancesIncludedArr.push(event.target.value)
             setCreateFormData({
                 ...createFormData,
@@ -218,28 +220,28 @@ export default function SellerProfilePage(props) {
             })
         } else if (event.target.name === "fixtures") {
             let tempFixturesArr = createFormData.fixtures
-            tempFixturesArr.push(event.target.value)
+            if (!tempFixturesArr.includes(event.target.value)) tempFixturesArr.push(event.target.value)
             setCreateFormData({
                 ...createFormData,
                 [event.target.name]: tempFixturesArr
             })
         } else if (event.target.name === "window") {
             let tempWindowArr = createFormData.window
-            tempWindowArr.push(event.target.value)
+            if (!tempWindowArr.includes(event.target.value)) tempWindowArr.push(event.target.value)
             setCreateFormData({
                 ...createFormData,
                 [event.target.name]: tempWindowArr
             })
         } else if (event.target.name === "HOAFeeIncludes") {
             let tempHOAFeeIncludesArr = createFormData.HOAFeeIncludes
-            tempHOAFeeIncludesArr.push(event.target.value)
+            if (!tempHOAFeeIncludesArr.includes(event.target.value)) tempHOAFeeIncludesArr.push(event.target.value)
             setCreateFormData({
                 ...createFormData,
                 [event.target.name]: tempHOAFeeIncludesArr
             })
         } else if (event.target.name === "communityAmenities") {
             let tempCommunityAmenitiesArr = createFormData.communityAmenities
-            tempCommunityAmenitiesArr.push(event.target.value)
+            if (!tempCommunityAmenitiesArr.includes(event.target.value)) tempCommunityAmenitiesArr.push(event.target.value)
             setCreateFormData({
                 ...createFormData,
                 [event.target.name]: tempCommunityAmenitiesArr
@@ -324,8 +326,11 @@ export default function SellerProfilePage(props) {
             lastTaxYear: 0,      
         })
         setShowCreateForm(false)
-        console.log(createFormData)
-        postListing({...createFormData, homeowner: listings[0].homeowner[0]})
+        postListing({
+            ...createFormData,
+            homeowner: listings[0].homeowner[0],
+            photo: event.target[10].files[0]
+        })
             .then(() => refreshListings())
     }
 
@@ -471,6 +476,12 @@ export default function SellerProfilePage(props) {
                         onChange={handleInputChange}
                     />
                     <br/>
+                    <label htmlFor="photos">Upload your listing photos </label>
+                    <input
+                        type="file"
+                        name="photos"
+                        id="photos"
+                    />
                     <input
                         name="homeowner"
                         id="homeowner"
@@ -731,7 +742,7 @@ export default function SellerProfilePage(props) {
                         onChange={handleInputChange}
                     />
                         <label htmlFor="bushes">Bushes</label>
-                <p className="table-title text-black-800">EXTERIOR: OTHER</p>
+                    <p className="table-title text-black-800">EXTERIOR: OTHER</p>
                     <label htmlFor="hasSolar">Does this property have solar panels? </label><br/>
                     <select
                         name="hasSolar"
@@ -852,8 +863,8 @@ export default function SellerProfilePage(props) {
                         defaultValue="carpet"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="carpet">Carpet</label><br/>
-                <p className="table-title text-black-800">INTERIOR: ROOMS</p>
+                    <label htmlFor="carpet">Carpet</label><br/>
+                    <p className="table-title text-black-800">INTERIOR: ROOMS</p>
                     <label htmlFor="bedrooms">Bedrooms: </label><br/>
                     <input
                         name="bedrooms"
@@ -924,122 +935,122 @@ export default function SellerProfilePage(props) {
                         onChange={handleInputChange}
                         required
                     /><br/>
-                <p className="table-title text-black-800">APPLIANCES INCLUDED IN SALE</p>
-                        <input
+                    <p className="table-title text-black-800">APPLIANCES INCLUDED IN SALE</p>
+                    <input
                         name="appliancesIncluded"
                         id="washer"
                         type="checkbox"
                         defaultValue="washer"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="washer">Washer</label><br/>
-                        <input
+                    <label htmlFor="washer">Washer</label><br/>
+                    <input
                         name="appliancesIncluded"
                         id="dryer"
                         type="checkbox"
                         defaultValue="dryer"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="dryer">Dryer</label><br/>
-                        <input
+                    <label htmlFor="dryer">Dryer</label><br/>
+                    <input
                         name="appliancesIncluded"
                         id="refrigerator"
                         type="checkbox"
                         defaultValue="refrigerator"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="refrigerator">Refrigerator</label><br/>
-                        <input
+                    <label htmlFor="refrigerator">Refrigerator</label><br/>
+                    <input
                         name="appliancesIncluded"
                         id="dishwasher"
                         type="checkbox"
                         defaultValue="dishwasher"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="dishwasher">Dishwasher</label><br/>
-                        <input
+                    <label htmlFor="dishwasher">Dishwasher</label><br/>
+                    <input
                         name="appliancesIncluded"
                         id="stove"
                         type="checkbox"
                         defaultValue="stove"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="stove">Stove/Oven</label><br/>
-                        <input
+                    <label htmlFor="stove">Stove/Oven</label><br/>
+                    <input
                         name="appliancesIncluded"
                         id="microwave"
                         type="checkbox"
                         defaultValue="microwave"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="microwave">Microwave</label><br/>
-                        <input
+                    <label htmlFor="microwave">Microwave</label><br/>
+                    <input
                         name="appliancesIncluded"
                         id="garbageDisposal"
                         type="checkbox"
                         defaultValue="garbageDisposal"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="garbageDisposal">Garbage Disposal</label><br/>
-                <p className="table-title text-black-800">FIXTURES</p>
-                        <input
+                    <label htmlFor="garbageDisposal">Garbage Disposal</label><br/>
+                    <p className="table-title text-black-800">FIXTURES</p>
+                    <input
                         name="fixtures"
                         id="ceilingFans"
                         type="checkbox"
                         defaultValue="ceilingFans"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="ceilingFans">Ceiling Fans</label><br/>
-                        <input
+                    <label htmlFor="ceilingFans">Ceiling Fans</label><br/>
+                    <input
                         name="fixtures"
                         id="potShelves"
                         type="checkbox"
                         defaultValue="potShelves"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="potShelves">Pot Shelves</label><br/>
-                        <input
+                    <label htmlFor="potShelves">Pot Shelves</label><br/>
+                    <input
                         name="fixtures"
                         id="chandeliers"
                         type="checkbox"
                         defaultValue="chandeliers"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="chandeliers">Chandeliers</label><br/>
-                <p className="table-title text-black-800">WINDOW FEATURES</p>
-                        <input
+                    <label htmlFor="chandeliers">Chandeliers</label><br/>
+                    <p className="table-title text-black-800">WINDOW FEATURES</p>
+                    <input
                         name="window"
                         id="curtains"
                         type="checkbox"
                         defaultValue="curtains"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="curtains">Curtains</label><br/>
-                        <input
+                    <label htmlFor="curtains">Curtains</label><br/>
+                    <input
                         name="window"
                         id="blinds"
                         type="checkbox"
                         defaultValue="blinds"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="blinds">Blinds</label><br/>
-                        <input
+                    <label htmlFor="blinds">Blinds</label><br/>
+                    <input
                         name="window"
                         id="drapes"
                         type="checkbox"
                         defaultValue="drapes"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="drapes">Drapes</label><br/>
-                        <input
+                    <label htmlFor="drapes">Drapes</label><br/>
+                    <input
                         name="window"
                         id="plantationShutters"
                         type="checkbox"
                         defaultValue="plantationShutters"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="plantationShutters">Plantation Shutters</label><br/>
-                <p className="table-title text-black-800">OTHER</p>
+                    <label htmlFor="plantationShutters">Plantation Shutters</label><br/>
+                    <p className="table-title text-black-800">OTHER</p>
                     <label htmlFor="fireplace">Fireplace: </label><br/>
                     <input
                         name="fireplace"
@@ -1058,7 +1069,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.other}
                         onChange={handleInputChange}
                     /><br/>
-                <p className="table-title text-black-800">PARKING</p>
+                    <p className="table-title text-black-800">PARKING</p>
                     <label htmlFor="parkingType">Parking type: </label><br/>
                     <input
                         name="parkingType"
@@ -1107,7 +1118,7 @@ export default function SellerProfilePage(props) {
                         defaultValue={createFormData.otherUtilities}
                         onChange={handleInputChange}
                     /><br/>
-                <p className="table-title text-black-800">HOA/COMMUNITY</p>
+                    <p className="table-title text-black-800">HOA/COMMUNITY</p>
                     <label htmlFor="HOACount">How many HOAs? </label><br/>
                     <input
                         name="HOACount"
@@ -1210,7 +1221,7 @@ export default function SellerProfilePage(props) {
                         onChange={handleInputChange}
                     />
                         <label htmlFor="guardGated">Guard Gated</label><br/>
-                <p className="!text-black underline my-5">Community amenities</p>
+                    <p className="!text-black underline my-5">Community amenities</p>
                         <input
                         name="communityAmenities"
                         id="communityPool"

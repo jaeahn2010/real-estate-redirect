@@ -65,7 +65,11 @@ export async function getListingById(listingId) {
 }
 
 export async function postListing(listing) {
-    const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } }
+    const authHeader = { headers: { 
+        'Authorization': localStorage.getItem('userToken'),
+        'Content-Type': 'multipart/form-data'
+    } }
+    
     const { data } = await axios.post('/api/listings', listing, authHeader)
     return data
 }

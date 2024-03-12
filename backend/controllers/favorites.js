@@ -59,7 +59,6 @@ router.post('/', authMiddleware, (req, res) => {
 
 // destroy: delete favorite
 router.delete('/:listingId', authMiddleware, async (req, res) => {
-    console.log("del req should be here")
     const userFavorite = await db.Favorite.findOne({listingId: req.body.listingId, userId: req.user.id})
     if (userFavorite) {
         const deletedFavorite = await db.Favorite.findOneAndDelete({listingId: req.body.listingId, userId: req.user.id})

@@ -17,6 +17,7 @@ const listingSchema = new mongoose.Schema(
             pricePerSF: {type: Number, required: true},
             listDate: {type: Date, default: new Date()},
             listingStatus: {type: String, default: "active"},
+            photoFilePath: {type: String}
         },
         homeowner: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'}],
         generalInfo: {

@@ -39,6 +39,17 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
+const multer = require('multer')
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./public/uploads/photos")
+    },
+    filename: (req, res, cb) => {
+        cb(null, res.originalname)
+    }
+})
+const upload = multer({storage: storage})
+
 /* routes
 ---------------------------------------------------------- */
 // index: display all listings
@@ -54,8 +65,8 @@ router.get('/:listingId', function (req, res) {
 })
 
 // create: create new listing
-router.post('/', authMiddleware, (req, res) => {
-    console.log(req.body)
+router.post('/', authMiddleware, upload.single('photo'), (req, res) => {
+    console.log(req.file)
     const reformat = {
         identifier: {
             apn: req.body.apn,
@@ -72,6 +83,7 @@ router.post('/', authMiddleware, (req, res) => {
             pricePerSF: req.body.pricePerSF,
             listDate: req.body.listDate,
             listingStatus: req.body.listingStatus,
+            photoFilePath: req.file.path,
         },
         homeowner: req.body.homeowner,
         generalInfo: {

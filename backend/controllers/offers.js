@@ -45,7 +45,7 @@ const authMiddleware = (req, res, next) => {
 const multer = require('multer')
 const storage = multer.diskStorage({
     destination: (req, res, cb) => {
-        cb(null, "./public/uploads")
+        cb(null, "./public/uploads/pofs")
     },
     filename: (req, res, cb) => {
         cb(null, res.originalname)
