@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import Gallery from '../Gallery'
-import { postListing, getListings, getUserByToken } from "../../../utils/backend"
+import { postListing, getUserByToken } from "../../../utils/backend"
 import './styles.css'
 
 let zipCodeOptions = []
@@ -72,7 +71,6 @@ export default function SellerProfilePage(props) {
         annualTax: 0,
         lastTaxYear: 0,
     })
-    const params = useParams()
 
     //city options
     let cityList = ["Boulder City", "Henderson", "Las Vegas", "North Las Vegas"]
@@ -395,7 +393,7 @@ export default function SellerProfilePage(props) {
                     <select
                         name="city"
                         id="city"
-                        defaultValue="Las Vegas"
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select a city</option>
@@ -477,6 +475,7 @@ export default function SellerProfilePage(props) {
                     />
                     <br/>
                     <label htmlFor="photos">Upload your listing photos </label>
+                    <br/>
                     <input
                         type="file"
                         name="photos"
@@ -496,7 +495,7 @@ export default function SellerProfilePage(props) {
                     <select
                         name="propertyType"
                         id="propertyType"
-                        defaultValue=""
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select a property type</option>
@@ -547,7 +546,7 @@ export default function SellerProfilePage(props) {
                     <select
                         name="isDetached"
                         id="isDetached"
-                        defaultValue=""
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select an option</option>
@@ -559,7 +558,7 @@ export default function SellerProfilePage(props) {
                     <select
                         name="houseFaces"
                         id="houseFaces"
-                        defaultValue=""
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select a direction</option>
@@ -709,45 +708,45 @@ export default function SellerProfilePage(props) {
                         defaultValue="fountain"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="fountain">Fountain</label><br/>
-                        <input
+                    <label htmlFor="fountain">Fountain</label><br/>
+                    <input
                         name="vegetation"
                         id="trees"
                         type="checkbox"
                         defaultValue="trees"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="trees">Trees</label><br/>
-                        <input
+                    <label htmlFor="trees">Trees</label><br/>
+                    <input
                         name="vegetation"
                         id="grass"
                         type="checkbox"
                         defaultValue="grass"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="grass">Grass</label><br/>
-                        <input
+                    <label htmlFor="grass">Grass</label><br/>
+                    <input
                         name="vegetation"
                         id="brush"
                         type="checkbox"
                         defaultValue="brush"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="brush">Brush</label><br/>
-                        <input
+                    <label htmlFor="brush">Brush</label><br/>
+                    <input
                         name="vegetation"
                         id="bushes"
                         type="checkbox"
                         defaultValue="bushes"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="bushes">Bushes</label>
+                    <label htmlFor="bushes">Bushes</label>
                     <p className="table-title text-black-800">EXTERIOR: OTHER</p>
                     <label htmlFor="hasSolar">Does this property have solar panels? </label><br/>
                     <select
                         name="hasSolar"
                         id="hasSolar"
-                        defaultValue=""
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select an option</option>
@@ -759,7 +758,7 @@ export default function SellerProfilePage(props) {
                     <select
                         name="hasBalcony"
                         id="hasBalcony"
-                        defaultValue=""
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select an option</option>
@@ -771,7 +770,7 @@ export default function SellerProfilePage(props) {
                     <select
                         name="hasPool"
                         id="hasPool"
-                        defaultValue=""
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select an option</option>
@@ -783,7 +782,7 @@ export default function SellerProfilePage(props) {
                     <select
                         name="hasSpa"
                         id="hasSpa"
-                        defaultValue=""
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select an option</option>
@@ -792,71 +791,71 @@ export default function SellerProfilePage(props) {
                     </select>
                     <br/>
                     <p className="table-title text-black-800">INTERIOR: FLOORING</p>
-                        <input
+                    <input
                         name="flooring"
                         id="tile"
                         type="checkbox"
                         defaultValue="tile"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="tile">Tile</label><br/>
-                        <input
+                    <label htmlFor="tile">Tile</label><br/>
+                    <input
                         name="flooring"
                         id="vinyl"
                         type="checkbox"
                         defaultValue="vinyl"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="vinyl">Vinyl</label><br/>
-                        <input
+                    <label htmlFor="vinyl">Vinyl</label><br/>
+                    <input
                         name="flooring"
                         id="hardwood"
                         type="checkbox"
                         defaultValue="hardwood"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="hardwood">Hardwood</label><br/>
-                        <input
+                    <label htmlFor="hardwood">Hardwood</label><br/>
+                    <input
                         name="flooring"
                         id="laminate"
                         type="checkbox"
                         defaultValue="laminate"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="laminate">Laminate</label><br/>
-                        <input
+                    <label htmlFor="laminate">Laminate</label><br/>
+                    <input
                         name="flooring"
                         id="marble"
                         type="checkbox"
                         defaultValue="marble"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="marble">Marble</label><br/>
-                        <input
+                    <label htmlFor="marble">Marble</label><br/>
+                    <input
                         name="flooring"
                         id="concrete"
                         type="checkbox"
                         defaultValue="concrete"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="concrete">Concrete</label><br/>
-                        <input
+                    <label htmlFor="concrete">Concrete</label><br/>
+                    <input
                         name="flooring"
                         id="stone"
                         type="checkbox"
                         defaultValue="stone"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="stone">Stone</label><br/>
-                        <input
+                    <label htmlFor="stone">Stone</label><br/>
+                    <input
                         name="flooring"
                         id="linoleum"
                         type="checkbox"
                         defaultValue="linoleum"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="linoleum">Linoleum</label><br/>
-                        <input
+                    <label htmlFor="linoleum">Linoleum</label><br/>
+                    <input
                         name="flooring"
                         id="carpet"
                         type="checkbox"
@@ -914,7 +913,7 @@ export default function SellerProfilePage(props) {
                         onChange={handleInputChange}
                         required
                     /><br/>
-                <p className="table-title text-black-800">INTERIOR: COOLING/HEATING</p>
+                    <p className="table-title text-black-800">INTERIOR: COOLING/HEATING</p>
                     <label htmlFor="cooling">Cooling: </label><br/>
                     <input
                         name="cooling"
@@ -1157,156 +1156,156 @@ export default function SellerProfilePage(props) {
                         onChange={handleInputChange}
                     /><br/>
                     <p className="!text-black underline my-5">What does the HOA fee cover?</p>
-                        <input
+                    <input
                         name="HOAFeeIncludes"
                         id="management"
                         type="checkbox"
                         defaultValue="management"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="management">Management</label><br/>
-                        <input
+                    <label htmlFor="management">Management</label><br/>
+                    <input
                         name="HOAFeeIncludes"
                         id="landscapeMaintenance"
                         type="checkbox"
                         defaultValue="landscapeMaintenance"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="landscapeMaintenance">Landscape Maintenance</label><br/>
-                        <input
+                    <label htmlFor="landscapeMaintenance">Landscape Maintenance</label><br/>
+                    <input
                         name="HOAFeeIncludes"
                         id="recreationalFacilities"
                         type="checkbox"
                         defaultValue="recreationalFacilities"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="recreationalFacilities">Reacreational Facilities</label><br/>
-                        <input
+                    <label htmlFor="recreationalFacilities">Reacreational Facilities</label><br/>
+                    <input
                         name="HOAFeeIncludes"
                         id="gated"
                         type="checkbox"
                         defaultValue="gated"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="gated">Gated</label><br/>
-                        <input
+                    <label htmlFor="gated">Gated</label><br/>
+                    <input
                         name="HOAFeeIncludes"
                         id="HOAWater"
                         type="checkbox"
                         defaultValue="HOAWater"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="HOAWater">Water</label><br/>
-                        <input
+                    <label htmlFor="HOAWater">Water</label><br/>
+                    <input
                         name="HOAFeeIncludes"
                         id="HOASewer"
                         type="checkbox"
                         defaultValue="HOASewer"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="HOASewer">Sewer</label><br/>
-                        <input
+                    <label htmlFor="HOASewer">Sewer</label><br/>
+                    <input
                         name="HOAFeeIncludes"
                         id="HOATrash"
                         type="checkbox"
                         defaultValue="HOATrash"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="HOATrash">Trash</label><br/>
-                        <input
+                    <label htmlFor="HOATrash">Trash</label><br/>
+                    <input
                         name="HOAFeeIncludes"
                         id="guardGated"
                         type="checkbox"
                         defaultValue="guardGated"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="guardGated">Guard Gated</label><br/>
+                    <label htmlFor="guardGated">Guard Gated</label><br/>
                     <p className="!text-black underline my-5">Community amenities</p>
-                        <input
+                    <input
                         name="communityAmenities"
                         id="communityPool"
                         type="checkbox"
                         defaultValue="communityPool"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="communityPool">Community Pool</label><br/>
-                        <input
+                    <label htmlFor="communityPool">Community Pool</label><br/>
+                    <input
                         name="communityAmenities"
                         id="communitySpa"
                         type="checkbox"
                         defaultValue="communitySpa"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="communitySpa">Community Spa</label><br/>
-                        <input
+                    <label htmlFor="communitySpa">Community Spa</label><br/>
+                    <input
                         name="communityAmenities"
                         id="communityPark"
                         type="checkbox"
                         defaultValue="communityPark"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="communityPark">Community Park</label><br/>
-                        <input
+                    <label htmlFor="communityPark">Community Park</label><br/>
+                    <input
                         name="communityAmenities"
                         id="fitnessCenter"
                         type="checkbox"
                         defaultValue="fitnessCenter"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="fitnessCenter"> Fitness Center</label><br/>
-                        <input
+                    <label htmlFor="fitnessCenter"> Fitness Center</label><br/>
+                    <input
                         name="communityAmenities"
                         id="playgrounds"
                         type="checkbox"
                         defaultValue="playgrounds"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="playgrounds">Playgrounds</label><br/>
-                        <input
+                    <label htmlFor="playgrounds">Playgrounds</label><br/>
+                    <input
                         name="communityAmenities"
                         id="clubhouse"
                         type="checkbox"
                         defaultValue="clubhouse"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="clubhouse">Clubhouse</label><br/>
-                        <input
+                    <label htmlFor="clubhouse">Clubhouse</label><br/>
+                    <input
                         name="communityAmenities"
                         id="golfCourse"
                         type="checkbox"
                         defaultValue="golfCourse"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="golfCourse">Golf Course</label><br/>
-                        <input
+                    <label htmlFor="golfCourse">Golf Course</label><br/>
+                    <input
                         name="communityAmenities"
                         id="basketballCourt"
                         type="checkbox"
                         defaultValue="basketballCourt"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="basketballCourt">Basketball Court</label><br/>
-                        <input
+                    <label htmlFor="basketballCourt">Basketball Court</label><br/>
+                    <input
                         name="communityAmenities"
                         id="tennisCourt"
                         type="checkbox"
                         defaultValue="tennisCourt"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="tennisCourt">Tennis Court</label><br/>
-                        <input
+                    <label htmlFor="tennisCourt">Tennis Court</label><br/>
+                    <input
                         name="communityAmenities"
                         id="joggingPath"
                         type="checkbox"
                         defaultValue="joggingPath"
                         onChange={handleInputChange}
                     />
-                        <label htmlFor="joggingPath">Jogging Path</label><br/>
+                    <label htmlFor="joggingPath">Jogging Path</label><br/>
                     <label htmlFor="isSeniorCommunity">Is this property in a senior community? </label><br/>
                     <select
                         name="isSeniorCommunity"
                         id="isSeniorCommunity"
-                        defaultValue=""
+                        defaultValue='none'
                         onChange={handleInputChange}
                         required>
                         <option key='0' value='none' disabled>Select an option</option>
@@ -1314,7 +1313,7 @@ export default function SellerProfilePage(props) {
                         <option key='false' value={false}>No</option>
                     </select>
                     <br/>
-                <p className="table-title text-black-800">LAST SALE INFORMATION</p>
+                    <p className="table-title text-black-800">LAST SALE INFORMATION</p>
                     <label htmlFor="lastSoldDate">Last Sold Date: </label><br/>
                     <input
                         name="lastSoldDate"
@@ -1334,16 +1333,7 @@ export default function SellerProfilePage(props) {
                         onChange={handleInputChange}
                         required
                     /><br/>
-                    {/* <label htmlFor="lastSoldPricPerSF">Last Sold Price Per SF: </label><br/>
-                    <input
-                        name="lastSoldPricPerSF"
-                        id="lastSoldPricPerSF"
-                        type="number"
-                        placeholder="Last Sold Price Per SF"
-                        defaultValue={createFormData.lastSoldPricPerSF}
-                        onChange={handleInputChange}
-                    /><br/> */}
-                <p className="table-title text-black-800">TAX INFORMATION</p>
+                    <p className="table-title text-black-800">TAX INFORMATION</p>
                     <label htmlFor="annualTax">Annual Tax: </label><br/>
                     <input
                         name="annualTax"

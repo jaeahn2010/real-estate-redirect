@@ -5,9 +5,10 @@ import heartIcon from '../../assets/heart.svg'
 import placeholder from '../../assets/placeholder.png'
 import './styles.css'
 
+let zipCodeOptions = []
+let dom = 0
+
 export default function Card({ listing, getFilteredData, updateDetails, loginStatus }) {
-
-
     const [homeownerToken, setHomeownerToken] = useState('')
     const [showEditForm, setShowEditForm] = useState(false)
     const [editFormData, setEditFormData] = useState({
@@ -20,7 +21,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
         price: listing.currentActivity.price,
         pricePerSF: listing.currentActivity.pricePerSF,
         listDate: listing.currentActivity.listDate,
-        status: listing.currentActivity.status,
+        listingStatus: listing.currentActivity.listingStatus,
         homeowner: listing.homeowner[0],
         propertyType: listing.generalInfo.propertyType,
         zoning: listing.generalInfo.zoning,
@@ -71,6 +72,32 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
         lastTaxYear: listing.tax.year,
     })
 
+        //city options
+        let cityList = ["Boulder City", "Henderson", "Las Vegas", "North Las Vegas"]
+        let cityOptions = []
+        cityList.forEach(city => cityOptions.push(<option key={city} value={city}>{city}</option>))
+    
+        //zip code options based on city choice
+        let zipCodesBoulderCity = [89005]
+        let zipCodesHenderson = [89002, 89011, 89012, 89014, 89015, 89044, 89052, 89074]
+        let zipCodesLV = [89101, 89102, 89103, 89104, 89106, 89107, 89108, 89109, 89110, 89113, 89115, 89117, 89118, 89119, 89120, 89121, 89122, 89123, 89124, 89128, 89129, 89130, 89131, 89134, 89135, 89138, 89139, 89141, 89142, 89143, 89144, 89145, 89146, 89147, 89148, 89149, 89156, 89158, 89161, 89166, 89169, 89178, 89179, 89183, 89191]
+        let zipCodesNLV = [89030, 89031, 89032, 89033, 89081, 89084, 89085, 89086, 89087]
+    
+        function zipCodeChoices(zipList) {
+            zipCodeOptions = []
+            zipList.forEach(zip => zipCodeOptions.push(<option key={zip} value={zip}>{zip}</option>))
+        }
+       
+        //property type options
+        let propertyTypeList = ["Single-Family Residence", "Townhouse", "Condominium", "Apartment", "Duplex/Triplex/Quadruplex", "Manufactured Home", "Mobile Home"]
+        let propertyTypeOptions = []
+        propertyTypeList.forEach(type => propertyTypeOptions.push(<option key={type} value={type}>{type}</option>))
+    
+        //house direction options
+        let directionsList = ["north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest"]
+        let directionOptions = []
+        directionsList.forEach(direction => directionOptions.push(<option key={direction} value={direction}>{direction}</option>))
+
     async function getHomeownerData() {
         const ownerData = await getUser(listing.homeowner[0])
         setHomeownerToken(ownerData.token)
@@ -83,10 +110,142 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
     }, [])
 
     function handleInputChange(event) {
-        setEditFormData({
-            ...editFormData,
-            [event.target.name]: event.target.value
-        })
+        if (event.target.name === "city") {
+            switch(event.target.value) {
+                case "Boulder City":
+                    zipCodeChoices(zipCodesBoulderCity)
+                    break;
+                case "Henderson":
+                    zipCodeChoices(zipCodesHenderson)
+                    break;
+                case "Las Vegas":
+                    zipCodeChoices(zipCodesLV)
+                    break;
+                case "North Las Vegas":
+                    zipCodeChoices(zipCodesNLV)
+                    break;
+            }
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: event.target.value
+            })
+        } else if (event.target.name === "listDate") {
+            let targetListDate = new Date(event.target.value)
+            let today = new Date()
+            targetListDate = targetListDate.setHours(0,0,0,0)
+            today = today.setHours(0,0,0,0)
+            //still calculates in UTC - need to fix
+            dom = Math.round((today - targetListDate) / 1000 / 60 / 60 / 24)
+            listingStatus = dom < 0 ? "COMING SOON" : "ACTIVE"
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: event.target.value,
+                listingStatus: listingStatus
+            })
+        } else if (event.target.name === "price") {
+            price = event.target.value
+            if (livingArea > 0) {
+                setEditFormData({
+                    ...editFormData,
+                    [event.target.name]: event.target.value,
+                    livingArea: livingArea,
+                    pricePerSF: Math.round(price / livingArea),
+                })
+            } else {
+                setEditFormData({
+                    ...editFormData,
+                    [event.target.name]: event.target.value
+                })                
+            }
+        } else if (event.target.name === "livingArea") {
+            livingArea = event.target.value
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: event.target.value,
+                pricePerSF: Math.round(price / livingArea),
+            })
+        } else if (event.target.name === "propertyType") {
+            let levelInput = document.getElementById("level")
+            let levelLabel = document.getElementById("level-label")
+            if (event.target.value === "Single-Family Residence" || event.target.value === "Townhouse" || event.target.value === "Manufactured Home" || event.target.value === "Mobile Home") {
+                levelInput.style.display = "none"
+                levelLabel.style.display = "none"
+                setEditFormData({
+                    ...editFormData,
+                    [event.target.name]: event.target.value,
+                    level: 1
+                })
+            } else {
+                levelInput.style.display = "block"
+                levelLabel.style.display = "block"
+                setEditFormData({
+                    ...editFormData,
+                    [event.target.name]: event.target.value
+                })
+            }
+        } else if (event.target.name === "lotFeatures") {
+            let tempLotFeaturesArr = editFormData.lotFeatures
+            if (!tempLotFeaturesArr.includes(event.target.value)) tempLotFeaturesArr.push(event.target.value)
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: tempLotFeaturesArr
+            })
+        } else if (event.target.name === "vegetation") {
+            let tempVegetationArr = editFormData.vegetation
+            if (!tempVegetationArr.includes(event.target.value)) tempVegetationArr.push(event.target.value)
+            setEditFormData({
+                ...createFormData,
+                [event.target.name]: tempVegetationArr
+            })
+        } else if (event.target.name === "flooring") {
+            let tempFlooringArr = editFormData.flooring
+            if (!tempFlooringArr.includes(event.target.value)) tempFlooringArr.push(event.target.value)
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: tempFlooringArr
+            })
+        } else if (event.target.name === "appliancesIncluded") {
+            let tempAppliancesIncludedArr = editFormData.appliancesIncluded
+            if (!tempAppliancesIncludedArr.includes(event.target.value)) 
+            tempAppliancesIncludedArr.push(event.target.value)
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: tempAppliancesIncludedArr
+            })
+        } else if (event.target.name === "fixtures") {
+            let tempFixturesArr = editFormData.fixtures
+            if (!tempFixturesArr.includes(event.target.value)) tempFixturesArr.push(event.target.value)
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: tempFixturesArr
+            })
+        } else if (event.target.name === "window") {
+            let tempWindowArr = editFormData.window
+            if (!tempWindowArr.includes(event.target.value)) tempWindowArr.push(event.target.value)
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: tempWindowArr
+            })
+        } else if (event.target.name === "HOAFeeIncludes") {
+            let tempHOAFeeIncludesArr = editFormData.HOAFeeIncludes
+            if (!tempHOAFeeIncludesArr.includes(event.target.value)) tempHOAFeeIncludesArr.push(event.target.value)
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: tempHOAFeeIncludesArr
+            })
+        } else if (event.target.name === "communityAmenities") {
+            let tempCommunityAmenitiesArr = editFormData.communityAmenities
+            if (!tempCommunityAmenitiesArr.includes(event.target.value)) tempCommunityAmenitiesArr.push(event.target.value)
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: tempCommunityAmenitiesArr
+            })
+        } else {
+            setEditFormData({
+                ...editFormData,
+                [event.target.name]: event.target.value
+            })
+        }
     }
 
     function handleSubmit(event) {
@@ -129,6 +288,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
         <form
             onSubmit={handleSubmit}
             className="listing-edit-form bg-stone-400 rounded-lg p-5 my-4 border-gray-700 border-2 w-[100%]">
+            <p className="!text-black text-center py-3">IDENTIFIER</p>
             <label htmlFor="apn">Parcel number: </label><br/>
             <input
                 name="apn"
@@ -138,6 +298,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 onChange={handleInputChange}
                 required
             /><br/>
+            <p className="!text-black text-center py-3">LOCATION</p>
             <label htmlFor="address">Street address: </label><br/>
             <input
                 name="address"
@@ -148,32 +309,39 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 required
             /><br/>
             <label htmlFor="city">City: </label><br/>
-            <input
+            <select
                 name="city"
                 id="city"
-                type="text"
                 defaultValue={listing.location.city}
                 onChange={handleInputChange}
-                required
-            /><br/>
+                required>
+                <option key='0' value='none' disabled>Select a city</option>
+                {cityOptions}
+            </select>
+            <br/>
             <label htmlFor="state">State: </label><br/>
             <input
                 name="state"
                 id="state"
                 type="text"
+                placeholder="NV"
                 disabled={true}
                 defaultValue={listing.location.state}
                 onChange={handleInputChange}
-            /><br/>
+                required
+            />
+            <br/>
             <label htmlFor="zip">Zip code: </label><br/>
-            <input
+            <select
                 name="zip"
                 id="zip"
-                type="number"
                 defaultValue={listing.location.zip}
                 onChange={handleInputChange}
-                required
-            /><br/>
+                required>
+                <option key='0' value={0} disabled>Select a zip code</option>
+                {zipCodeOptions}
+            </select>
+            <br/>
             <label htmlFor="subdivision">Subdivision: </label><br/>
             <input
                 name="subdivision"
@@ -182,6 +350,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue={listing.location.subdivision}
                 onChange={handleInputChange}
             /><br/>
+            <p className="!text-black text-center py-3">LISTING DATA</p>
             <label htmlFor="price">List price: $</label><br/>
             <input
                 name="price"
@@ -195,6 +364,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
             <input
                 name="pricePerSF"
                 type="number"
+                disabled={true}
                 defaultValue={listing.currentActivity.pricePerSF}
                 onChange={handleInputChange}
             /><br/>
@@ -205,30 +375,36 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 type="date"
                 defaultValue={listing.currentActivity.listDate}
                 onChange={handleInputChange}
+                required
             /><br/>
-            <label htmlFor="status">Status: </label><br/>
+            <label htmlFor="listingStatus">Listing Status: </label><br/>
             <input
-                name="status"
+                name="listingStatus"
+                id="listingStatus"
                 type="text"
-                defaultValue={listing.currentActivity.status}
+                defaultValue={listing.currentActivity.listingStatus}
                 onChange={handleInputChange}
             /><br/>
+            <label htmlFor="photos">Upload your listing photos </label>
+            <br/>
             <input
-                name="homeowner"
-                id="homeowner"
-                disabled={true}
-                hidden={true}
-                type="text"
-                defaultValue={listing.homeowner[0]}
-            /><br/>
+                type="file"
+                name="photos"
+                id="photos"
+            />
+            <br/>
+            <p className="!text-black text-center py-3">ZONING & STRUCTURE</p>
             <label htmlFor="propertyType">Property Type: </label><br/>
-            <input
+            <select
                 name="propertyType"
                 id="propertyType"
-                type="text"
                 defaultValue={listing.generalInfo.propertyType}
                 onChange={handleInputChange}
-            /><br/>
+                required>
+                <option key='0' value='none' disabled>Select a property type</option>
+                {propertyTypeOptions}
+            </select>
+            <br/>
             <label htmlFor="zoning">Zoning: </label><br/>
             <input
                 name="zoning"
@@ -246,6 +422,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
             /><br/>
             <label htmlFor="level">This property is located on level: </label><br/>
             <input
+                className="hidden"
                 name="level"
                 id="level"
                 type="number"
@@ -261,21 +438,29 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 onChange={handleInputChange}
             /><br/>
             <label htmlFor="isDetached">Is this property detached? </label><br/>
-            <input
+            <select
                 name="isDetached"
                 id="isDetached"
-                type="text"
                 defaultValue={listing.generalInfo.isDetached}
                 onChange={handleInputChange}
-            /><br/>
+                required>
+                <option key='0' value='none' disabled>Select an option</option>
+                <option key='true' value={true}>Yes</option>
+                <option key='false' value={false}>No</option>
+            </select>
+            <br/>
             <label htmlFor="houseFaces">Which direction does the house face? </label><br/>
-            <input
+            <select
                 name="houseFaces"
                 id="houseFaces"
-                type="text"
                 defaultValue={listing.generalInfo.houseFaces}
                 onChange={handleInputChange}
-            /><br/>
+                required>
+                <option key='0' value='none' disabled>Select a direction</option>
+                {directionOptions}
+            </select>
+            <br/>
+            <p className="!text-black text-center py-3">EXTERIOR: CONSTRUCTION</p>
             <label htmlFor="roof">Roof materials: </label><br/>
             <input
                 name="roof"
@@ -446,6 +631,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 onChange={handleInputChange}
             />
             <label htmlFor="bushes">Bushes</label><br/>
+            <p className="!text-black text-center py-3">EXTERIOR: OTHER</p>
             <label htmlFor="hasSolar">Does this property have solar panels? </label><br/>
             <input
                 name="hasSolar"
@@ -455,30 +641,42 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 onChange={handleInputChange}
             /><br/>
             <label htmlFor="hasBalcony">Does this property have a balcony? </label><br/>
-            <input
-                name="hasBalcony"
-                id="hasBalcony"
-                type="text"
-                defaultValue={listing.exterior.hasBalcony}
+            <select
+                name="hasSolar"
+                id="hasSolar"
+                defaultValue={listing.exterior.hasSolar}
                 onChange={handleInputChange}
-            /><br/>
+                required>
+                <option key='0' value='none' disabled>Select an option</option>
+                <option key='true' value={true}>Yes</option>
+                <option key='false' value={false}>No</option>
+            </select>
+            <br/>
             <label htmlFor="hasPool">Does this property have a pool? </label><br/>
-            <input
+            <select
                 name="hasPool"
                 id="hasPool"
-                type="text"
                 defaultValue={listing.exterior.hasPool}
                 onChange={handleInputChange}
-            /><br/>
-            <label htmlFor="isDetached">Does this property have a spa? </label><br/>
-            <input
+                required>
+                <option key='0' value='none' disabled>Select an option</option>
+                <option key='true' value={true}>Yes</option>
+                <option key='false' value={false}>No</option>
+            </select>
+            <br/>
+            <label htmlFor="hasSpa">Does this property have a spa? </label><br/>
+            <select
                 name="hasSpa"
                 id="hasSpa"
-                type="text"
                 defaultValue={listing.exterior.hasSpa}
                 onChange={handleInputChange}
-            /><br/>
-            <p className="!text-black py-3 text-center">Flooring:</p>
+                required>
+                <option key='0' value='none' disabled>Select an option</option>
+                <option key='true' value={true}>Yes</option>
+                <option key='false' value={false}>No</option>
+            </select>
+            <br/>
+            <p className="!text-black text-center py-3">INTERIOR: FLOORING</p>
             <input
                 name="flooring"
                 id="tile"
@@ -551,6 +749,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 onChange={handleInputChange}
             />
             <label htmlFor="carpet">Carpet</label><br/>
+            <p className="!text-black text-center py-3">INTERIOR: ROOMS</p>
             <label htmlFor="bedrooms">Bedrooms: </label><br/>
             <input
                 name="bedrooms"
@@ -591,6 +790,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue={listing.interior.livingArea}
                 onChange={handleInputChange}
             /><br/>
+            <p className="!text-black text-center py-3">INTERIOR: COOLING/HEATING</p>
             <label htmlFor="cooling">Cooling: </label><br/>
             <input
                 name="cooling"
@@ -607,7 +807,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue={listing.interior.heating}
                 onChange={handleInputChange}
             /><br/>
-            <p className="!text-black py-3 text-center">Appliances to be included in sale:</p>
+            <p className="!text-black text-center py-3">APPLIANCES INCLUDED IN SALE</p>
             <input
                 name="appliancesIncluded"
                 id="washer"
@@ -664,7 +864,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 onChange={handleInputChange}
             />
             <label htmlFor="garbageDisposal">Garbage Disposal</label><br/>
-            <p className="!text-black text-center py-3">Fixtures:</p>
+            <p className="!text-black text-center py-3">FIXTURES</p>
             <input
                 name="fixtures"
                 id="ceilingFans"
@@ -689,7 +889,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 onChange={handleInputChange}
             />
             <label htmlFor="chandeliers">Chandeliers</label><br/>
-            <p className="!text-black text-center py-3">Window features:</p>
+            <p className="!text-black text-center py-3">WINDOW FEATURES</p>
             <input
                 name="window"
                 id="curtains"
@@ -730,6 +930,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue={listing.interior.features.fireplace}
                 onChange={handleInputChange}
             /><br/>
+            <p className="!text-black text-center py-3">OTHER</p>
             <label htmlFor="other">Other interior features: </label><br/>
             <input
                 name="other"
@@ -739,6 +940,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue={listing.interior.features.other}
                 onChange={handleInputChange}
             /><br/>
+            <p className="!text-black text-center py-3">PARKING</p>
             <label htmlFor="parkingType">Parking type: </label><br/>
             <input
                 name="parkingType"
@@ -755,6 +957,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue={listing.parking.size}
                 onChange={handleInputChange}
             /><br/>
+            <p className="!text-black text-center py-3">UTILITIES</p>
             <label htmlFor="sewer">Sewer: </label><br/>
             <input
                 name="sewer"
@@ -779,6 +982,7 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
                 defaultValue={listing.utilities.otherUtilities}
                 onChange={handleInputChange}
             /><br/>
+            <p className="!text-black text-center py-3">HOA/COMMUNITY</p>
             <label htmlFor="HOACount">How many HOAs? </label><br/>
             <input
                 name="HOACount"
@@ -959,13 +1163,18 @@ export default function Card({ listing, getFilteredData, updateDetails, loginSta
             <label htmlFor="joggingPath">Jogging Path</label><br/>
             <br/>
             <label htmlFor="isSeniorCommunity" className="text-black">Is this property in a senior community? </label><br/>
-            <input
+            <select
                 name="isSeniorCommunity"
                 id="isSeniorCommunity"
-                type="text"
                 defaultValue={listing.community.isSeniorCommunity}
                 onChange={handleInputChange}
-            /><br/>
+                required>
+                <option key='0' value='none' disabled>Select an option</option>
+                <option key='true' value={true}>Yes</option>
+                <option key='false' value={false}>No</option>
+            </select>
+            <br/>
+            <p className="!text-black text-center py-3">LAST SALE INFORMATION</p>
             <label htmlFor="lastSoldDate">Last Sold Date: </label>
             <input
                 name="lastSoldDate"
